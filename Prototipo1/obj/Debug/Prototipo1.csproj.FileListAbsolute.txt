@@ -1,0 +1,12 @@
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\bin\Debug\Prototipo1.exe.config
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\bin\Debug\Prototipo1.exe
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\bin\Debug\Prototipo1.pdb
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.csprojResolveAssemblyReference.cache
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.Properties.Resources.resources
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.csproj.GenerateResource.Cache
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.csproj.CoreCompileInputs.cache
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.exe
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.pdb
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.MainForm.resources
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.FormAdvancedOptions.resources
+C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.InstanceLoader.resources
