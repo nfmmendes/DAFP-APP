@@ -96,5 +96,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{39e8506b-4492-4fdb-8174-b406395c1c75}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolverClientComunication\SolverClientComunication.csproj">
+      <Project>{6f471c3f-acbc-46e1-bf49-4c823d4f3491}</Project>
+      <Name>SolverClientComunication</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
