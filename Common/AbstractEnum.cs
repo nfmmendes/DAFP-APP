@@ -8,7 +8,7 @@ namespace Common
 {
     public abstract class AbstractEnum
     {
-        protected List<AbstractEnum> EnumList { get; private set; }
+        public List<AbstractEnum> EnumList { get; protected set; }
         public string Label { get; protected set; }
         public string DbCode { get; protected set; }
 

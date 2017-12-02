@@ -1,0 +1,10 @@
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Solver.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Solver.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\obj\Debug\Solver.csprojResolveAssemblyReference.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\obj\Debug\Solver.csproj.CoreCompileInputs.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\obj\Debug\Solver.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\obj\Debug\Solver.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Common.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\SolverClientComunication.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Common.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\SolverClientComunication.pdb
