@@ -8,3 +8,9 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Common.dll
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\SolverClientComunication.dll
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Common.pdb
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\SolverClientComunication.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\Solver.dll.config
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\EntityFramework.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\SolverClientComunication.dll.config
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\EntityFramework.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Solver\bin\Debug\EntityFramework.SqlServer.xml

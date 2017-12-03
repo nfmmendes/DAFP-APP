@@ -26,3 +26,8 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Common.dl
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.dll
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Common.pdb
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.dll.config
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.SqlServer.xml
