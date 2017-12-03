@@ -12,3 +12,5 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\D
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.pdb
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.Migrations.InitialMigration.resources
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientCommunication.csproj.GenerateResource.Cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientCommunication.csprojResolveAssemblyReference.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.Migrations.AirplaneAndAirportsDefinition.resources

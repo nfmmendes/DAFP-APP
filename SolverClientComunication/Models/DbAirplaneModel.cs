@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbCategory : DbContext
+    [Serializable]
+    class DbAirplaneModel
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; private set; }
 
         [Required]
         public string Code { get; private set; }
-
-        public DbInstance DbInstance { get; private set; }
     }
 }
