@@ -7,13 +7,13 @@ namespace SolverClientComunication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class RequestArc : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RequestArc));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712030124446_InitialMigration"; }
+            get { return "201712040035502_RequestArc"; }
         }
         
         string IMigrationMetadata.Source

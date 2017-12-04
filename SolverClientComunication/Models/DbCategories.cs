@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbCategory : DbContext
+    public class DbCategories : DbContext
     {
         [Key]
         public int Id { get; set; }

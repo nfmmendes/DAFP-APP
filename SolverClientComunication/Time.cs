@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SolverClientComunication
 {
-    class Time : IComparable<Time>
+    public class Time : IComparable<Time>
     {
         private DateTime DateTime { get; set; }
 

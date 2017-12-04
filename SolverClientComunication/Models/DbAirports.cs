@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SolverClientComunication.Models
 {
     [Serializable]
-    class DbAirports : DbContext
+    public class DbAirports : DbContext
     {
         [Key]
         public long Id { get; set; }

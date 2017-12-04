@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SolverClientComunication.Models
 {
     [Serializable]
-    class DbAirplaneModel
+    public class DbAirplaneModel
     {
         [Key]
         public long Id { get; private set; }

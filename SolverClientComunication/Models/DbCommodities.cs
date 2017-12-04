@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbCommodity : DbContext
+    public class DbCommodities : DbContext
     {
         [Key]
         public long Id { get; set; }
@@ -19,7 +19,7 @@ namespace SolverClientComunication.Models
         [Required, Range(0,Double.MaxValue)]
         public double Weight { get;  set; }
 
-        public DbCategory DbCategory { get; set; }
+        public DbCategories DbCategories { get; set; }
         public DbInstance DbInstance { get; set; }
     }
 }
