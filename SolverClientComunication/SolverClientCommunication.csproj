@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201712040035502_RequestArc.Designer.cs">
       <DependentUpon>201712040035502_RequestArc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712040045496_DbParemeters.cs" />
+    <Compile Include="Migrations\201712040045496_DbParemeters.Designer.cs">
+      <DependentUpon>201712040045496_DbParemeters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplaneModel.cs" />
     <Compile Include="Models\DbAirplane.cs" />
@@ -64,6 +68,7 @@
     <Compile Include="Models\DbCategories.cs" />
     <Compile Include="Models\DbCommodities.cs" />
     <Compile Include="Models\DbInstance.cs" />
+    <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverEnum.cs" />
@@ -86,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712040035502_RequestArc.resx">
       <DependentUpon>201712040035502_RequestArc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712040045496_DbParemeters.resx">
+      <DependentUpon>201712040045496_DbParemeters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

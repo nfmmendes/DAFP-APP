@@ -14,3 +14,4 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\D
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.Migrations.InitialDatabase.resources
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientCommunication.csproj.GenerateResource.Cache
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.Migrations.RequestArc.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\SolverClientComunication\obj\Debug\SolverClientComunication.Migrations.DbParemeters.resources
