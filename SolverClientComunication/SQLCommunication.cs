@@ -16,7 +16,9 @@ namespace SolverClientComunication
         public DbSet<DbAirports> DbAirports { get; set; }
         public DbSet<DbRequests> DbRequests { get; set; }
         public DbSet<DbParameters> DbParameters { get; set; }
-
+        public DbSet<DbClusterRequests> DbClusterRequests { get; set;  }
+        public DbSet<DbStretches> DbStretches { get; set; }
+            
         // Your context has been configured to use a 'SQLCommunication' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
         // 'SolverClientComunication.SQLCommunication' database on your LocalDb instance. 

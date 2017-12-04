@@ -23,6 +23,6 @@ namespace SolverClientComunication.Models
         [Required, Range(0,Double.PositiveInfinity)]
         public double Capacity { get; set; }
 
-        public DbInstance DbInstance { get;  set; }
+        public DbInstance Instance { get;  set; }
     }
 }

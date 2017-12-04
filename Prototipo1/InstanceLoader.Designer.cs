@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Airports");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Stretches");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Airplane");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Passenger");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Flight Request");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Flight Cluster Request");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Airports");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Stretches");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Airplane");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Passenger");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Flight Request");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Flight Cluster Request");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7,
+            treeNode8});
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -128,28 +128,28 @@
             this.treeView1.CheckBoxes = true;
             this.treeView1.Location = new System.Drawing.Point(20, 52);
             this.treeView1.Name = "treeView1";
-            treeNode10.Name = "AirportsNode";
-            treeNode10.Text = "Airports";
-            treeNode11.Name = "StretchNode";
-            treeNode11.Text = "Stretches";
-            treeNode12.Name = "NetworkNode";
-            treeNode12.Text = "Network";
-            treeNode13.Name = "AirplaneNode";
-            treeNode13.Text = "Airplane";
-            treeNode14.Name = "AirplaneNodes";
-            treeNode14.Text = "Airplanes";
-            treeNode15.Name = "PassengerNode";
-            treeNode15.Text = "Passenger";
-            treeNode16.Name = "FlightRequestNode";
-            treeNode16.Text = "Flight Request";
-            treeNode17.Name = "Flight Cluster Request Node";
-            treeNode17.Text = "Flight Cluster Request";
-            treeNode18.Name = "RequestsNodes";
-            treeNode18.Text = "Requests";
+            treeNode1.Name = "AirportsNode";
+            treeNode1.Text = "Airports";
+            treeNode2.Name = "StretchNode";
+            treeNode2.Text = "Stretches";
+            treeNode3.Name = "NetworkNode";
+            treeNode3.Text = "Network";
+            treeNode4.Name = "AirplaneNode";
+            treeNode4.Text = "Airplane";
+            treeNode5.Name = "AirplaneNodes";
+            treeNode5.Text = "Airplanes";
+            treeNode6.Name = "PassengerNode";
+            treeNode6.Text = "Passenger";
+            treeNode7.Name = "FlightRequestNode";
+            treeNode7.Text = "Flight Request";
+            treeNode8.Name = "Flight Cluster Request Node";
+            treeNode8.Text = "Flight Cluster Request";
+            treeNode9.Name = "RequestsNodes";
+            treeNode9.Text = "Requests";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode14,
-            treeNode18});
+            treeNode3,
+            treeNode5,
+            treeNode9});
             this.treeView1.Size = new System.Drawing.Size(269, 255);
             this.treeView1.TabIndex = 17;
             // 
@@ -230,7 +230,7 @@
             this.Controls.Add(this.buttonSelectFiles);
             this.Controls.Add(this.panel1);
             this.Name = "InstanceLoader";
-            this.Text = "Instances";
+            this.Text = "Load Instance";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

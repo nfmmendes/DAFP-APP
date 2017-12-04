@@ -61,15 +61,21 @@
     <Compile Include="Migrations\201712040045496_DbParemeters.Designer.cs">
       <DependentUpon>201712040045496_DbParemeters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041554443_StretchAndClusteredRequests.cs" />
+    <Compile Include="Migrations\201712041554443_StretchAndClusteredRequests.Designer.cs">
+      <DependentUpon>201712041554443_StretchAndClusteredRequests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplaneModel.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
+    <Compile Include="Models\DbClusterRequests.cs" />
     <Compile Include="Models\DbCommodities.cs" />
     <Compile Include="Models\DbInstance.cs" />
     <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbRequests.cs" />
+    <Compile Include="Models\DbStretches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverEnum.cs" />
     <Compile Include="SQLCommunication.cs" />
@@ -94,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712040045496_DbParemeters.resx">
       <DependentUpon>201712040045496_DbParemeters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041554443_StretchAndClusteredRequests.resx">
+      <DependentUpon>201712041554443_StretchAndClusteredRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

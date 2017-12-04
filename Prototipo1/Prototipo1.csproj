@@ -64,11 +64,11 @@
     <Compile Include="FormAdvancedOptions.Designer.cs">
       <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Instances.cs">
+    <Compile Include="InstanceLoader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Instances.Designer.cs">
-      <DependentUpon>Instances.cs</DependentUpon>
+    <Compile Include="InstanceLoader.Designer.cs">
+      <DependentUpon>InstanceLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,8 +78,8 @@
     <EmbeddedResource Include="FormAdvancedOptions.resx">
       <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Instances.resx">
-      <DependentUpon>Instances.cs</DependentUpon>
+    <EmbeddedResource Include="InstanceLoader.resx">
+      <DependentUpon>InstanceLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

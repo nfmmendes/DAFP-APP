@@ -14,8 +14,8 @@ namespace SolverClientComunication.Models
         public int Id { get; set; }
 
         [Required]
-        public string Code { get; private set; }
+        public string Code { get;  set; }
 
-        public DbInstance DbInstance { get; private set; }
+        public DbInstance Instance { get;  set; }
     }
 }

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbRequests : DbContext
+    public class DbClusterRequests : DbContext
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
-        public DbCommodities DbCommodities { get; set; }
-        
+        public DbSet<DbCommodities> DbCommodities { get; set; }
+
         [Required]
         public DateTime TimeOfRequisiton { get; set; }
 

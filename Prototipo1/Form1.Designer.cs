@@ -40,6 +40,11 @@
             this.radioButtonGenSettingY = new System.Windows.Forms.RadioButton();
             this.radioButtonGenSettingN = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -99,16 +104,12 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -118,7 +119,6 @@
             this.tabControl2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -257,6 +257,62 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(810, 630);
             this.panel6.TabIndex = 12;
+            // 
+            // button4
+            // 
+            this.button4.ForeColor = System.Drawing.Color.DarkRed;
+            this.button4.Location = new System.Drawing.Point(361, 562);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(175, 54);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Save";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.White;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.label14);
+            this.panel9.Controls.Add(this.radioButton1);
+            this.panel9.Controls.Add(this.radioButton2);
+            this.panel9.Location = new System.Drawing.Point(21, 181);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(768, 40);
+            this.panel9.TabIndex = 13;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label14.Location = new System.Drawing.Point(3, 7);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(151, 24);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Start from depot?";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButton1.Location = new System.Drawing.Point(307, 4);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(63, 28);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Yes";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButton2.Location = new System.Drawing.Point(473, 4);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(56, 28);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "No";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // panel7
             // 
@@ -513,7 +569,7 @@
             this.tabControl2.Location = new System.Drawing.Point(308, 37);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1282, 618);
+            this.tabControl2.Size = new System.Drawing.Size(888, 618);
             this.tabControl2.TabIndex = 14;
             // 
             // tabPage1
@@ -521,7 +577,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1274, 583);
+            this.tabPage1.Size = new System.Drawing.Size(880, 583);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -688,19 +744,19 @@
             this.instanceToolStripMenuItem2,
             this.solutionToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // instanceToolStripMenuItem2
             // 
             this.instanceToolStripMenuItem2.Name = "instanceToolStripMenuItem2";
-            this.instanceToolStripMenuItem2.Size = new System.Drawing.Size(181, 26);
+            this.instanceToolStripMenuItem2.Size = new System.Drawing.Size(139, 26);
             this.instanceToolStripMenuItem2.Text = "Instance";
             // 
             // solutionToolStripMenuItem
             // 
             this.solutionToolStripMenuItem.Name = "solutionToolStripMenuItem";
-            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.solutionToolStripMenuItem.Text = "Solution";
             // 
             // closeToolStripMenuItem
@@ -737,28 +793,28 @@
             this.cplexToolStripMenuItem.Checked = true;
             this.cplexToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cplexToolStripMenuItem.Name = "cplexToolStripMenuItem";
-            this.cplexToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.cplexToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.cplexToolStripMenuItem.Text = "Cplex";
             this.cplexToolStripMenuItem.Click += new System.EventHandler(this.cplexToolStripMenuItem_Click);
             // 
             // gurobiToolStripMenuItem
             // 
             this.gurobiToolStripMenuItem.Name = "gurobiToolStripMenuItem";
-            this.gurobiToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.gurobiToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.gurobiToolStripMenuItem.Text = "Gurobi";
             this.gurobiToolStripMenuItem.Click += new System.EventHandler(this.gurobiToolStripMenuItem_Click);
             // 
             // xpressToolStripMenuItem
             // 
             this.xpressToolStripMenuItem.Name = "xpressToolStripMenuItem";
-            this.xpressToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.xpressToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.xpressToolStripMenuItem.Text = "Xpress";
             this.xpressToolStripMenuItem.Click += new System.EventHandler(this.xpressToolStripMenuItem_Click);
             // 
             // coinORToolStripMenuItem
             // 
             this.coinORToolStripMenuItem.Name = "coinORToolStripMenuItem";
-            this.coinORToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.coinORToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.coinORToolStripMenuItem.Text = "Coin-OR";
             this.coinORToolStripMenuItem.Click += new System.EventHandler(this.coinORToolStripMenuItem_Click);
             // 
@@ -824,62 +880,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.White;
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Controls.Add(this.label14);
-            this.panel9.Controls.Add(this.radioButton1);
-            this.panel9.Controls.Add(this.radioButton2);
-            this.panel9.Location = new System.Drawing.Point(21, 181);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(768, 40);
-            this.panel9.TabIndex = 13;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label14.Location = new System.Drawing.Point(3, 7);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(151, 24);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Start from depot?";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButton1.Location = new System.Drawing.Point(307, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(63, 28);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yes";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButton2.Location = new System.Drawing.Point(473, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(56, 28);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "No";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.ForeColor = System.Drawing.Color.DarkRed;
-            this.button4.Location = new System.Drawing.Point(361, 562);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(175, 54);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Save";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -900,6 +900,8 @@
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -917,8 +919,6 @@
             this.panel5.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

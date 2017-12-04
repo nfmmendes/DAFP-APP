@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,8 @@ namespace SolverClientComunication.Models
         [Required, Range(0,180)]
         public double Longitude { get; set; }
 
-        [Required,MaxLength(6)]
+        [Index("UniqueAirportPerInstance", IsUnique = true)]
+        [Required,MaxLength(6) ]
         public string Prefix { get; set; }
 
         [Required,MaxLength(25)]
@@ -39,7 +41,9 @@ namespace SolverClientComunication.Models
 
         [Range(0,5000)]
         public int MaxFlightsPerHour { get; set; }
-        public DbInstance DbInstance { get; private set; }
+
+        [Index("UniqueAirportPerInstance", IsUnique = true)]
+        public DbInstance Instance { get;  set; }
         
 
     }
