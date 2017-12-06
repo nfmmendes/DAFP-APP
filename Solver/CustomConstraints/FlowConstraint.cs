@@ -12,7 +12,7 @@ namespace Solver.CustomConstraints
     class FlowConstraint : Constraint
     {
 
-        FlowConstraint() : base(RowSenseEnum.Greater, FlowConstraintBuilder.Instance)
+        FlowConstraint() : base(RowSenseEnum.Greater)
         {
             
         }
@@ -20,7 +20,7 @@ namespace Solver.CustomConstraints
 
     class FlowConstraintBuilder : ConstraintBuilder<IProblemData, FlowConstraintBuilder>
     {
-        public override void CreateOrUpdateConstraints(Variable v)
+        public override void CreateOrUpdateConstraints(Variable<IProblemData> v)
         {
             if (v.Type.Equals(YTVariableFactory.Instance))
             {

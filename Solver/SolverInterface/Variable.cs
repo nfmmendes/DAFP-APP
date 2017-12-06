@@ -8,7 +8,7 @@ using Solver.Enum.Commons;
 
 namespace Solver.SolverInterface
 {
-    public abstract class Variable
+    public abstract class Variable<ModelData>
     {
         public double Lb { get; set; }
         public double Ub { get; set; }
@@ -16,9 +16,9 @@ namespace Solver.SolverInterface
         public double ConsName { get; set; }
         public MathTypeEnum MathType { get; set; }
         public double Value { get; private set;  }
-        public VariableFactory<IProblemData, IVariableFactory<IProblemData>> Type { get; private set; }
+        public object Type { get; private set; }
 
-        public Variable(MathTypeEnum mathType, VariableFactory<IProblemData,IVariableFactory<IProblemData>> instance)
+        public Variable(MathTypeEnum mathType, object instance)
         {
             MathType = mathType;
             Type = instance;

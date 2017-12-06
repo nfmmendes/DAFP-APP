@@ -4,10 +4,10 @@ using Solver.SolverInterface;
 
 namespace Solver.CustomVariables
 {
-    public class YTVariable : Variable
+    public class YTVariable : Variable<IProblemData>
     {
 
-        public YTVariable() : base(MathTypeEnum.Integer, YTVariableFactory.Instance)
+        public YTVariable() : base(MathTypeEnum.Integer,YTVariableFactory.Instance)
         {
 
         }
@@ -17,7 +17,7 @@ namespace Solver.CustomVariables
     {
 
         //TODO: Verify if its called the right function in each class
-        public override bool CreateVariables(Model model)
+        public override bool CreateVariables(Model<IProblemData> model)
         {
             int a = 6;
             int b = 7;

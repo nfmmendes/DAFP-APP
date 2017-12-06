@@ -8,6 +8,6 @@ namespace Solver.SolverInterface
 {
     public interface IProblemData
     {
-         Model Model { get; set; }
+         Model<IProblemData> Model { get; set; }
     }
 }

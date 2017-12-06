@@ -58,7 +58,6 @@
     <Compile Include="SolverInterface\IConstraintBuilder.cs" />
     <Compile Include="SolverInterface\IProblemData.cs" />
     <Compile Include="Enum\Commons\MathTypeEnum.cs" />
-    <Compile Include="SolverInterface\IVariableFactory.cs" />
     <Compile Include="SolverInterface\Model.cs" />
     <Compile Include="SolverInterface\Variable.cs" />
     <Compile Include="SolverInterface\VariableFactory.cs" />

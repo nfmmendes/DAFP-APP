@@ -15,7 +15,7 @@ namespace Solver
     /// </summary>
     class SolverConfig
     {
-        private Model Model { get; set; }
+        private Model<IProblemData> Model { get; set; }
 
         public void StartSolver()
         {

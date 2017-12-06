@@ -6,22 +6,33 @@ using System.Threading.Tasks;
 
 namespace Solver.SolverInterface
 {
+    public interface IVariableFactory { }
 
-    public abstract class VariableFactory<IProblemData,T> : IVariableFactory<IProblemData> where T: class
-                          
+    public abstract class VariableFactory<ModelData,T>: IVariableFactory where T: VariableFactory<ModelData,T>,new()
+
     {
-        private static object lockingObject; //TODO: Use this to deal with paralelism
-        private static VariableFactory<IProblemData, T> singleTonObject;
+        private static T _instance;
+        private static readonly object padlock = new object();
 
+        public abstract bool CreateVariables(Model<ModelData> model);
 
-        public abstract bool CreateVariables(Model model);
-
-        protected VariableFactory()
+        public VariableFactory()
         {
 
         }
 
-        public static VariableFactory<SolverInterface.IProblemData, IVariableFactory<SolverInterface.IProblemData>> Instance { get; }
-        
+        public static T Instance
+        {
+            get
+            {
+                if (_instance == null){
+                    lock (padlock){
+                        _instance = new T();
+                    }
+                }
+                return _instance;
+            }
+        }
+
     }
 }

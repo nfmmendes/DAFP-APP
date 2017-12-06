@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace Solver.SolverInterface
 {
-    public abstract class ConstraintBuilder<IProblemData, T> : IConstraintBuilder<IProblemData> where T : class
+    public interface IConstraintBuilder { }
+    public abstract class ConstraintBuilder<ModelData, T>  where T : class,new()
 
     { 
-        public abstract void CreateOrUpdateConstraints(Variable v);
+        public abstract void CreateOrUpdateConstraints(Variable<ModelData> v);
 
         private static object lockingObject; //TODO: Use this to deal with paralelism
-        private static VariableFactory<IProblemData, T> singleTonObject;
+        private static ConstraintBuilder<IProblemData, T> singleTonObject;
 
         protected ConstraintBuilder()
         {
 
         }
 
-        public static ConstraintBuilder<SolverInterface.IProblemData, IVariableFactory<SolverInterface.IProblemData>> Instance { get; }
+        public static T Instance { get; }
     }
 }
