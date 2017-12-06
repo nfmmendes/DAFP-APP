@@ -47,23 +47,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomConstraints\FlowConstraint.cs" />
+    <Compile Include="CustomVariables\YTVariable.cs" />
+    <Compile Include="Enum\Commons\RowSenseEnum.cs" />
     <Compile Include="OptimizationParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolverConfig.cs" />
     <Compile Include="SolverInterface\Constraint.cs" />
     <Compile Include="SolverInterface\ConstraintBuilder.cs" />
+    <Compile Include="SolverInterface\IConstraintBuilder.cs" />
     <Compile Include="SolverInterface\IProblemData.cs" />
-    <Compile Include="SolverInterface\MathTypeEnum.cs" />
+    <Compile Include="Enum\Commons\MathTypeEnum.cs" />
+    <Compile Include="SolverInterface\IVariableFactory.cs" />
+    <Compile Include="SolverInterface\Model.cs" />
     <Compile Include="SolverInterface\Variable.cs" />
     <Compile Include="SolverInterface\VariableFactory.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="CustomConstraints\" />
-    <Folder Include="CustomVariables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Commons.csproj">
       <Project>{39e8506b-4492-4fdb-8174-b406395c1c75}</Project>
-      <Name>Common</Name>
+      <Name>Commons</Name>
     </ProjectReference>
     <ProjectReference Include="..\SolverClientComunication\SolverClientCommunication.csproj">
       <Project>{6f471c3f-acbc-46e1-bf49-4c823d4f3491}</Project>

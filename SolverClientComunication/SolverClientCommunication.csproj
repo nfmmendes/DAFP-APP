@@ -82,9 +82,9 @@
     <Compile Include="Time.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Commons.csproj">
       <Project>{39e8506b-4492-4fdb-8174-b406395c1c75}</Project>
-      <Name>Common</Name>
+      <Name>Commons</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Solver.SolverInterface
 {
-    class IProblemData
+    public interface IProblemData
     {
+         Model Model { get; set; }
     }
 }

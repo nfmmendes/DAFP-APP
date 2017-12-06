@@ -105,9 +105,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Commons.csproj">
       <Project>{39e8506b-4492-4fdb-8174-b406395c1c75}</Project>
-      <Name>Common</Name>
+      <Name>Commons</Name>
     </ProjectReference>
     <ProjectReference Include="..\SolverClientComunication\SolverClientCommunication.csproj">
       <Project>{6f471c3f-acbc-46e1-bf49-4c823d4f3491}</Project>
