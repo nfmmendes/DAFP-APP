@@ -65,5 +65,10 @@ namespace Prototipo1
                 coinORToolStripMenuItem.Checked = true; 
 
         }
+
+        private void listBoxSolution_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
