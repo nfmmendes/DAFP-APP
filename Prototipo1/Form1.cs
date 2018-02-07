@@ -66,9 +66,5 @@ namespace Prototipo1
 
         }
 
-        private void listBoxSolution_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
