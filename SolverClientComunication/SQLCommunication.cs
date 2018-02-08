@@ -10,15 +10,16 @@ namespace SolverClientComunication
     {
 
 
-        public DbSet<DbCategories> DbCategories { get; set; }
-        public DbSet<DbCommodities> DbCommodities { get; set; }
-        public DbSet<DbAirplane> DbAirplanes { get; set; }
-        public DbSet<DbAirports> DbAirports { get; set; }
-        public DbSet<DbRequests> DbRequests { get; set; }
-        public DbSet<DbParameters> DbParameters { get; set; }
-        public DbSet<DbClusterRequests> DbClusterRequests { get; set;  }
-        public DbSet<DbStretches> DbStretches { get; set; }
-        public DbSet<DbReportList> DbReportList { get; set; }
+        public DbSet<DbCategories> Categories { get; set; }
+        public DbSet<DbCommodities> Commodities { get; set; }
+        public DbSet<DbAirplane> Airplanes { get; set; }
+        public DbSet<DbAirports> Airports { get; set; }
+        public DbSet<DbRequests> Requests { get; set; }
+        public DbSet<DbParameters> Parameters { get; set; }
+        public DbSet<DbClusterRequests> ClusterRequests { get; set;  }
+        public DbSet<DbStretches> Stretches { get; set; }
+        public DbSet<DbReportList> ReportList { get; set; }
+        public DbSet<DbInstance> Instances { get; set;  }
             
         // Your context has been configured to use a 'SQLCommunication' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 

@@ -8,7 +8,7 @@ namespace SolverClientComunication.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.DbAirplanes",
+                "dbo.Airplanes",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -46,7 +46,7 @@ namespace SolverClientComunication.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.DbAirports",
+                "dbo.Airports",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -71,7 +71,7 @@ namespace SolverClientComunication.Migrations
                 .Index(t => t.DbInstance_Id);
             
             CreateTable(
-                "dbo.DbCategories",
+                "dbo.Categories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -83,7 +83,7 @@ namespace SolverClientComunication.Migrations
                 .Index(t => t.DbInstance_Id);
             
             CreateTable(
-                "dbo.DbCommodities",
+                "dbo.Commodities",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -93,13 +93,13 @@ namespace SolverClientComunication.Migrations
                         DbInstance_Id = c.Long(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DbCategories", t => t.DbCategories_Id)
+                .ForeignKey("dbo.Categories", t => t.DbCategories_Id)
                 .ForeignKey("dbo.DbInstances", t => t.DbInstance_Id)
                 .Index(t => t.DbCategories_Id)
                 .Index(t => t.DbInstance_Id);
             
             CreateTable(
-                "dbo.DbRequests",
+                "dbo.Requests",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -110,7 +110,7 @@ namespace SolverClientComunication.Migrations
                         DbInstance_Id = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DbCommodities", t => t.DbCommodities_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Commodities", t => t.DbCommodities_Id, cascadeDelete: true)
                 .ForeignKey("dbo.DbInstances", t => t.DbInstance_Id, cascadeDelete: true)
                 .Index(t => t.DbCommodities_Id)
                 .Index(t => t.DbInstance_Id);
@@ -119,29 +119,29 @@ namespace SolverClientComunication.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.DbRequests", "DbInstance_Id", "dbo.DbInstances");
-            DropForeignKey("dbo.DbRequests", "DbCommodities_Id", "dbo.DbCommodities");
-            DropForeignKey("dbo.DbCommodities", "DbInstance_Id", "dbo.DbInstances");
-            DropForeignKey("dbo.DbCommodities", "DbCategories_Id", "dbo.DbCategories");
-            DropForeignKey("dbo.DbCategories", "DbInstance_Id", "dbo.DbInstances");
-            DropForeignKey("dbo.DbAirports", "DbInstance_Id", "dbo.DbInstances");
-            DropForeignKey("dbo.DbAirplanes", "Model_Id", "dbo.DbAirplaneModels");
-            DropForeignKey("dbo.DbAirplanes", "DbInstance_Id", "dbo.DbInstances");
-            DropIndex("dbo.DbRequests", new[] { "DbInstance_Id" });
-            DropIndex("dbo.DbRequests", new[] { "DbCommodities_Id" });
-            DropIndex("dbo.DbCommodities", new[] { "DbInstance_Id" });
-            DropIndex("dbo.DbCommodities", new[] { "DbCategories_Id" });
-            DropIndex("dbo.DbCategories", new[] { "DbInstance_Id" });
-            DropIndex("dbo.DbAirports", new[] { "DbInstance_Id" });
-            DropIndex("dbo.DbAirplanes", new[] { "Model_Id" });
-            DropIndex("dbo.DbAirplanes", new[] { "DbInstance_Id" });
-            DropTable("dbo.DbRequests");
-            DropTable("dbo.DbCommodities");
-            DropTable("dbo.DbCategories");
-            DropTable("dbo.DbAirports");
+            DropForeignKey("dbo.Requests", "DbInstance_Id", "dbo.DbInstances");
+            DropForeignKey("dbo.Requests", "DbCommodities_Id", "dbo.Commodities");
+            DropForeignKey("dbo.Commodities", "DbInstance_Id", "dbo.DbInstances");
+            DropForeignKey("dbo.Commodities", "DbCategories_Id", "dbo.Categories");
+            DropForeignKey("dbo.Categories", "DbInstance_Id", "dbo.DbInstances");
+            DropForeignKey("dbo.Airports", "DbInstance_Id", "dbo.DbInstances");
+            DropForeignKey("dbo.Airplanes", "Model_Id", "dbo.DbAirplaneModels");
+            DropForeignKey("dbo.Airplanes", "DbInstance_Id", "dbo.DbInstances");
+            DropIndex("dbo.Requests", new[] { "DbInstance_Id" });
+            DropIndex("dbo.Requests", new[] { "DbCommodities_Id" });
+            DropIndex("dbo.Commodities", new[] { "DbInstance_Id" });
+            DropIndex("dbo.Commodities", new[] { "DbCategories_Id" });
+            DropIndex("dbo.Categories", new[] { "DbInstance_Id" });
+            DropIndex("dbo.Airports", new[] { "DbInstance_Id" });
+            DropIndex("dbo.Airplanes", new[] { "Model_Id" });
+            DropIndex("dbo.Airplanes", new[] { "DbInstance_Id" });
+            DropTable("dbo.Requests");
+            DropTable("dbo.Commodities");
+            DropTable("dbo.Categories");
+            DropTable("dbo.Airports");
             DropTable("dbo.DbAirplaneModels");
             DropTable("dbo.DbInstances");
-            DropTable("dbo.DbAirplanes");
+            DropTable("dbo.Airplanes");
         }
     }
 }

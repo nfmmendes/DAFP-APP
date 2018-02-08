@@ -51,6 +51,7 @@
     <Compile Include="CustomVariables\YTVariable.cs" />
     <Compile Include="Enum\Commons\RowSenseEnum.cs" />
     <Compile Include="OptimizationParameters.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverConfig.cs" />
     <Compile Include="SolverInterface\Constraint.cs" />

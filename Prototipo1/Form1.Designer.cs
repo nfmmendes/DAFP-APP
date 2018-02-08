@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabParameters = new System.Windows.Forms.TabPage();
             this.buttonOptimizeAll = new System.Windows.Forms.Button();
             this.panelParamSelectInstance = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.buttonOptimizeInstance = new System.Windows.Forms.Button();
+            this.comboBoxMInstance = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -43,13 +43,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.radioButtonStartDepotYes = new System.Windows.Forms.RadioButton();
+            this.radioButtonStartDepotNo = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.radioButtonTimeWindowYes = new System.Windows.Forms.RadioButton();
@@ -67,7 +62,11 @@
             this.radioButtonComeBackDepotYes = new System.Windows.Forms.RadioButton();
             this.radioButtonComeBackDepotNo = new System.Windows.Forms.RadioButton();
             this.tabInstances = new System.Windows.Forms.TabPage();
+            this.buttonCreateInstance = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.buttonDeleteScenario = new System.Windows.Forms.Button();
+            this.buttonEditScenario = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,8 +75,10 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabInput = new System.Windows.Forms.TabPage();
             this.tabSolution = new System.Windows.Forms.TabPage();
+            this.dataGridViewReports = new System.Windows.Forms.DataGridView();
+            this.Reports = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxInstances = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,15 +102,15 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewReports = new System.Windows.Forms.DataGridView();
-            this.Reports = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tabControl1.SuspendLayout();
+            this.buttonEditParams = new System.Windows.Forms.Button();
+            this.buttonSaveParams = new System.Windows.Forms.Button();
+            this.buttonCancelSaveParams = new System.Windows.Forms.Button();
+            this.tabControl.SuspendLayout();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -118,20 +119,21 @@
             this.panel5.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabSolution.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabParameters);
-            this.tabControl1.Controls.Add(this.tabInstances);
-            this.tabControl1.Font = new System.Drawing.Font("Arial Narrow", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(27, 61);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1200, 900);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.tabParameters);
+            this.tabControl.Controls.Add(this.tabInstances);
+            this.tabControl.Font = new System.Drawing.Font("Arial Narrow", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl.Location = new System.Drawing.Point(27, 61);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1200, 767);
+            this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabParameters
             // 
@@ -142,14 +144,14 @@
             this.tabParameters.Location = new System.Drawing.Point(4, 40);
             this.tabParameters.Name = "tabParameters";
             this.tabParameters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParameters.Size = new System.Drawing.Size(1192, 856);
+            this.tabParameters.Size = new System.Drawing.Size(1192, 723);
             this.tabParameters.TabIndex = 0;
             this.tabParameters.Text = "Parameters";
             this.tabParameters.UseVisualStyleBackColor = true;
             // 
             // buttonOptimizeAll
             // 
-            this.buttonOptimizeAll.Location = new System.Drawing.Point(11, 769);
+            this.buttonOptimizeAll.Location = new System.Drawing.Point(417, 627);
             this.buttonOptimizeAll.Name = "buttonOptimizeAll";
             this.buttonOptimizeAll.Size = new System.Drawing.Size(345, 48);
             this.buttonOptimizeAll.TabIndex = 17;
@@ -159,44 +161,44 @@
             // panelParamSelectInstance
             // 
             this.panelParamSelectInstance.BackColor = System.Drawing.Color.DarkRed;
-            this.panelParamSelectInstance.Controls.Add(this.button3);
-            this.panelParamSelectInstance.Controls.Add(this.comboBox2);
+            this.panelParamSelectInstance.Controls.Add(this.comboBoxMInstance);
             this.panelParamSelectInstance.Controls.Add(this.label13);
             this.panelParamSelectInstance.ForeColor = System.Drawing.Color.White;
-            this.panelParamSelectInstance.Location = new System.Drawing.Point(11, 125);
+            this.panelParamSelectInstance.Location = new System.Drawing.Point(375, 15);
             this.panelParamSelectInstance.Name = "panelParamSelectInstance";
-            this.panelParamSelectInstance.Size = new System.Drawing.Size(345, 171);
+            this.panelParamSelectInstance.Size = new System.Drawing.Size(789, 90);
             this.panelParamSelectInstance.TabIndex = 16;
             this.panelParamSelectInstance.Visible = false;
             // 
-            // button3
+            // buttonOptimizeInstance
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.ForeColor = System.Drawing.Color.DarkRed;
-            this.button3.Location = new System.Drawing.Point(12, 110);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(316, 48);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Optimize instance";
-            this.button3.UseVisualStyleBackColor = false;
+            this.buttonOptimizeInstance.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonOptimizeInstance.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonOptimizeInstance.Location = new System.Drawing.Point(418, 397);
+            this.buttonOptimizeInstance.Name = "buttonOptimizeInstance";
+            this.buttonOptimizeInstance.Size = new System.Drawing.Size(316, 48);
+            this.buttonOptimizeInstance.TabIndex = 18;
+            this.buttonOptimizeInstance.Text = "Optimize instance";
+            this.buttonOptimizeInstance.UseVisualStyleBackColor = false;
+            this.buttonOptimizeInstance.Visible = false;
             // 
-            // comboBox2
+            // comboBoxMInstance
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Arial Narrow", 12.2F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(12, 56);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(316, 32);
-            this.comboBox2.TabIndex = 16;
+            this.comboBoxMInstance.Font = new System.Drawing.Font("Arial Narrow", 12.2F);
+            this.comboBoxMInstance.FormattingEnabled = true;
+            this.comboBoxMInstance.Location = new System.Drawing.Point(12, 51);
+            this.comboBoxMInstance.Name = "comboBoxMInstance";
+            this.comboBoxMInstance.Size = new System.Drawing.Size(762, 32);
+            this.comboBoxMInstance.TabIndex = 16;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 11);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(168, 33);
+            this.label13.Size = new System.Drawing.Size(100, 33);
             this.label13.TabIndex = 15;
-            this.label13.Text = "Select Instance";
+            this.label13.Text = "Instance";
             // 
             // panel8
             // 
@@ -247,16 +249,19 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.DarkRed;
+            this.panel6.Controls.Add(this.buttonCancelSaveParams);
+            this.panel6.Controls.Add(this.buttonSaveParams);
+            this.panel6.Controls.Add(this.buttonEditParams);
+            this.panel6.Controls.Add(this.buttonOptimizeInstance);
             this.panel6.Controls.Add(this.button4);
             this.panel6.Controls.Add(this.panel9);
-            this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.panel1);
             this.panel6.Controls.Add(this.panel2);
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.panel4);
-            this.panel6.Location = new System.Drawing.Point(375, 15);
+            this.panel6.Location = new System.Drawing.Point(11, 140);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(810, 821);
+            this.panel6.Size = new System.Drawing.Size(1153, 462);
             this.panel6.TabIndex = 12;
             // 
             // button4
@@ -274,11 +279,11 @@
             this.panel9.BackColor = System.Drawing.Color.White;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.label14);
-            this.panel9.Controls.Add(this.radioButton1);
-            this.panel9.Controls.Add(this.radioButton2);
+            this.panel9.Controls.Add(this.radioButtonStartDepotYes);
+            this.panel9.Controls.Add(this.radioButtonStartDepotNo);
             this.panel9.Location = new System.Drawing.Point(21, 181);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(768, 40);
+            this.panel9.Size = new System.Drawing.Size(1117, 40);
             this.panel9.TabIndex = 13;
             // 
             // label14
@@ -291,78 +296,31 @@
             this.label14.TabIndex = 2;
             this.label14.Text = "Start from depot?";
             // 
-            // radioButton1
+            // radioButtonStartDepotYes
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButton1.Location = new System.Drawing.Point(307, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(63, 28);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yes";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButtonStartDepotYes.AutoSize = true;
+            this.radioButtonStartDepotYes.Checked = true;
+            this.radioButtonStartDepotYes.Enabled = false;
+            this.radioButtonStartDepotYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButtonStartDepotYes.Location = new System.Drawing.Point(307, 4);
+            this.radioButtonStartDepotYes.Name = "radioButtonStartDepotYes";
+            this.radioButtonStartDepotYes.Size = new System.Drawing.Size(63, 28);
+            this.radioButtonStartDepotYes.TabIndex = 0;
+            this.radioButtonStartDepotYes.TabStop = true;
+            this.radioButtonStartDepotYes.Text = "Yes";
+            this.radioButtonStartDepotYes.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radioButtonStartDepotNo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButton2.Location = new System.Drawing.Point(473, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(56, 28);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "No";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.White;
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.dateTimePicker2);
-            this.panel7.Controls.Add(this.dateTimePicker1);
-            this.panel7.Controls.Add(this.label6);
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Location = new System.Drawing.Point(20, 291);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(768, 100);
-            this.panel7.TabIndex = 12;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.dateTimePicker2.Location = new System.Drawing.Point(155, 62);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(322, 28);
-            this.dateTimePicker2.TabIndex = 10;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.dateTimePicker1.Location = new System.Drawing.Point(155, 10);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(322, 28);
-            this.dateTimePicker1.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label6.Location = new System.Drawing.Point(12, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 24);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "End date";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label5.Location = new System.Drawing.Point(12, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 24);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Begin date";
+            this.radioButtonStartDepotNo.AutoSize = true;
+            this.radioButtonStartDepotNo.Enabled = false;
+            this.radioButtonStartDepotNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButtonStartDepotNo.Location = new System.Drawing.Point(751, 4);
+            this.radioButtonStartDepotNo.Name = "radioButtonStartDepotNo";
+            this.radioButtonStartDepotNo.Size = new System.Drawing.Size(56, 28);
+            this.radioButtonStartDepotNo.TabIndex = 1;
+            this.radioButtonStartDepotNo.Text = "No";
+            this.radioButtonStartDepotNo.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -373,16 +331,16 @@
             this.panel1.Controls.Add(this.radioButtonTimeWindowNo);
             this.panel1.Location = new System.Drawing.Point(21, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(767, 40);
+            this.panel1.Size = new System.Drawing.Size(1117, 40);
             this.panel1.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 24);
+            this.label1.Size = new System.Drawing.Size(184, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "Use Time Windows?";
             // 
@@ -390,6 +348,7 @@
             // 
             this.radioButtonTimeWindowYes.AutoSize = true;
             this.radioButtonTimeWindowYes.Checked = true;
+            this.radioButtonTimeWindowYes.Enabled = false;
             this.radioButtonTimeWindowYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.radioButtonTimeWindowYes.Location = new System.Drawing.Point(307, 4);
             this.radioButtonTimeWindowYes.Name = "radioButtonTimeWindowYes";
@@ -402,8 +361,9 @@
             // radioButtonTimeWindowNo
             // 
             this.radioButtonTimeWindowNo.AutoSize = true;
+            this.radioButtonTimeWindowNo.Enabled = false;
             this.radioButtonTimeWindowNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonTimeWindowNo.Location = new System.Drawing.Point(473, 4);
+            this.radioButtonTimeWindowNo.Location = new System.Drawing.Point(751, 3);
             this.radioButtonTimeWindowNo.Name = "radioButtonTimeWindowNo";
             this.radioButtonTimeWindowNo.Size = new System.Drawing.Size(56, 28);
             this.radioButtonTimeWindowNo.TabIndex = 1;
@@ -419,7 +379,7 @@
             this.panel2.Controls.Add(this.radioButtonPickAllNo);
             this.panel2.Location = new System.Drawing.Point(21, 71);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(767, 40);
+            this.panel2.Size = new System.Drawing.Size(1117, 40);
             this.panel2.TabIndex = 5;
             // 
             // label3
@@ -436,6 +396,7 @@
             // 
             this.radioButtonPickAllYes.AutoSize = true;
             this.radioButtonPickAllYes.Checked = true;
+            this.radioButtonPickAllYes.Enabled = false;
             this.radioButtonPickAllYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.radioButtonPickAllYes.Location = new System.Drawing.Point(307, 4);
             this.radioButtonPickAllYes.Name = "radioButtonPickAllYes";
@@ -448,8 +409,9 @@
             // radioButtonPickAllNo
             // 
             this.radioButtonPickAllNo.AutoSize = true;
+            this.radioButtonPickAllNo.Enabled = false;
             this.radioButtonPickAllNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonPickAllNo.Location = new System.Drawing.Point(473, 4);
+            this.radioButtonPickAllNo.Location = new System.Drawing.Point(751, 4);
             this.radioButtonPickAllNo.Name = "radioButtonPickAllNo";
             this.radioButtonPickAllNo.Size = new System.Drawing.Size(56, 28);
             this.radioButtonPickAllNo.TabIndex = 1;
@@ -465,7 +427,7 @@
             this.panel3.Controls.Add(this.radioButtonDeliverAllNo);
             this.panel3.Location = new System.Drawing.Point(21, 126);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(767, 40);
+            this.panel3.Size = new System.Drawing.Size(1117, 40);
             this.panel3.TabIndex = 6;
             // 
             // label2
@@ -482,6 +444,7 @@
             // 
             this.radioButtonDeliverAllYes.AutoSize = true;
             this.radioButtonDeliverAllYes.Checked = true;
+            this.radioButtonDeliverAllYes.Enabled = false;
             this.radioButtonDeliverAllYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.radioButtonDeliverAllYes.Location = new System.Drawing.Point(307, 4);
             this.radioButtonDeliverAllYes.Name = "radioButtonDeliverAllYes";
@@ -494,8 +457,9 @@
             // radioButtonDeliverAllNo
             // 
             this.radioButtonDeliverAllNo.AutoSize = true;
+            this.radioButtonDeliverAllNo.Enabled = false;
             this.radioButtonDeliverAllNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonDeliverAllNo.Location = new System.Drawing.Point(473, 4);
+            this.radioButtonDeliverAllNo.Location = new System.Drawing.Point(751, 4);
             this.radioButtonDeliverAllNo.Name = "radioButtonDeliverAllNo";
             this.radioButtonDeliverAllNo.Size = new System.Drawing.Size(56, 28);
             this.radioButtonDeliverAllNo.TabIndex = 1;
@@ -511,7 +475,7 @@
             this.panel4.Controls.Add(this.radioButtonComeBackDepotNo);
             this.panel4.Location = new System.Drawing.Point(20, 236);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(768, 40);
+            this.panel4.Size = new System.Drawing.Size(1118, 40);
             this.panel4.TabIndex = 7;
             // 
             // label4
@@ -528,6 +492,7 @@
             // 
             this.radioButtonComeBackDepotYes.AutoSize = true;
             this.radioButtonComeBackDepotYes.Checked = true;
+            this.radioButtonComeBackDepotYes.Enabled = false;
             this.radioButtonComeBackDepotYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.radioButtonComeBackDepotYes.Location = new System.Drawing.Point(307, 4);
             this.radioButtonComeBackDepotYes.Name = "radioButtonComeBackDepotYes";
@@ -540,8 +505,9 @@
             // radioButtonComeBackDepotNo
             // 
             this.radioButtonComeBackDepotNo.AutoSize = true;
+            this.radioButtonComeBackDepotNo.Enabled = false;
             this.radioButtonComeBackDepotNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonComeBackDepotNo.Location = new System.Drawing.Point(473, 4);
+            this.radioButtonComeBackDepotNo.Location = new System.Drawing.Point(752, 7);
             this.radioButtonComeBackDepotNo.Name = "radioButtonComeBackDepotNo";
             this.radioButtonComeBackDepotNo.Size = new System.Drawing.Size(56, 28);
             this.radioButtonComeBackDepotNo.TabIndex = 1;
@@ -550,10 +516,11 @@
             // 
             // tabInstances
             // 
+            this.tabInstances.Controls.Add(this.buttonCreateInstance);
             this.tabInstances.Controls.Add(this.panel5);
             this.tabInstances.Controls.Add(this.tabControl2);
             this.tabInstances.Controls.Add(this.label7);
-            this.tabInstances.Controls.Add(this.comboBox1);
+            this.tabInstances.Controls.Add(this.comboBoxInstances);
             this.tabInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.tabInstances.Location = new System.Drawing.Point(4, 40);
             this.tabInstances.Name = "tabInstances";
@@ -563,9 +530,22 @@
             this.tabInstances.Text = "Instances";
             this.tabInstances.UseVisualStyleBackColor = true;
             // 
+            // buttonCreateInstance
+            // 
+            this.buttonCreateInstance.Location = new System.Drawing.Point(20, 75);
+            this.buttonCreateInstance.Name = "buttonCreateInstance";
+            this.buttonCreateInstance.Size = new System.Drawing.Size(182, 38);
+            this.buttonCreateInstance.TabIndex = 15;
+            this.buttonCreateInstance.Text = "Create new";
+            this.buttonCreateInstance.UseVisualStyleBackColor = true;
+            this.buttonCreateInstance.Click += new System.EventHandler(this.buttonCreateInstance_Click);
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.DarkRed;
+            this.panel5.Controls.Add(this.buttonDeleteScenario);
+            this.panel5.Controls.Add(this.buttonEditScenario);
+            this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.label11);
             this.panel5.Controls.Add(this.label10);
             this.panel5.Controls.Add(this.label9);
@@ -574,13 +554,42 @@
             this.panel5.ForeColor = System.Drawing.Color.White;
             this.panel5.Location = new System.Drawing.Point(298, 13);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(867, 57);
+            this.panel5.Size = new System.Drawing.Size(867, 100);
             this.panel5.TabIndex = 13;
+            // 
+            // buttonDeleteScenario
+            // 
+            this.buttonDeleteScenario.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonDeleteScenario.Location = new System.Drawing.Point(563, 52);
+            this.buttonDeleteScenario.Name = "buttonDeleteScenario";
+            this.buttonDeleteScenario.Size = new System.Drawing.Size(113, 38);
+            this.buttonDeleteScenario.TabIndex = 7;
+            this.buttonDeleteScenario.Text = "Delete";
+            this.buttonDeleteScenario.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditScenario
+            // 
+            this.buttonEditScenario.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonEditScenario.Location = new System.Drawing.Point(563, 8);
+            this.buttonEditScenario.Name = "buttonEditScenario";
+            this.buttonEditScenario.Size = new System.Drawing.Size(113, 38);
+            this.buttonEditScenario.TabIndex = 6;
+            this.buttonEditScenario.Text = "Edit";
+            this.buttonEditScenario.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(109, 24);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "Description:";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(537, 16);
+            this.label11.Location = new System.Drawing.Point(364, 16);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 24);
             this.label11.TabIndex = 4;
@@ -589,7 +598,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(379, 16);
+            this.label10.Location = new System.Drawing.Point(206, 16);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(152, 24);
             this.label10.TabIndex = 3;
@@ -617,21 +626,22 @@
             // button1
             // 
             this.button1.ForeColor = System.Drawing.Color.DarkRed;
-            this.button1.Location = new System.Drawing.Point(743, 8);
+            this.button1.Location = new System.Drawing.Point(740, 26);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 38);
+            this.button1.Size = new System.Drawing.Size(113, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Optimize";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabInput);
             this.tabControl2.Controls.Add(this.tabSolution);
-            this.tabControl2.Location = new System.Drawing.Point(20, 91);
+            this.tabControl2.Location = new System.Drawing.Point(20, 147);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1149, 731);
+            this.tabControl2.Size = new System.Drawing.Size(1149, 697);
             this.tabControl2.TabIndex = 14;
             // 
             // tabInput
@@ -639,7 +649,7 @@
             this.tabInput.Location = new System.Drawing.Point(4, 31);
             this.tabInput.Name = "tabInput";
             this.tabInput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInput.Size = new System.Drawing.Size(1141, 696);
+            this.tabInput.Size = new System.Drawing.Size(1141, 662);
             this.tabInput.TabIndex = 0;
             this.tabInput.Text = "Input";
             this.tabInput.UseVisualStyleBackColor = true;
@@ -650,10 +660,28 @@
             this.tabSolution.Location = new System.Drawing.Point(4, 31);
             this.tabSolution.Name = "tabSolution";
             this.tabSolution.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSolution.Size = new System.Drawing.Size(1141, 696);
+            this.tabSolution.Size = new System.Drawing.Size(1141, 662);
             this.tabSolution.TabIndex = 1;
             this.tabSolution.Text = "Solution";
             this.tabSolution.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewReports
+            // 
+            this.dataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Reports});
+            this.dataGridViewReports.Location = new System.Drawing.Point(0, 23);
+            this.dataGridViewReports.Name = "dataGridViewReports";
+            this.dataGridViewReports.RowHeadersVisible = false;
+            this.dataGridViewReports.RowTemplate.Height = 24;
+            this.dataGridViewReports.Size = new System.Drawing.Size(174, 334);
+            this.dataGridViewReports.TabIndex = 0;
+            // 
+            // Reports
+            // 
+            this.Reports.HeaderText = "Reports";
+            this.Reports.Name = "Reports";
+            this.Reports.Width = 169;
             // 
             // label7
             // 
@@ -665,13 +693,13 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "Instance";
             // 
-            // comboBox1
+            // comboBoxInstances
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(20, 39);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(262, 30);
-            this.comboBox1.TabIndex = 0;
+            this.comboBoxInstances.FormattingEnabled = true;
+            this.comboBoxInstances.Location = new System.Drawing.Point(20, 39);
+            this.comboBoxInstances.Name = "comboBoxInstances";
+            this.comboBoxInstances.Size = new System.Drawing.Size(262, 30);
+            this.comboBoxInstances.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -855,30 +883,50 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // dataGridViewReports
+            // buttonEditParams
             // 
-            this.dataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Reports});
-            this.dataGridViewReports.Location = new System.Drawing.Point(0, 23);
-            this.dataGridViewReports.Name = "dataGridViewReports";
-            this.dataGridViewReports.RowHeadersVisible = false;
-            this.dataGridViewReports.RowTemplate.Height = 24;
-            this.dataGridViewReports.Size = new System.Drawing.Size(174, 334);
-            this.dataGridViewReports.TabIndex = 0;
+            this.buttonEditParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonEditParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonEditParams.Location = new System.Drawing.Point(500, 324);
+            this.buttonEditParams.Name = "buttonEditParams";
+            this.buttonEditParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonEditParams.TabIndex = 19;
+            this.buttonEditParams.Text = "Edit";
+            this.buttonEditParams.UseVisualStyleBackColor = false;
+            this.buttonEditParams.Click += new System.EventHandler(this.buttonEditParams_Click);
             // 
-            // Reports
+            // buttonSaveParams
             // 
-            this.Reports.HeaderText = "Reports";
-            this.Reports.Name = "Reports";
-            this.Reports.Width = 169;
+            this.buttonSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonSaveParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonSaveParams.Location = new System.Drawing.Point(320, 324);
+            this.buttonSaveParams.Name = "buttonSaveParams";
+            this.buttonSaveParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonSaveParams.TabIndex = 20;
+            this.buttonSaveParams.Text = "Save";
+            this.buttonSaveParams.UseVisualStyleBackColor = false;
+            this.buttonSaveParams.Visible = false;
+            this.buttonSaveParams.Click += new System.EventHandler(this.buttonSaveParams_Click);
+            // 
+            // buttonCancelSaveParams
+            // 
+            this.buttonCancelSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonCancelSaveParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonCancelSaveParams.Location = new System.Drawing.Point(679, 324);
+            this.buttonCancelSaveParams.Name = "buttonCancelSaveParams";
+            this.buttonCancelSaveParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonCancelSaveParams.TabIndex = 21;
+            this.buttonCancelSaveParams.Text = "Cancel";
+            this.buttonCancelSaveParams.UseVisualStyleBackColor = false;
+            this.buttonCancelSaveParams.Visible = false;
+            this.buttonCancelSaveParams.Click += new System.EventHandler(this.buttonCancelSaveParams_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 977);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -886,7 +934,7 @@
             this.MinimumSize = new System.Drawing.Size(1280, 1024);
             this.Name = "MainForm";
             this.Text = "Unimore - Optimizer 1";
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabParameters.ResumeLayout(false);
             this.panelParamSelectInstance.ResumeLayout(false);
             this.panelParamSelectInstance.PerformLayout();
@@ -895,8 +943,6 @@
             this.panel6.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -911,9 +957,9 @@
             this.panel5.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabSolution.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -921,7 +967,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabParameters;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
@@ -933,18 +979,14 @@
         private System.Windows.Forms.RadioButton radioButtonPickAllYes;
         private System.Windows.Forms.RadioButton radioButtonPickAllNo;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton radioButtonDeliverAllYes;
         private System.Windows.Forms.RadioButton radioButtonDeliverAllNo;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton radioButtonComeBackDepotYes;
         private System.Windows.Forms.RadioButton radioButtonComeBackDepotNo;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabInput;
         private System.Windows.Forms.TabPage tabSolution;
@@ -955,7 +997,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxInstances;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -980,10 +1022,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton radioButtonGenSettingY;
         private System.Windows.Forms.RadioButton radioButtonGenSettingN;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button buttonOptimizeAll;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBoxMInstance;
+        private System.Windows.Forms.Button buttonOptimizeInstance;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem heuristicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tabuSearchToolStripMenuItem;
@@ -991,11 +1032,18 @@
         private System.Windows.Forms.ToolStripMenuItem gRASPToolStripMenuItem;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButtonStartDepotYes;
+        private System.Windows.Forms.RadioButton radioButtonStartDepotNo;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridViewReports;
         private System.Windows.Forms.DataGridViewButtonColumn Reports;
+        private System.Windows.Forms.Button buttonCreateInstance;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button buttonDeleteScenario;
+        private System.Windows.Forms.Button buttonEditScenario;
+        private System.Windows.Forms.Button buttonCancelSaveParams;
+        private System.Windows.Forms.Button buttonSaveParams;
+        private System.Windows.Forms.Button buttonEditParams;
     }
 }
 

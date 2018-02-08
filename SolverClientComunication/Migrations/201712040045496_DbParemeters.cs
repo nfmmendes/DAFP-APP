@@ -8,7 +8,7 @@ namespace SolverClientComunication.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.DbParameters",
+                "dbo.Parameters",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -24,9 +24,9 @@ namespace SolverClientComunication.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.DbParameters", "Instance_Id", "dbo.DbInstances");
-            DropIndex("dbo.DbParameters", new[] { "Instance_Id" });
-            DropTable("dbo.DbParameters");
+            DropForeignKey("dbo.Parameters", "Instance_Id", "dbo.DbInstances");
+            DropIndex("dbo.Parameters", new[] { "Instance_Id" });
+            DropTable("dbo.Parameters");
         }
     }
 }

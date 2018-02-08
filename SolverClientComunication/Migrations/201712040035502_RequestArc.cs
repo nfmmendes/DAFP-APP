@@ -7,18 +7,18 @@ namespace SolverClientComunication.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.DbRequests", "DestinationAirport", c => c.String(nullable: false));
-            AddColumn("dbo.DbRequests", "OriginAirport_Id", c => c.Long(nullable: false));
-            CreateIndex("dbo.DbRequests", "OriginAirport_Id");
-            AddForeignKey("dbo.DbRequests", "OriginAirport_Id", "dbo.DbAirports", "Id", cascadeDelete: true);
+            AddColumn("dbo.Requests", "DestinationAirport", c => c.String(nullable: false));
+            AddColumn("dbo.Requests", "OriginAirport_Id", c => c.Long(nullable: false));
+            CreateIndex("dbo.Requests", "OriginAirport_Id");
+            AddForeignKey("dbo.Requests", "OriginAirport_Id", "dbo.Airports", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.DbRequests", "OriginAirport_Id", "dbo.DbAirports");
-            DropIndex("dbo.DbRequests", new[] { "OriginAirport_Id" });
-            DropColumn("dbo.DbRequests", "OriginAirport_Id");
-            DropColumn("dbo.DbRequests", "DestinationAirport");
+            DropForeignKey("dbo.Requests", "OriginAirport_Id", "dbo.Airports");
+            DropIndex("dbo.Requests", new[] { "OriginAirport_Id" });
+            DropColumn("dbo.Requests", "OriginAirport_Id");
+            DropColumn("dbo.Requests", "DestinationAirport");
         }
     }
 }
