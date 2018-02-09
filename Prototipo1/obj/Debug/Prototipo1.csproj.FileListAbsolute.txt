@@ -23,6 +23,7 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverCli
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.xml
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.csprojResolveAssemblyReference.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.CreateInstance.resources
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.MainForm.resources
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.FormAdvancedOptions.resources
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.InstanceLoader.resources
@@ -31,4 +32,3 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.csproj.CoreCompileInputs.cache
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.exe
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.pdb
-C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.CreateInstance.resources

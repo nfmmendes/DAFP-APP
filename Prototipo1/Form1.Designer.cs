@@ -1,4 +1,7 @@
-﻿namespace Prototipo1
+﻿using System;
+using System.Windows.Forms;
+
+namespace Prototipo1
 {
     partial class MainForm
     {
@@ -32,7 +35,6 @@
             this.tabParameters = new System.Windows.Forms.TabPage();
             this.buttonOptimizeAll = new System.Windows.Forms.Button();
             this.panelParamSelectInstance = new System.Windows.Forms.Panel();
-            this.buttonOptimizeInstance = new System.Windows.Forms.Button();
             this.comboBoxMInstance = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -40,6 +42,10 @@
             this.radioButtonGenSettingY = new System.Windows.Forms.RadioButton();
             this.radioButtonGenSettingN = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.buttonCancelSaveParams = new System.Windows.Forms.Button();
+            this.buttonSaveParams = new System.Windows.Forms.Button();
+            this.buttonEditParams = new System.Windows.Forms.Button();
+            this.buttonOptimizeInstance = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
@@ -74,6 +80,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabInput = new System.Windows.Forms.TabPage();
+            this.tabControlInputTables = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabSolution = new System.Windows.Forms.TabPage();
             this.dataGridViewReports = new System.Windows.Forms.DataGridView();
             this.Reports = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -102,9 +111,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonEditParams = new System.Windows.Forms.Button();
-            this.buttonSaveParams = new System.Windows.Forms.Button();
-            this.buttonCancelSaveParams = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
@@ -118,6 +124,8 @@
             this.tabInstances.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tabControl2.SuspendLayout();
+            this.tabInput.SuspendLayout();
+            this.tabControlInputTables.SuspendLayout();
             this.tabSolution.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -125,13 +133,13 @@
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabParameters);
             this.tabControl.Controls.Add(this.tabInstances);
+            this.tabControl.Controls.Add(this.tabParameters);
             this.tabControl.Font = new System.Drawing.Font("Arial Narrow", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(27, 61);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1200, 767);
+            this.tabControl.Size = new System.Drawing.Size(1300, 850);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -144,7 +152,7 @@
             this.tabParameters.Location = new System.Drawing.Point(4, 40);
             this.tabParameters.Name = "tabParameters";
             this.tabParameters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParameters.Size = new System.Drawing.Size(1192, 723);
+            this.tabParameters.Size = new System.Drawing.Size(1192, 706);
             this.tabParameters.TabIndex = 0;
             this.tabParameters.Text = "Parameters";
             this.tabParameters.UseVisualStyleBackColor = true;
@@ -169,18 +177,6 @@
             this.panelParamSelectInstance.Size = new System.Drawing.Size(789, 90);
             this.panelParamSelectInstance.TabIndex = 16;
             this.panelParamSelectInstance.Visible = false;
-            // 
-            // buttonOptimizeInstance
-            // 
-            this.buttonOptimizeInstance.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonOptimizeInstance.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonOptimizeInstance.Location = new System.Drawing.Point(418, 397);
-            this.buttonOptimizeInstance.Name = "buttonOptimizeInstance";
-            this.buttonOptimizeInstance.Size = new System.Drawing.Size(316, 48);
-            this.buttonOptimizeInstance.TabIndex = 18;
-            this.buttonOptimizeInstance.Text = "Optimize instance";
-            this.buttonOptimizeInstance.UseVisualStyleBackColor = false;
-            this.buttonOptimizeInstance.Visible = false;
             // 
             // comboBoxMInstance
             // 
@@ -263,6 +259,56 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1153, 462);
             this.panel6.TabIndex = 12;
+            // 
+            // buttonCancelSaveParams
+            // 
+            this.buttonCancelSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonCancelSaveParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonCancelSaveParams.Location = new System.Drawing.Point(679, 324);
+            this.buttonCancelSaveParams.Name = "buttonCancelSaveParams";
+            this.buttonCancelSaveParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonCancelSaveParams.TabIndex = 21;
+            this.buttonCancelSaveParams.Text = "Cancel";
+            this.buttonCancelSaveParams.UseVisualStyleBackColor = false;
+            this.buttonCancelSaveParams.Visible = false;
+            this.buttonCancelSaveParams.Click += new System.EventHandler(this.buttonCancelSaveParams_Click);
+            // 
+            // buttonSaveParams
+            // 
+            this.buttonSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonSaveParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonSaveParams.Location = new System.Drawing.Point(320, 324);
+            this.buttonSaveParams.Name = "buttonSaveParams";
+            this.buttonSaveParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonSaveParams.TabIndex = 20;
+            this.buttonSaveParams.Text = "Save";
+            this.buttonSaveParams.UseVisualStyleBackColor = false;
+            this.buttonSaveParams.Visible = false;
+            this.buttonSaveParams.Click += new System.EventHandler(this.buttonSaveParams_Click);
+            // 
+            // buttonEditParams
+            // 
+            this.buttonEditParams.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonEditParams.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonEditParams.Location = new System.Drawing.Point(500, 324);
+            this.buttonEditParams.Name = "buttonEditParams";
+            this.buttonEditParams.Size = new System.Drawing.Size(150, 48);
+            this.buttonEditParams.TabIndex = 19;
+            this.buttonEditParams.Text = "Edit";
+            this.buttonEditParams.UseVisualStyleBackColor = false;
+            this.buttonEditParams.Click += new System.EventHandler(this.buttonEditParams_Click);
+            // 
+            // buttonOptimizeInstance
+            // 
+            this.buttonOptimizeInstance.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonOptimizeInstance.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonOptimizeInstance.Location = new System.Drawing.Point(418, 397);
+            this.buttonOptimizeInstance.Name = "buttonOptimizeInstance";
+            this.buttonOptimizeInstance.Size = new System.Drawing.Size(316, 48);
+            this.buttonOptimizeInstance.TabIndex = 18;
+            this.buttonOptimizeInstance.Text = "Optimize instance";
+            this.buttonOptimizeInstance.UseVisualStyleBackColor = false;
+            this.buttonOptimizeInstance.Visible = false;
             // 
             // button4
             // 
@@ -525,7 +571,7 @@
             this.tabInstances.Location = new System.Drawing.Point(4, 40);
             this.tabInstances.Name = "tabInstances";
             this.tabInstances.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInstances.Size = new System.Drawing.Size(1192, 856);
+            this.tabInstances.Size = new System.Drawing.Size(1292, 806);
             this.tabInstances.TabIndex = 1;
             this.tabInstances.Text = "Instances";
             this.tabInstances.UseVisualStyleBackColor = true;
@@ -638,21 +684,58 @@
             // 
             this.tabControl2.Controls.Add(this.tabInput);
             this.tabControl2.Controls.Add(this.tabSolution);
-            this.tabControl2.Location = new System.Drawing.Point(20, 147);
+            this.tabControl2.Location = new System.Drawing.Point(6, 146);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1149, 697);
+            this.tabControl2.Size = new System.Drawing.Size(1264, 641);
             this.tabControl2.TabIndex = 14;
             // 
             // tabInput
             // 
+            this.tabInput.Controls.Add(this.tabControlInputTables);
             this.tabInput.Location = new System.Drawing.Point(4, 31);
             this.tabInput.Name = "tabInput";
             this.tabInput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInput.Size = new System.Drawing.Size(1141, 662);
+            this.tabInput.Size = new System.Drawing.Size(1256, 606);
             this.tabInput.TabIndex = 0;
             this.tabInput.Text = "Input";
             this.tabInput.UseVisualStyleBackColor = true;
+            // 
+            // tabControlInputTables
+            // 
+            this.tabControlInputTables.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlInputTables.Controls.Add(this.tabPage1);
+            this.tabControlInputTables.Controls.Add(this.tabPage2);
+            this.tabControlInputTables.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlInputTables.ItemSize = new System.Drawing.Size(20, 120);
+            this.tabControlInputTables.Location = new System.Drawing.Point(3, 24);
+            this.tabControlInputTables.Multiline = true;
+            this.tabControlInputTables.Name = "tabControlInputTables";
+            this.tabControlInputTables.Padding = new System.Drawing.Point(6, 0);
+            this.tabControlInputTables.SelectedIndex = 0;
+            this.tabControlInputTables.Size = new System.Drawing.Size(1247, 561);
+            this.tabControlInputTables.TabIndex = 0;
+            this.tabControlInputTables.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlInputTables_DrawItem);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(124, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1119, 553);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Airplanes";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(124, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1004, 435);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Airport";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabSolution
             // 
@@ -660,7 +743,7 @@
             this.tabSolution.Location = new System.Drawing.Point(4, 31);
             this.tabSolution.Name = "tabSolution";
             this.tabSolution.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSolution.Size = new System.Drawing.Size(1141, 662);
+            this.tabSolution.Size = new System.Drawing.Size(1141, 626);
             this.tabSolution.TabIndex = 1;
             this.tabSolution.Text = "Solution";
             this.tabSolution.UseVisualStyleBackColor = true;
@@ -711,7 +794,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1382, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -883,57 +966,20 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // buttonEditParams
-            // 
-            this.buttonEditParams.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonEditParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonEditParams.Location = new System.Drawing.Point(500, 324);
-            this.buttonEditParams.Name = "buttonEditParams";
-            this.buttonEditParams.Size = new System.Drawing.Size(150, 48);
-            this.buttonEditParams.TabIndex = 19;
-            this.buttonEditParams.Text = "Edit";
-            this.buttonEditParams.UseVisualStyleBackColor = false;
-            this.buttonEditParams.Click += new System.EventHandler(this.buttonEditParams_Click);
-            // 
-            // buttonSaveParams
-            // 
-            this.buttonSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonSaveParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonSaveParams.Location = new System.Drawing.Point(320, 324);
-            this.buttonSaveParams.Name = "buttonSaveParams";
-            this.buttonSaveParams.Size = new System.Drawing.Size(150, 48);
-            this.buttonSaveParams.TabIndex = 20;
-            this.buttonSaveParams.Text = "Save";
-            this.buttonSaveParams.UseVisualStyleBackColor = false;
-            this.buttonSaveParams.Visible = false;
-            this.buttonSaveParams.Click += new System.EventHandler(this.buttonSaveParams_Click);
-            // 
-            // buttonCancelSaveParams
-            // 
-            this.buttonCancelSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonCancelSaveParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonCancelSaveParams.Location = new System.Drawing.Point(679, 324);
-            this.buttonCancelSaveParams.Name = "buttonCancelSaveParams";
-            this.buttonCancelSaveParams.Size = new System.Drawing.Size(150, 48);
-            this.buttonCancelSaveParams.TabIndex = 21;
-            this.buttonCancelSaveParams.Text = "Cancel";
-            this.buttonCancelSaveParams.UseVisualStyleBackColor = false;
-            this.buttonCancelSaveParams.Visible = false;
-            this.buttonCancelSaveParams.Click += new System.EventHandler(this.buttonCancelSaveParams_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1262, 977);
+            this.ClientSize = new System.Drawing.Size(1382, 953);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1280, 1024);
-            this.MinimumSize = new System.Drawing.Size(1280, 1024);
+            this.MaximumSize = new System.Drawing.Size(1400, 1000);
+            this.MinimumSize = new System.Drawing.Size(1400, 1000);
             this.Name = "MainForm";
             this.Text = "Unimore - Optimizer 1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl.ResumeLayout(false);
             this.tabParameters.ResumeLayout(false);
             this.panelParamSelectInstance.ResumeLayout(false);
@@ -956,6 +1002,8 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.tabControl2.ResumeLayout(false);
+            this.tabInput.ResumeLayout(false);
+            this.tabControlInputTables.ResumeLayout(false);
             this.tabSolution.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -1044,6 +1092,9 @@
         private System.Windows.Forms.Button buttonCancelSaveParams;
         private System.Windows.Forms.Button buttonSaveParams;
         private System.Windows.Forms.Button buttonEditParams;
+        private System.Windows.Forms.TabControl tabControlInputTables;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
