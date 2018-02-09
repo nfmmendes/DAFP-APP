@@ -31,11 +31,36 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabInstances = new System.Windows.Forms.TabPage();
+            this.buttonDeleteScenario = new System.Windows.Forms.Button();
+            this.buttonCreateInstance = new System.Windows.Forms.Button();
+            this.buttonEditScenario = new System.Windows.Forms.Button();
+            this.panelInstanceDetails = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabInput = new System.Windows.Forms.TabPage();
+            this.tabControlInputTables = new System.Windows.Forms.TabControl();
+            this.tabPageAirplanes = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.tabPageAirports = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPageRequests = new System.Windows.Forms.TabPage();
+            this.tabPageFuel = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tabSolution = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxInstancesInstanceTab = new System.Windows.Forms.ComboBox();
+            this.buttonOptimizeInstanceTab = new System.Windows.Forms.Button();
             this.tabParameters = new System.Windows.Forms.TabPage();
             this.buttonOptimizeAll = new System.Windows.Forms.Button();
             this.panelParamSelectInstance = new System.Windows.Forms.Panel();
-            this.comboBoxMInstance = new System.Windows.Forms.ComboBox();
+            this.comboBoxInstanceParamTab = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -67,27 +92,6 @@ namespace Prototipo1
             this.label4 = new System.Windows.Forms.Label();
             this.radioButtonComeBackDepotYes = new System.Windows.Forms.RadioButton();
             this.radioButtonComeBackDepotNo = new System.Windows.Forms.RadioButton();
-            this.tabInstances = new System.Windows.Forms.TabPage();
-            this.buttonCreateInstance = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.buttonDeleteScenario = new System.Windows.Forms.Button();
-            this.buttonEditScenario = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabInput = new System.Windows.Forms.TabPage();
-            this.tabControlInputTables = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabSolution = new System.Windows.Forms.TabPage();
-            this.dataGridViewReports = new System.Windows.Forms.DataGridView();
-            this.Reports = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxInstances = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,7 +115,50 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longintude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Elevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RunwayLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Region = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MTOW_APE3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Origin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Destination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Range = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxWeightTakeOff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Airplane = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
+            this.tabInstances.SuspendLayout();
+            this.panelInstanceDetails.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabInput.SuspendLayout();
+            this.tabControlInputTables.SuspendLayout();
+            this.tabPageAirplanes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.tabPageAirports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPageRequests.SuspendLayout();
+            this.tabPageFuel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -121,14 +168,9 @@ namespace Prototipo1
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.tabInstances.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabInput.SuspendLayout();
-            this.tabControlInputTables.SuspendLayout();
-            this.tabSolution.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -143,6 +185,306 @@ namespace Prototipo1
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
+            // tabInstances
+            // 
+            this.tabInstances.Controls.Add(this.buttonDeleteScenario);
+            this.tabInstances.Controls.Add(this.buttonCreateInstance);
+            this.tabInstances.Controls.Add(this.buttonEditScenario);
+            this.tabInstances.Controls.Add(this.panelInstanceDetails);
+            this.tabInstances.Controls.Add(this.tabControl2);
+            this.tabInstances.Controls.Add(this.label7);
+            this.tabInstances.Controls.Add(this.comboBoxInstancesInstanceTab);
+            this.tabInstances.Controls.Add(this.buttonOptimizeInstanceTab);
+            this.tabInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.tabInstances.Location = new System.Drawing.Point(4, 40);
+            this.tabInstances.Name = "tabInstances";
+            this.tabInstances.Padding = new System.Windows.Forms.Padding(3);
+            this.tabInstances.Size = new System.Drawing.Size(1292, 806);
+            this.tabInstances.TabIndex = 1;
+            this.tabInstances.Text = "Instances";
+            this.tabInstances.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteScenario
+            // 
+            this.buttonDeleteScenario.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonDeleteScenario.Location = new System.Drawing.Point(872, 31);
+            this.buttonDeleteScenario.Name = "buttonDeleteScenario";
+            this.buttonDeleteScenario.Size = new System.Drawing.Size(113, 38);
+            this.buttonDeleteScenario.TabIndex = 7;
+            this.buttonDeleteScenario.Text = "Delete";
+            this.buttonDeleteScenario.UseVisualStyleBackColor = true;
+            this.buttonDeleteScenario.Visible = false;
+            // 
+            // buttonCreateInstance
+            // 
+            this.buttonCreateInstance.Location = new System.Drawing.Point(434, 31);
+            this.buttonCreateInstance.Name = "buttonCreateInstance";
+            this.buttonCreateInstance.Size = new System.Drawing.Size(182, 38);
+            this.buttonCreateInstance.TabIndex = 15;
+            this.buttonCreateInstance.Text = "Create new";
+            this.buttonCreateInstance.UseVisualStyleBackColor = true;
+            this.buttonCreateInstance.Click += new System.EventHandler(this.buttonCreateInstance_Click);
+            // 
+            // buttonEditScenario
+            // 
+            this.buttonEditScenario.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonEditScenario.Location = new System.Drawing.Point(753, 31);
+            this.buttonEditScenario.Name = "buttonEditScenario";
+            this.buttonEditScenario.Size = new System.Drawing.Size(113, 38);
+            this.buttonEditScenario.TabIndex = 6;
+            this.buttonEditScenario.Text = "Edit";
+            this.buttonEditScenario.UseVisualStyleBackColor = true;
+            this.buttonEditScenario.Visible = false;
+            // 
+            // panelInstanceDetails
+            // 
+            this.panelInstanceDetails.BackColor = System.Drawing.Color.DarkRed;
+            this.panelInstanceDetails.Controls.Add(this.label15);
+            this.panelInstanceDetails.Controls.Add(this.label11);
+            this.panelInstanceDetails.Controls.Add(this.label10);
+            this.panelInstanceDetails.Controls.Add(this.label9);
+            this.panelInstanceDetails.Controls.Add(this.label8);
+            this.panelInstanceDetails.ForeColor = System.Drawing.Color.White;
+            this.panelInstanceDetails.Location = new System.Drawing.Point(20, 75);
+            this.panelInstanceDetails.Name = "panelInstanceDetails";
+            this.panelInstanceDetails.Size = new System.Drawing.Size(1250, 43);
+            this.panelInstanceDetails.TabIndex = 13;
+            this.panelInstanceDetails.Visible = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(13, 11);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(109, 24);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "Description:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(1086, 11);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 24);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "No";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(928, 11);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(152, 24);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Last optimization:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(838, 11);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 24);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "No";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(732, 11);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 24);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Optimized:";
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabInput);
+            this.tabControl2.Controls.Add(this.tabSolution);
+            this.tabControl2.Location = new System.Drawing.Point(6, 146);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1264, 641);
+            this.tabControl2.TabIndex = 14;
+            // 
+            // tabInput
+            // 
+            this.tabInput.Controls.Add(this.tabControlInputTables);
+            this.tabInput.Location = new System.Drawing.Point(4, 31);
+            this.tabInput.Name = "tabInput";
+            this.tabInput.Padding = new System.Windows.Forms.Padding(3);
+            this.tabInput.Size = new System.Drawing.Size(1256, 606);
+            this.tabInput.TabIndex = 0;
+            this.tabInput.Text = "Input";
+            this.tabInput.UseVisualStyleBackColor = true;
+            // 
+            // tabControlInputTables
+            // 
+            this.tabControlInputTables.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlInputTables.Controls.Add(this.tabPageAirplanes);
+            this.tabControlInputTables.Controls.Add(this.tabPageAirports);
+            this.tabControlInputTables.Controls.Add(this.tabPageRequests);
+            this.tabControlInputTables.Controls.Add(this.tabPageFuel);
+            this.tabControlInputTables.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlInputTables.ItemSize = new System.Drawing.Size(40, 100);
+            this.tabControlInputTables.Location = new System.Drawing.Point(3, 24);
+            this.tabControlInputTables.Multiline = true;
+            this.tabControlInputTables.Name = "tabControlInputTables";
+            this.tabControlInputTables.Padding = new System.Drawing.Point(200, 200);
+            this.tabControlInputTables.SelectedIndex = 0;
+            this.tabControlInputTables.Size = new System.Drawing.Size(1247, 561);
+            this.tabControlInputTables.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlInputTables.TabIndex = 0;
+            this.tabControlInputTables.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlInputTables_DrawItem);
+            // 
+            // tabPageAirplanes
+            // 
+            this.tabPageAirplanes.Controls.Add(this.dataGridView3);
+            this.tabPageAirplanes.Location = new System.Drawing.Point(104, 4);
+            this.tabPageAirplanes.Margin = new System.Windows.Forms.Padding(20);
+            this.tabPageAirplanes.Name = "tabPageAirplanes";
+            this.tabPageAirplanes.Padding = new System.Windows.Forms.Padding(20);
+            this.tabPageAirplanes.Size = new System.Drawing.Size(1139, 553);
+            this.tabPageAirplanes.TabIndex = 0;
+            this.tabPageAirplanes.Text = "Airplanes";
+            this.tabPageAirplanes.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView3
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AirplaneModel,
+            this.Prefix,
+            this.Range,
+            this.Weight,
+            this.MaxWeightTakeOff,
+            this.Capacity});
+            this.dataGridView3.Location = new System.Drawing.Point(12, 23);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersVisible = false;
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(1055, 238);
+            this.dataGridView3.TabIndex = 0;
+            // 
+            // tabPageAirports
+            // 
+            this.tabPageAirports.Controls.Add(this.dataGridView1);
+            this.tabPageAirports.Location = new System.Drawing.Point(104, 4);
+            this.tabPageAirports.Margin = new System.Windows.Forms.Padding(20);
+            this.tabPageAirports.Name = "tabPageAirports";
+            this.tabPageAirports.Padding = new System.Windows.Forms.Padding(20);
+            this.tabPageAirports.Size = new System.Drawing.Size(1139, 553);
+            this.tabPageAirports.TabIndex = 1;
+            this.tabPageAirports.Text = "Airport";
+            this.tabPageAirports.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AirportName,
+            this.ICAO,
+            this.Latitude,
+            this.Longintude,
+            this.Elevation,
+            this.RunwayLength,
+            this.Region,
+            this.MTOW_APE3,
+            this.MTOW_PC12});
+            this.dataGridView1.Location = new System.Drawing.Point(11, 32);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(1087, 419);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // tabPageRequests
+            // 
+            this.tabPageRequests.Controls.Add(this.dataGridView5);
+            this.tabPageRequests.Controls.Add(this.dataGridView4);
+            this.tabPageRequests.Location = new System.Drawing.Point(104, 4);
+            this.tabPageRequests.Margin = new System.Windows.Forms.Padding(20);
+            this.tabPageRequests.Name = "tabPageRequests";
+            this.tabPageRequests.Padding = new System.Windows.Forms.Padding(20);
+            this.tabPageRequests.Size = new System.Drawing.Size(1139, 553);
+            this.tabPageRequests.TabIndex = 2;
+            this.tabPageRequests.Text = "Requests";
+            this.tabPageRequests.UseVisualStyleBackColor = true;
+            // 
+            // tabPageFuel
+            // 
+            this.tabPageFuel.Controls.Add(this.dataGridView2);
+            this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
+            this.tabPageFuel.Name = "tabPageFuel";
+            this.tabPageFuel.Size = new System.Drawing.Size(1139, 553);
+            this.tabPageFuel.TabIndex = 3;
+            this.tabPageFuel.Text = "Fuel";
+            this.tabPageFuel.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Airplane,
+            this.Fuel,
+            this.Currency,
+            this.PricePerLitre});
+            this.dataGridView2.Location = new System.Drawing.Point(21, 19);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(1039, 223);
+            this.dataGridView2.TabIndex = 1;
+            // 
+            // tabSolution
+            // 
+            this.tabSolution.Location = new System.Drawing.Point(4, 31);
+            this.tabSolution.Name = "tabSolution";
+            this.tabSolution.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSolution.Size = new System.Drawing.Size(1256, 606);
+            this.tabSolution.TabIndex = 1;
+            this.tabSolution.Text = "Solution";
+            this.tabSolution.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label7.Location = new System.Drawing.Point(20, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 24);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Instance";
+            // 
+            // comboBoxInstancesInstanceTab
+            // 
+            this.comboBoxInstancesInstanceTab.FormattingEnabled = true;
+            this.comboBoxInstancesInstanceTab.Location = new System.Drawing.Point(20, 39);
+            this.comboBoxInstancesInstanceTab.Name = "comboBoxInstancesInstanceTab";
+            this.comboBoxInstancesInstanceTab.Size = new System.Drawing.Size(373, 30);
+            this.comboBoxInstancesInstanceTab.TabIndex = 0;
+            this.comboBoxInstancesInstanceTab.SelectedIndexChanged += new System.EventHandler(this.comboBoxInstances_SelectedIndexChanged);
+            // 
+            // buttonOptimizeInstanceTab
+            // 
+            this.buttonOptimizeInstanceTab.Enabled = false;
+            this.buttonOptimizeInstanceTab.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonOptimizeInstanceTab.Location = new System.Drawing.Point(1153, 31);
+            this.buttonOptimizeInstanceTab.Name = "buttonOptimizeInstanceTab";
+            this.buttonOptimizeInstanceTab.Size = new System.Drawing.Size(113, 38);
+            this.buttonOptimizeInstanceTab.TabIndex = 0;
+            this.buttonOptimizeInstanceTab.Text = "Optimize";
+            this.buttonOptimizeInstanceTab.UseVisualStyleBackColor = true;
+            this.buttonOptimizeInstanceTab.Click += new System.EventHandler(this.button1_Click);
+            // 
             // tabParameters
             // 
             this.tabParameters.Controls.Add(this.buttonOptimizeAll);
@@ -152,7 +494,7 @@ namespace Prototipo1
             this.tabParameters.Location = new System.Drawing.Point(4, 40);
             this.tabParameters.Name = "tabParameters";
             this.tabParameters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParameters.Size = new System.Drawing.Size(1192, 706);
+            this.tabParameters.Size = new System.Drawing.Size(1292, 806);
             this.tabParameters.TabIndex = 0;
             this.tabParameters.Text = "Parameters";
             this.tabParameters.UseVisualStyleBackColor = true;
@@ -169,7 +511,7 @@ namespace Prototipo1
             // panelParamSelectInstance
             // 
             this.panelParamSelectInstance.BackColor = System.Drawing.Color.DarkRed;
-            this.panelParamSelectInstance.Controls.Add(this.comboBoxMInstance);
+            this.panelParamSelectInstance.Controls.Add(this.comboBoxInstanceParamTab);
             this.panelParamSelectInstance.Controls.Add(this.label13);
             this.panelParamSelectInstance.ForeColor = System.Drawing.Color.White;
             this.panelParamSelectInstance.Location = new System.Drawing.Point(375, 15);
@@ -178,14 +520,14 @@ namespace Prototipo1
             this.panelParamSelectInstance.TabIndex = 16;
             this.panelParamSelectInstance.Visible = false;
             // 
-            // comboBoxMInstance
+            // comboBoxInstanceParamTab
             // 
-            this.comboBoxMInstance.Font = new System.Drawing.Font("Arial Narrow", 12.2F);
-            this.comboBoxMInstance.FormattingEnabled = true;
-            this.comboBoxMInstance.Location = new System.Drawing.Point(12, 51);
-            this.comboBoxMInstance.Name = "comboBoxMInstance";
-            this.comboBoxMInstance.Size = new System.Drawing.Size(762, 32);
-            this.comboBoxMInstance.TabIndex = 16;
+            this.comboBoxInstanceParamTab.Font = new System.Drawing.Font("Arial Narrow", 12.2F);
+            this.comboBoxInstanceParamTab.FormattingEnabled = true;
+            this.comboBoxInstanceParamTab.Location = new System.Drawing.Point(12, 51);
+            this.comboBoxInstanceParamTab.Name = "comboBoxInstanceParamTab";
+            this.comboBoxInstanceParamTab.Size = new System.Drawing.Size(762, 32);
+            this.comboBoxInstanceParamTab.TabIndex = 16;
             // 
             // label13
             // 
@@ -560,230 +902,6 @@ namespace Prototipo1
             this.radioButtonComeBackDepotNo.Text = "No";
             this.radioButtonComeBackDepotNo.UseVisualStyleBackColor = true;
             // 
-            // tabInstances
-            // 
-            this.tabInstances.Controls.Add(this.buttonCreateInstance);
-            this.tabInstances.Controls.Add(this.panel5);
-            this.tabInstances.Controls.Add(this.tabControl2);
-            this.tabInstances.Controls.Add(this.label7);
-            this.tabInstances.Controls.Add(this.comboBoxInstances);
-            this.tabInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.tabInstances.Location = new System.Drawing.Point(4, 40);
-            this.tabInstances.Name = "tabInstances";
-            this.tabInstances.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInstances.Size = new System.Drawing.Size(1292, 806);
-            this.tabInstances.TabIndex = 1;
-            this.tabInstances.Text = "Instances";
-            this.tabInstances.UseVisualStyleBackColor = true;
-            // 
-            // buttonCreateInstance
-            // 
-            this.buttonCreateInstance.Location = new System.Drawing.Point(20, 75);
-            this.buttonCreateInstance.Name = "buttonCreateInstance";
-            this.buttonCreateInstance.Size = new System.Drawing.Size(182, 38);
-            this.buttonCreateInstance.TabIndex = 15;
-            this.buttonCreateInstance.Text = "Create new";
-            this.buttonCreateInstance.UseVisualStyleBackColor = true;
-            this.buttonCreateInstance.Click += new System.EventHandler(this.buttonCreateInstance_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.DarkRed;
-            this.panel5.Controls.Add(this.buttonDeleteScenario);
-            this.panel5.Controls.Add(this.buttonEditScenario);
-            this.panel5.Controls.Add(this.label15);
-            this.panel5.Controls.Add(this.label11);
-            this.panel5.Controls.Add(this.label10);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Controls.Add(this.button1);
-            this.panel5.ForeColor = System.Drawing.Color.White;
-            this.panel5.Location = new System.Drawing.Point(298, 13);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(867, 100);
-            this.panel5.TabIndex = 13;
-            // 
-            // buttonDeleteScenario
-            // 
-            this.buttonDeleteScenario.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonDeleteScenario.Location = new System.Drawing.Point(563, 52);
-            this.buttonDeleteScenario.Name = "buttonDeleteScenario";
-            this.buttonDeleteScenario.Size = new System.Drawing.Size(113, 38);
-            this.buttonDeleteScenario.TabIndex = 7;
-            this.buttonDeleteScenario.Text = "Delete";
-            this.buttonDeleteScenario.UseVisualStyleBackColor = true;
-            // 
-            // buttonEditScenario
-            // 
-            this.buttonEditScenario.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonEditScenario.Location = new System.Drawing.Point(563, 8);
-            this.buttonEditScenario.Name = "buttonEditScenario";
-            this.buttonEditScenario.Size = new System.Drawing.Size(113, 38);
-            this.buttonEditScenario.TabIndex = 6;
-            this.buttonEditScenario.Text = "Edit";
-            this.buttonEditScenario.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 62);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(109, 24);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "Description:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(364, 16);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 24);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "No";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(206, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(152, 24);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Last optimization:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(116, 16);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 24);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "No";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 24);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Optimized:";
-            // 
-            // button1
-            // 
-            this.button1.ForeColor = System.Drawing.Color.DarkRed;
-            this.button1.Location = new System.Drawing.Point(740, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 38);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Optimize";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.tabInput);
-            this.tabControl2.Controls.Add(this.tabSolution);
-            this.tabControl2.Location = new System.Drawing.Point(6, 146);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1264, 641);
-            this.tabControl2.TabIndex = 14;
-            // 
-            // tabInput
-            // 
-            this.tabInput.Controls.Add(this.tabControlInputTables);
-            this.tabInput.Location = new System.Drawing.Point(4, 31);
-            this.tabInput.Name = "tabInput";
-            this.tabInput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInput.Size = new System.Drawing.Size(1256, 606);
-            this.tabInput.TabIndex = 0;
-            this.tabInput.Text = "Input";
-            this.tabInput.UseVisualStyleBackColor = true;
-            // 
-            // tabControlInputTables
-            // 
-            this.tabControlInputTables.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControlInputTables.Controls.Add(this.tabPage1);
-            this.tabControlInputTables.Controls.Add(this.tabPage2);
-            this.tabControlInputTables.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.tabControlInputTables.ItemSize = new System.Drawing.Size(20, 120);
-            this.tabControlInputTables.Location = new System.Drawing.Point(3, 24);
-            this.tabControlInputTables.Multiline = true;
-            this.tabControlInputTables.Name = "tabControlInputTables";
-            this.tabControlInputTables.Padding = new System.Drawing.Point(6, 0);
-            this.tabControlInputTables.SelectedIndex = 0;
-            this.tabControlInputTables.Size = new System.Drawing.Size(1247, 561);
-            this.tabControlInputTables.TabIndex = 0;
-            this.tabControlInputTables.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlInputTables_DrawItem);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(124, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1119, 553);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Airplanes";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(124, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1004, 435);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Airport";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabSolution
-            // 
-            this.tabSolution.Controls.Add(this.dataGridViewReports);
-            this.tabSolution.Location = new System.Drawing.Point(4, 31);
-            this.tabSolution.Name = "tabSolution";
-            this.tabSolution.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSolution.Size = new System.Drawing.Size(1141, 626);
-            this.tabSolution.TabIndex = 1;
-            this.tabSolution.Text = "Solution";
-            this.tabSolution.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewReports
-            // 
-            this.dataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Reports});
-            this.dataGridViewReports.Location = new System.Drawing.Point(0, 23);
-            this.dataGridViewReports.Name = "dataGridViewReports";
-            this.dataGridViewReports.RowHeadersVisible = false;
-            this.dataGridViewReports.RowTemplate.Height = 24;
-            this.dataGridViewReports.Size = new System.Drawing.Size(174, 334);
-            this.dataGridViewReports.TabIndex = 0;
-            // 
-            // Reports
-            // 
-            this.Reports.HeaderText = "Reports";
-            this.Reports.Name = "Reports";
-            this.Reports.Width = 169;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label7.Location = new System.Drawing.Point(20, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 24);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Instance";
-            // 
-            // comboBoxInstances
-            // 
-            this.comboBoxInstances.FormattingEnabled = true;
-            this.comboBoxInstances.Location = new System.Drawing.Point(20, 39);
-            this.comboBoxInstances.Name = "comboBoxInstances";
-            this.comboBoxInstances.Size = new System.Drawing.Size(262, 30);
-            this.comboBoxInstances.TabIndex = 0;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.DarkRed;
@@ -966,6 +1084,202 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // AirportName
+            // 
+            this.AirportName.HeaderText = "Aiport";
+            this.AirportName.Name = "AirportName";
+            // 
+            // ICAO
+            // 
+            this.ICAO.HeaderText = "ICAO";
+            this.ICAO.Name = "ICAO";
+            this.ICAO.Width = 70;
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.Width = 80;
+            // 
+            // Longintude
+            // 
+            this.Longintude.HeaderText = "Longitude";
+            this.Longintude.Name = "Longintude";
+            this.Longintude.Width = 80;
+            // 
+            // Elevation
+            // 
+            this.Elevation.HeaderText = "Elevation  (m)";
+            this.Elevation.Name = "Elevation";
+            // 
+            // RunwayLength
+            // 
+            this.RunwayLength.HeaderText = "Runway Length (m)";
+            this.RunwayLength.Name = "RunwayLength";
+            // 
+            // Region
+            // 
+            this.Region.HeaderText = "Region";
+            this.Region.Name = "Region";
+            // 
+            // MTOW_APE3
+            // 
+            this.MTOW_APE3.HeaderText = "MTOW-APE3";
+            this.MTOW_APE3.Name = "MTOW_APE3";
+            this.MTOW_APE3.Width = 120;
+            // 
+            // MTOW_PC12
+            // 
+            this.MTOW_PC12.HeaderText = "MTOW-PC12";
+            this.MTOW_PC12.Name = "MTOW_PC12";
+            this.MTOW_PC12.Width = 120;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BookingNumber,
+            this.Origin,
+            this.Destination,
+            this.MinDeparture,
+            this.MaxDeparture,
+            this.MinArrival,
+            this.MaxArrival});
+            this.dataGridView4.Location = new System.Drawing.Point(11, 32);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.RowTemplate.Height = 24;
+            this.dataGridView4.Size = new System.Drawing.Size(1070, 213);
+            this.dataGridView4.TabIndex = 0;
+            // 
+            // BookingNumber
+            // 
+            this.BookingNumber.HeaderText = "PNR";
+            this.BookingNumber.Name = "BookingNumber";
+            // 
+            // Origin
+            // 
+            this.Origin.HeaderText = "Origin";
+            this.Origin.Name = "Origin";
+            // 
+            // Destination
+            // 
+            this.Destination.HeaderText = "Destination";
+            this.Destination.Name = "Destination";
+            // 
+            // MinDeparture
+            // 
+            this.MinDeparture.HeaderText = "Minimum Departure Time";
+            this.MinDeparture.Name = "MinDeparture";
+            this.MinDeparture.Width = 170;
+            // 
+            // MaxDeparture
+            // 
+            this.MaxDeparture.HeaderText = "Maximum Departure Time";
+            this.MaxDeparture.Name = "MaxDeparture";
+            this.MaxDeparture.Width = 170;
+            // 
+            // MinArrival
+            // 
+            this.MinArrival.HeaderText = "Minimum Arrival Time";
+            this.MinArrival.Name = "MinArrival";
+            this.MinArrival.Width = 150;
+            // 
+            // MaxArrival
+            // 
+            this.MaxArrival.HeaderText = "Maximum Arrival Time";
+            this.MaxArrival.Name = "MaxArrival";
+            this.MaxArrival.Width = 150;
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Passenger,
+            this.Sex,
+            this.Class});
+            this.dataGridView5.Location = new System.Drawing.Point(11, 327);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.RowHeadersVisible = false;
+            this.dataGridView5.RowTemplate.Height = 24;
+            this.dataGridView5.Size = new System.Drawing.Size(1070, 189);
+            this.dataGridView5.TabIndex = 1;
+            // 
+            // AirplaneModel
+            // 
+            this.AirplaneModel.HeaderText = "Model";
+            this.AirplaneModel.Name = "AirplaneModel";
+            // 
+            // Prefix
+            // 
+            this.Prefix.HeaderText = "Prefix";
+            this.Prefix.Name = "Prefix";
+            // 
+            // Range
+            // 
+            this.Range.HeaderText = "Range (Km)";
+            this.Range.Name = "Range";
+            this.Range.Width = 140;
+            // 
+            // Weight
+            // 
+            this.Weight.HeaderText = "Weight (Kg)";
+            this.Weight.Name = "Weight";
+            this.Weight.Width = 140;
+            // 
+            // MaxWeightTakeOff
+            // 
+            this.MaxWeightTakeOff.HeaderText = "Max Weight Take Off (Kg)";
+            this.MaxWeightTakeOff.Name = "MaxWeightTakeOff";
+            this.MaxWeightTakeOff.Width = 180;
+            // 
+            // Capacity
+            // 
+            this.Capacity.HeaderText = "Capacity";
+            this.Capacity.Name = "Capacity";
+            // 
+            // Airplane
+            // 
+            this.Airplane.HeaderText = "Airplane";
+            this.Airplane.Name = "Airplane";
+            this.Airplane.Width = 240;
+            // 
+            // Fuel
+            // 
+            this.Fuel.HeaderText = "Fuel";
+            this.Fuel.Name = "Fuel";
+            this.Fuel.Width = 150;
+            // 
+            // Currency
+            // 
+            this.Currency.HeaderText = "Currency";
+            this.Currency.Name = "Currency";
+            this.Currency.Width = 180;
+            // 
+            // PricePerLitre
+            // 
+            this.PricePerLitre.HeaderText = "Price Per Litre";
+            this.PricePerLitre.Name = "PricePerLitre";
+            this.PricePerLitre.Width = 200;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.Width = 270;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.Width = 260;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.Width = 260;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -981,6 +1295,20 @@ namespace Prototipo1
             this.Text = "Unimore - Optimizer 1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl.ResumeLayout(false);
+            this.tabInstances.ResumeLayout(false);
+            this.tabInstances.PerformLayout();
+            this.panelInstanceDetails.ResumeLayout(false);
+            this.panelInstanceDetails.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabInput.ResumeLayout(false);
+            this.tabControlInputTables.ResumeLayout(false);
+            this.tabPageAirplanes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.tabPageAirports.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPageRequests.ResumeLayout(false);
+            this.tabPageFuel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabParameters.ResumeLayout(false);
             this.panelParamSelectInstance.ResumeLayout(false);
             this.panelParamSelectInstance.PerformLayout();
@@ -997,17 +1325,10 @@ namespace Prototipo1
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.tabInstances.ResumeLayout(false);
-            this.tabInstances.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabInput.ResumeLayout(false);
-            this.tabControlInputTables.ResumeLayout(false);
-            this.tabSolution.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1038,14 +1359,14 @@ namespace Prototipo1
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabInput;
         private System.Windows.Forms.TabPage tabSolution;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panelInstanceDetails;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonOptimizeInstanceTab;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBoxInstances;
+        private System.Windows.Forms.ComboBox comboBoxInstancesInstanceTab;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -1071,7 +1392,7 @@ namespace Prototipo1
         private System.Windows.Forms.RadioButton radioButtonGenSettingY;
         private System.Windows.Forms.RadioButton radioButtonGenSettingN;
         private System.Windows.Forms.Button buttonOptimizeAll;
-        private System.Windows.Forms.ComboBox comboBoxMInstance;
+        private System.Windows.Forms.ComboBox comboBoxInstanceParamTab;
         private System.Windows.Forms.Button buttonOptimizeInstance;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem heuristicToolStripMenuItem;
@@ -1083,8 +1404,6 @@ namespace Prototipo1
         private System.Windows.Forms.RadioButton radioButtonStartDepotYes;
         private System.Windows.Forms.RadioButton radioButtonStartDepotNo;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.DataGridView dataGridViewReports;
-        private System.Windows.Forms.DataGridViewButtonColumn Reports;
         private System.Windows.Forms.Button buttonCreateInstance;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button buttonDeleteScenario;
@@ -1093,8 +1412,45 @@ namespace Prototipo1
         private System.Windows.Forms.Button buttonSaveParams;
         private System.Windows.Forms.Button buttonEditParams;
         private System.Windows.Forms.TabControl tabControlInputTables;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageAirplanes;
+        private System.Windows.Forms.TabPage tabPageAirports;
+        private TabPage tabPageRequests;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn AirplaneName;
+        private TabPage tabPageFuel;
+        private DataGridView dataGridView2;
+        private DataGridView dataGridView3;
+        private DataGridViewTextBoxColumn AirportName;
+        private DataGridViewTextBoxColumn ICAO;
+        private DataGridViewTextBoxColumn Latitude;
+        private DataGridViewTextBoxColumn Longintude;
+        private DataGridViewTextBoxColumn Elevation;
+        private DataGridViewTextBoxColumn RunwayLength;
+        private DataGridViewTextBoxColumn Region;
+        private DataGridViewTextBoxColumn MTOW_APE3;
+        private DataGridViewTextBoxColumn MTOW_PC12;
+        private DataGridView dataGridView4;
+        private DataGridView dataGridView5;
+        private DataGridViewTextBoxColumn BookingNumber;
+        private DataGridViewTextBoxColumn Origin;
+        private DataGridViewTextBoxColumn Destination;
+        private DataGridViewTextBoxColumn MinDeparture;
+        private DataGridViewTextBoxColumn MaxDeparture;
+        private DataGridViewTextBoxColumn MinArrival;
+        private DataGridViewTextBoxColumn MaxArrival;
+        private DataGridViewTextBoxColumn AirplaneModel;
+        private DataGridViewTextBoxColumn Prefix;
+        private DataGridViewTextBoxColumn Range;
+        private DataGridViewTextBoxColumn Weight;
+        private DataGridViewTextBoxColumn MaxWeightTakeOff;
+        private DataGridViewTextBoxColumn Capacity;
+        private DataGridViewTextBoxColumn Airplane;
+        private DataGridViewTextBoxColumn Fuel;
+        private DataGridViewTextBoxColumn Currency;
+        private DataGridViewTextBoxColumn PricePerLitre;
+        private DataGridViewTextBoxColumn Passenger;
+        private DataGridViewTextBoxColumn Sex;
+        private DataGridViewTextBoxColumn Class;
     }
 }
 

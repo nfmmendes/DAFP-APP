@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using SolverClientComunication;
+using SolverClientComunication.Models;
 
 
 namespace Prototipo1
@@ -14,9 +16,17 @@ namespace Prototipo1
         public MainForm()
         {
             InitializeComponent();
-            comboBoxInstances.DataSource = context.Instances.Select(x => x.Name).ToList();
-            comboBoxMInstance.DataSource = context.Instances.Select(x => x.Name).ToList();
+            var instances = context.Instances;
+            comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+            comboBoxInstancesInstanceTab.SelectedIndex = 0;
+            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
 
+        }
+
+        
+        private string shortInstanceDescription(DbInstance x)
+        {
+            return $"{x.Name} ({x.CreatedOn.ToString("dd/MM/yy hh:mm")}) {(x.Optimized?"Opt":"NotOpt")}";
         }
 
         private void radioButtonGenSettingY_CheckedChanged(object sender, EventArgs e){
@@ -83,13 +93,16 @@ namespace Prototipo1
         {
             var createNewInstance = new CreateInstance(context);
             createNewInstance.ShowDialog();
-            comboBoxInstances.Refresh();
+            comboBoxInstancesInstanceTab.DataSource = context.Instances.ToList().Select(shortInstanceDescription).ToList();
+            comboBoxInstancesInstanceTab.SelectedIndex = 0;
+            comboBoxInstanceParamTab.DataSource = context.Instances.ToList().Select(shortInstanceDescription).ToList();
+
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab == tabControl.TabPages["tabInstances"]){
-                //comboBoxInstances.DataSource = context.Instances.Select(x => new{x.Id, Label =  $"{x.Name} ({x.CreatedOn})"}).ToList();
+                
                 
             }
         }
@@ -166,6 +179,16 @@ namespace Prototipo1
             buttonSaveParams.Visible = false;
             buttonEditParams.Visible = true;
 
+        }
+
+        private void comboBoxInstances_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxInstancesInstanceTab.SelectedIndex >= 0){
+                buttonEditScenario.Visible = true;
+                buttonDeleteScenario.Visible = true;
+                buttonOptimizeInstanceTab.Enabled = true;
+                panelInstanceDetails.Visible = true;
+            }
         }
     }
 }
