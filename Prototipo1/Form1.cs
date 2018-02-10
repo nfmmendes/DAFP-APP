@@ -117,6 +117,9 @@ namespace Prototipo1
             radioButtonPickAllNo.Enabled = radioButtonPickAllYes.Enabled = true;
             radioButtonTimeWindowNo.Enabled = radioButtonTimeWindowYes.Enabled = true;
             radioButtonStartDepotNo.Enabled = radioButtonStartDepotYes.Enabled = true;
+            numUD_ChildWeight.Enabled = true;
+            numUD_WomanWeight.Enabled = true;
+            numUD_ManWeight.Enabled = true;
         }
 
         private void buttonCancelSaveParams_Click(object sender, EventArgs e)
@@ -129,8 +132,48 @@ namespace Prototipo1
             radioButtonPickAllNo.Enabled = radioButtonPickAllYes.Enabled = false;
             radioButtonTimeWindowNo.Enabled = radioButtonTimeWindowYes.Enabled = false;
             radioButtonStartDepotNo.Enabled = radioButtonStartDepotYes.Enabled = false;
+            numUD_ChildWeight.Enabled = false;
+            numUD_ManWeight.Enabled = false;
+            numUD_WomanWeight.Enabled = false; 
+
         }
-        
+
+#region Drawing Instance's Tabs 
+        private void tabControlOtherTables_DrawItem(Object sender, System.Windows.Forms.DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Brush _textBrush;
+
+            // Get the item from the collection.
+            TabPage _tabPage = tabControlInstanceSolution.TabPages[e.Index];
+
+            // Get the real bounds for the tab rectangle.
+            Rectangle _tabBounds = tabControlInstanceSolution.GetTabRect(e.Index);
+
+            if (e.State == DrawItemState.Selected)
+            {
+
+                // Draw a different background color, and don't paint a focus rectangle.
+                _textBrush = new SolidBrush(Color.Black);
+                g.FillRectangle(Brushes.Gray, e.Bounds);
+            }
+            else
+            {
+                _textBrush = new System.Drawing.SolidBrush(e.ForeColor);
+                e.DrawBackground();
+            }
+
+            // Use our own font.
+            Font _tabFont = new Font("Microsoft Sans Serif", (float)10.8, FontStyle.Regular, GraphicsUnit.Pixel);
+
+            // Draw string. Center the text.
+            StringFormat _stringFlags = new StringFormat();
+            _stringFlags.Alignment = StringAlignment.Center;
+            _stringFlags.LineAlignment = StringAlignment.Center;
+            g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+        }
+
+
         private void tabControlInputTables_DrawItem(Object sender, System.Windows.Forms.DrawItemEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -164,7 +207,7 @@ namespace Prototipo1
             _stringFlags.LineAlignment = StringAlignment.Center;
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
-        
+#endregion
 
         private void buttonSaveParams_Click(object sender, EventArgs e)
         {
@@ -174,6 +217,9 @@ namespace Prototipo1
             radioButtonPickAllNo.Enabled = radioButtonPickAllYes.Enabled = false;
             radioButtonTimeWindowNo.Enabled = radioButtonTimeWindowYes.Enabled = false;
             radioButtonStartDepotNo.Enabled = radioButtonStartDepotYes.Enabled = false;
+            numUD_ChildWeight.Enabled = false;
+            numUD_WomanWeight.Enabled = false;
+            numUD_ManWeight.Enabled = false;
 
             buttonCancelSaveParams.Visible = false;
             buttonSaveParams.Visible = false;
