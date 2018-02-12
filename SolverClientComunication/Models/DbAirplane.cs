@@ -18,10 +18,21 @@ namespace SolverClientComunication.Models
         public string Prefix { get;  set; }
 
         [Required]
+        public int Range { get; set; }
+
+        [Required]
+        public int Weight { get; set; }
+
+        [Required]
+        public double Knot { get; set; }
+
+        [Required]
         public DbAirplaneModel Model { get; set;  }
 
         [Required, Range(0,Double.PositiveInfinity)]
         public double Capacity { get; set; }
+
+        public DbAirports BaseAirport { get; set; }
 
         public DbInstance Instance { get;  set; }
     }

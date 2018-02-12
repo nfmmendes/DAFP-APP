@@ -34,22 +34,33 @@
             treeNode1,
             treeNode2});
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Airplane");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Passenger");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Flight Request");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Flight Cluster Request");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Seat List");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Passenger");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Flight Request");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Flight Cluster Request");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
             treeNode7,
-            treeNode8});
+            treeNode8,
+            treeNode9});
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.labelRequestFileLabel = new System.Windows.Forms.Label();
+            this.buttonChooseRequestFile = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.chooseAirplaneFileLabel = new System.Windows.Forms.Label();
+            this.buttonChooseAirplaneFile = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxInstances = new System.Windows.Forms.ComboBox();
             this.buttonSelectFiles = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonLoadFiles = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeViewTablesLoaded = new System.Windows.Forms.TreeView();
             this.label13 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBoxInstance = new System.Windows.Forms.TextBox();
@@ -57,6 +68,9 @@
             this.radioButtonNew = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -64,11 +78,102 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkRed;
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(359, 53);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(634, 455);
             this.panel1.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.Controls.Add(this.panel6);
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Location = new System.Drawing.Point(23, 59);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(589, 365);
+            this.panel4.TabIndex = 18;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.labelRequestFileLabel);
+            this.panel6.Controls.Add(this.buttonChooseRequestFile);
+            this.panel6.Location = new System.Drawing.Point(115, 102);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(458, 43);
+            this.panel6.TabIndex = 5;
+            // 
+            // labelRequestFileLabel
+            // 
+            this.labelRequestFileLabel.AutoSize = true;
+            this.labelRequestFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.labelRequestFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.labelRequestFileLabel.Name = "labelRequestFileLabel";
+            this.labelRequestFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.labelRequestFileLabel.TabIndex = 2;
+            // 
+            // buttonChooseRequestFile
+            // 
+            this.buttonChooseRequestFile.Enabled = false;
+            this.buttonChooseRequestFile.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseRequestFile.Name = "buttonChooseRequestFile";
+            this.buttonChooseRequestFile.Size = new System.Drawing.Size(148, 41);
+            this.buttonChooseRequestFile.TabIndex = 0;
+            this.buttonChooseRequestFile.Text = "Choose file";
+            this.buttonChooseRequestFile.UseVisualStyleBackColor = true;
+            this.buttonChooseRequestFile.Click += new System.EventHandler(this.buttonChooseFileRequests_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label6.Location = new System.Drawing.Point(15, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 24);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Requests:";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.chooseAirplaneFileLabel);
+            this.panel5.Controls.Add(this.buttonChooseAirplaneFile);
+            this.panel5.Location = new System.Drawing.Point(115, 23);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(458, 43);
+            this.panel5.TabIndex = 3;
+            // 
+            // chooseAirplaneFileLabel
+            // 
+            this.chooseAirplaneFileLabel.AutoSize = true;
+            this.chooseAirplaneFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.chooseAirplaneFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.chooseAirplaneFileLabel.Name = "chooseAirplaneFileLabel";
+            this.chooseAirplaneFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.chooseAirplaneFileLabel.TabIndex = 2;
+            // 
+            // buttonChooseAirplaneFile
+            // 
+            this.buttonChooseAirplaneFile.Enabled = false;
+            this.buttonChooseAirplaneFile.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseAirplaneFile.Name = "buttonChooseAirplaneFile";
+            this.buttonChooseAirplaneFile.Size = new System.Drawing.Size(148, 41);
+            this.buttonChooseAirplaneFile.TabIndex = 0;
+            this.buttonChooseAirplaneFile.Text = "Choose file";
+            this.buttonChooseAirplaneFile.UseVisualStyleBackColor = true;
+            this.buttonChooseAirplaneFile.Click += new System.EventHandler(this.buttonChooseAirplaneFile_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label3.Location = new System.Drawing.Point(15, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 24);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Airplanes:";
             // 
             // label1
             // 
@@ -81,14 +186,14 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "File List";
             // 
-            // comboBox1
+            // comboBoxInstances
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(20, 98);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(277, 30);
-            this.comboBox1.TabIndex = 1;
+            this.comboBoxInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.comboBoxInstances.FormattingEnabled = true;
+            this.comboBoxInstances.Location = new System.Drawing.Point(20, 98);
+            this.comboBoxInstances.Name = "comboBoxInstances";
+            this.comboBoxInstances.Size = new System.Drawing.Size(277, 30);
+            this.comboBoxInstances.TabIndex = 1;
             // 
             // buttonSelectFiles
             // 
@@ -100,34 +205,35 @@
             this.buttonSelectFiles.TabIndex = 2;
             this.buttonSelectFiles.Text = "Select files";
             this.buttonSelectFiles.UseVisualStyleBackColor = true;
-            this.buttonSelectFiles.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // buttonLoadFiles
             // 
-            this.button1.Enabled = false;
-            this.button1.ForeColor = System.Drawing.Color.DarkRed;
-            this.button1.Location = new System.Drawing.Point(699, 543);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 38);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Load";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonLoadFiles.Enabled = false;
+            this.buttonLoadFiles.ForeColor = System.Drawing.Color.DarkRed;
+            this.buttonLoadFiles.Location = new System.Drawing.Point(699, 543);
+            this.buttonLoadFiles.Name = "buttonLoadFiles";
+            this.buttonLoadFiles.Size = new System.Drawing.Size(130, 38);
+            this.buttonLoadFiles.TabIndex = 3;
+            this.buttonLoadFiles.Text = "Load";
+            this.buttonLoadFiles.UseVisualStyleBackColor = true;
+            this.buttonLoadFiles.Click += new System.EventHandler(this.buttonLoadFiles_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkRed;
-            this.panel2.Controls.Add(this.treeView1);
+            this.panel2.Controls.Add(this.treeViewTablesLoaded);
             this.panel2.Controls.Add(this.label13);
             this.panel2.Location = new System.Drawing.Point(13, 256);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(315, 325);
             this.panel2.TabIndex = 4;
             // 
-            // treeView1
+            // treeViewTablesLoaded
             // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(20, 52);
-            this.treeView1.Name = "treeView1";
+            this.treeViewTablesLoaded.CheckBoxes = true;
+            this.treeViewTablesLoaded.Enabled = false;
+            this.treeViewTablesLoaded.Location = new System.Drawing.Point(20, 52);
+            this.treeViewTablesLoaded.Name = "treeViewTablesLoaded";
             treeNode1.Name = "AirportsNode";
             treeNode1.Text = "Airports";
             treeNode2.Name = "StretchNode";
@@ -136,22 +242,26 @@
             treeNode3.Text = "Network";
             treeNode4.Name = "AirplaneNode";
             treeNode4.Text = "Airplane";
-            treeNode5.Name = "AirplaneNodes";
-            treeNode5.Text = "Airplanes";
-            treeNode6.Name = "PassengerNode";
-            treeNode6.Text = "Passenger";
-            treeNode7.Name = "FlightRequestNode";
-            treeNode7.Text = "Flight Request";
-            treeNode8.Name = "Flight Cluster Request Node";
-            treeNode8.Text = "Flight Cluster Request";
-            treeNode9.Name = "RequestsNodes";
-            treeNode9.Text = "Requests";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode5.Name = "SeatListNode";
+            treeNode5.Text = "Seat List";
+            treeNode6.Name = "AirplaneNodes";
+            treeNode6.Text = "Airplanes";
+            treeNode7.Name = "PassengerNode";
+            treeNode7.Text = "Passenger";
+            treeNode8.Name = "FlightRequestNode";
+            treeNode8.Text = "Flight Request";
+            treeNode9.Name = "Flight Cluster Request Node";
+            treeNode9.Text = "Flight Cluster Request";
+            treeNode10.Name = "RequestsNodes";
+            treeNode10.Text = "Requests";
+            this.treeViewTablesLoaded.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3,
-            treeNode5,
-            treeNode9});
-            this.treeView1.Size = new System.Drawing.Size(269, 255);
-            this.treeView1.TabIndex = 17;
+            treeNode6,
+            treeNode10});
+            this.treeViewTablesLoaded.Size = new System.Drawing.Size(269, 255);
+            this.treeViewTablesLoaded.TabIndex = 17;
+            this.treeViewTablesLoaded.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTablesLoaded_AfterCheck);
+            this.treeViewTablesLoaded.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTablesLoaded_AfterSelect);
             // 
             // label13
             // 
@@ -160,9 +270,9 @@
             this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(15, 12);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(86, 25);
+            this.label13.Size = new System.Drawing.Size(146, 25);
             this.label13.TabIndex = 16;
-            this.label13.Text = "File List";
+            this.label13.Text = "Tables loaded";
             // 
             // panel3
             // 
@@ -171,7 +281,7 @@
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Controls.Add(this.radioButtonNew);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.comboBoxInstances);
             this.panel3.Location = new System.Drawing.Point(13, 53);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(315, 182);
@@ -184,10 +294,12 @@
             this.textBoxInstance.Name = "textBoxInstance";
             this.textBoxInstance.Size = new System.Drawing.Size(276, 28);
             this.textBoxInstance.TabIndex = 19;
+            this.textBoxInstance.TextChanged += new System.EventHandler(this.textBoxInstance_TextChanged);
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.radioButton2.Location = new System.Drawing.Point(169, 59);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(128, 21);
@@ -199,6 +311,7 @@
             // 
             this.radioButtonNew.AutoSize = true;
             this.radioButtonNew.Checked = true;
+            this.radioButtonNew.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.radioButtonNew.Location = new System.Drawing.Point(20, 59);
             this.radioButtonNew.Name = "radioButtonNew";
             this.radioButtonNew.Size = new System.Drawing.Size(113, 21);
@@ -226,13 +339,19 @@
             this.ClientSize = new System.Drawing.Size(1011, 606);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonLoadFiles);
             this.Controls.Add(this.buttonSelectFiles);
             this.Controls.Add(this.panel1);
             this.Name = "InstanceLoader";
             this.Text = "Load Instance";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -244,11 +363,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxInstances;
         private System.Windows.Forms.Button buttonSelectFiles;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLoadFiles;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeViewTablesLoaded;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
@@ -256,5 +375,14 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButtonNew;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label labelRequestFileLabel;
+        private System.Windows.Forms.Button buttonChooseRequestFile;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label chooseAirplaneFileLabel;
+        private System.Windows.Forms.Button buttonChooseAirplaneFile;
+        private System.Windows.Forms.Label label3;
     }
 }

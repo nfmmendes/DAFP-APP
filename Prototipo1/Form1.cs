@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 using SolverClientComunication;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 
@@ -11,12 +12,12 @@ namespace Prototipo1
 {
     public partial class MainForm : Form
     {
-        SQLCommunication context = new SQLCommunication();
+        public static CoopserviceContext Context = new CoopserviceContext();
 
         public MainForm()
         {
             InitializeComponent();
-            var instances = context.Instances;
+            var instances = Context.Instances;
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
             comboBoxInstancesInstanceTab.SelectedIndex = 0;
             comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
@@ -24,8 +25,7 @@ namespace Prototipo1
         }
 
         
-        private string shortInstanceDescription(DbInstance x)
-        {
+        private string shortInstanceDescription(DbInstance x){
             return $"{x.Name} ({x.CreatedOn.ToString("dd/MM/yy hh:mm")}) {(x.Optimized?"Opt":"NotOpt")}";
         }
 
@@ -91,11 +91,11 @@ namespace Prototipo1
 
         private void buttonCreateInstance_Click(object sender, EventArgs e)
         {
-            var createNewInstance = new CreateInstance(context);
+            var createNewInstance = new CreateInstance(Context);
             createNewInstance.ShowDialog();
-            comboBoxInstancesInstanceTab.DataSource = context.Instances.ToList().Select(shortInstanceDescription).ToList();
+            comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             comboBoxInstancesInstanceTab.SelectedIndex = 0;
-            comboBoxInstanceParamTab.DataSource = context.Instances.ToList().Select(shortInstanceDescription).ToList();
+            comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
 
         }
 
@@ -120,6 +120,7 @@ namespace Prototipo1
             numUD_ChildWeight.Enabled = true;
             numUD_WomanWeight.Enabled = true;
             numUD_ManWeight.Enabled = true;
+            numUD_TimeLimit.Enabled = true;
         }
 
         private void buttonCancelSaveParams_Click(object sender, EventArgs e)
@@ -134,7 +135,8 @@ namespace Prototipo1
             radioButtonStartDepotNo.Enabled = radioButtonStartDepotYes.Enabled = false;
             numUD_ChildWeight.Enabled = false;
             numUD_ManWeight.Enabled = false;
-            numUD_WomanWeight.Enabled = false; 
+            numUD_WomanWeight.Enabled = false;
+            numUD_TimeLimit.Enabled = false;
 
         }
 
@@ -220,6 +222,7 @@ namespace Prototipo1
             numUD_ChildWeight.Enabled = false;
             numUD_WomanWeight.Enabled = false;
             numUD_ManWeight.Enabled = false;
+            numUD_TimeLimit.Enabled = false;
 
             buttonCancelSaveParams.Visible = false;
             buttonSaveParams.Visible = false;

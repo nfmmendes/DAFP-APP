@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common;
 
-namespace SolverClientComunication
+namespace SolverClientComunication.Enums
 {
     public class SolverEnum :AbstractEnum 
     {

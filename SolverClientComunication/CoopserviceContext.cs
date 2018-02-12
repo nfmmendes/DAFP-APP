@@ -6,7 +6,7 @@ namespace SolverClientComunication
     using System.Data.Entity;
     using System.Linq;
 
-    public class SQLCommunication : DbContext
+    public class CoopserviceContext : DbContext
     {
 
 
@@ -21,14 +21,14 @@ namespace SolverClientComunication
         public DbSet<DbReportList> ReportList { get; set; }
         public DbSet<DbInstance> Instances { get; set;  }
             
-        // Your context has been configured to use a 'SQLCommunication' connection string from your application's 
+        // Your context has been configured to use a 'CoopserviceContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'SolverClientComunication.SQLCommunication' database on your LocalDb instance. 
+        // 'SolverClientComunication.CoopserviceContext' database on your LocalDb instance. 
         // 
-        // If you wish to target a different database and/or database provider, modify the 'SQLCommunication' 
+        // If you wish to target a different database and/or database provider, modify the 'CoopserviceContext' 
         // connection string in the application configuration file.
-        public SQLCommunication()
-            : base("name=SQLCommunication")
+        public CoopserviceContext()
+            : base("name=CoopserviceContext")
         {
             
         }

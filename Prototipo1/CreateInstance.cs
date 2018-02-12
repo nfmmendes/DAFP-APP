@@ -14,8 +14,8 @@ namespace Prototipo1
 {
     public partial class CreateInstance : Form
     {
-        private SQLCommunication context; 
-        public CreateInstance(SQLCommunication context)
+        private CoopserviceContext context; 
+        public CreateInstance(CoopserviceContext context)
         {
             InitializeComponent();
             this.context = context; 
