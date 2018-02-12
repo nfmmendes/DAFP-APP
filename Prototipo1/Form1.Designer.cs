@@ -48,11 +48,25 @@ namespace Prototipo1
             this.tabControlInputTables = new System.Windows.Forms.TabControl();
             this.tabPageAirplanes = new System.Windows.Forms.TabPage();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Range = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxWeightTakeOff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CruiseSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageAirports = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPageRequests = new System.Windows.Forms.TabPage();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Origin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,10 +77,33 @@ namespace Prototipo1
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageFuel = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabExchangeRate = new System.Windows.Forms.TabPage();
+            this.dataGridView9 = new System.Windows.Forms.DataGridView();
+            this.CurrencyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrencySymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSolution = new System.Windows.Forms.TabPage();
             this.tabControlInstanceSolution = new System.Windows.Forms.TabControl();
             this.tabPageRouteVisualization = new System.Windows.Forms.TabPage();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabPageAirplaneUsage = new System.Windows.Forms.TabPage();
+            this.dataGridView8 = new System.Windows.Forms.DataGridView();
+            this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.RouteId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchOrigin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArrivalTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label18 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxInstancesInstanceTab = new System.Windows.Forms.ComboBox();
             this.buttonOptimizeInstanceTab = new System.Windows.Forms.Button();
@@ -80,6 +117,13 @@ namespace Prototipo1
             this.radioButtonGenSettingY = new System.Windows.Forms.RadioButton();
             this.radioButtonGenSettingN = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.radioButtonHeuristic = new System.Windows.Forms.RadioButton();
+            this.radioButtonExact = new System.Windows.Forms.RadioButton();
+            this.label19 = new System.Windows.Forms.Label();
+            this.numUD_TimeLimit = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.numUD_ChildWeight = new System.Windows.Forms.NumericUpDown();
             this.numUD_WomanWeight = new System.Windows.Forms.NumericUpDown();
@@ -136,37 +180,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.label18 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dataGridView7 = new System.Windows.Forms.DataGridView();
-            this.dataGridView8 = new System.Windows.Forms.DataGridView();
-            this.RouteId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchOrigin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArrivalTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.numUD_TimeLimit = new System.Windows.Forms.NumericUpDown();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.radioButtonExact = new System.Windows.Forms.RadioButton();
-            this.radioButtonHeuristic = new System.Windows.Forms.RadioButton();
             this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -177,19 +190,7 @@ namespace Prototipo1
             this.MTOW_APE3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LandingCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabExchangeRate = new System.Windows.Forms.TabPage();
-            this.dataGridView9 = new System.Windows.Forms.DataGridView();
-            this.CurrencyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrencySymbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Range = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxWeightTakeOff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CruiseSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroundTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -206,14 +207,20 @@ namespace Prototipo1
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPageFuel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tabExchangeRate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             this.tabSolution.SuspendLayout();
             this.tabControlInstanceSolution.SuspendLayout();
             this.tabPageRouteVisualization.SuspendLayout();
             this.tabPageAirplaneUsage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUD_ChildWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUD_WomanWeight)).BeginInit();
@@ -224,12 +231,6 @@ namespace Prototipo1
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).BeginInit();
-            this.tabExchangeRate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -424,6 +425,24 @@ namespace Prototipo1
             this.dataGridView6.Size = new System.Drawing.Size(1018, 200);
             this.dataGridView6.TabIndex = 1;
             // 
+            // SeatClass
+            // 
+            this.SeatClass.HeaderText = "Class";
+            this.SeatClass.Name = "SeatClass";
+            this.SeatClass.Width = 310;
+            // 
+            // NumberSeats
+            // 
+            this.NumberSeats.HeaderText = "Number of Seats";
+            this.NumberSeats.Name = "NumberSeats";
+            this.NumberSeats.Width = 180;
+            // 
+            // MaxLuggageWeight
+            // 
+            this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
+            this.MaxLuggageWeight.Name = "MaxLuggageWeight";
+            this.MaxLuggageWeight.Width = 320;
+            // 
             // dataGridView3
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -451,6 +470,51 @@ namespace Prototipo1
             this.dataGridView3.Size = new System.Drawing.Size(1018, 214);
             this.dataGridView3.TabIndex = 0;
             // 
+            // AirplaneModel
+            // 
+            this.AirplaneModel.HeaderText = "Model";
+            this.AirplaneModel.Name = "AirplaneModel";
+            // 
+            // Prefix
+            // 
+            this.Prefix.HeaderText = "Prefix";
+            this.Prefix.Name = "Prefix";
+            // 
+            // Range
+            // 
+            this.Range.HeaderText = "Range (Km)";
+            this.Range.Name = "Range";
+            this.Range.Width = 120;
+            // 
+            // Weight
+            // 
+            this.Weight.HeaderText = "Weight (Kg)";
+            this.Weight.Name = "Weight";
+            this.Weight.Width = 120;
+            // 
+            // MaxWeightTakeOff
+            // 
+            this.MaxWeightTakeOff.HeaderText = "Max Weight Take Off (Kg)";
+            this.MaxWeightTakeOff.Name = "MaxWeightTakeOff";
+            this.MaxWeightTakeOff.Width = 180;
+            // 
+            // CruiseSpeed
+            // 
+            this.CruiseSpeed.HeaderText = "Cruise Speed (Knot)";
+            this.CruiseSpeed.Name = "CruiseSpeed";
+            this.CruiseSpeed.Width = 150;
+            // 
+            // Capacity
+            // 
+            this.Capacity.HeaderText = "Capacity";
+            this.Capacity.Name = "Capacity";
+            this.Capacity.Width = 90;
+            // 
+            // BaseAirport
+            // 
+            this.BaseAirport.HeaderText = "Base Airport";
+            this.BaseAirport.Name = "BaseAirport";
+            // 
             // tabPageAirports
             // 
             this.tabPageAirports.Controls.Add(this.dataGridView1);
@@ -476,7 +540,8 @@ namespace Prototipo1
             this.Region,
             this.MTOW_APE3,
             this.MTOW_PC12,
-            this.LandingCost});
+            this.LandingCost,
+            this.GroundTime});
             this.dataGridView1.Location = new System.Drawing.Point(11, 32);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -510,6 +575,24 @@ namespace Prototipo1
             this.dataGridView5.RowTemplate.Height = 24;
             this.dataGridView5.Size = new System.Drawing.Size(1013, 189);
             this.dataGridView5.TabIndex = 1;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.Width = 300;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.Width = 260;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.Width = 245;
             // 
             // dataGridView4
             // 
@@ -593,6 +676,73 @@ namespace Prototipo1
             this.dataGridView2.Size = new System.Drawing.Size(1008, 223);
             this.dataGridView2.TabIndex = 1;
             // 
+            // Airport
+            // 
+            this.Airport.HeaderText = "Airport";
+            this.Airport.Name = "Airport";
+            this.Airport.Width = 270;
+            // 
+            // Fuel
+            // 
+            this.Fuel.HeaderText = "Fuel";
+            this.Fuel.Name = "Fuel";
+            this.Fuel.Width = 150;
+            // 
+            // Currency
+            // 
+            this.Currency.HeaderText = "Currency";
+            this.Currency.Name = "Currency";
+            this.Currency.Width = 180;
+            // 
+            // PricePerLitre
+            // 
+            this.PricePerLitre.HeaderText = "Price Per Litre";
+            this.PricePerLitre.Name = "PricePerLitre";
+            this.PricePerLitre.Width = 200;
+            // 
+            // tabExchangeRate
+            // 
+            this.tabExchangeRate.Controls.Add(this.dataGridView9);
+            this.tabExchangeRate.Location = new System.Drawing.Point(104, 4);
+            this.tabExchangeRate.Name = "tabExchangeRate";
+            this.tabExchangeRate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabExchangeRate.Size = new System.Drawing.Size(1078, 546);
+            this.tabExchangeRate.TabIndex = 4;
+            this.tabExchangeRate.Text = "Exchange Rates";
+            this.tabExchangeRate.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView9
+            // 
+            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView9.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CurrencyName,
+            this.CurrencySymbol,
+            this.Value});
+            this.dataGridView9.Location = new System.Drawing.Point(16, 63);
+            this.dataGridView9.Name = "dataGridView9";
+            this.dataGridView9.RowHeadersVisible = false;
+            this.dataGridView9.RowTemplate.Height = 24;
+            this.dataGridView9.Size = new System.Drawing.Size(1008, 223);
+            this.dataGridView9.TabIndex = 2;
+            // 
+            // CurrencyName
+            // 
+            this.CurrencyName.HeaderText = "Currency";
+            this.CurrencyName.Name = "CurrencyName";
+            this.CurrencyName.Width = 370;
+            // 
+            // CurrencySymbol
+            // 
+            this.CurrencySymbol.HeaderText = "Symbol";
+            this.CurrencySymbol.Name = "CurrencySymbol";
+            this.CurrencySymbol.Width = 200;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value (1 to US$)";
+            this.Value.Name = "Value";
+            this.Value.Width = 200;
+            // 
             // tabSolution
             // 
             this.tabSolution.Controls.Add(this.tabControlInstanceSolution);
@@ -633,6 +783,18 @@ namespace Prototipo1
             this.tabPageRouteVisualization.Text = "Route Vizualization";
             this.tabPageRouteVisualization.UseVisualStyleBackColor = true;
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(20, 20);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(1038, 506);
+            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.Url = new System.Uri("https://www.openstreetmap.org/", System.UriKind.Absolute);
+            // 
             // tabPageAirplaneUsage
             // 
             this.tabPageAirplaneUsage.Controls.Add(this.dataGridView8);
@@ -647,6 +809,108 @@ namespace Prototipo1
             this.tabPageAirplaneUsage.TabIndex = 1;
             this.tabPageAirplaneUsage.Text = "Airplane Usage";
             this.tabPageAirplaneUsage.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView8
+            // 
+            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView8.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.StretchPassenger,
+            this.StretchPNR,
+            this.StretchSex,
+            this.StretchClass});
+            this.dataGridView8.Location = new System.Drawing.Point(16, 350);
+            this.dataGridView8.Name = "dataGridView8";
+            this.dataGridView8.RowHeadersVisible = false;
+            this.dataGridView8.RowTemplate.Height = 24;
+            this.dataGridView8.Size = new System.Drawing.Size(1017, 162);
+            this.dataGridView8.TabIndex = 6;
+            // 
+            // StretchPassenger
+            // 
+            this.StretchPassenger.HeaderText = "Passenger";
+            this.StretchPassenger.Name = "StretchPassenger";
+            this.StretchPassenger.Width = 360;
+            // 
+            // StretchPNR
+            // 
+            this.StretchPNR.HeaderText = "PNR";
+            this.StretchPNR.Name = "StretchPNR";
+            this.StretchPNR.Width = 150;
+            // 
+            // StretchSex
+            // 
+            this.StretchSex.HeaderText = "Sex";
+            this.StretchSex.Name = "StretchSex";
+            this.StretchSex.Width = 150;
+            // 
+            // StretchClass
+            // 
+            this.StretchClass.HeaderText = "Class";
+            this.StretchClass.Name = "StretchClass";
+            this.StretchClass.Width = 150;
+            // 
+            // dataGridView7
+            // 
+            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.RouteId,
+            this.StretchOrigin,
+            this.DepartureTime,
+            this.StretchDestination,
+            this.ArrivalTime});
+            this.dataGridView7.Location = new System.Drawing.Point(16, 121);
+            this.dataGridView7.Name = "dataGridView7";
+            this.dataGridView7.RowHeadersVisible = false;
+            this.dataGridView7.RowTemplate.Height = 24;
+            this.dataGridView7.Size = new System.Drawing.Size(1017, 165);
+            this.dataGridView7.TabIndex = 5;
+            // 
+            // RouteId
+            // 
+            this.RouteId.HeaderText = "Route ID";
+            this.RouteId.Name = "RouteId";
+            this.RouteId.Width = 120;
+            // 
+            // StretchOrigin
+            // 
+            this.StretchOrigin.HeaderText = "Origin";
+            this.StretchOrigin.Name = "StretchOrigin";
+            this.StretchOrigin.Width = 200;
+            // 
+            // DepartureTime
+            // 
+            this.DepartureTime.HeaderText = "Departure";
+            this.DepartureTime.Name = "DepartureTime";
+            this.DepartureTime.Width = 150;
+            // 
+            // StretchDestination
+            // 
+            this.StretchDestination.HeaderText = "Destination";
+            this.StretchDestination.Name = "StretchDestination";
+            this.StretchDestination.Width = 200;
+            // 
+            // ArrivalTime
+            // 
+            this.ArrivalTime.HeaderText = "Arrival";
+            this.ArrivalTime.Name = "ArrivalTime";
+            this.ArrivalTime.Width = 140;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(10, 12);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(80, 24);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Airplane";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 39);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(220, 30);
+            this.comboBox1.TabIndex = 3;
             // 
             // label7
             // 
@@ -797,6 +1061,93 @@ namespace Prototipo1
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1153, 501);
             this.panel6.TabIndex = 12;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Controls.Add(this.radioButtonHeuristic);
+            this.panel7.Controls.Add(this.radioButtonExact);
+            this.panel7.Controls.Add(this.label19);
+            this.panel7.Controls.Add(this.numUD_TimeLimit);
+            this.panel7.Controls.Add(this.label21);
+            this.panel7.Controls.Add(this.label22);
+            this.panel7.Location = new System.Drawing.Point(861, 15);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(279, 151);
+            this.panel7.TabIndex = 23;
+            // 
+            // radioButtonHeuristic
+            // 
+            this.radioButtonHeuristic.AutoSize = true;
+            this.radioButtonHeuristic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButtonHeuristic.Location = new System.Drawing.Point(141, 111);
+            this.radioButtonHeuristic.Name = "radioButtonHeuristic";
+            this.radioButtonHeuristic.Size = new System.Drawing.Size(104, 28);
+            this.radioButtonHeuristic.TabIndex = 7;
+            this.radioButtonHeuristic.TabStop = true;
+            this.radioButtonHeuristic.Text = "Heuristic";
+            this.radioButtonHeuristic.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonExact
+            // 
+            this.radioButtonExact.AutoSize = true;
+            this.radioButtonExact.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.radioButtonExact.Location = new System.Drawing.Point(141, 77);
+            this.radioButtonExact.Name = "radioButtonExact";
+            this.radioButtonExact.Size = new System.Drawing.Size(78, 28);
+            this.radioButtonExact.TabIndex = 6;
+            this.radioButtonExact.TabStop = true;
+            this.radioButtonExact.Text = "Exact";
+            this.radioButtonExact.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label19.Location = new System.Drawing.Point(4, 81);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(79, 24);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Method:";
+            // 
+            // numUD_TimeLimit
+            // 
+            this.numUD_TimeLimit.Enabled = false;
+            this.numUD_TimeLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.numUD_TimeLimit.Location = new System.Drawing.Point(141, 39);
+            this.numUD_TimeLimit.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numUD_TimeLimit.Name = "numUD_TimeLimit";
+            this.numUD_TimeLimit.Size = new System.Drawing.Size(50, 28);
+            this.numUD_TimeLimit.TabIndex = 4;
+            this.numUD_TimeLimit.Value = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label21.Location = new System.Drawing.Point(4, 43);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(134, 24);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "Time Limit (m):";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(3, 6);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(144, 24);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "Solver Params";
             // 
             // panel5
             // 
@@ -1320,35 +1671,35 @@ namespace Prototipo1
             this.cplexToolStripMenuItem.Checked = true;
             this.cplexToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cplexToolStripMenuItem.Name = "cplexToolStripMenuItem";
-            this.cplexToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.cplexToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.cplexToolStripMenuItem.Text = "Cplex";
             this.cplexToolStripMenuItem.Click += new System.EventHandler(this.cplexToolStripMenuItem_Click);
             // 
             // gurobiToolStripMenuItem
             // 
             this.gurobiToolStripMenuItem.Name = "gurobiToolStripMenuItem";
-            this.gurobiToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.gurobiToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.gurobiToolStripMenuItem.Text = "Gurobi";
             this.gurobiToolStripMenuItem.Click += new System.EventHandler(this.gurobiToolStripMenuItem_Click);
             // 
             // xpressToolStripMenuItem
             // 
             this.xpressToolStripMenuItem.Name = "xpressToolStripMenuItem";
-            this.xpressToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.xpressToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.xpressToolStripMenuItem.Text = "Xpress";
             this.xpressToolStripMenuItem.Click += new System.EventHandler(this.xpressToolStripMenuItem_Click);
             // 
             // coinORToolStripMenuItem
             // 
             this.coinORToolStripMenuItem.Name = "coinORToolStripMenuItem";
-            this.coinORToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.coinORToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.coinORToolStripMenuItem.Text = "Coin-OR";
             this.coinORToolStripMenuItem.Click += new System.EventHandler(this.coinORToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
             // 
             // heuristicToolStripMenuItem
             // 
@@ -1357,7 +1708,7 @@ namespace Prototipo1
             this.simulatedAnnealingToolStripMenuItem,
             this.gRASPToolStripMenuItem});
             this.heuristicToolStripMenuItem.Name = "heuristicToolStripMenuItem";
-            this.heuristicToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.heuristicToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.heuristicToolStripMenuItem.Text = "Heuristic";
             // 
             // tabuSearchToolStripMenuItem
@@ -1406,267 +1757,6 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.AllowNavigation = false;
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(20, 20);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(1038, 506);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Url = new System.Uri("https://www.openstreetmap.org/", System.UriKind.Absolute);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 12);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(80, 24);
-            this.label18.TabIndex = 4;
-            this.label18.Text = "Airplane";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 39);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(220, 30);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // dataGridView7
-            // 
-            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RouteId,
-            this.StretchOrigin,
-            this.DepartureTime,
-            this.StretchDestination,
-            this.ArrivalTime});
-            this.dataGridView7.Location = new System.Drawing.Point(16, 121);
-            this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.RowHeadersVisible = false;
-            this.dataGridView7.RowTemplate.Height = 24;
-            this.dataGridView7.Size = new System.Drawing.Size(1017, 165);
-            this.dataGridView7.TabIndex = 5;
-            // 
-            // dataGridView8
-            // 
-            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView8.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.StretchPassenger,
-            this.StretchPNR,
-            this.StretchSex,
-            this.StretchClass});
-            this.dataGridView8.Location = new System.Drawing.Point(16, 350);
-            this.dataGridView8.Name = "dataGridView8";
-            this.dataGridView8.RowHeadersVisible = false;
-            this.dataGridView8.RowTemplate.Height = 24;
-            this.dataGridView8.Size = new System.Drawing.Size(1017, 162);
-            this.dataGridView8.TabIndex = 6;
-            // 
-            // RouteId
-            // 
-            this.RouteId.HeaderText = "Route ID";
-            this.RouteId.Name = "RouteId";
-            this.RouteId.Width = 120;
-            // 
-            // StretchOrigin
-            // 
-            this.StretchOrigin.HeaderText = "Origin";
-            this.StretchOrigin.Name = "StretchOrigin";
-            this.StretchOrigin.Width = 200;
-            // 
-            // DepartureTime
-            // 
-            this.DepartureTime.HeaderText = "Departure";
-            this.DepartureTime.Name = "DepartureTime";
-            this.DepartureTime.Width = 150;
-            // 
-            // StretchDestination
-            // 
-            this.StretchDestination.HeaderText = "Destination";
-            this.StretchDestination.Name = "StretchDestination";
-            this.StretchDestination.Width = 200;
-            // 
-            // ArrivalTime
-            // 
-            this.ArrivalTime.HeaderText = "Arrival";
-            this.ArrivalTime.Name = "ArrivalTime";
-            this.ArrivalTime.Width = 140;
-            // 
-            // SeatClass
-            // 
-            this.SeatClass.HeaderText = "Class";
-            this.SeatClass.Name = "SeatClass";
-            this.SeatClass.Width = 310;
-            // 
-            // NumberSeats
-            // 
-            this.NumberSeats.HeaderText = "Number of Seats";
-            this.NumberSeats.Name = "NumberSeats";
-            this.NumberSeats.Width = 180;
-            // 
-            // MaxLuggageWeight
-            // 
-            this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
-            this.MaxLuggageWeight.Name = "MaxLuggageWeight";
-            this.MaxLuggageWeight.Width = 320;
-            // 
-            // Airport
-            // 
-            this.Airport.HeaderText = "Airport";
-            this.Airport.Name = "Airport";
-            this.Airport.Width = 270;
-            // 
-            // Fuel
-            // 
-            this.Fuel.HeaderText = "Fuel";
-            this.Fuel.Name = "Fuel";
-            this.Fuel.Width = 150;
-            // 
-            // Currency
-            // 
-            this.Currency.HeaderText = "Currency";
-            this.Currency.Name = "Currency";
-            this.Currency.Width = 180;
-            // 
-            // PricePerLitre
-            // 
-            this.PricePerLitre.HeaderText = "Price Per Litre";
-            this.PricePerLitre.Name = "PricePerLitre";
-            this.PricePerLitre.Width = 200;
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            this.Passenger.Width = 300;
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            this.Sex.Width = 260;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
-            this.Class.Width = 245;
-            // 
-            // StretchPassenger
-            // 
-            this.StretchPassenger.HeaderText = "Passenger";
-            this.StretchPassenger.Name = "StretchPassenger";
-            this.StretchPassenger.Width = 360;
-            // 
-            // StretchPNR
-            // 
-            this.StretchPNR.HeaderText = "PNR";
-            this.StretchPNR.Name = "StretchPNR";
-            this.StretchPNR.Width = 150;
-            // 
-            // StretchSex
-            // 
-            this.StretchSex.HeaderText = "Sex";
-            this.StretchSex.Name = "StretchSex";
-            this.StretchSex.Width = 150;
-            // 
-            // StretchClass
-            // 
-            this.StretchClass.HeaderText = "Class";
-            this.StretchClass.Name = "StretchClass";
-            this.StretchClass.Width = 150;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.White;
-            this.panel7.Controls.Add(this.radioButtonHeuristic);
-            this.panel7.Controls.Add(this.radioButtonExact);
-            this.panel7.Controls.Add(this.label19);
-            this.panel7.Controls.Add(this.numUD_TimeLimit);
-            this.panel7.Controls.Add(this.label21);
-            this.panel7.Controls.Add(this.label22);
-            this.panel7.Location = new System.Drawing.Point(861, 15);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(279, 151);
-            this.panel7.TabIndex = 23;
-            // 
-            // numUD_TimeLimit
-            // 
-            this.numUD_TimeLimit.Enabled = false;
-            this.numUD_TimeLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.numUD_TimeLimit.Location = new System.Drawing.Point(141, 39);
-            this.numUD_TimeLimit.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numUD_TimeLimit.Name = "numUD_TimeLimit";
-            this.numUD_TimeLimit.Size = new System.Drawing.Size(50, 28);
-            this.numUD_TimeLimit.TabIndex = 4;
-            this.numUD_TimeLimit.Value = new decimal(new int[] {
-            45,
-            0,
-            0,
-            0});
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label21.Location = new System.Drawing.Point(4, 43);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(134, 24);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "Time Limit (m):";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(3, 6);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(144, 24);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "Solver Params";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label19.Location = new System.Drawing.Point(4, 81);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(79, 24);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "Method:";
-            // 
-            // radioButtonExact
-            // 
-            this.radioButtonExact.AutoSize = true;
-            this.radioButtonExact.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonExact.Location = new System.Drawing.Point(141, 77);
-            this.radioButtonExact.Name = "radioButtonExact";
-            this.radioButtonExact.Size = new System.Drawing.Size(78, 28);
-            this.radioButtonExact.TabIndex = 6;
-            this.radioButtonExact.TabStop = true;
-            this.radioButtonExact.Text = "Exact";
-            this.radioButtonExact.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonHeuristic
-            // 
-            this.radioButtonHeuristic.AutoSize = true;
-            this.radioButtonHeuristic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.radioButtonHeuristic.Location = new System.Drawing.Point(141, 111);
-            this.radioButtonHeuristic.Name = "radioButtonHeuristic";
-            this.radioButtonHeuristic.Size = new System.Drawing.Size(104, 28);
-            this.radioButtonHeuristic.TabIndex = 7;
-            this.radioButtonHeuristic.TabStop = true;
-            this.radioButtonHeuristic.Text = "Heuristic";
-            this.radioButtonHeuristic.UseVisualStyleBackColor = true;
             // 
             // AirportName
             // 
@@ -1724,93 +1814,10 @@ namespace Prototipo1
             this.LandingCost.Name = "LandingCost";
             this.LandingCost.Width = 150;
             // 
-            // tabExchangeRate
+            // GroundTime
             // 
-            this.tabExchangeRate.Controls.Add(this.dataGridView9);
-            this.tabExchangeRate.Location = new System.Drawing.Point(104, 4);
-            this.tabExchangeRate.Name = "tabExchangeRate";
-            this.tabExchangeRate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExchangeRate.Size = new System.Drawing.Size(1078, 546);
-            this.tabExchangeRate.TabIndex = 4;
-            this.tabExchangeRate.Text = "Exchange Rates";
-            this.tabExchangeRate.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView9
-            // 
-            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView9.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CurrencyName,
-            this.CurrencySymbol,
-            this.Value});
-            this.dataGridView9.Location = new System.Drawing.Point(16, 63);
-            this.dataGridView9.Name = "dataGridView9";
-            this.dataGridView9.RowHeadersVisible = false;
-            this.dataGridView9.RowTemplate.Height = 24;
-            this.dataGridView9.Size = new System.Drawing.Size(1008, 223);
-            this.dataGridView9.TabIndex = 2;
-            // 
-            // CurrencyName
-            // 
-            this.CurrencyName.HeaderText = "Currency";
-            this.CurrencyName.Name = "CurrencyName";
-            this.CurrencyName.Width = 370;
-            // 
-            // CurrencySymbol
-            // 
-            this.CurrencySymbol.HeaderText = "Symbol";
-            this.CurrencySymbol.Name = "CurrencySymbol";
-            this.CurrencySymbol.Width = 200;
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Value (1 to US$)";
-            this.Value.Name = "Value";
-            this.Value.Width = 200;
-            // 
-            // AirplaneModel
-            // 
-            this.AirplaneModel.HeaderText = "Model";
-            this.AirplaneModel.Name = "AirplaneModel";
-            // 
-            // Prefix
-            // 
-            this.Prefix.HeaderText = "Prefix";
-            this.Prefix.Name = "Prefix";
-            // 
-            // Range
-            // 
-            this.Range.HeaderText = "Range (Km)";
-            this.Range.Name = "Range";
-            this.Range.Width = 120;
-            // 
-            // Weight
-            // 
-            this.Weight.HeaderText = "Weight (Kg)";
-            this.Weight.Name = "Weight";
-            this.Weight.Width = 120;
-            // 
-            // MaxWeightTakeOff
-            // 
-            this.MaxWeightTakeOff.HeaderText = "Max Weight Take Off (Kg)";
-            this.MaxWeightTakeOff.Name = "MaxWeightTakeOff";
-            this.MaxWeightTakeOff.Width = 180;
-            // 
-            // CruiseSpeed
-            // 
-            this.CruiseSpeed.HeaderText = "Cruise Speed (Knot)";
-            this.CruiseSpeed.Name = "CruiseSpeed";
-            this.CruiseSpeed.Width = 150;
-            // 
-            // Capacity
-            // 
-            this.Capacity.HeaderText = "Capacity";
-            this.Capacity.Name = "Capacity";
-            this.Capacity.Width = 90;
-            // 
-            // BaseAirport
-            // 
-            this.BaseAirport.HeaderText = "Base Airport";
-            this.BaseAirport.Name = "BaseAirport";
+            this.GroundTime.HeaderText = "Ground Time";
+            this.GroundTime.Name = "GroundTime";
             // 
             // MainForm
             // 
@@ -1844,17 +1851,24 @@ namespace Prototipo1
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPageFuel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tabExchangeRate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             this.tabSolution.ResumeLayout(false);
             this.tabControlInstanceSolution.ResumeLayout(false);
             this.tabPageRouteVisualization.ResumeLayout(false);
             this.tabPageAirplaneUsage.ResumeLayout(false);
             this.tabPageAirplaneUsage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.tabParameters.ResumeLayout(false);
             this.panelParamSelectInstance.ResumeLayout(false);
             this.panelParamSelectInstance.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUD_ChildWeight)).EndInit();
@@ -1872,13 +1886,6 @@ namespace Prototipo1
             this.panel4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).EndInit();
-            this.tabExchangeRate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2022,16 +2029,6 @@ namespace Prototipo1
         private NumericUpDown numUD_TimeLimit;
         private Label label21;
         private Label label22;
-        private DataGridViewTextBoxColumn AirportName;
-        private DataGridViewTextBoxColumn ICAO;
-        private DataGridViewTextBoxColumn Latitude;
-        private DataGridViewTextBoxColumn Longintude;
-        private DataGridViewTextBoxColumn Elevation;
-        private DataGridViewTextBoxColumn RunwayLength;
-        private DataGridViewTextBoxColumn Region;
-        private DataGridViewTextBoxColumn MTOW_APE3;
-        private DataGridViewTextBoxColumn MTOW_PC12;
-        private DataGridViewTextBoxColumn LandingCost;
         private TabPage tabExchangeRate;
         private DataGridView dataGridView9;
         private DataGridViewTextBoxColumn CurrencyName;
@@ -2045,6 +2042,17 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn CruiseSpeed;
         private DataGridViewTextBoxColumn Capacity;
         private DataGridViewTextBoxColumn BaseAirport;
+        private DataGridViewTextBoxColumn AirportName;
+        private DataGridViewTextBoxColumn ICAO;
+        private DataGridViewTextBoxColumn Latitude;
+        private DataGridViewTextBoxColumn Longintude;
+        private DataGridViewTextBoxColumn Elevation;
+        private DataGridViewTextBoxColumn RunwayLength;
+        private DataGridViewTextBoxColumn Region;
+        private DataGridViewTextBoxColumn MTOW_APE3;
+        private DataGridViewTextBoxColumn MTOW_PC12;
+        private DataGridViewTextBoxColumn LandingCost;
+        private DataGridViewTextBoxColumn GroundTime;
     }
 }
 

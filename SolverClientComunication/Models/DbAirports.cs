@@ -16,6 +16,9 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
+        public string AiportName { get; set; }
+
+        [Required]
         public char LatitudeHemisphere { get; set; }
 
         [Required]
@@ -27,22 +30,25 @@ namespace SolverClientComunication.Models
         [Required, Range(0,180)]
         public double Longitude { get; set; }
 
-        [Index("UniqueAirportPerInstance", IsUnique = true)]
-        [Required,MaxLength(6) ]
-        public string Prefix { get; set; }
+        [MaxLength(6) ]
+        public string ICAO { get; set; }
 
-        [Required,MaxLength(25)]
-        public string City { get; set; }
+        [MaxLength(25)]
+        public string Region { get; set; }
 
-        [MaxLength(55)]
-        public string Name { get; set; }
-        public Time Openning { get; set; }
-        public Time Closing { get; set;  }
+        [Range(0,20000)]
+        public int Elevation { get; set; }
 
-        [Range(0,5000)]
-        public int MaxFlightsPerHour { get; set; }
+        public int RunwayLength { get; set; }
 
-        [Index("UniqueAirportPerInstance", IsUnique = true)]
+        public int MTOW_APE3 { get; set; }
+
+        public int MTOW_PC12 { get; set; }
+
+        public int LandingCost { get; set; }
+
+        public DateTime GroundTime { get;set;}
+
         public DbInstance Instance { get;  set; }
         
 

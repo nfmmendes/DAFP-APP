@@ -26,8 +26,7 @@ namespace SolverClientComunication.Models
         [Required]
         public double Knot { get; set; }
 
-        [Required]
-        public DbAirplaneModel Model { get; set;  }
+        public string Model { get; set;  }
 
         [Required, Range(0,Double.PositiveInfinity)]
         public double Capacity { get; set; }

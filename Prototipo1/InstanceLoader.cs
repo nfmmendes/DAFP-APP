@@ -118,43 +118,62 @@ namespace Prototipo1
 
         private void treeViewTablesLoaded_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            if (alreadyDoneCall){
-                alreadyDoneCall = false;
+            if (alreadyDoneCall)
                 return;
-            }
+            
 
-            alreadyDoneCall = true; 
+            alreadyDoneCall = true;
 
             var tree = treeViewTablesLoaded;
-            if (tree.Nodes["AirplaneNodes"].Checked ){
-                this.buttonChooseAirplaneFile.Enabled = true;
-                tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = true;
-                alreadyDoneCall = true; 
-                tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = true;
-                alreadyDoneCall = true;
+            bool airplaneStatus = tree.Nodes["AirplaneNodes"].Checked;
+            bool airplaneAirplaneStatus = tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked;
+            bool airplaneSeatStatus = tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked;
 
-            }else if (tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked || tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked){
-                tree.Nodes["AirplaneNodes"].Checked = true;
-                alreadyDoneCall = true;
-                this.buttonChooseAirplaneFile.Enabled = true;
-            }else {
+            
+            if (airplaneStatus && !airplaneAirplaneStatus && !airplaneSeatStatus ){
                 this.buttonChooseAirplaneFile.Enabled = true;
                 tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = true;
-                alreadyDoneCall = true;
                 tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = true;
-                alreadyDoneCall = true; 
+
+            }else if((airplaneAirplaneStatus || airplaneSeatStatus) && !airplaneStatus){
+                tree.Nodes["AirplaneNodes"].Checked = true;
+                this.buttonChooseAirplaneFile.Enabled = true;
+            }else if(!airplaneStatus) {
+                this.buttonChooseAirplaneFile.Enabled = false;
+                tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = false;
+                tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = false;
             }
+
 
             if (tree.Nodes["RequestsNodes"].Checked){
                 this.buttonChooseRequestFile.Enabled = true;
                 tree.Nodes["RequestsNodes"].Nodes["FlightRequestNode"].Checked = true;
-                
-
             }else if (tree.Nodes["RequestsNodes"].Nodes["FlightRequestNode"].Checked){
                 tree.Nodes["RequestsNodes"].Checked = true;
                 this.buttonChooseRequestFile.Enabled = true;
             }else
                 this.buttonChooseRequestFile.Enabled = false;
+
+            alreadyDoneCall = false; 
+        }
+
+        private void buttonChooseFileNetwork_Click(object sender, EventArgs e)
+        {
+            var fileDialogue = new OpenFileDialog();
+            fileDialogue.Filter = "Microsoft Excel files (*.xlsx)|*.xlsx";
+            fileDialogue.ShowDialog();
+
+            if (fileDialogue.FileName != null)
+            {
+                var splitedFileName = fileDialogue.FileName.Split('\\');
+                if (splitedFileName.Last() != "Network.xlsx")
+                    MessageBox.Show("Your input file must be called Network.xlsx");
+                else
+                {
+                    chooseAirplaneFileLabel.Text = fileDialogue.FileName;
+                    buttonLoadFiles.Enabled = true;
+                }
+            }
         }
     }
 }

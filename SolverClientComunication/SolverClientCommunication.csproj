@@ -74,8 +74,15 @@
     <Compile Include="Migrations\201802112237478_AirplaneDescriptionUpdate.Designer.cs">
       <DependentUpon>201802112237478_AirplaneDescriptionUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802121631436_RemoveDbAirplaneModel.cs" />
+    <Compile Include="Migrations\201802121631436_RemoveDbAirplaneModel.Designer.cs">
+      <DependentUpon>201802121631436_RemoveDbAirplaneModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121723284_UpdateNetworkDescription.cs" />
+    <Compile Include="Migrations\201802121723284_UpdateNetworkDescription.Designer.cs">
+      <DependentUpon>201802121723284_UpdateNetworkDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DbAirplaneModel.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
@@ -120,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802112237478_AirplaneDescriptionUpdate.resx">
       <DependentUpon>201802112237478_AirplaneDescriptionUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121631436_RemoveDbAirplaneModel.resx">
+      <DependentUpon>201802121631436_RemoveDbAirplaneModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121723284_UpdateNetworkDescription.resx">
+      <DependentUpon>201802121723284_UpdateNetworkDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
