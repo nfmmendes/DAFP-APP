@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Prototipo1.Controller;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 
@@ -14,11 +15,11 @@ namespace Prototipo1
 {
     public partial class CreateInstance : Form
     {
-        private CoopserviceContext context; 
-        public CreateInstance(CoopserviceContext context)
+        private CustomSqlContext Context; 
+        public CreateInstance(CustomSqlContext context)
         {
             InitializeComponent();
-            this.context = context; 
+            this.Context = context; 
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -33,16 +34,8 @@ namespace Prototipo1
                 return; 
             }
 
-            var instance = new DbInstance()
-            {
-                CreatedOn = DateTime.Now,
-                Description = this.textBoxScenarioDescription.Text,
-                Name = this.textBoxScenarioName.Text,
-                LastOptimization = DateTime.Now, //TODO : Change to nullable  
-                Optimized = false
-            };
-            context.Instances.Add(instance);
-            context.SaveChanges();
+            InstancesController.Instance.setContext(Context);
+            InstancesController.Instance.AddInstance(this.textBoxScenarioName.Text, this.textBoxScenarioDescription.Text);
             this.Close();
         }
     }

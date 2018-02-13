@@ -20,7 +20,7 @@ namespace SolverClientComunication.Models
 
         [Required]
         public DateTime CreatedOn { get; set; }
-        public DateTime LastOptimization { get; set; }
+        public DateTime? LastOptimization { get; set; }
 
         [Required]
         public bool Optimized { get; set; }

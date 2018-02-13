@@ -6,29 +6,27 @@ namespace SolverClientComunication
     using System.Data.Entity;
     using System.Linq;
 
-    public class CoopserviceContext : DbContext
+    public class CustomSqlContext : DbContext
     {
 
 
         public DbSet<DbCategories> Categories { get; set; }
-        public DbSet<DbCommodities> Commodities { get; set; }
         public DbSet<DbAirplane> Airplanes { get; set; }
         public DbSet<DbAirports> Airports { get; set; }
         public DbSet<DbRequests> Requests { get; set; }
         public DbSet<DbParameters> Parameters { get; set; }
-        public DbSet<DbClusterRequests> ClusterRequests { get; set;  }
         public DbSet<DbStretches> Stretches { get; set; }
         public DbSet<DbReportList> ReportList { get; set; }
         public DbSet<DbInstance> Instances { get; set;  }
             
-        // Your context has been configured to use a 'CoopserviceContext' connection string from your application's 
+        // Your context has been configured to use a 'CustomSqlContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'SolverClientComunication.CoopserviceContext' database on your LocalDb instance. 
+        // 'SolverClientComunication.CustomSqlContext' database on your LocalDb instance. 
         // 
-        // If you wish to target a different database and/or database provider, modify the 'CoopserviceContext' 
+        // If you wish to target a different database and/or database provider, modify the 'CustomSqlContext' 
         // connection string in the application configuration file.
-        public CoopserviceContext()
-            : base("name=CoopserviceContext")
+        public CustomSqlContext()
+            : base("name=CustomSqlContext")
         {
             
         }

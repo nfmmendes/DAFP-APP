@@ -13,7 +13,8 @@ namespace Common
         public string DbCode { get; protected set; }
 
         protected AbstractEnum(string label, string dbCode){
-
+            Label = label;
+            DbCode = dbCode;
         } 
 
         public AbstractEnum()

@@ -7,7 +7,7 @@ using Common;
 
 namespace SolverClientComunication.Enums
 {
-    class ParametersEnum : AbstractEnum
+    public class ParametersEnum : AbstractEnum
     {
         public static List<ParametersEnum> EnumList = new List<ParametersEnum>();
 

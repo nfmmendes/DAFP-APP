@@ -14,16 +14,28 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
-        public DbCommodities DbCommodities { get; set; }
+        public string Class { get; set; }
+
+        [Required]
+        public string Sex { get; set; }
+
+        [Required]
+        public bool IsChildren { get; set; }
         
         [Required]
         public DateTime TimeOfRequisiton { get; set; }
 
         [Required]
-        public DateTime TimeWindowBegin { get; set; }
+        public DateTime DepartureTimeWindowBegin { get; set; }
 
         [Required]
-        public DateTime TimeWindowEnd { get; set; }
+        public DateTime DepartureTimeWindowEnd { get; set; }
+
+        [Required]
+        public DateTime ArrivalTimeWindowBegin { get; set; }
+
+        [Required]
+        public DateTime ArrivalTimeWindowEnd { get; set; }
 
         [Required]
         public DbStretches Stretch { get; set; }

@@ -12,7 +12,7 @@ namespace Prototipo1
 {
     public partial class MainForm : Form
     {
-        public static CoopserviceContext Context = new CoopserviceContext();
+        public CustomSqlContext Context = new CustomSqlContext();
 
         public MainForm()
         {
@@ -43,7 +43,7 @@ namespace Prototipo1
 
         private void instanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var instanceLoader = new InstanceLoader();
+            var instanceLoader = new InstanceLoader(Context);
             instanceLoader.ShowDialog();
             
         }

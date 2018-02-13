@@ -82,12 +82,14 @@
     <Compile Include="Migrations\201802121723284_UpdateNetworkDescription.Designer.cs">
       <DependentUpon>201802121723284_UpdateNetworkDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131157276_RequestDefinition.cs" />
+    <Compile Include="Migrations\201802131157276_RequestDefinition.Designer.cs">
+      <DependentUpon>201802131157276_RequestDefinition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
-    <Compile Include="Models\DbClusterRequests.cs" />
-    <Compile Include="Models\DbCommodities.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
     <Compile Include="Models\DbInstance.cs" />
     <Compile Include="Models\DbParameters.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="Models\DbStretches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\SolverEnum.cs" />
-    <Compile Include="CoopserviceContext.cs" />
+    <Compile Include="CustomSqlContext.cs" />
     <Compile Include="Time.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802121723284_UpdateNetworkDescription.resx">
       <DependentUpon>201802121723284_UpdateNetworkDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131157276_RequestDefinition.resx">
+      <DependentUpon>201802131157276_RequestDefinition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

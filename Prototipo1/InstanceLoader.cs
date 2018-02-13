@@ -14,15 +14,17 @@ namespace Prototipo1
     public partial class InstanceLoader : Form
     {
 
-        private bool alreadyDoneCall; 
+        private bool alreadyDoneCall;
+        private CustomSqlContext Context { get; set;  }
         
         /// <summary>
         /// 
         /// </summary>
-        public InstanceLoader()
+        public InstanceLoader(CustomSqlContext context)
         {
             InitializeComponent();
-            var instances = MainForm.Context.Instances;
+            Context = context;
+            var instances = Context.Instances;
             comboBoxInstances.DataSource = instances.ToList().Select(x=>x.Name).ToList();
         }
 
