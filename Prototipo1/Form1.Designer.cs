@@ -62,8 +62,23 @@ namespace Prototipo1
             this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageAirports = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longintude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Elevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RunwayLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Region = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MTOW_APE3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LandingCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroundTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageRequests = new System.Windows.Forms.TabPage();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Origin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -177,21 +192,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longintude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Elevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RunwayLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Region = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MTOW_APE3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LandingCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GroundTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -244,7 +244,7 @@ namespace Prototipo1
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1223, 852);
             this.tabControl.TabIndex = 0;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+
             // 
             // tabInstances
             // 
@@ -275,6 +275,7 @@ namespace Prototipo1
             this.buttonDeleteScenario.Text = "Delete";
             this.buttonDeleteScenario.UseVisualStyleBackColor = true;
             this.buttonDeleteScenario.Visible = false;
+            this.buttonDeleteScenario.Click += new System.EventHandler(this.buttonDeleteScenario_Click);
             // 
             // buttonCreateInstance
             // 
@@ -296,6 +297,7 @@ namespace Prototipo1
             this.buttonEditScenario.Text = "Edit";
             this.buttonEditScenario.UseVisualStyleBackColor = true;
             this.buttonEditScenario.Visible = false;
+            this.buttonEditScenario.Click += new System.EventHandler(this.buttonEditScenario_Click);
             // 
             // panelInstanceDetails
             // 
@@ -550,6 +552,67 @@ namespace Prototipo1
             this.dataGridView1.Size = new System.Drawing.Size(1013, 419);
             this.dataGridView1.TabIndex = 0;
             // 
+            // AirportName
+            // 
+            this.AirportName.HeaderText = "Aiport";
+            this.AirportName.Name = "AirportName";
+            // 
+            // ICAO
+            // 
+            this.ICAO.HeaderText = "ICAO";
+            this.ICAO.Name = "ICAO";
+            this.ICAO.Width = 70;
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.Width = 80;
+            // 
+            // Longintude
+            // 
+            this.Longintude.HeaderText = "Longitude";
+            this.Longintude.Name = "Longintude";
+            this.Longintude.Width = 80;
+            // 
+            // Elevation
+            // 
+            this.Elevation.HeaderText = "Elevation  (m)";
+            this.Elevation.Name = "Elevation";
+            // 
+            // RunwayLength
+            // 
+            this.RunwayLength.HeaderText = "Runway Length (m)";
+            this.RunwayLength.Name = "RunwayLength";
+            // 
+            // Region
+            // 
+            this.Region.HeaderText = "Region";
+            this.Region.Name = "Region";
+            // 
+            // MTOW_APE3
+            // 
+            this.MTOW_APE3.HeaderText = "MTOW-APE3";
+            this.MTOW_APE3.Name = "MTOW_APE3";
+            this.MTOW_APE3.Width = 120;
+            // 
+            // MTOW_PC12
+            // 
+            this.MTOW_PC12.HeaderText = "MTOW-PC12";
+            this.MTOW_PC12.Name = "MTOW_PC12";
+            this.MTOW_PC12.Width = 120;
+            // 
+            // LandingCost
+            // 
+            this.LandingCost.HeaderText = "LandingCost (US$)";
+            this.LandingCost.Name = "LandingCost";
+            this.LandingCost.Width = 150;
+            // 
+            // GroundTime
+            // 
+            this.GroundTime.HeaderText = "Ground Time";
+            this.GroundTime.Name = "GroundTime";
+            // 
             // tabPageRequests
             // 
             this.tabPageRequests.Controls.Add(this.dataGridView5);
@@ -577,6 +640,30 @@ namespace Prototipo1
             this.dataGridView5.RowTemplate.Height = 24;
             this.dataGridView5.Size = new System.Drawing.Size(1013, 189);
             this.dataGridView5.TabIndex = 1;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.Width = 300;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.Width = 260;
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.Width = 120;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.Width = 245;
             // 
             // dataGridView4
             // 
@@ -925,7 +1012,7 @@ namespace Prototipo1
             this.buttonOptimizeInstanceTab.TabIndex = 0;
             this.buttonOptimizeInstanceTab.Text = "Optimize";
             this.buttonOptimizeInstanceTab.UseVisualStyleBackColor = true;
-            this.buttonOptimizeInstanceTab.Click += new System.EventHandler(this.button1_Click);
+            this.buttonOptimizeInstanceTab.Click += new System.EventHandler(this.buttonOptimizeInstance_Click);
             // 
             // tabParameters
             // 
@@ -1741,91 +1828,6 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // AirportName
-            // 
-            this.AirportName.HeaderText = "Aiport";
-            this.AirportName.Name = "AirportName";
-            // 
-            // ICAO
-            // 
-            this.ICAO.HeaderText = "ICAO";
-            this.ICAO.Name = "ICAO";
-            this.ICAO.Width = 70;
-            // 
-            // Latitude
-            // 
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.Width = 80;
-            // 
-            // Longintude
-            // 
-            this.Longintude.HeaderText = "Longitude";
-            this.Longintude.Name = "Longintude";
-            this.Longintude.Width = 80;
-            // 
-            // Elevation
-            // 
-            this.Elevation.HeaderText = "Elevation  (m)";
-            this.Elevation.Name = "Elevation";
-            // 
-            // RunwayLength
-            // 
-            this.RunwayLength.HeaderText = "Runway Length (m)";
-            this.RunwayLength.Name = "RunwayLength";
-            // 
-            // Region
-            // 
-            this.Region.HeaderText = "Region";
-            this.Region.Name = "Region";
-            // 
-            // MTOW_APE3
-            // 
-            this.MTOW_APE3.HeaderText = "MTOW-APE3";
-            this.MTOW_APE3.Name = "MTOW_APE3";
-            this.MTOW_APE3.Width = 120;
-            // 
-            // MTOW_PC12
-            // 
-            this.MTOW_PC12.HeaderText = "MTOW-PC12";
-            this.MTOW_PC12.Name = "MTOW_PC12";
-            this.MTOW_PC12.Width = 120;
-            // 
-            // LandingCost
-            // 
-            this.LandingCost.HeaderText = "LandingCost (US$)";
-            this.LandingCost.Name = "LandingCost";
-            this.LandingCost.Width = 150;
-            // 
-            // GroundTime
-            // 
-            this.GroundTime.HeaderText = "Ground Time";
-            this.GroundTime.Name = "GroundTime";
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            this.Passenger.Width = 300;
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            this.Sex.Width = 260;
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            this.IsKid.Width = 120;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
-            this.Class.Width = 245;
             // 
             // MainForm
             // 

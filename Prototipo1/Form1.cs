@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using Prototipo1.Controller;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
@@ -14,6 +15,9 @@ namespace Prototipo1
     {
         public CustomSqlContext Context = new CustomSqlContext();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -24,23 +28,41 @@ namespace Prototipo1
 
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         private string shortInstanceDescription(DbInstance x){
             return $"{x.Name} ({x.CreatedOn.ToString("dd/MM/yy hh:mm")}) {(x.Optimized?"Opt":"NotOpt")}";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButtonGenSettingY_CheckedChanged(object sender, EventArgs e){
             this.panelParamSelectInstance.Visible = !this.radioButtonGenSettingY.Checked;
             this.buttonOptimizeAll.Enabled = this.radioButtonGenSettingY.Checked;
             this.buttonOptimizeInstance.Visible = this.radioButtonGenSettingN.Checked;
         }
 
-        private void advancedOptionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedOptionsToolStripMenuItem_Click(object sender, EventArgs e){
             var dialog = new FormAdvancedOptions();
             dialog.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void instanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var instanceLoader = new InstanceLoader(Context);
@@ -48,24 +70,47 @@ namespace Prototipo1
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cplexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             changeSelectedSolver(SolverEnum.CPLEX);
-          
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gurobiToolStripMenuItem_Click(object sender, EventArgs e){
             changeSelectedSolver(SolverEnum.GUROBI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void xpressToolStripMenuItem_Click(object sender, EventArgs e){
             changeSelectedSolver(SolverEnum.XPRESS);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void coinORToolStripMenuItem_Click(object sender, EventArgs e){
             changeSelectedSolver(SolverEnum.COIN);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="solverEnum"></param>
         private void changeSelectedSolver(SolverEnum solverEnum)
         {
             this.cplexToolStripMenuItem.Checked = false;
@@ -84,7 +129,7 @@ namespace Prototipo1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonOptimizeInstance_Click(object sender, EventArgs e)
         {
 
         }
@@ -99,14 +144,11 @@ namespace Prototipo1
 
         }
 
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl.SelectedTab == tabControl.TabPages["tabInstances"]){
-                
-                
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonEditParams_Click(object sender, EventArgs e)
         {
             buttonEditParams.Visible = false;
@@ -238,6 +280,52 @@ namespace Prototipo1
                 buttonOptimizeInstanceTab.Enabled = true;
                 panelInstanceDetails.Visible = true;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string getSelectedInstanceName(){
+            var selectedLabel = this.comboBoxInstancesInstanceTab.SelectedValue.ToString();
+            var instanceName = selectedLabel.Split('(')[0];
+            return instanceName.Substring(0, instanceName.Length - 1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDeleteScenario_Click(object sender, EventArgs e)
+        {
+            var instanceName = getSelectedInstanceName();
+
+            var result = MessageBox.Show($"Do you really want delete the instance {instanceName}?","Warning", MessageBoxButtons.YesNo);
+
+
+            if (result == DialogResult.Yes){
+                InstancesController.Instance.setContext(Context);
+                InstancesController.Instance.FindAndDeleteByName(instanceName);
+            }
+
+            this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
+            this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditScenario_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName();
+            var scenarioId = this.Context.Instances.First(x => x.Name.Equals(instanceName)).Id;
+            
+            var editController = new EditInstance(Context,scenarioId);
+            editController.ShowDialog();
+            this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
+            this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
         }
     }
 }
