@@ -26,6 +26,9 @@ namespace Prototipo1
             comboBoxInstancesInstanceTab.SelectedIndex = 0;
             comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
 
+            InstancesController.Instance.setContext(Context);
+            ParametersController.Instance.setContext(Context);
+
         }
 
         /// <summary>
@@ -167,18 +170,7 @@ namespace Prototipo1
 
         private void buttonCancelSaveParams_Click(object sender, EventArgs e)
         {
-            buttonCancelSaveParams.Visible = false;
-            buttonSaveParams.Visible = false;
-            buttonEditParams.Visible = true;
-            radioButtonDeliverAllNo.Enabled = radioButtonDeliverAllYes.Enabled = false;
-            radioButtonComeBackDepotNo.Enabled = radioButtonComeBackDepotYes.Enabled = false;
-            radioButtonPickAllNo.Enabled = radioButtonPickAllYes.Enabled = false;
-            radioButtonTimeWindowNo.Enabled = radioButtonTimeWindowYes.Enabled = false;
-            radioButtonStartDepotNo.Enabled = radioButtonStartDepotYes.Enabled = false;
-            numUD_ChildWeight.Enabled = false;
-            numUD_ManWeight.Enabled = false;
-            numUD_WomanWeight.Enabled = false;
-            numUD_TimeLimit.Enabled = false;
+            DisableParametersEdition();
 
         }
 
@@ -253,9 +245,38 @@ namespace Prototipo1
         }
 #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSaveParams_Click(object sender, EventArgs e)
         {
 
+            DisableParametersEdition();
+            if (this.radioButtonGenSettingY.Checked){
+                ParametersController.Instance.UpdateAllInstances(radioButtonTimeWindowYes.Checked,
+                                                                radioButtonPickAllYes.Checked,radioButtonDeliverAllYes.Checked, 
+                                                                radioButtonStartDepotYes.Checked,radioButtonComeBackDepotYes.Checked, 
+                                                                Convert.ToInt32(numUD_ManWeight.Value),Convert.ToInt32(numUD_WomanWeight.Value), 
+                                                                Convert.ToInt32(numUD_ChildWeight.Value),Convert.ToInt32(numUD_TimeLimit.Value));
+            }
+            else{
+                var instanceName = getSelectedInstanceName(this.comboBoxInstanceParamTab.SelectedValue.ToString());
+                var instance = Context.Instances.First(x => x.Name.Equals(instanceName));
+                ParametersController.Instance.UpdateInstanceParameters(instance, radioButtonTimeWindowYes.Checked,
+                                                                radioButtonPickAllYes.Checked, radioButtonDeliverAllYes.Checked,
+                                                                radioButtonStartDepotYes.Checked, radioButtonComeBackDepotYes.Checked,
+                                                                Convert.ToInt32(numUD_ManWeight.Value), Convert.ToInt32(numUD_WomanWeight.Value),
+                                                                Convert.ToInt32(numUD_ChildWeight.Value), Convert.ToInt32(numUD_TimeLimit.Value));
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DisableParametersEdition(){
             radioButtonDeliverAllNo.Enabled = radioButtonDeliverAllYes.Enabled = false;
             radioButtonComeBackDepotNo.Enabled = radioButtonComeBackDepotYes.Enabled = false;
             radioButtonPickAllNo.Enabled = radioButtonPickAllYes.Enabled = false;
@@ -269,9 +290,13 @@ namespace Prototipo1
             buttonCancelSaveParams.Visible = false;
             buttonSaveParams.Visible = false;
             buttonEditParams.Visible = true;
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxInstances_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxInstancesInstanceTab.SelectedIndex >= 0){
@@ -286,8 +311,8 @@ namespace Prototipo1
         /// 
         /// </summary>
         /// <returns></returns>
-        public string getSelectedInstanceName(){
-            var selectedLabel = this.comboBoxInstancesInstanceTab.SelectedValue.ToString();
+        public string getSelectedInstanceName(string selectedValue){
+            var selectedLabel = selectedValue; 
             var instanceName = selectedLabel.Split('(')[0];
             return instanceName.Substring(0, instanceName.Length - 1);
         }
@@ -299,15 +324,14 @@ namespace Prototipo1
         /// <param name="e"></param>
         private void buttonDeleteScenario_Click(object sender, EventArgs e)
         {
-            var instanceName = getSelectedInstanceName();
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedValue.ToString());
 
             var result = MessageBox.Show($"Do you really want delete the instance {instanceName}?","Warning", MessageBoxButtons.YesNo);
 
 
-            if (result == DialogResult.Yes){
-                InstancesController.Instance.setContext(Context);
+            if (result == DialogResult.Yes)
                 InstancesController.Instance.FindAndDeleteByName(instanceName);
-            }
+            
 
             this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
@@ -319,7 +343,7 @@ namespace Prototipo1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonEditScenario_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName();
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedValue.ToString());
             var scenarioId = this.Context.Instances.First(x => x.Name.Equals(instanceName)).Id;
             
             var editController = new EditInstance(Context,scenarioId);

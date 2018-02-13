@@ -27,14 +27,14 @@ namespace Prototipo1
             Context = context;
             InstanceId = instanceId;
             InitializeComponent();
-            InitializeComboBoxes();
+            InitializeTextBoxes();
             
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void InitializeComboBoxes(){
+        private void InitializeTextBoxes(){
             var instance = Context.Instances.FirstOrDefault(x => x.Id == InstanceId);
             if (instance != null){
                 this.textBoxScenarioDescription.Text = instance.Description;
@@ -52,7 +52,7 @@ namespace Prototipo1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonEditScenario_Click(object sender, EventArgs e){
-            InstancesController.Instance.setContext(Context);
+            
             InstancesController.Instance.EditInstance(InstanceId,textBoxScenarioName.Text,textBoxScenarioDescription.Text);
             this.Close();
         }

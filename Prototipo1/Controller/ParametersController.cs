@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -51,8 +52,72 @@ namespace Prototipo1.Controller
                 ShowErros(e);
                 throw;
             }
+        }
 
+        public void UpdateInstanceParameters(DbInstance instance, bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
+                                       bool startFromDepot = true, bool comebackToDepot = true, int averageWeightMan = 75,
+                                       int averageWeightWoman = 65, int averageChildWeight = 30, int timeLimit = 45)
+        {
+            var insId = instance.Id;
+            var Parameters = Instance.Context.Parameters;
+            var parameters = Parameters.Where(x =>insId == x.Instance.Id && x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = useTimeWindows ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.PICK_ALL.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = pickAll ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.DELIVER_ALL.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = deliverAll ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.START_FROM_DEPOT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = startFromDepot ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = comebackToDepot ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = averageWeightMan.ToString(); UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = averageWeightWoman.ToString(); UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
+        }
+
+        public void UpdateAllInstances(bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
+                                       bool startFromDepot = true,bool comebackToDepot = true, int averageWeightMan = 75, 
+                                       int averageWeightWoman = 65,int averageChildWeight = 30,int timeLimit = 45){
+
+            var parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
+            foreach (var param in parameters){ param.Value= useTimeWindows?"true":"false";   UpdateAndSave(param);}
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.PICK_ALL.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = pickAll ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.DELIVER_ALL.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = deliverAll ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.START_FROM_DEPOT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = startFromDepot ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = comebackToDepot ? "true" : "false"; UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = averageWeightMan.ToString(); UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = averageWeightWoman.ToString(); UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
+            foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
             
+        }
+
+        private void UpdateAndSave(DbParameters param){
+            Instance.Context.Parameters.AddOrUpdate(param);
+            Instance.Context.SaveChanges();
         }
 
         private void ShowErros(DbEntityValidationException e)

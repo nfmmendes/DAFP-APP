@@ -86,11 +86,16 @@
     <Compile Include="Migrations\201802131157276_RequestDefinition.Designer.cs">
       <DependentUpon>201802131157276_RequestDefinition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802132043138_GeneralParamtersTable.cs" />
+    <Compile Include="Migrations\201802132043138_GeneralParamtersTable.Designer.cs">
+      <DependentUpon>201802132043138_GeneralParamtersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
+    <Compile Include="Models\DbGeneralParametersDefault.cs" />
     <Compile Include="Models\DbInstance.cs" />
     <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbReportList.cs" />
@@ -138,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802131157276_RequestDefinition.resx">
       <DependentUpon>201802131157276_RequestDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802132043138_GeneralParamtersTable.resx">
+      <DependentUpon>201802132043138_GeneralParamtersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
