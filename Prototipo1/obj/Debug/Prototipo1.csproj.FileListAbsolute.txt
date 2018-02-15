@@ -33,3 +33,9 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.exe
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.pdb
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.EditInstance.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OOXML.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.xml

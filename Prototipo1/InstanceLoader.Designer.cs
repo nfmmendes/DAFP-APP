@@ -28,32 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Airports");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Stretches");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Airplane");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Seat List");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Flight Request");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Airports");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Stretches");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Airplane");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Seat List");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Flight Request");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Requests", new System.Windows.Forms.TreeNode[] {
+            treeNode7});
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.networkFileChoosenLabel = new System.Windows.Forms.Label();
+            this.buttonChooseFileNetwork = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.labelRequestFileLabel = new System.Windows.Forms.Label();
+            this.choosenRequestFileLabel = new System.Windows.Forms.Label();
             this.buttonChooseRequestFile = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.chooseAirplaneFileLabel = new System.Windows.Forms.Label();
+            this.choosenAirplaneFileLabel = new System.Windows.Forms.Label();
             this.buttonChooseAirplaneFile = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxInstances = new System.Windows.Forms.ComboBox();
-            this.buttonSelectFiles = new System.Windows.Forms.Button();
             this.buttonLoadFiles = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.treeViewTablesLoaded = new System.Windows.Forms.TreeView();
@@ -63,17 +66,13 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButtonNew = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.buttonChooseFileNetwork = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -100,23 +99,62 @@
             this.panel4.Size = new System.Drawing.Size(589, 365);
             this.panel4.TabIndex = 18;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.networkFileChoosenLabel);
+            this.panel7.Controls.Add(this.buttonChooseFileNetwork);
+            this.panel7.Location = new System.Drawing.Point(115, 167);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(458, 43);
+            this.panel7.TabIndex = 7;
+            // 
+            // networkFileChoosenLabel
+            // 
+            this.networkFileChoosenLabel.AutoSize = true;
+            this.networkFileChoosenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.networkFileChoosenLabel.Location = new System.Drawing.Point(10, 9);
+            this.networkFileChoosenLabel.Name = "networkFileChoosenLabel";
+            this.networkFileChoosenLabel.Size = new System.Drawing.Size(0, 24);
+            this.networkFileChoosenLabel.TabIndex = 2;
+            // 
+            // buttonChooseFileNetwork
+            // 
+            this.buttonChooseFileNetwork.Enabled = false;
+            this.buttonChooseFileNetwork.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseFileNetwork.Name = "buttonChooseFileNetwork";
+            this.buttonChooseFileNetwork.Size = new System.Drawing.Size(148, 41);
+            this.buttonChooseFileNetwork.TabIndex = 0;
+            this.buttonChooseFileNetwork.Text = "Choose file";
+            this.buttonChooseFileNetwork.UseVisualStyleBackColor = true;
+            this.buttonChooseFileNetwork.Click += new System.EventHandler(this.buttonChooseFileNetwork_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label5.Location = new System.Drawing.Point(15, 176);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 24);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Network:";
+            // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.labelRequestFileLabel);
+            this.panel6.Controls.Add(this.choosenRequestFileLabel);
             this.panel6.Controls.Add(this.buttonChooseRequestFile);
             this.panel6.Location = new System.Drawing.Point(115, 102);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(458, 43);
             this.panel6.TabIndex = 5;
             // 
-            // labelRequestFileLabel
+            // choosenRequestFileLabel
             // 
-            this.labelRequestFileLabel.AutoSize = true;
-            this.labelRequestFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.labelRequestFileLabel.Location = new System.Drawing.Point(10, 9);
-            this.labelRequestFileLabel.Name = "labelRequestFileLabel";
-            this.labelRequestFileLabel.Size = new System.Drawing.Size(0, 24);
-            this.labelRequestFileLabel.TabIndex = 2;
+            this.choosenRequestFileLabel.AutoSize = true;
+            this.choosenRequestFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.choosenRequestFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.choosenRequestFileLabel.Name = "choosenRequestFileLabel";
+            this.choosenRequestFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.choosenRequestFileLabel.TabIndex = 2;
             // 
             // buttonChooseRequestFile
             // 
@@ -141,21 +179,21 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.chooseAirplaneFileLabel);
+            this.panel5.Controls.Add(this.choosenAirplaneFileLabel);
             this.panel5.Controls.Add(this.buttonChooseAirplaneFile);
             this.panel5.Location = new System.Drawing.Point(115, 23);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(458, 43);
             this.panel5.TabIndex = 3;
             // 
-            // chooseAirplaneFileLabel
+            // choosenAirplaneFileLabel
             // 
-            this.chooseAirplaneFileLabel.AutoSize = true;
-            this.chooseAirplaneFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.chooseAirplaneFileLabel.Location = new System.Drawing.Point(10, 9);
-            this.chooseAirplaneFileLabel.Name = "chooseAirplaneFileLabel";
-            this.chooseAirplaneFileLabel.Size = new System.Drawing.Size(0, 24);
-            this.chooseAirplaneFileLabel.TabIndex = 2;
+            this.choosenAirplaneFileLabel.AutoSize = true;
+            this.choosenAirplaneFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.choosenAirplaneFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.choosenAirplaneFileLabel.Name = "choosenAirplaneFileLabel";
+            this.choosenAirplaneFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.choosenAirplaneFileLabel.TabIndex = 2;
             // 
             // buttonChooseAirplaneFile
             // 
@@ -198,22 +236,11 @@
             this.comboBoxInstances.Size = new System.Drawing.Size(277, 30);
             this.comboBoxInstances.TabIndex = 1;
             // 
-            // buttonSelectFiles
-            // 
-            this.buttonSelectFiles.Enabled = false;
-            this.buttonSelectFiles.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonSelectFiles.Location = new System.Drawing.Point(493, 543);
-            this.buttonSelectFiles.Name = "buttonSelectFiles";
-            this.buttonSelectFiles.Size = new System.Drawing.Size(130, 38);
-            this.buttonSelectFiles.TabIndex = 2;
-            this.buttonSelectFiles.Text = "Select files";
-            this.buttonSelectFiles.UseVisualStyleBackColor = true;
-            // 
             // buttonLoadFiles
             // 
             this.buttonLoadFiles.Enabled = false;
             this.buttonLoadFiles.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonLoadFiles.Location = new System.Drawing.Point(699, 543);
+            this.buttonLoadFiles.Location = new System.Drawing.Point(625, 543);
             this.buttonLoadFiles.Name = "buttonLoadFiles";
             this.buttonLoadFiles.Size = new System.Drawing.Size(130, 38);
             this.buttonLoadFiles.TabIndex = 3;
@@ -237,26 +264,26 @@
             this.treeViewTablesLoaded.Enabled = false;
             this.treeViewTablesLoaded.Location = new System.Drawing.Point(20, 52);
             this.treeViewTablesLoaded.Name = "treeViewTablesLoaded";
-            treeNode9.Name = "AirportsNode";
-            treeNode9.Text = "Airports";
-            treeNode10.Name = "StretchNode";
-            treeNode10.Text = "Stretches";
-            treeNode11.Name = "NetworkNode";
-            treeNode11.Text = "Network";
-            treeNode12.Name = "AirplaneNode";
-            treeNode12.Text = "Airplane";
-            treeNode13.Name = "SeatListNode";
-            treeNode13.Text = "Seat List";
-            treeNode14.Name = "AirplaneNodes";
-            treeNode14.Text = "Airplanes";
-            treeNode15.Name = "FlightRequestNode";
-            treeNode15.Text = "Flight Request";
-            treeNode16.Name = "RequestsNodes";
-            treeNode16.Text = "Requests";
+            treeNode1.Name = "AirportsNode";
+            treeNode1.Text = "Airports";
+            treeNode2.Name = "StretchNode";
+            treeNode2.Text = "Stretches";
+            treeNode3.Name = "NetworkNode";
+            treeNode3.Text = "Network";
+            treeNode4.Name = "AirplaneNode";
+            treeNode4.Text = "Airplane";
+            treeNode5.Name = "SeatListNode";
+            treeNode5.Text = "Seat List";
+            treeNode6.Name = "AirplaneNodes";
+            treeNode6.Text = "Airplanes";
+            treeNode7.Name = "FlightRequestNode";
+            treeNode7.Text = "Flight Request";
+            treeNode8.Name = "RequestsNodes";
+            treeNode8.Text = "Requests";
             this.treeViewTablesLoaded.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode14,
-            treeNode16});
+            treeNode3,
+            treeNode6,
+            treeNode8});
             this.treeViewTablesLoaded.Size = new System.Drawing.Size(269, 255);
             this.treeViewTablesLoaded.TabIndex = 17;
             this.treeViewTablesLoaded.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTablesLoaded_AfterCheck);
@@ -331,45 +358,6 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Instance";
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.label4);
-            this.panel7.Controls.Add(this.buttonChooseFileNetwork);
-            this.panel7.Location = new System.Drawing.Point(115, 167);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(458, 43);
-            this.panel7.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label4.Location = new System.Drawing.Point(10, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 24);
-            this.label4.TabIndex = 2;
-            // 
-            // buttonChooseFileNetwork
-            // 
-            this.buttonChooseFileNetwork.Enabled = false;
-            this.buttonChooseFileNetwork.Location = new System.Drawing.Point(309, 0);
-            this.buttonChooseFileNetwork.Name = "buttonChooseFileNetwork";
-            this.buttonChooseFileNetwork.Size = new System.Drawing.Size(148, 41);
-            this.buttonChooseFileNetwork.TabIndex = 0;
-            this.buttonChooseFileNetwork.Text = "Choose file";
-            this.buttonChooseFileNetwork.UseVisualStyleBackColor = true;
-            this.buttonChooseFileNetwork.Click += new System.EventHandler(this.buttonChooseFileNetwork_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label5.Location = new System.Drawing.Point(15, 176);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 24);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Network:";
-            // 
             // InstanceLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -378,7 +366,6 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.buttonLoadFiles);
-            this.Controls.Add(this.buttonSelectFiles);
             this.Controls.Add(this.panel1);
             this.Name = "InstanceLoader";
             this.Text = "Load Instance";
@@ -386,6 +373,8 @@
             this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -394,8 +383,6 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -404,7 +391,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBoxInstances;
-        private System.Windows.Forms.Button buttonSelectFiles;
         private System.Windows.Forms.Button buttonLoadFiles;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TreeView treeViewTablesLoaded;
@@ -417,15 +403,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label labelRequestFileLabel;
+        private System.Windows.Forms.Label choosenRequestFileLabel;
         private System.Windows.Forms.Button buttonChooseRequestFile;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label chooseAirplaneFileLabel;
+        private System.Windows.Forms.Label choosenAirplaneFileLabel;
         private System.Windows.Forms.Button buttonChooseAirplaneFile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label networkFileChoosenLabel;
         private System.Windows.Forms.Button buttonChooseFileNetwork;
         private System.Windows.Forms.Label label5;
     }
