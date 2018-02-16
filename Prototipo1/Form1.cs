@@ -305,6 +305,53 @@ namespace Prototipo1
                 buttonDeleteScenario.Visible = true;
                 buttonOptimizeInstanceTab.Enabled = true;
                 panelInstanceDetails.Visible = true;
+                var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+                var instance = Context.Instances.First(x => x.Name.Equals(instanceName));
+                labelDescriptionInstance.Text = instance.Description;
+                FillTables(instance);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        private void FillTables(DbInstance instance)
+        {
+            FillAiportsTables(instance);
+            FillStretcheTables(instance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        private void FillStretcheTables(DbInstance instance)
+        {
+            this.dataGridViewStretches.Rows.Clear();
+            var stretches = Context.Stretches.Where(x => x.Origin.Instance.Id == instance.Id);
+            int cont = 0;
+            foreach (var item in stretches){
+                dataGridViewStretches.Rows.Add(item.Origin.AiportName, item.Destination.AiportName, item.Distance);
+                cont++;
+                if (cont == 10001)
+                    break; 
+            }
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        private void FillAiportsTables(DbInstance instance)
+        {
+            this.dataGridViewAirport.Rows.Clear();
+            var airports = Context.Airports.Where(x => x.Instance.Id == instance.Id);
+            foreach (var item in airports){
+                dataGridViewAirport.Rows.Add(item.AiportName, item.ICAO, item.Latitude, item.Longitude, item.Elevation,
+                                             item.RunwayLength, item.Region, item.MTOW_APE3, item.MTOW_PC12, item.LandingCost, item.GroundTime);
             }
         }
 

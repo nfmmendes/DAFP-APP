@@ -24,14 +24,14 @@ namespace Prototipo1.Controller
             Instance.Context = context;
         }
 
-        public void importNetworkData(string fileName, DbInstance instance)
+        public void importNetworkData(string fileName, DbInstance instance,bool loadAirports, bool loadStretches)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
             var sheet = hssfwb.GetSheet("Airport");
-            if (sheet != null){
+            if (sheet != null && loadAirports){
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
                     IRow row = sheet.GetRow(i);
@@ -71,8 +71,9 @@ namespace Prototipo1.Controller
 
             var sheet2 = hssfwb.GetSheet("Stretches");
 
-            if (sheet2 != null){
+            if (sheet2 != null && loadStretches){
                 var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
+                List<DbStretches> newItems = new List<DbStretches>();
                 for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
                     IRow row = sheet2.GetRow(i);
                     if (row == null) break;
@@ -86,17 +87,17 @@ namespace Prototipo1.Controller
                     var airportOrigin = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportOriginName));
                     var airportDestination = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportDestinationName));
 
+                    
+
                     if (airportOrigin != null && airportDestination != null){
                         var item = new DbStretches(){
-                            Instance = instance,
                             Origin = airportOrigin,
                             Destination = airportDestination,
                             Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue)
                         };
 
                         try{
-                            Instance.Context.Stretches.AddOrUpdate(item);
-        
+                            newItems.Add(item);
                         }
                         catch (DbEntityValidationException e){
                             ShowErros(e);
@@ -104,6 +105,7 @@ namespace Prototipo1.Controller
                     }
 
                 }
+                Instance.Context.Stretches.AddRange(newItems);
                 Instance.Context.SaveChanges();
             }
 
@@ -129,9 +131,46 @@ namespace Prototipo1.Controller
             throw new NotImplementedException();
         }
 
-        public void importAirplanesData(string text, DbInstance instance)
+        public void importAirplanesData(string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
         {
-            throw new NotImplementedException();
-        }
+            var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+            stream.Position = 0;
+
+            XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            var sheet = hssfwb.GetSheet("Airplanes");
+            if (sheet != null && loadAirplanes){
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                {
+                    IRow row = sheet.GetRow(i);
+                    if (row == null) break;
+                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                    var airportName = row.GetCell(7).StringCellValue;
+                    var baseAirport = Context.Airports.FirstOrDefault(x => x.AiportName.Equals(airportName));
+
+                    if (baseAirport != null){
+
+                        var item = new DbAirplane(){
+                            Model = row.GetCell(0).StringCellValue,
+                            Prefix = row.GetCell(1).StringCellValue,
+                            Range = Convert.ToInt32(row.GetCell(2).NumericCellValue),
+                            Weight = Convert.ToInt32(row.GetCell(3).NumericCellValue),
+                            MaxWeight = Convert.ToInt32(row.GetCell(4).NumericCellValue),
+                            CruiseSpeed = Convert.ToInt32(row.GetCell(5).NumericCellValue),
+                            Capacity = Convert.ToInt32(row.GetCell(6).NumericCellValue),
+                            BaseAirport = baseAirport,
+                            FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell(8).NumericCellValue),
+                            FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell(9).NumericCellValue),
+                            MaxFuel = Convert.ToInt32(row.GetCell(10).NumericCellValue),
+                            Instance = instance
+                        };
+
+                        Instance.Context.Airplanes.Add(item);
+                    }
+                }
+                Instance.Context.SaveChanges();
+                
+            }
+       }
     }
 }

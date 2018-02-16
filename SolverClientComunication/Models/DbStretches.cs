@@ -22,7 +22,6 @@ namespace SolverClientComunication.Models
         [Required]
         public int Distance { get; set; }
 
-        [Key]
-        public DbInstance Instance { get; set;  }
+      
     }
 }

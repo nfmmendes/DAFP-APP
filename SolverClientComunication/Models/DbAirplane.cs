@@ -11,7 +11,7 @@ namespace SolverClientComunication.Models
     [Serializable]
     public class DbAirplane : DbContext
     {
-
+        [Key]
         public long Id { get;  set; }
 
         [Required, MaxLength(25)]
@@ -24,7 +24,19 @@ namespace SolverClientComunication.Models
         public int Weight { get; set; }
 
         [Required]
-        public double Knot { get; set; }
+        public int MaxWeight { get; set; }
+
+        [Required]
+        public int FuelConsumptionFirstHour { get; set; }
+
+        [Required]
+        public int FuelConsumptionSecondHour { get; set; }
+
+        [Required]
+        public double CruiseSpeed { get; set; }
+
+        [Required]
+        public double MaxFuel { get; set;  }
 
         public string Model { get; set;  }
 

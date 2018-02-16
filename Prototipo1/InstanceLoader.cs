@@ -90,6 +90,12 @@ namespace Prototipo1
         private void buttonLoadFiles_Click(object sender, EventArgs e)
         {
             DbInstance instance=null;
+
+            var loadAirplane = treeViewTablesLoaded.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked;
+            var loadSeat = treeViewTablesLoaded.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked;
+            var loadAirports = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked;
+            var loadStretches = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["StretchNode"].Checked;
+
             if (this.radioButtonNew.Checked == true)
             {
                 if (!string.IsNullOrEmpty(this.textBoxInstance.Text)){
@@ -106,11 +112,11 @@ namespace Prototipo1
             this.Enabled = false; 
             if (instance != null){
                 if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
-                    ImportDataController.Instance.importNetworkData(this.networkFileChoosenLabel.Text, instance);
+                    ImportDataController.Instance.importNetworkData(this.networkFileChoosenLabel.Text, instance,loadAirports, loadStretches);
                 if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
-                    ImportDataController.Instance.importAirplanesData(this.networkFileChoosenLabel.Text, instance);
+                    ImportDataController.Instance.importAirplanesData(this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
                 if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
-                    ImportDataController.Instance.importAirplanesData(this.choosenRequestFileLabel.Text, instance);
+                    ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, instance);
             }
             this.Enabled = true; 
             // ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());

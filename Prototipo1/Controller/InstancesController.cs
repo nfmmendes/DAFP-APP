@@ -66,8 +66,11 @@ namespace Prototipo1.Controller
         {
             var deleted = Instance.Context.Instances.FirstOrDefault(x => x.Name.Equals(name));
             if (deleted != null){
+
+                Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.Where(x => x.Origin.Instance.Id.Equals(deleted.Id)));
+                Instance.Context.SaveChanges();
                 Instance.Context.Instances.Remove(deleted);
-                Instance.Context.Parameters.RemoveRange(Instance.Context.Parameters.Where(x => x.Instance.Id.Equals(deleted.Id)));
+                
             } 
             Instance.Context.SaveChanges();
         }

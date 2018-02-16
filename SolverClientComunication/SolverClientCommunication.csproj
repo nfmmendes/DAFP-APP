@@ -110,12 +110,29 @@
     <Compile Include="Migrations\201802151926327_a.Designer.cs">
       <DependentUpon>201802151926327_a.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802160239593_dbStretchAlter.cs" />
+    <Compile Include="Migrations\201802160239593_dbStretchAlter.Designer.cs">
+      <DependentUpon>201802160239593_dbStretchAlter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802162119037_DataTableImportErrors.cs" />
+    <Compile Include="Migrations\201802162119037_DataTableImportErrors.Designer.cs">
+      <DependentUpon>201802162119037_DataTableImportErrors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802162248439_airplanesRedefinition.cs" />
+    <Compile Include="Migrations\201802162248439_airplanesRedefinition.Designer.cs">
+      <DependentUpon>201802162248439_airplanesRedefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802162337127_airplanesRedefinition2.cs" />
+    <Compile Include="Migrations\201802162337127_airplanesRedefinition2.Designer.cs">
+      <DependentUpon>201802162337127_airplanesRedefinition2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
     <Compile Include="Models\DbGeneralParametersDefault.cs" />
+    <Compile Include="Models\DbImportErrors.cs" />
     <Compile Include="Models\DbInstance.cs" />
     <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbReportList.cs" />
@@ -181,6 +198,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802151926327_a.resx">
       <DependentUpon>201802151926327_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802160239593_dbStretchAlter.resx">
+      <DependentUpon>201802160239593_dbStretchAlter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802162119037_DataTableImportErrors.resx">
+      <DependentUpon>201802162119037_DataTableImportErrors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802162248439_airplanesRedefinition.resx">
+      <DependentUpon>201802162248439_airplanesRedefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802162337127_airplanesRedefinition2.resx">
+      <DependentUpon>201802162337127_airplanesRedefinition2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
