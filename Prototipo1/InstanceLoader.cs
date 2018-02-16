@@ -89,8 +89,31 @@ namespace Prototipo1
         /// <param name="e"></param>
         private void buttonLoadFiles_Click(object sender, EventArgs e)
         {
-            ImportDataController.Instance.importAirportData(this.choosenAirplaneFileLabel.Text,new DbInstance());
-            ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());
+            DbInstance instance=null;
+            if (this.radioButtonNew.Checked == true)
+            {
+                if (!string.IsNullOrEmpty(this.textBoxInstance.Text)){
+                    InstancesController.Instance.AddInstance(this.textBoxInstance.Text);
+                }else
+                    MessageBox.Show("You should type the instance name");
+
+                 instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(this.textBoxInstance.Text));
+               
+            }else{
+                 instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(this.comboBoxInstances.SelectedValue.ToString()));
+            }
+
+            this.Enabled = false; 
+            if (instance != null){
+                if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
+                    ImportDataController.Instance.importNetworkData(this.networkFileChoosenLabel.Text, instance);
+                if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
+                    ImportDataController.Instance.importAirplanesData(this.networkFileChoosenLabel.Text, instance);
+                if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
+                    ImportDataController.Instance.importAirplanesData(this.choosenRequestFileLabel.Text, instance);
+            }
+            this.Enabled = true; 
+            // ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());
         }
 
         /// <summary>
@@ -126,7 +149,12 @@ namespace Prototipo1
                 }
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewTablesLoaded_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (alreadyDoneCall)
@@ -200,6 +228,11 @@ namespace Prototipo1
             alreadyDoneCall = false; 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonChooseFileNetwork_Click(object sender, EventArgs e)
         {
             var fileDialogue = new OpenFileDialog();

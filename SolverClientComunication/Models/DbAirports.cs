@@ -17,18 +17,12 @@ namespace SolverClientComunication.Models
 
         [Required]
         public string AiportName { get; set; }
-
-        [Required]
-        public char LatitudeHemisphere { get; set; }
-
-        [Required]
-        public char LongitudeHemisphere { get; set; }
         
-        [Required, Range(0,90)]
-        public double Latitude { get; set; }
+        [Required]
+        public string Latitude { get; set; }
 
-        [Required, Range(0,180)]
-        public double Longitude { get; set; }
+        [Required]
+        public string Longitude { get; set; }
 
         [MaxLength(6) ]
         public string ICAO { get; set; }
@@ -47,8 +41,9 @@ namespace SolverClientComunication.Models
 
         public int LandingCost { get; set; }
 
-        public DateTime GroundTime { get;set;}
+        public TimeSpan GroundTime { get;set;}
 
+        [Required]
         public DbInstance Instance { get;  set; }
         
 

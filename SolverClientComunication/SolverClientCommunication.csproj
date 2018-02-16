@@ -90,6 +90,26 @@
     <Compile Include="Migrations\201802132043138_GeneralParamtersTable.Designer.cs">
       <DependentUpon>201802132043138_GeneralParamtersTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802151540532_alterLatLongFields.cs" />
+    <Compile Include="Migrations\201802151540532_alterLatLongFields.Designer.cs">
+      <DependentUpon>201802151540532_alterLatLongFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151616361_alterLatLongFields2.cs" />
+    <Compile Include="Migrations\201802151616361_alterLatLongFields2.Designer.cs">
+      <DependentUpon>201802151616361_alterLatLongFields2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151700130_changeInstanceField.cs" />
+    <Compile Include="Migrations\201802151700130_changeInstanceField.Designer.cs">
+      <DependentUpon>201802151700130_changeInstanceField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151811074_alterLatLongFields3.cs" />
+    <Compile Include="Migrations\201802151811074_alterLatLongFields3.Designer.cs">
+      <DependentUpon>201802151811074_alterLatLongFields3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151926327_a.cs" />
+    <Compile Include="Migrations\201802151926327_a.Designer.cs">
+      <DependentUpon>201802151926327_a.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -146,6 +166,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802132043138_GeneralParamtersTable.resx">
       <DependentUpon>201802132043138_GeneralParamtersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151540532_alterLatLongFields.resx">
+      <DependentUpon>201802151540532_alterLatLongFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151616361_alterLatLongFields2.resx">
+      <DependentUpon>201802151616361_alterLatLongFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151700130_changeInstanceField.resx">
+      <DependentUpon>201802151700130_changeInstanceField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151811074_alterLatLongFields3.resx">
+      <DependentUpon>201802151811074_alterLatLongFields3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151926327_a.resx">
+      <DependentUpon>201802151926327_a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,6 +18,7 @@ namespace SolverClientComunication.Models
         [Required]
         public string Value { get; set; }
 
+        [Required]
         public DbInstance Instance { get; set; }
     }
 }

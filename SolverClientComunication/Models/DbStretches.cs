@@ -17,7 +17,7 @@ namespace SolverClientComunication.Models
         public DbAirports Origin { get; set; }
 
         [Key]
-        public DbAirports Departure { get; set; }
+        public DbAirports Destination { get; set; }
 
         [Required]
         public int Distance { get; set; }

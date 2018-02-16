@@ -28,6 +28,7 @@ namespace Prototipo1
 
             InstancesController.Instance.setContext(Context);
             ParametersController.Instance.setContext(Context);
+            ImportDataController.Instance.setContext(Context);
 
         }
 

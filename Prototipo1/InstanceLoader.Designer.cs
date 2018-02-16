@@ -103,7 +103,7 @@
             // 
             this.panel7.Controls.Add(this.networkFileChoosenLabel);
             this.panel7.Controls.Add(this.buttonChooseFileNetwork);
-            this.panel7.Location = new System.Drawing.Point(115, 167);
+            this.panel7.Location = new System.Drawing.Point(114, 25);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(458, 43);
             this.panel7.TabIndex = 7;
@@ -132,7 +132,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label5.Location = new System.Drawing.Point(15, 176);
+            this.label5.Location = new System.Drawing.Point(14, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 24);
             this.label5.TabIndex = 6;
@@ -142,7 +142,7 @@
             // 
             this.panel6.Controls.Add(this.choosenRequestFileLabel);
             this.panel6.Controls.Add(this.buttonChooseRequestFile);
-            this.panel6.Location = new System.Drawing.Point(115, 102);
+            this.panel6.Location = new System.Drawing.Point(115, 179);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(458, 43);
             this.panel6.TabIndex = 5;
@@ -171,7 +171,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label6.Location = new System.Drawing.Point(15, 111);
+            this.label6.Location = new System.Drawing.Point(15, 188);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 24);
             this.label6.TabIndex = 4;
@@ -181,7 +181,7 @@
             // 
             this.panel5.Controls.Add(this.choosenAirplaneFileLabel);
             this.panel5.Controls.Add(this.buttonChooseAirplaneFile);
-            this.panel5.Location = new System.Drawing.Point(115, 23);
+            this.panel5.Location = new System.Drawing.Point(115, 100);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(458, 43);
             this.panel5.TabIndex = 3;
@@ -210,7 +210,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label3.Location = new System.Drawing.Point(15, 32);
+            this.label3.Location = new System.Drawing.Point(15, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 24);
             this.label3.TabIndex = 1;
