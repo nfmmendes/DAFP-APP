@@ -20,6 +20,8 @@ namespace SolverClientComunication
         public DbSet<DbInstance> Instances { get; set;  }
         public DbSet<DbGeneralParametersDefault> DefaultParameters { get; set; }
         public DbSet<DbImportErrors> ImportErrors { get; set; }
+        public DbSet<DbSeats> SeatList { get; set; }
+        public DbSet<DbFuelPrice> FuelPrice { get; set; }
             
         // Your context has been configured to use a 'CustomSqlContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 

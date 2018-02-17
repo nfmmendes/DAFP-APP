@@ -24,6 +24,13 @@ namespace Prototipo1.Controller
             Instance.Context = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="instance"></param>
+        /// <param name="loadAirports"></param>
+        /// <param name="loadStretches"></param>
         public void importNetworkData(string fileName, DbInstance instance,bool loadAirports, bool loadStretches)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
@@ -111,6 +118,10 @@ namespace Prototipo1.Controller
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         private void ShowErros(DbEntityValidationException e)
         {
             foreach (var eve in e.EntityValidationErrors)
@@ -125,7 +136,12 @@ namespace Prototipo1.Controller
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="instance"></param>
+        /// <param name="loadRequests"></param>
         public void importRequestData(string fileName, DbInstance instance,bool loadRequests)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
@@ -189,6 +205,15 @@ namespace Prototipo1.Controller
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="fileName"></param>
+        /// <param name="sheet"></param>
+        /// <param name="importHour"></param>
+        /// <param name="i"></param>
+        /// <param name="msg"></param>
         private void CreateImportErrorLog(DbInstance instance,string fileName,string sheet,  DateTime importHour, int i,string msg)
         {
             Instance.Context.ImportErrors.Add(new DbImportErrors()
@@ -202,6 +227,13 @@ namespace Prototipo1.Controller
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="instance"></param>
+        /// <param name="loadAirplanes"></param>
+        /// <param name="loadSeats"></param>
         public void importAirplanesData(string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
@@ -221,9 +253,7 @@ namespace Prototipo1.Controller
                     var airportName = row.GetCell(7).StringCellValue;
                     var baseAirport = Context.Airports.FirstOrDefault(x => x.AiportName.Equals(airportName));
 
-                    if (baseAirport != null)
-                    {
-
+                    if (baseAirport != null){
                         var item = new DbAirplane()
                         {
                             Model = row.GetCell(0).StringCellValue,
@@ -258,6 +288,57 @@ namespace Prototipo1.Controller
                 Instance.Context.SaveChanges();
                 
             }
-       }
+
+            sheet = hssfwb.GetSheet("Seat List");
+            if (sheet != null && loadSeats){
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                {
+                    IRow row = sheet.GetRow(i);
+                    if (row == null) break;
+                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                    //Data validation
+                    if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)){
+                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplane information not available");
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)){
+                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Class information not available");
+                        continue;
+                    }
+
+                    if (row.GetCell(2).CellType == CellType.String && string.IsNullOrEmpty(row.GetCell(2).StringCellValue)){
+                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Number of seats not available");
+                        continue;
+                    }
+
+                    if (row.GetCell(3).CellType == CellType.String && string.IsNullOrEmpty(row.GetCell(3).StringCellValue)){
+                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Luggage information not available");
+                        continue;
+                    }
+
+                    var prefix = row.GetCell(0).StringCellValue;
+                    var airplane = Instance.Context.Airplanes.FirstOrDefault(x=>x.Instance.Id == instance.Id 
+                                                                             && x.Prefix.Equals(prefix));
+
+                    if (airplane != null){
+
+                        var item = new DbSeats(){
+                            Airplane = airplane,
+                            seatClass = row.GetCell(1).StringCellValue,
+                            numberOfSeats = Convert.ToInt32(row.GetCell(2).NumericCellValue),
+                            luggageWeightLimit = row.GetCell(3).NumericCellValue
+                        };
+
+                        Instance.Context.SeatList.Add(item);
+                        
+                    }else{
+                        CreateImportErrorLog(instance,"Airplanes", "Seat List",importHour, i, "Airplane not found");
+                    }
+                }
+                Instance.Context.SaveChanges();
+            }
+        }
     }
 }

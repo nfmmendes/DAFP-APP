@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    class DbExchangeRates
+    public class DbSeats : DbContext
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
-        public string CurrencyName { get; set; }
-
-        public string CurrencySymbol { get; set; }
+        public DbAirplane Airplane { get; set; }
 
         [Required]
-        public Decimal ValueInDolar { get; set; }
+        public string seatClass { get; set; }
 
         [Required]
-        public DbInstance Instance { get; set; }
+        public int numberOfSeats { get; set; }
+
+        [Required]
+        public double luggageWeightLimit { get; set; }
     }
 }
