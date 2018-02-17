@@ -95,6 +95,7 @@ namespace Prototipo1
             var loadSeat = treeViewTablesLoaded.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked;
             var loadAirports = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked;
             var loadStretches = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["StretchNode"].Checked;
+            var loadRequest = treeViewTablesLoaded.Nodes["RequestsNodes"].Checked;
 
             if (this.radioButtonNew.Checked == true)
             {
@@ -116,7 +117,7 @@ namespace Prototipo1
                 if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
                     ImportDataController.Instance.importAirplanesData(this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
                 if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
-                    ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, instance);
+                    ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, instance, loadRequest);
             }
             this.Enabled = true; 
             // ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());

@@ -45,6 +45,7 @@ namespace SolverClientComunication.Models
 
         public DbAirports BaseAirport { get; set; }
 
+        [Required]
         public DbInstance Instance { get;  set; }
     }
 }

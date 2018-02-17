@@ -126,6 +126,30 @@
     <Compile Include="Migrations\201802162337127_airplanesRedefinition2.Designer.cs">
       <DependentUpon>201802162337127_airplanesRedefinition2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802171703543_airplanesRedefinition3.cs" />
+    <Compile Include="Migrations\201802171703543_airplanesRedefinition3.Designer.cs">
+      <DependentUpon>201802171703543_airplanesRedefinition3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802171726472_RequestModifications.cs" />
+    <Compile Include="Migrations\201802171726472_RequestModifications.Designer.cs">
+      <DependentUpon>201802171726472_RequestModifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802171847580_RequestModification2.cs" />
+    <Compile Include="Migrations\201802171847580_RequestModification2.Designer.cs">
+      <DependentUpon>201802171847580_RequestModification2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802171852227_RenameFieldICAO.cs" />
+    <Compile Include="Migrations\201802171852227_RenameFieldICAO.Designer.cs">
+      <DependentUpon>201802171852227_RenameFieldICAO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802171925538_InsertInstanceOnRequest.cs" />
+    <Compile Include="Migrations\201802171925538_InsertInstanceOnRequest.Designer.cs">
+      <DependentUpon>201802171925538_InsertInstanceOnRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802171930502_removeStretch.cs" />
+    <Compile Include="Migrations\201802171930502_removeStretch.Designer.cs">
+      <DependentUpon>201802171930502_removeStretch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -210,6 +234,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802162337127_airplanesRedefinition2.resx">
       <DependentUpon>201802162337127_airplanesRedefinition2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171703543_airplanesRedefinition3.resx">
+      <DependentUpon>201802171703543_airplanesRedefinition3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171726472_RequestModifications.resx">
+      <DependentUpon>201802171726472_RequestModifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171847580_RequestModification2.resx">
+      <DependentUpon>201802171847580_RequestModification2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171852227_RenameFieldICAO.resx">
+      <DependentUpon>201802171852227_RenameFieldICAO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171925538_InsertInstanceOnRequest.resx">
+      <DependentUpon>201802171925538_InsertInstanceOnRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171930502_removeStretch.resx">
+      <DependentUpon>201802171930502_removeStretch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1751,9 +1751,9 @@ namespace Prototipo1
             this.AirportName.HeaderText = "Airport";
             this.AirportName.Name = "AirportName";
             // 
-            // ICAO
+            // IATA
             // 
-            this.ICAO.HeaderText = "ICAO";
+            this.ICAO.HeaderText = "IATA";
             this.ICAO.Name = "ICAO";
             this.ICAO.Width = 70;
             // 

@@ -9,7 +9,7 @@ namespace SolverClientComunication.Migrations
         {
             DropIndex("dbo.DbAirports", "UniqueAirportPerInstance");
             AddColumn("dbo.DbAirports", "AiportName", c => c.String(nullable: false));
-            AddColumn("dbo.DbAirports", "ICAO", c => c.String(maxLength: 6));
+            AddColumn("dbo.DbAirports", "IATA", c => c.String(maxLength: 6));
             AddColumn("dbo.DbAirports", "Region", c => c.String(maxLength: 25));
             AddColumn("dbo.DbAirports", "Elevation", c => c.Int(nullable: false));
             AddColumn("dbo.DbAirports", "RunwayLength", c => c.Int(nullable: false));
@@ -54,7 +54,7 @@ namespace SolverClientComunication.Migrations
             DropColumn("dbo.DbAirports", "RunwayLength");
             DropColumn("dbo.DbAirports", "Elevation");
             DropColumn("dbo.DbAirports", "Region");
-            DropColumn("dbo.DbAirports", "ICAO");
+            DropColumn("dbo.DbAirports", "IATA");
             DropColumn("dbo.DbAirports", "AiportName");
             CreateIndex("dbo.DbAirports", "Prefix", unique: true, name: "UniqueAirportPerInstance");
         }

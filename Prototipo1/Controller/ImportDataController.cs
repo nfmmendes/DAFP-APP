@@ -42,7 +42,7 @@ namespace Prototipo1.Controller
                     {
                         AiportName = row.GetCell(0).StringCellValue,
                         GroundTime =row.GetCell(9).CellType != CellType.String?  row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
-                        ICAO = row.GetCell(1).StringCellValue,
+                        IATA = row.GetCell(1).StringCellValue,
                         Latitude = row.GetCell(2).StringCellValue,
                         Longitude = row.GetCell(3).StringCellValue, 
                         Region = row.GetCell(6).StringCellValue,
@@ -126,15 +126,88 @@ namespace Prototipo1.Controller
         }
 
 
-        public void importRequestData(string text, DbInstance dbInstance)
+        public void importRequestData(string fileName, DbInstance instance,bool loadRequests)
         {
-            throw new NotImplementedException();
+            var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+            stream.Position = 0;
+
+            var importHour = DateTime.Now;
+
+            XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            var sheet = hssfwb.GetSheet("Request");
+            if (sheet != null)
+            {
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                {
+                    IRow row = sheet.GetRow(i);
+                    if (row == null) break;
+                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                    var originIATA = row.GetCell(5).StringCellValue;
+                    var destinationIATA = row.GetCell(6).StringCellValue;
+                    if (string.IsNullOrEmpty(originIATA) || string.IsNullOrEmpty(destinationIATA)){
+                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Null origin or destination airport name");
+                        continue;
+                    }
+
+                    var airportOrigin = Instance.Context.Airports.FirstOrDefault(x=>x.Instance.Id == instance.Id 
+                                                                                && x.IATA.Equals(originIATA));
+                    var airportDestination = Instance.Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id 
+                                                                                   && x.IATA.Equals(destinationIATA));
+
+                    if (airportOrigin == null || airportDestination == null){
+                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
+                        continue;
+                    }
+
+                    var item = new DbRequests()
+                    {
+                        Name = row.GetCell(0).StringCellValue,
+                        PNR = row.GetCell(1).CellType == CellType.String? row.GetCell(1).StringCellValue: row.GetCell(1).NumericCellValue.ToString(),
+                        Sex = row.GetCell(2).StringCellValue,
+                        Class = row.GetCell(3).StringCellValue,
+                        IsChildren = row.GetCell(4).BooleanCellValue,
+                        Origin = airportOrigin,
+                        Destination = airportDestination,
+                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.TimeOfDay,
+                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.TimeOfDay,
+                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.TimeOfDay,
+                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.TimeOfDay,
+                        Instance = instance
+                    };
+
+                    Instance.Context.Requests.Add(item);
+                }
+
+                try{
+                    Instance.Context.SaveChanges();
+                }catch (DbEntityValidationException e){
+                    ShowErros(e);
+                }
+                
+
+            }
+        }
+
+        private void CreateImportErrorLog(DbInstance instance,string fileName,string sheet,  DateTime importHour, int i,string msg)
+        {
+            Instance.Context.ImportErrors.Add(new DbImportErrors()
+            {
+                ImportationHour = importHour,
+                File = fileName,
+                Instance = instance,
+                Sheet = sheet,
+                RowLine = i,
+                Message = msg
+            });
         }
 
         public void importAirplanesData(string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
+
+            var importHour = DateTime.Now;
 
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
             var sheet = hssfwb.GetSheet("Airplanes");
@@ -148,9 +221,11 @@ namespace Prototipo1.Controller
                     var airportName = row.GetCell(7).StringCellValue;
                     var baseAirport = Context.Airports.FirstOrDefault(x => x.AiportName.Equals(airportName));
 
-                    if (baseAirport != null){
+                    if (baseAirport != null)
+                    {
 
-                        var item = new DbAirplane(){
+                        var item = new DbAirplane()
+                        {
                             Model = row.GetCell(0).StringCellValue,
                             Prefix = row.GetCell(1).StringCellValue,
                             Range = Convert.ToInt32(row.GetCell(2).NumericCellValue),
@@ -166,6 +241,18 @@ namespace Prototipo1.Controller
                         };
 
                         Instance.Context.Airplanes.Add(item);
+                    }
+                    else
+                    {
+                        Instance.Context.ImportErrors.Add(new DbImportErrors()
+                        {
+                            ImportationHour = importHour,
+                            File = "Airplane",
+                            Instance = instance,
+                            Sheet = "Airplanes",
+                            RowLine = i,
+                            Message = "Airport does not exist"
+                        });
                     }
                 }
                 Instance.Context.SaveChanges();

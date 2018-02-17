@@ -13,6 +13,11 @@ namespace SolverClientComunication.Models
         [Key]
         public long Id { get; set; }
 
+        public string Name { get; set; }
+
+        [Required]
+        public string PNR { get; set; }
+
         [Required]
         public string Class { get; set; }
 
@@ -21,26 +26,26 @@ namespace SolverClientComunication.Models
 
         [Required]
         public bool IsChildren { get; set; }
-        
-        [Required]
-        public DateTime TimeOfRequisiton { get; set; }
 
         [Required]
-        public DateTime DepartureTimeWindowBegin { get; set; }
+        public TimeSpan DepartureTimeWindowBegin { get; set; }
 
         [Required]
-        public DateTime DepartureTimeWindowEnd { get; set; }
+        public TimeSpan DepartureTimeWindowEnd { get; set; }
 
         [Required]
-        public DateTime ArrivalTimeWindowBegin { get; set; }
+        public TimeSpan ArrivalTimeWindowBegin { get; set; }
 
         [Required]
-        public DateTime ArrivalTimeWindowEnd { get; set; }
+        public TimeSpan ArrivalTimeWindowEnd { get; set; }
 
         [Required]
-        public DbStretches Stretch { get; set; }
+        public DbAirports Origin { get; set; }
 
         [Required]
-        public DbInstance DbInstance { get; set; }
+        public DbAirports Destination { get; set; }
+
+        [Required]
+        public DbInstance Instance { get; set; }
     }
 }

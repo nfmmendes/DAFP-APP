@@ -25,7 +25,7 @@ namespace SolverClientComunication.Models
         public string Longitude { get; set; }
 
         [MaxLength(6) ]
-        public string ICAO { get; set; }
+        public string IATA { get; set; }
 
         [MaxLength(25)]
         public string Region { get; set; }

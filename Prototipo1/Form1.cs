@@ -350,7 +350,7 @@ namespace Prototipo1
             this.dataGridViewAirport.Rows.Clear();
             var airports = Context.Airports.Where(x => x.Instance.Id == instance.Id);
             foreach (var item in airports){
-                dataGridViewAirport.Rows.Add(item.AiportName, item.ICAO, item.Latitude, item.Longitude, item.Elevation,
+                dataGridViewAirport.Rows.Add(item.AiportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
                                              item.RunwayLength, item.Region, item.MTOW_APE3, item.MTOW_PC12, item.LandingCost, item.GroundTime);
             }
         }
