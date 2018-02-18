@@ -16,6 +16,10 @@ namespace Prototipo1.Controller
         private CustomSqlContext Context { get; set; }
         public static readonly InstancesController Instance = new InstancesController();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public void setContext(CustomSqlContext context){
             Instance.Context = context; 
         }
