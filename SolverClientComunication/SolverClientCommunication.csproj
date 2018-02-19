@@ -54,11 +54,16 @@
     <Compile Include="Migrations\201802181745260_InitialDatabase.Designer.cs">
       <DependentUpon>201802181745260_InitialDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802182114299_addExchangeDataTable.cs" />
+    <Compile Include="Migrations\201802182114299_addExchangeDataTable.Designer.cs">
+      <DependentUpon>201802182114299_addExchangeDataTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbCategories.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
+    <Compile Include="Models\DbFlightsReport.cs" />
     <Compile Include="Models\DbFuelPrice.cs" />
     <Compile Include="Models\DbGeneralParametersDefault.cs" />
     <Compile Include="Models\DbImportErrors.cs" />
@@ -86,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802181745260_InitialDatabase.resx">
       <DependentUpon>201802181745260_InitialDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802182114299_addExchangeDataTable.resx">
+      <DependentUpon>201802182114299_addExchangeDataTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

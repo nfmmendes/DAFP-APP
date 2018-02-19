@@ -89,7 +89,7 @@
             // 
             this.textBoxScenarioDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.textBoxScenarioDescription.Location = new System.Drawing.Point(136, 94);
-            this.textBoxScenarioDescription.MaxLength = 128;
+            this.textBoxScenarioDescription.MaxLength = 40;
             this.textBoxScenarioDescription.Name = "textBoxScenarioDescription";
             this.textBoxScenarioDescription.Size = new System.Drawing.Size(479, 28);
             this.textBoxScenarioDescription.TabIndex = 1;

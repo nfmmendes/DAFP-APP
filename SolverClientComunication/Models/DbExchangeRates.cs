@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    class DbExchangeRates
+    public class DbExchangeRates
     {
         [Key]
         public long Id { get; set; }

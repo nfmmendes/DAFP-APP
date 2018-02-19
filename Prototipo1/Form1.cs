@@ -23,7 +23,8 @@ namespace Prototipo1
             InitializeComponent();
             var instances = Context.Instances;
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
-            comboBoxInstancesInstanceTab.SelectedIndex = 0;
+            if(comboBoxInstancesInstanceTab.Items.Count>0)
+                comboBoxInstancesInstanceTab.SelectedIndex = 0;
             comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
 
             InstancesController.Instance.setContext(Context);
@@ -133,11 +134,21 @@ namespace Prototipo1
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOptimizeInstance_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCreateInstance_Click(object sender, EventArgs e)
         {
             var createNewInstance = new CreateInstance(Context);
@@ -318,21 +329,68 @@ namespace Prototipo1
         /// <param name="instance"></param>
         private void FillTables(DbInstance instance)
         {
-            FillAiportsTables(instance);
-            FillStretcheTables(instance);
+            FillAiportsTable(instance);
+            FillStretchTable(instance);
+            FillAirplaneTables(instance);
+            FillRequestTables(instance);
+            FillCurrencyTable(instance);
+            FillFuelTable(instance);
+        }
+
+        private void FillFuelTable(DbInstance instance){
+            this.dataGridViewFuel.Rows.Clear();
+            var fuels = Context.FuelPrice.Where(x => x.Instance.Id == instance.Id);
+
+            foreach (var item in fuels)
+            {
+                dataGridViewFuel.Rows.Add(item.Id, item.Airport.AiportName, item.Currency, item.Value);
+            }
+        }
+
+        private void FillCurrencyTable(DbInstance instance)
+        {
+            this.dataGridViewCurrency.Rows.Clear();
+            var exchanges = Context.Exchange.Where(x => x.Instance.Id == instance.Id);
+
+            foreach (var item in exchanges){
+                this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
+            }
+        }
+
+        private void FillRequestTables(DbInstance instance)
+        {
+            this.dataGridViewRequest.Rows.Clear();
+            var requests = Context.Requests.Where(x => x.Instance.Id == instance.Id).GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
+
+            foreach (var key in requests.Keys){
+                var value = requests[key].First();
+                dataGridViewRequest.Rows.Add(key, key, value.Origin.AiportName, value.Destination.AiportName, value.DepartureTimeWindowBegin,
+                                                value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
+           }
+        }
+
+        private void FillAirplaneTables(DbInstance instance)
+        {
+            this.dataGridViewAirplane.Rows.Clear();
+            var airplanes = Context.Airplanes.Where(x => x.Instance.Id == instance.Id);
+
+            foreach (var item in airplanes)
+                dataGridViewAirplane.Rows.Add(item.Id, item.Model,item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed, item.FuelConsumptionFirstHour,
+                                              item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity, item.BaseAirport.AiportName);
+            
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="instance"></param>
-        private void FillStretcheTables(DbInstance instance)
+        private void FillStretchTable(DbInstance instance)
         {
             this.dataGridViewStretches.Rows.Clear();
             var stretches = Context.Stretches.Where(x => x.Origin.Instance.Id == instance.Id);
             int cont = 0;
             foreach (var item in stretches){
-                dataGridViewStretches.Rows.Add(item.Origin.AiportName, item.Destination.AiportName, item.Distance);
+                dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
                 cont++;
                 if (cont == 10001)
                     break; 
@@ -345,12 +403,12 @@ namespace Prototipo1
         /// 
         /// </summary>
         /// <param name="instance"></param>
-        private void FillAiportsTables(DbInstance instance)
+        private void FillAiportsTable(DbInstance instance)
         {
             this.dataGridViewAirport.Rows.Clear();
             var airports = Context.Airports.Where(x => x.Instance.Id == instance.Id);
             foreach (var item in airports){
-                dataGridViewAirport.Rows.Add(item.AiportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
+                dataGridViewAirport.Rows.Add(item.Id, item.AiportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
                                              item.RunwayLength, item.Region, item.MTOW_APE3, item.MTOW_PC12, item.LandingCost, item.GroundTime);
             }
         }
@@ -398,6 +456,33 @@ namespace Prototipo1
             editController.ShowDialog();
             this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
+        }
+
+        private void FillSeatTypeList(long idAirplane) { 
+            this.dataGridViewSeatTypes.Rows.Clear();
+
+            var seatTypes = Context.SeatList.Where(x => x.Airplane.Id == idAirplane);
+            foreach (var item in seatTypes){
+                dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.numberOfSeats, item.luggageWeightLimit);
+                
+            }
+        }
+
+        private void dataGridViewAirplane_RowEnter(object sender, DataGridViewCellEventArgs e){
+            FillSeatTypeList(Convert.ToInt64(dataGridViewAirport.Rows[e.RowIndex].Cells[0].Value));
+        }
+
+        private void dataGridViewRequest_RowEnter(object sender, DataGridViewCellEventArgs e){
+            FillPassengerList(dataGridViewRequest.Rows[e.RowIndex].Cells[0].Value.ToString());
+        }
+
+        private void FillPassengerList(string PNR){
+            this.dataGridViewPassenger.Rows.Clear();
+            var passengers = Context.Requests.Where(x => x.PNR.Equals(PNR));
+
+            foreach (var item in passengers){
+                this.dataGridViewPassenger.Rows.Add(item.Id, item.Name, item.Sex, item.IsChildren, item.Class);
+            }
         }
     }
 }
