@@ -76,12 +76,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Description:";
             // 
-            // textBoxScenarioName
+            // textBoxInstanceName
             // 
             this.textBoxScenarioName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.textBoxScenarioName.Location = new System.Drawing.Point(136, 41);
             this.textBoxScenarioName.MaxLength = 32;
-            this.textBoxScenarioName.Name = "textBoxScenarioName";
+            this.textBoxScenarioName.Name = "textBoxInstanceName";
             this.textBoxScenarioName.Size = new System.Drawing.Size(288, 28);
             this.textBoxScenarioName.TabIndex = 0;
             // 

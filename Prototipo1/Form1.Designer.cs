@@ -31,7 +31,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -97,6 +97,11 @@ namespace Prototipo1
             this.buttonEditRequest = new System.Windows.Forms.Button();
             this.buttonAddRequest = new System.Windows.Forms.Button();
             this.dataGridViewPassenger = new System.Windows.Forms.DataGridView();
+            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRequest = new System.Windows.Forms.DataGridView();
             this.RequestId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -222,11 +227,8 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -565,14 +567,14 @@ namespace Prototipo1
             // dataGridViewAirplane
             // 
             this.dataGridViewAirplane.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewAirplane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAirplane.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AirplaneId,
@@ -889,6 +891,37 @@ namespace Prototipo1
             this.dataGridViewPassenger.RowTemplate.Height = 24;
             this.dataGridViewPassenger.Size = new System.Drawing.Size(1013, 189);
             this.dataGridViewPassenger.TabIndex = 1;
+            // 
+            // IdPassenger
+            // 
+            this.IdPassenger.HeaderText = "Id";
+            this.IdPassenger.Name = "IdPassenger";
+            this.IdPassenger.ReadOnly = true;
+            this.IdPassenger.Visible = false;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.Width = 300;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.Width = 260;
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.Width = 120;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.Width = 245;
             // 
             // dataGridViewRequest
             // 
@@ -1315,11 +1348,11 @@ namespace Prototipo1
             this.label18.TabIndex = 4;
             this.label18.Text = "Airplane";
             // 
-            // comboBox1
+            // comboBoxInstance
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(12, 39);
-            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Name = "comboBoxInstance";
             this.comboBox1.Size = new System.Drawing.Size(220, 30);
             this.comboBox1.TabIndex = 3;
             // 
@@ -1994,6 +2027,7 @@ namespace Prototipo1
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.configurationToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -2023,7 +2057,8 @@ namespace Prototipo1
             // instanceToolStripMenuItem
             // 
             this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
-            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.instanceToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.instanceToolStripMenuItem.Text = "Instance";
             this.instanceToolStripMenuItem.Click += new System.EventHandler(this.instanceToolStripMenuItem_Click);
             // 
@@ -2160,45 +2195,31 @@ namespace Prototipo1
             // tutorialToolStripMenuItem
             // 
             this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.tutorialToolStripMenuItem.Text = "Tutorial";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // IdPassenger
+            // toolsToolStripMenuItem
             // 
-            this.IdPassenger.HeaderText = "Id";
-            this.IdPassenger.Name = "IdPassenger";
-            this.IdPassenger.ReadOnly = true;
-            this.IdPassenger.Visible = false;
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.duplicateInstanceToolStripMenuItem});
+            this.toolsToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // Passenger
+            // duplicateInstanceToolStripMenuItem
             // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            this.Passenger.Width = 300;
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            this.Sex.Width = 260;
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            this.IsKid.Width = 120;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
-            this.Class.Width = 245;
+            this.duplicateInstanceToolStripMenuItem.Name = "duplicateInstanceToolStripMenuItem";
+            this.duplicateInstanceToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.duplicateInstanceToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
+            this.duplicateInstanceToolStripMenuItem.Text = "Duplicate Instance";
+            this.duplicateInstanceToolStripMenuItem.Click += new System.EventHandler(this.duplicateInstanceToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -2472,6 +2493,8 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn Sex;
         private DataGridViewCheckBoxColumn IsKid;
         private DataGridViewTextBoxColumn Class;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ToolStripMenuItem duplicateInstanceToolStripMenuItem;
     }
 }
 

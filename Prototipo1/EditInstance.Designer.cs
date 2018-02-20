@@ -45,12 +45,12 @@
             this.textBoxScenarioDescription.Size = new System.Drawing.Size(479, 28);
             this.textBoxScenarioDescription.TabIndex = 5;
             // 
-            // textBoxScenarioName
+            // textBoxInstanceName
             // 
             this.textBoxScenarioName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.textBoxScenarioName.Location = new System.Drawing.Point(128, 33);
             this.textBoxScenarioName.MaxLength = 32;
-            this.textBoxScenarioName.Name = "textBoxScenarioName";
+            this.textBoxScenarioName.Name = "textBoxInstanceName";
             this.textBoxScenarioName.Size = new System.Drawing.Size(288, 28);
             this.textBoxScenarioName.TabIndex = 4;
             // 

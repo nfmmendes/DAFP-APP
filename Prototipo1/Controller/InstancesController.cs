@@ -78,5 +78,14 @@ namespace Prototipo1.Controller
             } 
             Instance.Context.SaveChanges();
         }
+
+        /// <summary>
+        /// Copy all the information of a instance to another, except the metadata
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="newInstance"></param>
+        public void CopyInstance(DbInstance previousInstance, DbInstance newInstance){
+            //TODO: Implement
+        }
     }
 }

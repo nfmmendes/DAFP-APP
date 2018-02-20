@@ -16,7 +16,10 @@ namespace Prototipo1
         public CustomSqlContext Context = new CustomSqlContext();
 
         /// <summary>
-        /// 
+        /// Class constructor
+        /// The funcion initialize component is created automatically by the Visual Studio
+        /// The initialization of Controller's context is just for avoid code repetition
+        /// The initialization of combo boxes should be maintened here
         /// </summary>
         public MainForm()
         {
@@ -43,7 +46,8 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Event handler to catch the change of parameter edit/visualization option
+        /// In this case, the general settings is being choosen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,7 +58,8 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Event handler to open advanced options window. 
+        /// This window probably will be used just to internal tests. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -180,10 +185,14 @@ namespace Prototipo1
             numUD_TimeLimit.Enabled = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCancelSaveParams_Click(object sender, EventArgs e)
         {
             DisableParametersEdition();
-
         }
 
 #region Drawing Instance's Tabs 
@@ -337,6 +346,10 @@ namespace Prototipo1
             FillFuelTable(instance);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         private void FillFuelTable(DbInstance instance){
             this.dataGridViewFuel.Rows.Clear();
             var fuels = Context.FuelPrice.Where(x => x.Instance.Id == instance.Id);
@@ -347,6 +360,10 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         private void FillCurrencyTable(DbInstance instance)
         {
             this.dataGridViewCurrency.Rows.Clear();
@@ -357,6 +374,10 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         private void FillRequestTables(DbInstance instance)
         {
             this.dataGridViewRequest.Rows.Clear();
@@ -369,6 +390,10 @@ namespace Prototipo1
            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         private void FillAirplaneTables(DbInstance instance)
         {
             this.dataGridViewAirplane.Rows.Clear();
@@ -458,7 +483,11 @@ namespace Prototipo1
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
         }
 
-        private void FillSeatTypeList(long idAirplane) { 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idAirplane"></param>
+        private void FillSeatTypeList(long idAirplane){ 
             this.dataGridViewSeatTypes.Rows.Clear();
 
             var seatTypes = Context.SeatList.Where(x => x.Airplane.Id == idAirplane);
@@ -468,14 +497,29 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewAirplane_RowEnter(object sender, DataGridViewCellEventArgs e){
             FillSeatTypeList(Convert.ToInt64(dataGridViewAirport.Rows[e.RowIndex].Cells[0].Value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewRequest_RowEnter(object sender, DataGridViewCellEventArgs e){
             FillPassengerList(dataGridViewRequest.Rows[e.RowIndex].Cells[0].Value.ToString());
         }
 
+        /// <summary>
+        /// Fill the data grid view that shows the list of passengers. 
+        /// This function will be called after a row of the request data grid view be selected
+        /// </summary>
+        /// <param name="PNR"></param>
         private void FillPassengerList(string PNR){
             this.dataGridViewPassenger.Rows.Clear();
             var passengers = Context.Requests.Where(x => x.PNR.Equals(PNR));
@@ -483,6 +527,16 @@ namespace Prototipo1
             foreach (var item in passengers){
                 this.dataGridViewPassenger.Rows.Add(item.Id, item.Name, item.Sex, item.IsChildren, item.Class);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void duplicateInstanceToolStripMenuItem_Click(object sender, EventArgs e){
+            var duplicateWindow = new DuplicateInstance(Context);
+            duplicateWindow.ShowDialog();
         }
     }
 }

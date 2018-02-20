@@ -39,3 +39,4 @@ C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OOXM
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXml4Net.dll
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXmlFormats.dll
 C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.DuplicateInstance.resources
