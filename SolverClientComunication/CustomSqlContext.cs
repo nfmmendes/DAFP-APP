@@ -8,9 +8,6 @@ namespace SolverClientComunication
 
     public class CustomSqlContext : DbContext
     {
-
-
-        public DbSet<DbCategories> Categories { get; set; }
         public DbSet<DbAirplane> Airplanes { get; set; }
         public DbSet<DbAirports> Airports { get; set; }
         public DbSet<DbRequests> Requests { get; set; }

@@ -61,7 +61,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
-    <Compile Include="Models\DbCategories.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
     <Compile Include="Models\DbFlightsReport.cs" />
     <Compile Include="Models\DbFuelPrice.cs" />

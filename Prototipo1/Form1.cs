@@ -146,7 +146,15 @@ namespace Prototipo1
         /// <param name="e"></param>
         private void buttonOptimizeInstance_Click(object sender, EventArgs e)
         {
-
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+            if (instance != null){
+                var input =  SolverInput.BuildSolverInput(Context,instance);
+                var heuristic = new Solver.Heuristics.ConstructiveHeuristic(input, true);
+                heuristic.Execute();
+            }else{
+                
+            }
         }
 
         /// <summary>

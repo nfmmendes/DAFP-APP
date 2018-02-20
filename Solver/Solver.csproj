@@ -51,7 +51,13 @@
     <Compile Include="CustomConstraints\FlowConstraint.cs" />
     <Compile Include="CustomVariables\YTVariable.cs" />
     <Compile Include="Enum\Commons\RowSenseEnum.cs" />
+    <Compile Include="Heuristics\AbstractHeuristic.cs" />
+    <Compile Include="Heuristics\ConstructiveHeuristic.cs" />
+    <Compile Include="Heuristics\MainHeuristic.cs" />
     <Compile Include="OptimizationParameters.cs" />
+    <Compile Include="SolutionData\Flight.cs" />
+    <Compile Include="SolutionData\GeneralSolution.cs" />
+    <Compile Include="SolutionData\Refuel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverConfig.cs" />

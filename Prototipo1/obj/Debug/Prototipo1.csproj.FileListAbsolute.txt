@@ -10,3 +10,36 @@ C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.p
 C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.MainForm.resources
 C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.FormAdvancedOptions.resources
 C:\Users\Nilson Felipe\source\repos\Prototipo1\Prototipo1\obj\Debug\Prototipo1.InstanceLoader.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Prototipo1.exe.config
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Prototipo1.exe
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Prototipo1.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Common.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OOXML.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Common.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\SolverClientComunication.dll.config
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\NPOI.xml
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.csprojResolveAssemblyReference.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.CreateInstance.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.DuplicateInstance.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.MainForm.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.EditInstance.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.FormAdvancedOptions.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.InstanceLoader.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.Properties.Resources.resources
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.csproj.GenerateResource.Cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.csproj.CoreCompileInputs.cache
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.exe
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\obj\Debug\Prototipo1.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Solver.dll
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Solver.pdb
+C:\Users\Nilson Felipe\Desktop\Prototipo 1\Source\Prototipo1\bin\Debug\Solver.dll.config

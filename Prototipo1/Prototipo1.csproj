@@ -158,6 +158,10 @@
       <Project>{6f471c3f-acbc-46e1-bf49-4c823d4f3491}</Project>
       <Name>SolverClientCommunication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Solver\Solver.csproj">
+      <Project>{ab3ddd75-ecbd-4cb9-8d61-6ec8fbb1faf2}</Project>
+      <Name>Solver</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="InputView\" />
