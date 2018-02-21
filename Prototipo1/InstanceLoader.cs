@@ -95,6 +95,7 @@ namespace Prototipo1
             var loadSeat = treeViewTablesLoaded.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked;
             var loadAirports = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked;
             var loadStretches = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["StretchNode"].Checked;
+            var loadFuel = treeViewTablesLoaded.Nodes["NetworkNode"].Nodes["FuelNode"].Checked;
             var loadRequest = treeViewTablesLoaded.Nodes["RequestsNodes"].Checked;
 
             if (this.radioButtonNew.Checked == true)
@@ -111,14 +112,14 @@ namespace Prototipo1
             }
 
             this.Enabled = false; 
-            if (instance != null){
-                if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
-                    ImportDataController.Instance.importNetworkData(this.networkFileChoosenLabel.Text, instance,loadAirports, loadStretches);
-                if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
+          if (instance != null){
+             if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
+                ImportDataController.Instance.importNetworkData(networkFileChoosenLabel.Text,instance,loadAirports,loadStretches,loadFuel);
+             if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
                     ImportDataController.Instance.importAirplanesData(this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
-                if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
+             if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
                     ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, instance, loadRequest);
-            }
+          }
             this.Enabled = true; 
             // ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());
         }
@@ -171,52 +172,53 @@ namespace Prototipo1
             alreadyDoneCall = true;
 
             var tree = treeViewTablesLoaded;
+            var treeAiplane = treeViewTablesLoaded.Nodes["AirplaneNodes"];
+            var treeNetwork = tree.Nodes["NetworkNode"];
             bool airplaneStatus = tree.Nodes["AirplaneNodes"].Checked;
             bool networkStatus = tree.Nodes["NetworkNode"].Checked;
 
+            bool someSelected = treeAiplane.Nodes["SeatListNode"].Checked | treeAiplane.Nodes["AirplaneNode"].Checked;
             if (!previousStateAirplanes && airplaneStatus){
                 this.buttonChooseAirplaneFile.Enabled = true;
-                previousStateAirplanes = true; 
-                tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = true;
-                tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = true;
+                previousStateAirplanes = true;
+                treeAiplane.Nodes["AirplaneNode"].Checked = true;
+                treeAiplane.Nodes["SeatListNode"].Checked = true;
             }else if (previousStateAirplanes && !airplaneStatus){
                 this.buttonChooseAirplaneFile.Enabled = false;
                 previousStateAirplanes = false;
-                tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = false;
-                tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = false;
-            }else if(tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked ==tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked){
-                if (tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked == false){
+                treeAiplane.Nodes["AirplaneNode"].Checked = false;
+                treeAiplane.Nodes["SeatListNode"].Checked = false;
+            }else if(!someSelected){
                     this.buttonChooseAirplaneFile.Enabled = false;
                     previousStateAirplanes = false;
-                    tree.Nodes["AirplaneNodes"].Checked = false;
-                    tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked = false;
-                    tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked = false;
-                }              
-            }else if (tree.Nodes["AirplaneNodes"].Nodes["SeatListNode"].Checked !=tree.Nodes["AirplaneNodes"].Nodes["AirplaneNode"].Checked){
+                    treeAiplane.Checked = false;
+                    treeAiplane.Nodes["AirplaneNode"].Checked = false;
+                    treeAiplane.Nodes["SeatListNode"].Checked = false;
+            }else {
                 this.buttonChooseAirplaneFile.Enabled = true;
                 previousStateAirplanes = true;
-                tree.Nodes["AirplaneNodes"].Checked = true;
+                treeAiplane.Checked = true;
             }
 
+            someSelected = treeNetwork.Nodes["AirportsNode"].Checked | treeNetwork.Nodes["StretchNode"].Checked |
+                                treeNetwork.Nodes["FuelNode"].Checked;
             if (!previousStateNetwork && networkStatus){
                 this.buttonChooseFileNetwork.Enabled = true;
                 previousStateNetwork = true;
-                tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked = true;
-                tree.Nodes["NetworkNode"].Nodes["StretchNode"].Checked = true;
+                treeNetwork.Nodes["AirportsNode"].Checked = true;
+                treeNetwork.Nodes["StretchNode"].Checked = true;
             }else if (previousStateNetwork && !networkStatus){
                 this.buttonChooseFileNetwork.Enabled = false;
                 previousStateNetwork = false;
-                tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked = false;
-                tree.Nodes["NetworkNode"].Nodes["StretchNode"].Checked = false;
-            }else if (tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked == tree.Nodes["NetworkNode"].Nodes["StretchNode"].Checked){
-                if (tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked == false){
-                    tree.Nodes["NetworkNode"].Checked = false;
+                treeNetwork.Nodes["AirportsNode"].Checked = false;
+                treeNetwork.Nodes["StretchNode"].Checked = false;
+            }else if (!someSelected){
+                    treeNetwork.Checked = false;
                     this.buttonChooseFileNetwork.Enabled = false;
                     previousStateNetwork = false;
-                    tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked = false;
-                    tree.Nodes["NetworkNode"].Nodes["StretchNode"].Checked = false;
-                }
-            }else if (tree.Nodes["NetworkNode"].Nodes["AirportsNode"].Checked !=tree.Nodes["NetworkNode"].Nodes["StretchNode"].Checked){
+                    treeNetwork.Nodes["AirportsNode"].Checked = false;
+                    treeNetwork.Nodes["StretchNode"].Checked = false;
+            }else{
                 this.buttonChooseFileNetwork.Enabled = true;
                 previousStateNetwork = true;
                 tree.Nodes["NetworkNode"].Checked = true; 

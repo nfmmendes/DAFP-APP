@@ -113,10 +113,6 @@ namespace Prototipo1
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageFuel = new System.Windows.Forms.TabPage();
             this.dataGridViewFuel = new System.Windows.Forms.DataGridView();
-            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabExchangeRate = new System.Windows.Forms.TabPage();
             this.buttonDeleteCurrency = new System.Windows.Forms.Button();
             this.buttonEditCurrency = new System.Windows.Forms.Button();
@@ -224,11 +220,16 @@ namespace Prototipo1
             this.simulatedAnnealingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gRASPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IdFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -1006,6 +1007,7 @@ namespace Prototipo1
             this.dataGridViewFuel.AllowUserToAddRows = false;
             this.dataGridViewFuel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFuel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdFuel,
             this.Airport,
             this.Fuel,
             this.Currency,
@@ -1017,30 +1019,6 @@ namespace Prototipo1
             this.dataGridViewFuel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFuel.Size = new System.Drawing.Size(1008, 223);
             this.dataGridViewFuel.TabIndex = 1;
-            // 
-            // Airport
-            // 
-            this.Airport.HeaderText = "Airport";
-            this.Airport.Name = "Airport";
-            this.Airport.Width = 270;
-            // 
-            // Fuel
-            // 
-            this.Fuel.HeaderText = "Fuel";
-            this.Fuel.Name = "Fuel";
-            this.Fuel.Width = 150;
-            // 
-            // Currency
-            // 
-            this.Currency.HeaderText = "Currency";
-            this.Currency.Name = "Currency";
-            this.Currency.Width = 180;
-            // 
-            // PricePerLitre
-            // 
-            this.PricePerLitre.HeaderText = "Price Per Litre";
-            this.PricePerLitre.Name = "PricePerLitre";
-            this.PricePerLitre.Width = 200;
             // 
             // tabExchangeRate
             // 
@@ -1348,11 +1326,11 @@ namespace Prototipo1
             this.label18.TabIndex = 4;
             this.label18.Text = "Airplane";
             // 
-            // comboBoxInstance
+            // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(12, 39);
-            this.comboBox1.Name = "comboBoxInstance";
+            this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(220, 30);
             this.comboBox1.TabIndex = 3;
             // 
@@ -2182,28 +2160,6 @@ namespace Prototipo1
             this.advancedOptionsToolStripMenuItem.Text = "Advanced options";
             this.advancedOptionsToolStripMenuItem.Click += new System.EventHandler(this.advancedOptionsToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tutorialToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // tutorialToolStripMenuItem
-            // 
-            this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.tutorialToolStripMenuItem.Text = "Tutorial";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2220,6 +2176,59 @@ namespace Prototipo1
             this.duplicateInstanceToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.duplicateInstanceToolStripMenuItem.Text = "Duplicate Instance";
             this.duplicateInstanceToolStripMenuItem.Click += new System.EventHandler(this.duplicateInstanceToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tutorialToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // tutorialToolStripMenuItem
+            // 
+            this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
+            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.tutorialToolStripMenuItem.Text = "Tutorial";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // IdFuel
+            // 
+            this.IdFuel.HeaderText = "Id";
+            this.IdFuel.Name = "IdFuel";
+            this.IdFuel.ReadOnly = true;
+            this.IdFuel.Visible = false;
+            // 
+            // Airport
+            // 
+            this.Airport.HeaderText = "Airport";
+            this.Airport.Name = "Airport";
+            this.Airport.Width = 270;
+            // 
+            // Fuel
+            // 
+            this.Fuel.HeaderText = "Fuel";
+            this.Fuel.Name = "Fuel";
+            this.Fuel.Width = 150;
+            // 
+            // Currency
+            // 
+            this.Currency.HeaderText = "Currency";
+            this.Currency.Name = "Currency";
+            this.Currency.Width = 180;
+            // 
+            // PricePerLitre
+            // 
+            this.PricePerLitre.HeaderText = "Price Per Litre";
+            this.PricePerLitre.Name = "PricePerLitre";
+            this.PricePerLitre.Width = 200;
             // 
             // MainForm
             // 
@@ -2405,10 +2414,6 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn DepartureTime;
         private DataGridViewTextBoxColumn StretchDestination;
         private DataGridViewTextBoxColumn ArrivalTime;
-        private DataGridViewTextBoxColumn Airport;
-        private DataGridViewTextBoxColumn Fuel;
-        private DataGridViewTextBoxColumn Currency;
-        private DataGridViewTextBoxColumn PricePerLitre;
         private DataGridViewTextBoxColumn StretchPassenger;
         private DataGridViewTextBoxColumn StretchPNR;
         private DataGridViewTextBoxColumn StretchSex;
@@ -2495,6 +2500,11 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn Class;
         private ToolStripMenuItem toolsToolStripMenuItem;
         private ToolStripMenuItem duplicateInstanceToolStripMenuItem;
+        private DataGridViewTextBoxColumn IdFuel;
+        private DataGridViewTextBoxColumn Airport;
+        private DataGridViewTextBoxColumn Fuel;
+        private DataGridViewTextBoxColumn Currency;
+        private DataGridViewTextBoxColumn PricePerLitre;
     }
 }
 

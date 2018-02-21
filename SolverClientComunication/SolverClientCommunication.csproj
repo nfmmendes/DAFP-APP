@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201802182114299_addExchangeDataTable.Designer.cs">
       <DependentUpon>201802182114299_addExchangeDataTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802211351062_removeUselessTable.cs" />
+    <Compile Include="Migrations\201802211351062_removeUselessTable.Designer.cs">
+      <DependentUpon>201802211351062_removeUselessTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplane.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802182114299_addExchangeDataTable.resx">
       <DependentUpon>201802182114299_addExchangeDataTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802211351062_removeUselessTable.resx">
+      <DependentUpon>201802211351062_removeUselessTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

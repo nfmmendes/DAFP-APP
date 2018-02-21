@@ -364,7 +364,7 @@ namespace Prototipo1
 
             foreach (var item in fuels)
             {
-                dataGridViewFuel.Rows.Add(item.Id, item.Airport.AiportName, item.Currency, item.Value);
+                dataGridViewFuel.Rows.Add(item.Id,item.Airport.AiportName,"F", item.Currency, item.Value); //TODO: Change This F
             }
         }
 
@@ -497,8 +497,11 @@ namespace Prototipo1
         /// <param name="idAirplane"></param>
         private void FillSeatTypeList(long idAirplane){ 
             this.dataGridViewSeatTypes.Rows.Clear();
-
+            
+                
             var seatTypes = Context.SeatList.Where(x => x.Airplane.Id == idAirplane);
+
+            if(seatTypes.Any())
             foreach (var item in seatTypes){
                 dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.numberOfSeats, item.luggageWeightLimit);
                 

@@ -31,7 +31,7 @@ namespace Prototipo1.Controller
         /// <param name="instance"></param>
         /// <param name="loadAirports"></param>
         /// <param name="loadStretches"></param>
-        public void importNetworkData(string fileName, DbInstance instance,bool loadAirports, bool loadStretches)
+        public void importNetworkData(string fileName, DbInstance instance,bool loadAirports, bool loadStretches, bool loadFuelInformation)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
@@ -48,7 +48,8 @@ namespace Prototipo1.Controller
                     var item = new DbAirports()
                     {
                         AiportName = row.GetCell(0).StringCellValue,
-                        GroundTime =row.GetCell(9).CellType != CellType.String?  row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
+                        GroundTime =row.GetCell(9).CellType != CellType.String? 
+                                                               row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
                         IATA = row.GetCell(1).StringCellValue,
                         Latitude = row.GetCell(2).StringCellValue,
                         Longitude = row.GetCell(3).StringCellValue, 
@@ -113,6 +114,34 @@ namespace Prototipo1.Controller
 
                 }
                 Instance.Context.Stretches.AddRange(newItems);
+                Instance.Context.SaveChanges();
+            }
+
+            var sheet3 = hssfwb.GetSheet("Fuel Prices");
+            if (loadFuelInformation && sheet3 != null){
+                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
+                
+                for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
+                {
+                    IRow row = sheet2.GetRow(i);
+                    if (row == null) break;
+                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                    if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
+                    var airportName = row.GetCell(0).StringCellValue;
+                    
+                    var airport = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportName));
+
+                    if (airport != null){
+                        var item = new DbFuelPrice(){
+                            Instance = instance,
+                            Airport = airport,
+                            Currency = row.GetCell(1).StringCellValue,
+                            Value = row.GetCell(2).NumericCellValue.ToString()
+                        };
+                        Instance.Context.FuelPrice.Add(item);
+                    }
+                }
                 Instance.Context.SaveChanges();
             }
 
