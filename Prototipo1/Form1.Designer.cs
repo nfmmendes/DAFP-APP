@@ -31,7 +31,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -113,6 +113,11 @@ namespace Prototipo1
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageFuel = new System.Windows.Forms.TabPage();
             this.dataGridViewFuel = new System.Windows.Forms.DataGridView();
+            this.IdFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabExchangeRate = new System.Windows.Forms.TabPage();
             this.buttonDeleteCurrency = new System.Windows.Forms.Button();
             this.buttonEditCurrency = new System.Windows.Forms.Button();
@@ -225,11 +230,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.IdFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PricePerLitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -477,6 +477,7 @@ namespace Prototipo1
             this.buttonDeleteAirplane.TabIndex = 7;
             this.buttonDeleteAirplane.Text = "Delete";
             this.buttonDeleteAirplane.UseVisualStyleBackColor = true;
+            this.buttonDeleteAirplane.Click += new System.EventHandler(this.buttonDeleteAirplane_Click);
             // 
             // buttonEditAirplane
             // 
@@ -504,6 +505,7 @@ namespace Prototipo1
             this.buttonDeleteAirplaneSeatType.TabIndex = 4;
             this.buttonDeleteAirplaneSeatType.Text = "Delete";
             this.buttonDeleteAirplaneSeatType.UseVisualStyleBackColor = true;
+            this.buttonDeleteAirplaneSeatType.Click += new System.EventHandler(this.buttonDeleteAirplaneSeatType_Click);
             // 
             // buttonEditAirplaneSeatType
             // 
@@ -568,14 +570,14 @@ namespace Prototipo1
             // dataGridViewAirplane
             // 
             this.dataGridViewAirplane.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewAirplane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAirplane.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AirplaneId,
@@ -691,6 +693,7 @@ namespace Prototipo1
             this.buttonDeleteAirport.TabIndex = 7;
             this.buttonDeleteAirport.Text = "Delete";
             this.buttonDeleteAirport.UseVisualStyleBackColor = true;
+            this.buttonDeleteAirport.Click += new System.EventHandler(this.buttonDeleteAirport_Click);
             // 
             // buttonEditAirport
             // 
@@ -1019,6 +1022,37 @@ namespace Prototipo1
             this.dataGridViewFuel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFuel.Size = new System.Drawing.Size(1008, 223);
             this.dataGridViewFuel.TabIndex = 1;
+            // 
+            // IdFuel
+            // 
+            this.IdFuel.HeaderText = "Id";
+            this.IdFuel.Name = "IdFuel";
+            this.IdFuel.ReadOnly = true;
+            this.IdFuel.Visible = false;
+            // 
+            // Airport
+            // 
+            this.Airport.HeaderText = "Airport";
+            this.Airport.Name = "Airport";
+            this.Airport.Width = 270;
+            // 
+            // Fuel
+            // 
+            this.Fuel.HeaderText = "Fuel";
+            this.Fuel.Name = "Fuel";
+            this.Fuel.Width = 150;
+            // 
+            // Currency
+            // 
+            this.Currency.HeaderText = "Currency";
+            this.Currency.Name = "Currency";
+            this.Currency.Width = 180;
+            // 
+            // PricePerLitre
+            // 
+            this.PricePerLitre.HeaderText = "Price Per Litre";
+            this.PricePerLitre.Name = "PricePerLitre";
+            this.PricePerLitre.Width = 200;
             // 
             // tabExchangeRate
             // 
@@ -2198,37 +2232,6 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // IdFuel
-            // 
-            this.IdFuel.HeaderText = "Id";
-            this.IdFuel.Name = "IdFuel";
-            this.IdFuel.ReadOnly = true;
-            this.IdFuel.Visible = false;
-            // 
-            // Airport
-            // 
-            this.Airport.HeaderText = "Airport";
-            this.Airport.Name = "Airport";
-            this.Airport.Width = 270;
-            // 
-            // Fuel
-            // 
-            this.Fuel.HeaderText = "Fuel";
-            this.Fuel.Name = "Fuel";
-            this.Fuel.Width = 150;
-            // 
-            // Currency
-            // 
-            this.Currency.HeaderText = "Currency";
-            this.Currency.Name = "Currency";
-            this.Currency.Width = 180;
-            // 
-            // PricePerLitre
-            // 
-            this.PricePerLitre.HeaderText = "Price Per Litre";
-            this.PricePerLitre.Name = "PricePerLitre";
-            this.PricePerLitre.Width = 200;
             // 
             // MainForm
             // 
