@@ -230,6 +230,9 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -703,6 +706,7 @@ namespace Prototipo1
             this.buttonEditAirport.TabIndex = 6;
             this.buttonEditAirport.Text = "Edit";
             this.buttonEditAirport.UseVisualStyleBackColor = true;
+            this.buttonEditAirport.Click += new System.EventHandler(this.buttonEditAirport_Click);
             // 
             // buttonAddAirport
             // 
@@ -712,6 +716,7 @@ namespace Prototipo1
             this.buttonAddAirport.TabIndex = 5;
             this.buttonAddAirport.Text = "Add";
             this.buttonAddAirport.UseVisualStyleBackColor = true;
+            this.buttonAddAirport.Click += new System.EventHandler(this.buttonAddAirport_Click);
             // 
             // dataGridViewAirport
             // 
@@ -997,6 +1002,9 @@ namespace Prototipo1
             // 
             // tabPageFuel
             // 
+            this.tabPageFuel.Controls.Add(this.buttonDeleteFuelPrice);
+            this.tabPageFuel.Controls.Add(this.button2);
+            this.tabPageFuel.Controls.Add(this.button3);
             this.tabPageFuel.Controls.Add(this.dataGridViewFuel);
             this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
             this.tabPageFuel.Name = "tabPageFuel";
@@ -2233,6 +2241,34 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // buttonDeleteFuelPrice
+            // 
+            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(711, 278);
+            this.buttonDeleteFuelPrice.Name = "buttonDeleteFuelPrice";
+            this.buttonDeleteFuelPrice.Size = new System.Drawing.Size(91, 34);
+            this.buttonDeleteFuelPrice.TabIndex = 7;
+            this.buttonDeleteFuelPrice.Text = "Delete";
+            this.buttonDeleteFuelPrice.UseVisualStyleBackColor = true;
+            this.buttonDeleteFuelPrice.Click += new System.EventHandler(this.buttonDeleteFuelPrice_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(480, 278);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(91, 34);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Edit";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(224, 278);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(91, 34);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2508,6 +2544,9 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn Fuel;
         private DataGridViewTextBoxColumn Currency;
         private DataGridViewTextBoxColumn PricePerLitre;
+        private Button buttonDeleteFuelPrice;
+        private Button button2;
+        private Button button3;
     }
 }
 

@@ -203,22 +203,31 @@ namespace Prototipo1
             someSelected = treeNetwork.Nodes["AirportsNode"].Checked | treeNetwork.Nodes["StretchNode"].Checked |
                                 treeNetwork.Nodes["FuelNode"].Checked;
             if (!previousStateNetwork && networkStatus){
+
                 this.buttonChooseFileNetwork.Enabled = true;
                 previousStateNetwork = true;
                 treeNetwork.Nodes["AirportsNode"].Checked = true;
                 treeNetwork.Nodes["StretchNode"].Checked = true;
+                treeNetwork.Nodes["FuelNode"].Checked = true;
+
             }else if (previousStateNetwork && !networkStatus){
+
                 this.buttonChooseFileNetwork.Enabled = false;
                 previousStateNetwork = false;
                 treeNetwork.Nodes["AirportsNode"].Checked = false;
                 treeNetwork.Nodes["StretchNode"].Checked = false;
+                treeNetwork.Nodes["FuelNode"].Checked = false;
+
             }else if (!someSelected){
-                    treeNetwork.Checked = false;
-                    this.buttonChooseFileNetwork.Enabled = false;
-                    previousStateNetwork = false;
-                    treeNetwork.Nodes["AirportsNode"].Checked = false;
-                    treeNetwork.Nodes["StretchNode"].Checked = false;
-            }else{
+
+                treeNetwork.Checked = false;
+                this.buttonChooseFileNetwork.Enabled = false;
+                previousStateNetwork = false;
+                treeNetwork.Nodes["AirportsNode"].Checked = false;
+                treeNetwork.Nodes["StretchNode"].Checked = false;
+                treeNetwork.Nodes["FuelNode"].Checked = false;
+            }
+            else{
                 this.buttonChooseFileNetwork.Enabled = true;
                 previousStateNetwork = true;
                 tree.Nodes["NetworkNode"].Checked = true; 

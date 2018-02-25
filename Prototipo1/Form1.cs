@@ -607,8 +607,7 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected seat types");
         }
 
-        private void buttonDeleteAirport_Click(object sender, EventArgs e)
-        {
+        private void buttonDeleteAirport_Click(object sender, EventArgs e){
             
             if (dataGridViewAirport.SelectedRows.Count > 0)
             {
@@ -642,6 +641,44 @@ namespace Prototipo1
             else
                 MessageBox.Show("There are no selected airplanes");
        }
-        
+
+        private void buttonDeleteFuelPrice_Click(object sender, EventArgs e){
+            if (dataGridViewFuel.SelectedRows.Count > 0)
+            {
+                var message = "All information related with these prices will be deleted. Do you want continue?";
+                var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    for (int i = 0; i < dataGridViewFuel.Rows.Count; i++)
+                    {
+
+                        if (!dataGridViewFuel.Rows[i].Selected) continue;
+
+                        var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
+                        var deleted = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
+
+                        if (deleted != null)
+                            Context.FuelPrice.Remove(deleted);
+                    }
+
+                    Context.SaveChanges();
+                    var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
+                    FillTables(Context.Instances.ToList().First(x => x.Name.Equals(instanceName)));
+                }
+            }
+            else
+                MessageBox.Show("There are no selected airplanes");
+        }
+
+        private void buttonAddAirport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonEditAirport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -67,6 +67,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditAirplane.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditAirplane.Designer.cs">
+      <DependentUpon>AddEditAirplane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditAirport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditAirport.Designer.cs">
+      <DependentUpon>AddEditAirport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditFuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditFuel.Designer.cs">
+      <DependentUpon>AddEditFuel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\AirportController.cs" />
+    <Compile Include="Controller\FuelController.cs" />
     <Compile Include="Controller\ImportDataController.cs" />
     <Compile Include="Controller\InstancesController.cs" />
     <Compile Include="Controller\ParametersController.cs" />
@@ -108,6 +128,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddEditAirplane.resx">
+      <DependentUpon>AddEditAirplane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditAirport.resx">
+      <DependentUpon>AddEditAirport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditFuel.resx">
+      <DependentUpon>AddEditFuel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateInstance.resx">
       <DependentUpon>CreateInstance.cs</DependentUpon>
     </EmbeddedResource>
