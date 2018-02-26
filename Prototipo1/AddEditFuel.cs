@@ -22,6 +22,18 @@ namespace Prototipo1
             InitializeComponent();
         }
 
+        public void OpenToAdd(DbInstance instance){
+            this.ShowDialog();
+            this.Instance = instance;
+            IsAdd = true;
+        }
+
+        public void OpenToEdit(DbInstance instance, long IdFuel){
+            this.ShowDialog();
+            IsAdd = false;
+        }
+
+
         private void buttonCancel_Click(object sender, EventArgs e){
             this.Close(); 
         }

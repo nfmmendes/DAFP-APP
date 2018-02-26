@@ -31,7 +31,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -112,6 +112,9 @@ namespace Prototipo1
             this.MinArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageFuel = new System.Windows.Forms.TabPage();
+            this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonAddFuel = new System.Windows.Forms.Button();
             this.dataGridViewFuel = new System.Windows.Forms.DataGridView();
             this.IdFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Airport = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -230,9 +233,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -490,6 +490,7 @@ namespace Prototipo1
             this.buttonEditAirplane.TabIndex = 6;
             this.buttonEditAirplane.Text = "Edit";
             this.buttonEditAirplane.UseVisualStyleBackColor = true;
+            this.buttonEditAirplane.Click += new System.EventHandler(this.buttonEditAirplane_Click);
             // 
             // buttonAddAirplane
             // 
@@ -499,6 +500,7 @@ namespace Prototipo1
             this.buttonAddAirplane.TabIndex = 5;
             this.buttonAddAirplane.Text = "Add";
             this.buttonAddAirplane.UseVisualStyleBackColor = true;
+            this.buttonAddAirplane.Click += new System.EventHandler(this.buttonAddAirplane_Click);
             // 
             // buttonDeleteAirplaneSeatType
             // 
@@ -573,14 +575,14 @@ namespace Prototipo1
             // dataGridViewAirplane
             // 
             this.dataGridViewAirplane.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewAirplane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAirplane.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AirplaneId,
@@ -1004,7 +1006,7 @@ namespace Prototipo1
             // 
             this.tabPageFuel.Controls.Add(this.buttonDeleteFuelPrice);
             this.tabPageFuel.Controls.Add(this.button2);
-            this.tabPageFuel.Controls.Add(this.button3);
+            this.tabPageFuel.Controls.Add(this.buttonAddFuel);
             this.tabPageFuel.Controls.Add(this.dataGridViewFuel);
             this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
             this.tabPageFuel.Name = "tabPageFuel";
@@ -1012,6 +1014,36 @@ namespace Prototipo1
             this.tabPageFuel.TabIndex = 3;
             this.tabPageFuel.Text = "Fuel";
             this.tabPageFuel.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteFuelPrice
+            // 
+            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(711, 278);
+            this.buttonDeleteFuelPrice.Name = "buttonDeleteFuelPrice";
+            this.buttonDeleteFuelPrice.Size = new System.Drawing.Size(91, 34);
+            this.buttonDeleteFuelPrice.TabIndex = 7;
+            this.buttonDeleteFuelPrice.Text = "Delete";
+            this.buttonDeleteFuelPrice.UseVisualStyleBackColor = true;
+            this.buttonDeleteFuelPrice.Click += new System.EventHandler(this.buttonDeleteFuelPrice_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(480, 278);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(91, 34);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Edit";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.buttonEditFuel_Click);
+            // 
+            // buttonAddFuel
+            // 
+            this.buttonAddFuel.Location = new System.Drawing.Point(224, 278);
+            this.buttonAddFuel.Name = "buttonAddFuel";
+            this.buttonAddFuel.Size = new System.Drawing.Size(91, 34);
+            this.buttonAddFuel.TabIndex = 5;
+            this.buttonAddFuel.Text = "Add";
+            this.buttonAddFuel.UseVisualStyleBackColor = true;
+            this.buttonAddFuel.Click += new System.EventHandler(this.buttonAddFuel_Click);
             // 
             // dataGridViewFuel
             // 
@@ -2241,34 +2273,6 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // buttonDeleteFuelPrice
-            // 
-            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(711, 278);
-            this.buttonDeleteFuelPrice.Name = "buttonDeleteFuelPrice";
-            this.buttonDeleteFuelPrice.Size = new System.Drawing.Size(91, 34);
-            this.buttonDeleteFuelPrice.TabIndex = 7;
-            this.buttonDeleteFuelPrice.Text = "Delete";
-            this.buttonDeleteFuelPrice.UseVisualStyleBackColor = true;
-            this.buttonDeleteFuelPrice.Click += new System.EventHandler(this.buttonDeleteFuelPrice_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(480, 278);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 34);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Edit";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(224, 278);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 34);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Add";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2546,7 +2550,7 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn PricePerLitre;
         private Button buttonDeleteFuelPrice;
         private Button button2;
-        private Button button3;
+        private Button buttonAddFuel;
     }
 }
 

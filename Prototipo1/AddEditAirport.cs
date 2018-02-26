@@ -22,11 +22,13 @@ namespace Prototipo1
 
         public void OpenToAdd(DbInstance instance){
             this.ShowDialog();
+            Instance = instance;
             IsAdd = true; 
         }
 
-        public void OpenToEdit(DbInstance instance){
+        public void OpenToEdit(DbInstance instance,long idAiport){
             this.ShowDialog();
+            Instance = instance; 
             IsAdd = false; 
         }
 

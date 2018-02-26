@@ -671,14 +671,98 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected airplanes");
         }
 
-        private void buttonAddAirport_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddAirport_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
+            if (instance != null){
+                var addAirport = new AddEditAirport();
+                addAirport.OpenToAdd(instance);
+                FillAiportsTable(instance);
+            }
         }
 
-        private void buttonEditAirport_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditAirport_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
+            if (instance != null){
+                var addAirport = new AddEditAirport();
+                addAirport.OpenToEdit(instance,0); //TODO: get real instance
+                FillAiportsTable(instance);
+            }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddAirplane_Click(object sender, EventArgs e){
+
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var addAirplane = new AddEditAirplane();
+                addAirplane.OpenToAdd(instance);
+                FillAirplaneTables(instance);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditAirplane_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+            
+            if (instance != null){
+                var addAirplane = new AddEditAirplane();
+                addAirplane.OpenToEdit(instance,0); //TODO: Get the real index
+                FillAirplaneTables(instance);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddFuel_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var addFuel = new AddEditFuel();
+                addFuel.OpenToAdd(instance);
+                FillFuelTable(instance);
+            }
+        }
+
+        private void buttonEditFuel_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var addFuel = new AddEditFuel();
+                addFuel.OpenToEdit(instance,0); //TODO: Get real id
+                FillFuelTable(instance);
+            }
+        }
+
+
     }
 }
