@@ -21,15 +21,15 @@ namespace Prototipo1
         }
 
         public void OpenToAdd(DbInstance instance){
-            this.ShowDialog();
             Instance = instance;
-            IsAdd = true; 
+            IsAdd = true;
+            this.ShowDialog();
         }
 
-        public void OpenToEdit(DbInstance instance,long idAiport){
+        public void OpenToEdit(DbInstance instance, long idAiport){
+            Instance = instance;
+            IsAdd = false;
             this.ShowDialog();
-            Instance = instance; 
-            IsAdd = false; 
         }
 
         private void buttonSave_Click(object sender, EventArgs e){

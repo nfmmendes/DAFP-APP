@@ -746,7 +746,7 @@ namespace Prototipo1
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
             if (instance != null){
-                var addFuel = new AddEditFuel();
+                var addFuel = new AddEditFuel(Context);
                 addFuel.OpenToAdd(instance);
                 FillFuelTable(instance);
             }
@@ -756,13 +756,78 @@ namespace Prototipo1
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
-            if (instance != null){
-                var addFuel = new AddEditFuel();
-                addFuel.OpenToEdit(instance,0); //TODO: Get real id
+            if (instance != null && dataGridViewFuel.SelectedRows.Count >0){
+                var addFuel = new AddEditFuel(Context);
+                var index = dataGridViewFuel.SelectedRows[0].Index;
+
+                addFuel.OpenToEdit(instance,Convert.ToInt64(dataGridViewFuel.Rows[index].Cells[0].Value)); //TODO: Get real id
+                
                 FillFuelTable(instance);
             }
         }
 
+        private void buttonAddAirplaneSeatType_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
+            if (instance != null){
+                var addSeat = new AddEditSeatType();
+                addSeat.OpenToAdd(instance);
+            }
+        }
+
+        private void buttonEditAirplaneSeatType_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var addSeat = new AddEditSeatType();
+                addSeat.OpenToEdit(instance,0); //TODO: replace by the real ID
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddRequest_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var addRequest = new AddEditRequest();
+                addRequest.OpenToAdd(instance);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditRequest_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null && dataGridViewRequest.SelectedRows.Count >0 ){
+                var editRequest = new AddEditRequest();
+                var rowIndex = dataGridViewRequest.SelectedRows[0].Index;
+                
+                editRequest.OpenToEdit(instance, dataGridViewRequest.Rows[rowIndex].Cells[0].Value.ToString());
+            }
+        }
+
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

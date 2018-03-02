@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SolverClientComunication;
 using SolverClientComunication.Models;
 
 namespace Prototipo1
@@ -16,21 +17,38 @@ namespace Prototipo1
 
         public bool IsAdd { get; set; }
         public DbInstance Instance { get; set; }
+        public DbFuelPrice CurrentElement { get; set; }
+        private CustomSqlContext Context { get; set; }
 
-        public AddEditFuel()
-        {
+        public AddEditFuel(CustomSqlContext context){
             InitializeComponent();
+            Context = context;
         }
 
         public void OpenToAdd(DbInstance instance){
-            this.ShowDialog();
             this.Instance = instance;
             IsAdd = true;
+            this.ShowDialog();
         }
 
         public void OpenToEdit(DbInstance instance, long IdFuel){
-            this.ShowDialog();
             IsAdd = false;
+            CurrentElement = Context.FuelPrice.FirstOrDefault(x => x.Id == IdFuel);
+
+            if (CurrentElement != null){
+                comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Id)
+                    .Select(x => x.AiportName).ToList();
+                comboBoxAirport.SelectedText = CurrentElement.Airport.AiportName;
+                comboBoxFuel.SelectedText = "F";
+                comboBoxCurrency.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Id)
+                    .Select(x => x.AiportName).ToList();
+                comboBoxCurrency.SelectedText = CurrentElement.Currency;
+                textBoxPrice.Text = CurrentElement.Value;
+            }
+
+
+            this.ShowDialog();
+            
         }
 
 

@@ -85,6 +85,18 @@
     <Compile Include="AddEditFuel.Designer.cs">
       <DependentUpon>AddEditFuel.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditRequest.Designer.cs">
+      <DependentUpon>AddEditRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditSeatType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditSeatType.Designer.cs">
+      <DependentUpon>AddEditSeatType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\AirportController.cs" />
     <Compile Include="Controller\FuelController.cs" />
     <Compile Include="Controller\ImportDataController.cs" />
@@ -136,6 +148,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditFuel.resx">
       <DependentUpon>AddEditFuel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditRequest.resx">
+      <DependentUpon>AddEditRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditSeatType.resx">
+      <DependentUpon>AddEditSeatType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateInstance.resx">
       <DependentUpon>CreateInstance.cs</DependentUpon>

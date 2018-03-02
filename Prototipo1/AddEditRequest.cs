@@ -11,33 +11,29 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1
 {
-    public partial class AddEditAirplane : Form
+    public partial class AddEditRequest : Form
     {
 
         private bool IsAdd { get; set; }
         public DbInstance Instance { get; set; }
 
-        public AddEditAirplane()
-        {
+        public AddEditRequest(){
             InitializeComponent();
         }
 
-        public void OpenToAdd(DbInstance instance)
-        {
+        public void OpenToAdd(DbInstance instance){
             Instance = instance;
             IsAdd = true;
             this.ShowDialog();
         }
 
-        public void OpenToEdit(DbInstance instance, long idAIrplane){
+        public void OpenToEdit(DbInstance instance, string PNRCode){
             Instance = instance;
             IsAdd = false;
-            this.ShowDialog();
+            this.ShowDialog(); 
         }
 
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
+        private void buttonSave_Click(object sender, EventArgs e){
 
         }
 

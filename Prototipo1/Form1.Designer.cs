@@ -520,6 +520,7 @@ namespace Prototipo1
             this.buttonEditAirplaneSeatType.TabIndex = 3;
             this.buttonEditAirplaneSeatType.Text = "Edit";
             this.buttonEditAirplaneSeatType.UseVisualStyleBackColor = true;
+            this.buttonEditAirplaneSeatType.Click += new System.EventHandler(this.buttonEditAirplaneSeatType_Click);
             // 
             // buttonAddAirplaneSeatType
             // 
@@ -529,6 +530,7 @@ namespace Prototipo1
             this.buttonAddAirplaneSeatType.TabIndex = 2;
             this.buttonAddAirplaneSeatType.Text = "Add";
             this.buttonAddAirplaneSeatType.UseVisualStyleBackColor = true;
+            this.buttonAddAirplaneSeatType.Click += new System.EventHandler(this.buttonAddAirplaneSeatType_Click);
             // 
             // dataGridViewSeatTypes
             // 
@@ -876,6 +878,7 @@ namespace Prototipo1
             this.buttonEditRequest.TabIndex = 9;
             this.buttonEditRequest.Text = "Edit";
             this.buttonEditRequest.UseVisualStyleBackColor = true;
+            this.buttonEditRequest.Click += new System.EventHandler(this.buttonEditRequest_Click);
             // 
             // buttonAddRequest
             // 
@@ -885,6 +888,7 @@ namespace Prototipo1
             this.buttonAddRequest.TabIndex = 8;
             this.buttonAddRequest.Text = "Add";
             this.buttonAddRequest.UseVisualStyleBackColor = true;
+            this.buttonAddRequest.Click += new System.EventHandler(this.buttonAddRequest_Click);
             // 
             // dataGridViewPassenger
             // 
@@ -1197,6 +1201,7 @@ namespace Prototipo1
             this.buttonEdit.TabIndex = 10;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // dataGridViewStretches
             // 

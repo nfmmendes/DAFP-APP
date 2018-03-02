@@ -32,12 +32,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
+            this.comboBoxFuel = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.comboBoxAirport = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -80,47 +80,39 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Price";
             // 
-            // textBox1
+            // textBoxPrice
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.textBox1.Location = new System.Drawing.Point(129, 78);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 28);
-            this.textBox1.TabIndex = 4;
+            this.textBoxPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.textBoxPrice.Location = new System.Drawing.Point(129, 253);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(298, 28);
+            this.textBoxPrice.TabIndex = 7;
             // 
-            // textBox4
+            // comboBoxCurrency
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.textBox4.Location = new System.Drawing.Point(129, 253);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(298, 28);
-            this.textBox4.TabIndex = 7;
+            this.comboBoxCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.comboBoxCurrency.FormattingEnabled = true;
+            this.comboBoxCurrency.Location = new System.Drawing.Point(129, 191);
+            this.comboBoxCurrency.Name = "comboBoxCurrency";
+            this.comboBoxCurrency.Size = new System.Drawing.Size(297, 30);
+            this.comboBoxCurrency.TabIndex = 8;
             // 
-            // comboBox1
+            // comboBoxFuel
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(129, 191);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(297, 30);
-            this.comboBox1.TabIndex = 8;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBoxFuel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.comboBoxFuel.FormattingEnabled = true;
+            this.comboBoxFuel.Items.AddRange(new object[] {
             "F",
             "G",
             "H"});
-            this.comboBox2.Location = new System.Drawing.Point(129, 132);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(297, 30);
-            this.comboBox2.TabIndex = 9;
+            this.comboBoxFuel.Location = new System.Drawing.Point(129, 132);
+            this.comboBoxFuel.Name = "comboBoxFuel";
+            this.comboBoxFuel.Size = new System.Drawing.Size(297, 30);
+            this.comboBoxFuel.TabIndex = 9;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(194, 307);
+            this.buttonSave.Location = new System.Drawing.Point(84, 307);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(126, 43);
             this.buttonSave.TabIndex = 10;
@@ -130,7 +122,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(381, 307);
+            this.buttonCancel.Location = new System.Drawing.Point(271, 307);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(126, 43);
             this.buttonCancel.TabIndex = 11;
@@ -138,17 +130,26 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // comboBoxAirport
+            // 
+            this.comboBoxAirport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.comboBoxAirport.FormattingEnabled = true;
+            this.comboBoxAirport.Location = new System.Drawing.Point(128, 80);
+            this.comboBoxAirport.Name = "comboBoxAirport";
+            this.comboBoxAirport.Size = new System.Drawing.Size(298, 30);
+            this.comboBoxAirport.TabIndex = 12;
+            // 
             // AddEditFuel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 366);
+            this.ClientSize = new System.Drawing.Size(473, 366);
+            this.Controls.Add(this.comboBoxAirport);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.comboBoxFuel);
+            this.Controls.Add(this.comboBoxCurrency);
+            this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -168,11 +169,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.ComboBox comboBoxCurrency;
+        private System.Windows.Forms.ComboBox comboBoxFuel;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ComboBox comboBoxAirport;
     }
 }

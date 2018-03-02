@@ -11,37 +11,37 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1
 {
-    public partial class AddEditAirplane : Form
+    public partial class AddEditSeatType : Form
     {
-
         private bool IsAdd { get; set; }
         public DbInstance Instance { get; set; }
 
-        public AddEditAirplane()
+        public AddEditSeatType()
         {
             InitializeComponent();
         }
 
         public void OpenToAdd(DbInstance instance)
         {
+            this.ShowDialog();
             Instance = instance;
             IsAdd = true;
-            this.ShowDialog();
         }
 
-        public void OpenToEdit(DbInstance instance, long idAIrplane){
+        public void OpenToEdit(DbInstance instance, long idAiport)
+        {
+            this.ShowDialog();
             Instance = instance;
             IsAdd = false;
-            this.ShowDialog();
         }
-
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e){
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }
