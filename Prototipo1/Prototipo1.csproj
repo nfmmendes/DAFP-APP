@@ -114,6 +114,12 @@
     <Compile Include="DuplicateScenario.Designer.cs">
       <DependentUpon>DuplicateScenario.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditStretch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditStretch.Designer.cs">
+      <DependentUpon>EditStretch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DuplicateScenario.resx">
       <DependentUpon>DuplicateScenario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditStretch.resx">
+      <DependentUpon>EditStretch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -31,13 +31,13 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxClass = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numUDNumberSeats = new System.Windows.Forms.NumericUpDown();
+            this.numUDLuggageWeight = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUDNumberSeats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUDLuggageWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -70,13 +70,13 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Class :";
             // 
-            // textBox1
+            // textBoxClass
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.textBox1.Location = new System.Drawing.Point(97, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(361, 28);
-            this.textBox1.TabIndex = 17;
+            this.textBoxClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.textBoxClass.Location = new System.Drawing.Point(97, 68);
+            this.textBoxClass.Name = "textBoxClass";
+            this.textBoxClass.Size = new System.Drawing.Size(361, 28);
+            this.textBoxClass.TabIndex = 1;
             // 
             // label2
             // 
@@ -88,21 +88,21 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Number Of Seats :";
             // 
-            // numericUpDown1
+            // numUDNumberSeats
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.numericUpDown1.Location = new System.Drawing.Point(207, 132);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 28);
-            this.numericUpDown1.TabIndex = 19;
+            this.numUDNumberSeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.numUDNumberSeats.Location = new System.Drawing.Point(231, 132);
+            this.numUDNumberSeats.Name = "numUDNumberSeats";
+            this.numUDNumberSeats.Size = new System.Drawing.Size(120, 28);
+            this.numUDNumberSeats.TabIndex = 2;
             // 
-            // numericUpDown2
+            // numUDLuggageWeight
             // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.numericUpDown2.Location = new System.Drawing.Point(207, 194);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 28);
-            this.numericUpDown2.TabIndex = 21;
+            this.numUDLuggageWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.numUDLuggageWeight.Location = new System.Drawing.Point(231, 194);
+            this.numUDLuggageWeight.Name = "numUDLuggageWeight";
+            this.numUDLuggageWeight.Size = new System.Drawing.Size(120, 28);
+            this.numUDLuggageWeight.TabIndex = 3;
             // 
             // label3
             // 
@@ -110,20 +110,20 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.label3.Location = new System.Drawing.Point(17, 196);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 24);
+            this.label3.Size = new System.Drawing.Size(195, 24);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Number Of Seats :";
+            this.label3.Text = "Max Luggage Weight:";
             // 
             // AddEditSeatType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 322);
-            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.numUDLuggageWeight);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numUDNumberSeats);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxClass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
@@ -132,8 +132,8 @@
             this.Name = "AddEditSeatType";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUDNumberSeats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUDLuggageWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,10 +144,10 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxClass;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numUDNumberSeats;
+        private System.Windows.Forms.NumericUpDown numUDLuggageWeight;
         private System.Windows.Forms.Label label3;
     }
 }

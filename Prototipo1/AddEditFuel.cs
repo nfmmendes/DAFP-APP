@@ -36,11 +36,11 @@ namespace Prototipo1
             CurrentElement = Context.FuelPrice.FirstOrDefault(x => x.Id == IdFuel);
 
             if (CurrentElement != null){
-                comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Id)
+                comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
                     .Select(x => x.AiportName).ToList();
                 comboBoxAirport.SelectedText = CurrentElement.Airport.AiportName;
                 comboBoxFuel.SelectedText = "F";
-                comboBoxCurrency.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Id)
+                comboBoxCurrency.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
                     .Select(x => x.AiportName).ToList();
                 comboBoxCurrency.SelectedText = CurrentElement.Currency;
                 textBoxPrice.Text = CurrentElement.Value;
