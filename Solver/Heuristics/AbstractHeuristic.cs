@@ -11,7 +11,7 @@ namespace Solver.Heuristics
 {
     public abstract class AbstractHeuristic
     {
-        public GeneralSolution Solution { get; set; }
+        public GeneralSolution BestSolution { get; set; }
         public double BestSolutionValue { get; set;  }
         public double CurrentSolutionValue { get; set; }
         public bool IsMinimization{ get; set; }
@@ -24,7 +24,7 @@ namespace Solver.Heuristics
                 CurrentSolutionValue = Double.MaxValue;
             }
         }
-        public abstract double EvaluateSolution();
+        protected abstract double EvaluateSolution(GeneralSolution solution);
         public abstract void Execute();
 
     }

@@ -1,27 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Solver.SolutionData;
 using SolverClientComunication;
+using SolverClientComunication.Models;
 
 namespace Solver.Heuristics
 {
     public class ConstructiveHeuristic : AbstractHeuristic
     {
-        public override double EvaluateSolution()
-        {
+        public enum GreedyStrategie { MostRequestedOrigin, MostRequestedDestination, EarlierRequests}
+
+        public GreedyStrategie Strategie { get; set; }
+
+        protected override double EvaluateSolution(GeneralSolution solution){
             throw new NotImplementedException();
         }
 
         public override void Execute()
         {
-            var a = 1;
-            a = 2; 
+            if (Strategie == GreedyStrategie.MostRequestedOrigin){
+                
+            }else if (Strategie == GreedyStrategie.EarlierRequests){
+                
+            }else if (Strategie == GreedyStrategie.MostRequestedOrigin){
+                
+            }
+            
+            
         }
 
-        public ConstructiveHeuristic(SolverInput input, bool isMinimization) : base(input, isMinimization)
-        {
+
+        public ConstructiveHeuristic(SolverInput input, bool isMinimization, GreedyStrategie strategie) 
+            : base(input, isMinimization){
+
+        }
+
+        private void FirstRequestStrategy(){
+            var requests = Input.Requests;
+            var requestsByOrigin = requests.GroupBy(x => x.Origin).ToDictionary(x => x.Key, x => x.ToList());
+            var requestsByDestination = requests.GroupBy(x => x.Destination).ToDictionary(x => x.Key, x => x.ToList());
+
+            var numberOfPassengersByAirport = new Dictionary<DbAirports, int>(); 
+            foreach (var key in requestsByOrigin.Keys){
+                numberOfPassengersByAirport[key] = requestsByOrigin[key].Count;
+            }
+
+            numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
+
+            bool someoneInserted = true;
+
+            while (someoneInserted){
+                someoneInserted = false;
+
+                foreach (var element in numberOfPassengersByAirport){
+                    
+                }
+            }
+
+
         }
     }
 }

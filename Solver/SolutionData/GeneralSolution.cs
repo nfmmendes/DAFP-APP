@@ -10,5 +10,6 @@ namespace Solver.SolutionData
     public class GeneralSolution
     {
         public List<Flight> Flights { get; set; }
+        public List<Refuel> Refuels { get; set;  }
     }
 }

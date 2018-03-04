@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 using Prototipo1.Controller;
+using Solver;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
@@ -155,7 +156,7 @@ namespace Prototipo1
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
             if (instance != null){
                 var input =  SolverInput.BuildSolverInput(Context,instance);
-                var heuristic = new Solver.Heuristics.ConstructiveHeuristic(input, true);
+                var heuristic = new Solver.Heuristics.MainHeuristic(input, true);
                 heuristic.Execute();
             }else{
                 

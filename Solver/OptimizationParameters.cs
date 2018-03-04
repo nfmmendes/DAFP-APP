@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Solver
 {
-    static class OptimizationParameters
+    public class OptimizationParameters
     {
-        public static bool UseTimeWindows {  get;  set; }
-        public static bool PickUpAll { get; set; }
-        public static bool DeliverALl { get; set; }
-        public static bool StartFromDepot { get; set; }
-        public static bool ComeBackToDepot { get; private set; }
-        public static DateTime StartDate { get; private set; }
-        public static DateTime EndDate { get; private set; }
+        public  bool UseTimeWindows {  get;  set; }
+        public  bool PickUpAll { get; set; }
+        public  bool DeliverALl { get; set; }
+        public  bool StartFromDepot { get; set; }
+        public  bool ComeBackToDepot { get; private set; }
+        public  DateTime StartDate { get; private set; }
+        public  DateTime EndDate { get; private set; }
+        public  int TimeLimit { get; set;  }
 
     }
 }

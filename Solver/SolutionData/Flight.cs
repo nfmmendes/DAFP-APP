@@ -13,8 +13,8 @@ namespace SolutionData
     {
         public Aiport Origin { get; set; }
         public Aiport Destination { get; set; }
-        public TimeSpan Departure { get; set; }
-        public TimeSpan Arrival { get; set; }
+        public TimeSpan DepartureTime { get; set; }
+        public TimeSpan ArrivalTime { get; set; }
         public double FuelOnTakeOff { get; set; }
         public double FuelOnLanding { get; set; }
         public List<Passenger> Passengers { get; set;  }

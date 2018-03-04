@@ -80,7 +80,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\SolverEnum.cs" />
     <Compile Include="CustomSqlContext.cs" />
-    <Compile Include="SolverInput.cs" />
     <Compile Include="Time.cs" />
   </ItemGroup>
   <ItemGroup>

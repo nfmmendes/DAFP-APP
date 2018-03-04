@@ -10,6 +10,7 @@ namespace SolutionData
     public class Refuel{
         public DbAirports Airport { get; set; }
         public double Amount { get; set; }
+        public string FuelCode { get; set; }
         public double PriceInUSD { get; set; }
 
         /// <summary>
@@ -19,7 +20,9 @@ namespace SolutionData
         /// <param name="amount"></param>
         /// <param name="price"></param>
         public Refuel(DbAirports airport, double amount, double price){
-             
+            this.Airport = airport;
+            this.Amount = amount;
+            this.PriceInUSD = price;
         }
     }
 }

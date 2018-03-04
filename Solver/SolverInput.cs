@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Solver;
+using SolverClientComunication;
 using SolverClientComunication.Models;
 
-namespace SolverClientComunication
+namespace Solver
 {
     public class SolverInput{
         public List<DbAirplane> Airplanes { get; set; }
@@ -16,6 +18,7 @@ namespace SolverClientComunication
         public List<DbStretches> Stretches { get; set; }
         public List<DbReportList> ReportList { get; set; }
         public List<DbGeneralParametersDefault> DefaultParameters { get; set; }
+        public OptimizationParameters OptimizationParameter { get; set;  }
         public List<DbImportErrors> ImportErrors { get; set; }
         public List<DbSeats> SeatList { get; set; }
         public List<DbFuelPrice> FuelPrice { get; set; }

@@ -61,6 +61,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverConfig.cs" />
+    <Compile Include="SolverInput.cs" />
     <Compile Include="SolverInterface\Constraint.cs" />
     <Compile Include="SolverInterface\ConstraintBuilder.cs" />
     <Compile Include="SolverInterface\IConstraintBuilder.cs" />
