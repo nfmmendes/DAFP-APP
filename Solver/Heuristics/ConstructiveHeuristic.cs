@@ -23,7 +23,7 @@ namespace Solver.Heuristics
         public override void Execute()
         {
             if (Strategie == GreedyStrategie.MostRequestedOrigin){
-                
+                DoMostRequestedOriginStrategy();
             }else if (Strategie == GreedyStrategie.EarlierRequests){
                 
             }else if (Strategie == GreedyStrategie.MostRequestedOrigin){
@@ -39,17 +39,17 @@ namespace Solver.Heuristics
 
         }
 
-        private void FirstRequestStrategy(){
+        private void DoMostRequestedOriginStrategy(){
             var requests = Input.Requests;
             var requestsByOrigin = requests.GroupBy(x => x.Origin).ToDictionary(x => x.Key, x => x.ToList());
-            var requestsByDestination = requests.GroupBy(x => x.Destination).ToDictionary(x => x.Key, x => x.ToList());
+            
 
             var numberOfPassengersByAirport = new Dictionary<DbAirports, int>(); 
             foreach (var key in requestsByOrigin.Keys){
                 numberOfPassengersByAirport[key] = requestsByOrigin[key].Count;
             }
 
-            numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
+            var orderedNumberOfPassagensByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
 
             bool someoneInserted = true;
 

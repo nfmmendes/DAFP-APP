@@ -15,11 +15,11 @@ namespace Solver
         public List<DbAirports> Airports { get; set; }
         public List<DbRequests> Requests { get; set; }
         public List<DbParameters> Parameters { get; set; }
-        public List<DbStretches> Stretches { get; set; }
-        public List<DbReportList> ReportList { get; set; }
+        public Dictionary<DbAirports,Dictionary<DbAirports,double>>  Stretches { get; set; } //< Origin, destination, distance
+        //public List<DbReportList> ReportList { get; set; }
         public List<DbGeneralParametersDefault> DefaultParameters { get; set; }
         public OptimizationParameters OptimizationParameter { get; set;  }
-        public List<DbImportErrors> ImportErrors { get; set; }
+        //public List<DbImportErrors> ImportErrors { get; set; }
         public List<DbSeats> SeatList { get; set; }
         public List<DbFuelPrice> FuelPrice { get; set; }
         public List<DbExchangeRates> Exchange { get; set; }
@@ -34,11 +34,21 @@ namespace Solver
             input.Airplanes = context.Airplanes.Where(x=>x.Instance.Id == Instance.Id).ToList();
             input.Airports = context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Requests = context.Requests.Where(x => x.Instance.Id == Instance.Id).ToList();
-            input.Stretches = context.Stretches.Where(x => x.Origin.Instance.Id == Instance.Id).ToList();
             input.Parameters = context.Parameters.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.SeatList = context.SeatList.Where(x => x.Airplane.Instance.Id == Instance.Id).ToList();
             input.FuelPrice = context.FuelPrice.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Exchange = context.Exchange.Where(x => x.Instance.Id == Instance.Id).ToList();
+            input.DefaultParameters = context.DefaultParameters.ToList();
+            //TODO: Corrigir
+           // input.OptimizationParameter = context.Parameters.Where(x => x.Instance.Id == Instance.Id).ToList();
+
+            
+            foreach (var stretch in context.Stretches){
+                if(!input.Stretches.ContainsKey(stretch.Origin))
+                    input.Stretches[stretch.Origin] = new Dictionary<DbAirports, double>();
+
+                input.Stretches[stretch.Origin][stretch.Destination] = stretch.Distance;
+            }
 
             return input;
         }

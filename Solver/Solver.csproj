@@ -54,6 +54,7 @@
     <Compile Include="Heuristics\AbstractHeuristic.cs" />
     <Compile Include="Heuristics\ConstructiveHeuristic.cs" />
     <Compile Include="Heuristics\MainHeuristic.cs" />
+    <Compile Include="Heuristics\SolverUtils.cs" />
     <Compile Include="OptimizationParameters.cs" />
     <Compile Include="SolutionData\Flight.cs" />
     <Compile Include="SolutionData\GeneralSolution.cs" />
