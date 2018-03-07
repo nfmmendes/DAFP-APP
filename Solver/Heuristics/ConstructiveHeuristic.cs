@@ -185,9 +185,9 @@ namespace Solver.Heuristics
                                 //If the current airport allows refueling 
                                 if (Input.FuelPrice.Any(x => x.Airport.Id == origin.Id)){
                                     var weight = choosenAirplane.Weight + fuelOnTakeOff*SolverUtils.PoundsToKg;
-                                    var refuel = new Refuel(origin,Math.Min()){
+                                  //  var refuel = new Refuel(origin,Math.Min()){
                                         
-                                    };
+                                   // };
 
                                     var newFlight = new Flight()
                                     {
