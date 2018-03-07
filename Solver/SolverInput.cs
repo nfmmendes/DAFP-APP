@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using Solver;
 using SolverClientComunication;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Solver
@@ -39,10 +40,26 @@ namespace Solver
             input.FuelPrice = context.FuelPrice.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Exchange = context.Exchange.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.DefaultParameters = context.DefaultParameters.ToList();
-            //TODO: Corrigir
-           // input.OptimizationParameter = context.Parameters.Where(x => x.Instance.Id == Instance.Id).ToList();
+           
+           
+            //Setting the optimization parameters 
+            var instanceOptimizationParameters = context.Parameters.Where(x=>x.Instance.Id == Instance.Id).ToList();
+            var comeBackToDepot = instanceOptimizationParameters.FirstOrDefault(x=>x.Code.Equals(ParametersEnum.COME_BACK_TO_DEPOT.DbCode));
+            var deliveryAll = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.DELIVER_ALL.DbCode));
+            var pickAll = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.PICK_ALL.DbCode));
+            var startFromDepot = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.START_FROM_DEPOT.DbCode));
+            var useTimeWindows = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.USE_TIME_WINDOWS.DbCode));
+            var timeLimit = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.TIME_LIMIT.DbCode));
 
-            
+            input.OptimizationParameter = new OptimizationParameters();
+            input.OptimizationParameter.ComeBackToDepot = comeBackToDepot != null && (comeBackToDepot.Value == "true"? true: false);
+            input.OptimizationParameter.DeliverAll = deliveryAll != null && (deliveryAll.Value == "true"? true: false);
+            input.OptimizationParameter.PickUpAll = pickAll != null && (pickAll.Value == "true" ? true : false);
+            input.OptimizationParameter.StartFromDepot = startFromDepot != null && (startFromDepot.Value == "true" ? true : false);
+            input.OptimizationParameter.UseTimeWindows = useTimeWindows != null && (useTimeWindows.Value == "true" ? true : false);
+            input.OptimizationParameter.TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value): 500; 
+
+            input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
             foreach (var stretch in context.Stretches){
                 if(!input.Stretches.ContainsKey(stretch.Origin))
                     input.Stretches[stretch.Origin] = new Dictionary<DbAirports, double>();

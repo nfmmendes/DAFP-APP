@@ -15,7 +15,7 @@ namespace Solver.Heuristics
     {
 
         protected override double EvaluateSolution(GeneralSolution solution){
-            throw new NotImplementedException();
+            return 0; 
 
         }
 
@@ -52,7 +52,10 @@ namespace Solver.Heuristics
 
 
             while (sw.Elapsed.TotalSeconds < timeLimit/4){
-                
+
+                var currentSolution = solution.Clone(); 
+
+
             }
 
 

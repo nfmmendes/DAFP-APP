@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SolutionData;
 using SolverClientComunication.Models;
 
@@ -11,9 +12,9 @@ namespace Solver.Heuristics
 {
     class SolverUtils
     {
-        public readonly double KnotsToKmH = 1.852;
+        public static readonly double KnotsToKmH = 1.852;
         /// <summary>
-        /// Return the airplanes that can satisfy entirely a list of requests 
+        /// Return the airplanes that can satisfy entirely a list of requests considering only the seats/class capacities
         /// </summary>
         /// <param name="input"></param>
         /// <param name="requests"></param>
@@ -30,8 +31,7 @@ namespace Solver.Heuristics
             {
                 returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) &&
                                                                                y.Airplane.Id == x.Id &&
-                                                                               y.numberOfSeats >= countRequestsByClass[key]))
-                    .ToList();
+                                                                               y.numberOfSeats >= countRequestsByClass[key])).ToList();
             }
 
             return returnedList;
@@ -52,10 +52,8 @@ namespace Solver.Heuristics
 
             //TODO: Improve it
             //TODO: The number of seats here is greater than zero, but it should be checked on the input
-            foreach (var key in countRequestsByClass.Keys)
-            {
-                returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) &&
-                                                                               y.Airplane.Id == x.Id &&
+            foreach (var key in countRequestsByClass.Keys){
+                returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) && y.Airplane.Id == x.Id &&
                                                                                y.numberOfSeats >= 0)).ToList();
             }
 
@@ -109,16 +107,42 @@ namespace Solver.Heuristics
                 //TODO: Create a dictionary to stretch 
                 var exist = input.Stretches.ContainsKey(item.Destination);
                 exist = exist | input.Stretches[item.Destination].ContainsKey(request.Origin);
+
+           
+
                 if (exist){
                     var flightTime = TimeSpan.FromHours(input.Stretches[item.Destination][request.Origin]/(item.Airplane.CruiseSpeed*KnotsToKmH));
                     var arrivalOnOriginOfRequest = item.ArrivalTime + item.Destination.GroundTime + flightTime + request.Origin.GroundTime;
-                    if (arrivalOnOriginOfRequest < request.DepartureTimeWindowEnd)
+                    if (arrivalOnOriginOfRequest < request.DepartureTimeWindowEnd )
                         return true; 
                 }
                 
             }
 
             return false; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airplane"></param>
+        /// <param name="originRequest"></param>
+        /// <returns></returns>
+        public static TimeSpan ArrivallFromDepot(SolverInput input,DbAirplane airplane, DbAirports originRequest){
+           var baseAirport = airplane.BaseAirport;
+            var returnedValue = TimeSpan.FromHours(1000000); 
+            if (input.Stretches.ContainsKey(baseAirport) && input.Stretches[baseAirport].ContainsKey(originRequest))
+                returnedValue = TimeSpan.FromHours(input.Stretches[baseAirport][originRequest] / (airplane.CruiseSpeed * KnotsToKmH));
+
+            return returnedValue;
+        }
+
+
+        public static double GetFuelOnLanding(int fuelOnTakeOff, DbAirports origin, DbAirports destination, DbAirplane choosen)
+        {
+
+            return 0;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Solver.Heuristics
         //public delegate bool StopCriteria(object[] ); 
 
         public AbstractHeuristic(SolverInput input, bool isMinimization){
+            Input = input;
             if (isMinimization){
                 BestSolutionValue = Double.MaxValue;
                 CurrentSolutionValue = Double.MaxValue;
