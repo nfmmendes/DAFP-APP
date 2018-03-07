@@ -50,14 +50,21 @@ namespace Solver
             var startFromDepot = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.START_FROM_DEPOT.DbCode));
             var useTimeWindows = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.USE_TIME_WINDOWS.DbCode));
             var timeLimit = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.TIME_LIMIT.DbCode));
+            var menAverageWeight = instanceOptimizationParameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode));
+            var womenAverageWeight = instanceOptimizationParameters.FirstOrDefault(x=> x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
+            var kidsAverageWeight = instanceOptimizationParameters.FirstOrDefault(x =>x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
 
             input.OptimizationParameter = new OptimizationParameters();
-            input.OptimizationParameter.ComeBackToDepot = comeBackToDepot != null && (comeBackToDepot.Value == "true"? true: false);
-            input.OptimizationParameter.DeliverAll = deliveryAll != null && (deliveryAll.Value == "true"? true: false);
-            input.OptimizationParameter.PickUpAll = pickAll != null && (pickAll.Value == "true" ? true : false);
-            input.OptimizationParameter.StartFromDepot = startFromDepot != null && (startFromDepot.Value == "true" ? true : false);
-            input.OptimizationParameter.UseTimeWindows = useTimeWindows != null && (useTimeWindows.Value == "true" ? true : false);
+            input.OptimizationParameter.ComeBackToDepot = comeBackToDepot == null || (comeBackToDepot.Value == "true"? true : false); 
+               
+            input.OptimizationParameter.DeliverAll = deliveryAll == null || (deliveryAll.Value == "true"? true: false);
+            input.OptimizationParameter.PickUpAll = pickAll == null || (pickAll.Value == "true" ? true : false);
+            input.OptimizationParameter.StartFromDepot = startFromDepot == null || (startFromDepot.Value == "true" ? true : false);
+            input.OptimizationParameter.UseTimeWindows = useTimeWindows == null || (useTimeWindows.Value == "true" ? true : false);
             input.OptimizationParameter.TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value): 500; 
+            input.OptimizationParameter.AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight) : 30;
+            input.OptimizationParameter.AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight) : 75;
+            input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight) : 30;
 
             input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
             foreach (var stretch in context.Stretches){

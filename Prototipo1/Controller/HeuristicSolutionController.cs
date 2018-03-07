@@ -26,6 +26,11 @@ namespace Prototipo1.Controller
             foreach (var flight in solution.Flights){
               //  var item = new Db
             }
+
+            foreach (var refuel in solution.Refuels)
+            {
+                
+            }
         }
     }
 }

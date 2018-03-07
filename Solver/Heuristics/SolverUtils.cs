@@ -13,6 +13,7 @@ namespace Solver.Heuristics
     class SolverUtils
     {
         public static readonly double KnotsToKmH = 1.852;
+        public static readonly double PoundsToKg = 0.453592;
         /// <summary>
         /// Return the airplanes that can satisfy entirely a list of requests considering only the seats/class capacities
         /// </summary>
@@ -99,11 +100,11 @@ namespace Solver.Heuristics
         private bool IsFreeAndClose(SolverInput input, DbAirplane airplane, List<Flight> flights, DbRequests request)
         {
             
-            var earlyFinishedFlights = flights.Where(x =>x.ArrivalTime <= request.DepartureTimeWindowEnd - x.Destination.GroundTime - request.Origin.GroundTime);
+            var earlyFlights = flights.Where(x =>x.ArrivalTime <= request.DepartureTimeWindowEnd - x.Destination.GroundTime - request.Origin.GroundTime);
 
             List<Flight> usefulFlights = new List<Flight>();
 
-            foreach (var item in earlyFinishedFlights){
+            foreach (var item in earlyFlights){
                 //TODO: Create a dictionary to stretch 
                 var exist = input.Stretches.ContainsKey(item.Destination);
                 exist = exist | input.Stretches[item.Destination].ContainsKey(request.Origin);
@@ -130,8 +131,9 @@ namespace Solver.Heuristics
         /// <param name="originRequest"></param>
         /// <returns></returns>
         public static TimeSpan ArrivallFromDepot(SolverInput input,DbAirplane airplane, DbAirports originRequest){
-           var baseAirport = airplane.BaseAirport;
+            var baseAirport = airplane.BaseAirport;
             var returnedValue = TimeSpan.FromHours(1000000); 
+            //TODO: Maybe replace this calculus (time to go) with a input
             if (input.Stretches.ContainsKey(baseAirport) && input.Stretches[baseAirport].ContainsKey(originRequest))
                 returnedValue = TimeSpan.FromHours(input.Stretches[baseAirport][originRequest] / (airplane.CruiseSpeed * KnotsToKmH));
 
@@ -139,10 +141,57 @@ namespace Solver.Heuristics
         }
 
 
-        public static double GetFuelOnLanding(int fuelOnTakeOff, DbAirports origin, DbAirports destination, DbAirplane choosen)
-        {
+        public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirports origin, DbAirports destination, DbAirplane airplane){
 
-            return 0;
+            double timeToGo = 0;
+            if(input.Stretches.ContainsKey(origin))
+                if (input.Stretches[origin].ContainsKey(destination))
+                    timeToGo = input.Stretches[origin][destination] / (airplane.CruiseSpeed);
+
+            double fuelSpent = 0;
+            if (timeToGo > 1)
+                fuelSpent = (timeToGo - 1) * airplane.FuelConsumptionSecondHour + airplane.FuelConsumptionFirstHour ;
+
+
+            return timeToGo != 0? fuelOnTakeOff - fuelSpent : -1;
+        }
+
+        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplane airplane, TimeSpan departureTime, DbAirports origin, DbAirports destination){
+            
+            var returnedValue = TimeSpan.FromHours(1000000);
+            //TODO: Maybe replace this calculus (time to go) with a input
+            if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
+                returnedValue = TimeSpan.FromHours(input.Stretches[origin][destination] / (airplane.CruiseSpeed * KnotsToKmH));
+
+            return departureTime + returnedValue;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        public static List<DbAirports> findStopToFuelAirport(SolverInput input, DbAirports origin, DbAirports destination){
+            const double absurdValue = 100000;
+            double distanceOrigDest = absurdValue;
+            if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
+                distanceOrigDest = input.Stretches[origin][destination];
+            var refuelAirports = input.FuelPrice.Select(x => x.Airport);
+
+            //TODO: Evaluate a future improvement on this filter
+            if (refuelAirports.Any() && distanceOrigDest != absurdValue){
+                var closerAirports  = refuelAirports.Where(x=>   input.Stretches[origin].ContainsKey(x) && input.Stretches.ContainsKey(x)
+                                                              && input.Stretches[origin][x] < distanceOrigDest).ToList();
+
+                var finalResult = closerAirports.Where(x=>     input.Stretches[x].ContainsKey(destination)
+                                                            && input.Stretches[x][destination] < distanceOrigDest).ToList();
+
+                return finalResult; 
+
+            }else
+                return new List<DbAirports>();
         }
     }
 }

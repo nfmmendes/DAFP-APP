@@ -93,7 +93,7 @@ namespace Solver.Heuristics
         }
 
         /// <summary>
-        /// 
+        /// Builds a initial solution based on priotizing the airports with bigger 
         /// </summary>
         /// <returns></returns>
         private GeneralSolution DoMostRequestedOriginStrategy(){
@@ -109,7 +109,7 @@ namespace Solver.Heuristics
                 numberOfPassengersByAirport[key] = requestsByOrigin[key].Count;
             }
 
-            var orderedNumberOfPassagensByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
+            var orderedNumberOfPassagersByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
             var firstTakeOff = TimeSpan.FromHours(6.25); //TODO: Put it as a parameter. Now it's considered as the sun rise hour
 
             bool someoneInserted = true;
@@ -118,32 +118,107 @@ namespace Solver.Heuristics
                 someoneInserted = false;
 
                 foreach (var element in numberOfPassengersByAirport){
-                    var aiportRequestsByRPN = requestsByOrigin[element.Key].OrderBy(x=>x.DepartureTimeWindowEnd)
+                    var airportRequestsByRPN = requestsByOrigin[element.Key].OrderBy(x=>x.DepartureTimeWindowEnd)
                                                                            .GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
 
-                    foreach (var requestItem in aiportRequestsByRPN){
+                    foreach (var requestItem in airportRequestsByRPN){
                         var airplanes =  SolverUtils.GetCompatibleAirplanes(Input,requestItem.Value);
                         var origin = requestItem.Value.First().Origin; //Same RPN is equals to same origin.
+                        var destination = requestItem.Value.First().Destination; //Same RPN is equals to same origin.
                         var time = requestItem.Value.First().DepartureTimeWindowEnd;
 
-                        var choosen = airplanes.FirstOrDefault(x => SolverUtils.ArrivallFromDepot(Input,x, origin) < time);
+                        var choosenAirplane = airplanes.FirstOrDefault(x => SolverUtils.ArrivallFromDepot(Input,x, origin) < time);
 
-                        if (choosen != null){
+                        if (choosenAirplane != null){
                             
-                            var fuelOnTakeOff = choosen.Model.Contains("PC") ? choosen.BaseAirport.MTOW_PC12 : choosen.BaseAirport.MTOW_APE3;
-                            var newFlight = new Flight(){
-                                Airplane = choosen,
-                                DepartureTime = firstTakeOff,
-                                ArrivalTime = SolverUtils.ArrivallFromDepot(Input, choosen, origin),
-                                Origin = choosen.BaseAirport,
-                                Destination = origin,
-                                FuelOnLanding = fuelOnTakeOff,
-                                FuelOnTakeOff = SolverUtils.GetFuelOnLanding(fuelOnTakeOff, choosen.BaseAirport, origin, choosen),
-                                Passengers = requestItem.Value.ToList()
-                            };
+                            //Fills with the data about the flight from depot to the first origin
+                            double fuelOnTakeOff = choosenAirplane.Model.Contains("PC") ? choosenAirplane.BaseAirport.MTOW_PC12 : choosenAirplane.BaseAirport.MTOW_APE3;
+                            double fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, choosenAirplane.BaseAirport, origin, choosenAirplane);
+                            TimeSpan arrivalTime = SolverUtils.ArrivallFromDepot(Input, choosenAirplane, origin);
 
-                            solution.Flights.Add(newFlight);
+                            //TODO: Eventually the plane will do some stops. Decide if it will allowed in this point
+                            if (fuelOnLanding > 0){
+                                var newFlight = new Flight(){
+                                    Airplane = choosenAirplane,
+                                    DepartureTime = firstTakeOff,
+                                    ArrivalTime = arrivalTime,
+                                    Origin = choosenAirplane.BaseAirport,
+                                    Destination = origin,
+                                    FuelOnLanding = fuelOnTakeOff,
+                                    FuelOnTakeOff = fuelOnLanding,
+                                    Passengers = new List<DbRequests>()
+                                };
 
+                                solution.Flights.Add(newFlight);
+                            }
+
+                            fuelOnTakeOff = fuelOnLanding; 
+                            fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, origin,destination , choosenAirplane);
+                            var departureTime = arrivalTime + origin.GroundTime < requestItem.Value.First().DepartureTimeWindowEnd
+                                ? requestItem.Value.First().DepartureTimeWindowEnd : arrivalTime + origin.GroundTime;
+
+                            //TODO: Include more checks  
+                            if (fuelOnLanding > 0)
+                            {
+                                
+                                arrivalTime = SolverUtils.GetArrivalTime(Input, choosenAirplane, departureTime, origin,destination);
+
+                                var newFlight = new Flight(){
+                                    Airplane = choosenAirplane,
+                                    DepartureTime = departureTime,
+                                    ArrivalTime = arrivalTime,
+                                    Origin = choosenAirplane.BaseAirport,
+                                    Destination = origin,
+                                    FuelOnLanding = fuelOnTakeOff,
+                                    FuelOnTakeOff = fuelOnLanding,
+                                    Passengers = new List<DbRequests>()
+                                };
+
+                                someoneInserted = true;
+                                solution.Flights.Add(newFlight);
+                                
+                            }else{
+
+                                //IF there was not enough fuel on the airplane to do the trip without a stop, 
+                                //it is searched an airport to refueling on the track (or refueled on origin airport)
+
+                                //If the current airport allows refueling 
+                                if (Input.FuelPrice.Any(x => x.Airport.Id == origin.Id)){
+                                    var weight = choosenAirplane.Weight + fuelOnTakeOff*SolverUtils.PoundsToKg;
+                                    var refuel = new Refuel(origin,Math.Min()){
+                                        
+                                    };
+
+                                    var newFlight = new Flight()
+                                    {
+                                        Airplane = choosenAirplane,
+                                        DepartureTime = departureTime,
+                                        ArrivalTime = arrivalTime,
+                                        Origin = choosenAirplane.BaseAirport,
+                                        Destination = origin,
+                                        FuelOnLanding = fuelOnTakeOff,
+                                        FuelOnTakeOff = fuelOnLanding,
+                                        Passengers = new List<DbRequests>()
+                                    };
+                                }
+
+
+                                var alternativeRoute = SolverUtils.findStopToFuelAirport(Input, origin, destination);
+                                foreach (var airport in alternativeRoute){
+                                    //Fuel after arriving on the intermediary airport
+                                    var firstStep = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, origin, airport, choosenAirplane);
+
+                                    if (firstStep < 0)
+                                        continue;
+
+                                    //Fuel after arriving on the second airport
+                                    var secondStep = SolverUtils.GetFuelOnLanding(Input, firstStep, airport, destination, choosenAirplane);
+                                    if (secondStep > 0){
+                                        
+                                    }
+
+                                }
+                            }
 
                         }
                         
