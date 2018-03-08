@@ -12,7 +12,7 @@ using SolverClientComunication.Models;
 namespace Solver
 {
     public class SolverInput{
-        public List<DbAirplane> Airplanes { get; set; }
+        public List<DbAirplanes> Airplanes { get; set; }
         public List<DbAirports> Airports { get; set; }
         public List<DbRequests> Requests { get; set; }
         public List<DbParameters> Parameters { get; set; }
@@ -36,7 +36,7 @@ namespace Solver
             input.Airports = context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Requests = context.Requests.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Parameters = context.Parameters.Where(x => x.Instance.Id == Instance.Id).ToList();
-            input.SeatList = context.SeatList.Where(x => x.Airplane.Instance.Id == Instance.Id).ToList();
+            input.SeatList = context.SeatList.Where(x => x.Airplanes.Instance.Id == Instance.Id).ToList();
             input.FuelPrice = context.FuelPrice.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Exchange = context.Exchange.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.DefaultParameters = context.DefaultParameters.ToList();
@@ -62,9 +62,9 @@ namespace Solver
             input.OptimizationParameter.StartFromDepot = startFromDepot == null || (startFromDepot.Value == "true" ? true : false);
             input.OptimizationParameter.UseTimeWindows = useTimeWindows == null || (useTimeWindows.Value == "true" ? true : false);
             input.OptimizationParameter.TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value): 500; 
-            input.OptimizationParameter.AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight) : 30;
-            input.OptimizationParameter.AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight) : 75;
-            input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight) : 30;
+            input.OptimizationParameter.AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight.Value) : 30;
+            input.OptimizationParameter.AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight.Value) : 75;
+            input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30;
 
             input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
             foreach (var stretch in context.Stretches){

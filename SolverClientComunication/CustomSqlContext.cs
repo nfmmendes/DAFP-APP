@@ -8,7 +8,7 @@ namespace SolverClientComunication
 
     public class CustomSqlContext : DbContext
     {
-        public DbSet<DbAirplane> Airplanes { get; set; }
+        public DbSet<DbAirplanes> Airplanes { get; set; }
         public DbSet<DbAirports> Airports { get; set; }
         public DbSet<DbRequests> Requests { get; set; }
         public DbSet<DbParameters> Parameters { get; set; }
@@ -20,6 +20,9 @@ namespace SolverClientComunication
         public DbSet<DbSeats> SeatList { get; set; }
         public DbSet<DbFuelPrice> FuelPrice { get; set; }
         public DbSet<DbExchangeRates> Exchange { get; set; }
+        public DbSet<DbRefuelsReport> RefuelsReport { get; set; }
+        public DbSet<DbFlightsReport> FlightsReports { get; set; }
+        public DbSet<DbPassagensOnFlightReport> PassagersOnFlight { get; set; }
             
         // Your context has been configured to use a 'CustomSqlContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 

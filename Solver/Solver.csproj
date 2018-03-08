@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmParameters.cs" />
     <Compile Include="CustomConstraints\FlowConstraint.cs" />
     <Compile Include="CustomVariables\YTVariable.cs" />
     <Compile Include="Enum\Commons\RowSenseEnum.cs" />

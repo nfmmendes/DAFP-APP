@@ -97,7 +97,6 @@
     <Compile Include="AddEditSeatType.Designer.cs">
       <DependentUpon>AddEditSeatType.cs</DependentUpon>
     </Compile>
-    <Compile Include="AlgorithmParameters.cs" />
     <Compile Include="Controller\AirportController.cs" />
     <Compile Include="Controller\FuelController.cs" />
     <Compile Include="Controller\HeuristicSolutionController.cs" />

@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbSeats : DbContext
+    public class DbRefuelsReport 
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
+        public DbInstance Instance { get; set; }
+        
+        [Required]
+        public DbAirports Airport { get; set; }
+
+        [Required]
         public DbAirplanes Airplanes { get; set; }
 
         [Required]
-        public string seatClass { get; set; }
+        public TimeSpan RefuelTime { get; set; }
 
         [Required]
-        public int numberOfSeats { get; set; }
-
-        [Required]
-        public double luggageWeightLimit { get; set; }
+        public double Amount { get; set; }
     }
 }

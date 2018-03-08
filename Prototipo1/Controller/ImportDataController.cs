@@ -283,7 +283,7 @@ namespace Prototipo1.Controller
                     var baseAirport = Context.Airports.FirstOrDefault(x => x.AiportName.Equals(airportName));
 
                     if (baseAirport != null){
-                        var item = new DbAirplane()
+                        var item = new DbAirplanes()
                         {
                             Model = row.GetCell(0).StringCellValue,
                             Prefix = row.GetCell(1).StringCellValue,
@@ -306,7 +306,7 @@ namespace Prototipo1.Controller
                         Instance.Context.ImportErrors.Add(new DbImportErrors()
                         {
                             ImportationHour = importHour,
-                            File = "Airplane",
+                            File = "Airplanes",
                             Instance = instance,
                             Sheet = "Airplanes",
                             RowLine = i,
@@ -328,7 +328,7 @@ namespace Prototipo1.Controller
 
                     //Data validation
                     if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)){
-                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplane information not available");
+                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplanes information not available");
                         continue;
                     }
 
@@ -354,7 +354,7 @@ namespace Prototipo1.Controller
                     if (airplane != null){
 
                         var item = new DbSeats(){
-                            Airplane = airplane,
+                            Airplanes = airplane,
                             seatClass = row.GetCell(1).StringCellValue,
                             numberOfSeats = Convert.ToInt32(row.GetCell(2).NumericCellValue),
                             luggageWeightLimit = row.GetCell(3).NumericCellValue
@@ -363,7 +363,7 @@ namespace Prototipo1.Controller
                         Instance.Context.SeatList.Add(item);
                         
                     }else{
-                        CreateImportErrorLog(instance,"Airplanes", "Seat List",importHour, i, "Airplane not found");
+                        CreateImportErrorLog(instance,"Airplanes", "Seat List",importHour, i, "Airplanes not found");
                     }
                 }
                 Instance.Context.SaveChanges();

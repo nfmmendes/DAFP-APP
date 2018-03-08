@@ -13,7 +13,7 @@ namespace SolutionData
 {
     public class Flight
     {
-        public DbAirplane Airplane { get; set; }
+        public DbAirplanes Airplanes { get; set; }
         public Aiport Origin { get; set; }
         public Aiport Destination { get; set; }
         public TimeSpan DepartureTime { get; set; }

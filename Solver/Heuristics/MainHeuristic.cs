@@ -21,25 +21,31 @@ namespace Solver.Heuristics
 
         public override void Execute()
         {
-            var constructHeur1 = new ConstructiveHeuristic(Input, true,GreedyStrategy.MostRequestedOrigin);
             GeneralSolution currentSolution = new GeneralSolution();
 
+
+            /*      Uncoment it
+            var constructHeur1 = new ConstructiveHeuristic(Input, true,GreedyStrategy.MostRequestedOrigin);
             constructHeur1.Execute();
             var firstSolution = constructHeur1.BestSolution;
             currentSolution = DeterministicLocalSearch(firstSolution);
             UpdateBestSolution(currentSolution);
 
             var constructHeur2 = new ConstructiveHeuristic(Input,true,GreedyStrategy.MostRequestedDestination);
+
             var secondSolution = constructHeur2.BestSolution;
             currentSolution = DeterministicLocalSearch(secondSolution);
             UpdateBestSolution(currentSolution);
 
             var constructHeur3 = new ConstructiveHeuristic(Input,true,GreedyStrategy.EarlierRequests);
+
             var thirdSolution = constructHeur3.BestSolution;
             currentSolution = DeterministicLocalSearch(thirdSolution);
             UpdateBestSolution(currentSolution);
-
-            
+            */
+            var constructHeur1 = new ConstructiveHeuristic(Input, true, GreedyStrategy.MostRequestedOrigin);
+            constructHeur1.Execute();
+            BestSolution = constructHeur1.BestSolution; 
         }
 
         public GeneralSolution DeterministicLocalSearch(GeneralSolution solution){

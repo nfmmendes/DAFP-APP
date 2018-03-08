@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prototipo1
+namespace Solver
 {
     class AlgorithmParameters
     {

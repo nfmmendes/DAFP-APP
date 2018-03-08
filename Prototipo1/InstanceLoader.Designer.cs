@@ -35,7 +35,7 @@
             treeNode1,
             treeNode2,
             treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Airplane");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Airplanes");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Seat List");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Airplanes", new System.Windows.Forms.TreeNode[] {
             treeNode5,
@@ -275,7 +275,7 @@
             treeNode4.Name = "NetworkNode";
             treeNode4.Text = "Network";
             treeNode5.Name = "AirplaneNode";
-            treeNode5.Text = "Airplane";
+            treeNode5.Text = "Airplanes";
             treeNode6.Name = "SeatListNode";
             treeNode6.Text = "Seat List";
             treeNode7.Name = "AirplaneNodes";

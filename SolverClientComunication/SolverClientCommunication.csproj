@@ -62,8 +62,12 @@
     <Compile Include="Migrations\201802211351062_removeUselessTable.Designer.cs">
       <DependentUpon>201802211351062_removeUselessTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803081550343_UpdateReportsDefinition.cs" />
+    <Compile Include="Migrations\201803081550343_UpdateReportsDefinition.Designer.cs">
+      <DependentUpon>201803081550343_UpdateReportsDefinition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DbAirplane.cs" />
+    <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
     <Compile Include="Models\DbExchangeRates.cs" />
     <Compile Include="Models\DbFlightsReport.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Models\DbInstance.cs" />
     <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbPassagensOnFlightReport.cs" />
+    <Compile Include="Models\DbRefuelsReport.cs" />
     <Compile Include="Models\DbReportList.cs" />
     <Compile Include="Models\DbRequests.cs" />
     <Compile Include="Models\DbSeats.cs" />
@@ -101,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802211351062_removeUselessTable.resx">
       <DependentUpon>201802211351062_removeUselessTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803081550343_UpdateReportsDefinition.resx">
+      <DependentUpon>201803081550343_UpdateReportsDefinition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

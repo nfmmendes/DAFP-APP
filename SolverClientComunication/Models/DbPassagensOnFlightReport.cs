@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    class DbPassagensOnFlightReport : DbContext
+    public class DbPassagensOnFlightReport : DbContext
     {
         [Key]
+        public long Id { get; set; }
+
+        [Required]
         public DbFlightsReport Flight { get; set; }
 
-        [Key]
-        public string Passenger { get; set; }
+        [Required]
+        public List<DbRequests> Passenger { get; set; }
 
     }
 }

@@ -34,6 +34,7 @@ namespace Prototipo1
             InstancesController.Instance.setContext(Context);
             ParametersController.Instance.setContext(Context);
             ImportDataController.Instance.setContext(Context);
+            HeuristicSolutionController.Instance.setContext(Context);
 
         }
 
@@ -158,10 +159,19 @@ namespace Prototipo1
                 var input =  SolverInput.BuildSolverInput(Context,instance);
                 var heuristic = new Solver.Heuristics.MainHeuristic(input, true);
                 heuristic.Execute();
+                HeuristicSolutionController.Instance.SaveResults(instance, heuristic.BestSolution);
+                MessageBox.Show("Optimization finished");
+                BuildSolutionPanel(); 
             }else{
-                
+                MessageBox.Show("A instance should be selected");
             }
         }
+
+        private void BuildSolutionPanel(){
+            this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x=>x.Airplanes.Prefix).Distinct().ToList();
+            this.tabControlInputSolution.SelectedIndex = 1; 
+        }
+
 
         /// <summary>
         /// 
@@ -505,7 +515,7 @@ namespace Prototipo1
             this.dataGridViewSeatTypes.Rows.Clear();
             
                 
-            var seatTypes = Context.SeatList.Where(x => x.Airplane.Id == idAirplane).ToList();
+            var seatTypes = Context.SeatList.Where(x => x.Airplanes.Id == idAirplane).ToList();
 
             //if(seatTypes.Any())
             foreach (var item in seatTypes){
@@ -594,7 +604,7 @@ namespace Prototipo1
 
                         var index = Convert.ToInt64(dataGridViewSeatTypes.Rows[i].Cells[0].Value);
                         var deleted = Context.SeatList.FirstOrDefault(x => x.Id == index);
-                        idAirplane = deleted.Airplane.Id;
+                        idAirplane = deleted.Airplanes.Id;
                         if (deleted != null)
                             Context.SeatList.Remove(deleted);
                     }

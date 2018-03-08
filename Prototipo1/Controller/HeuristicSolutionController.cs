@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Solver.SolutionData;
 using SolverClientComunication;
+using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
@@ -22,9 +23,38 @@ namespace Prototipo1.Controller
             Instance.Context = context;
         }
 
-        public void SaveResults(GeneralSolution solution){
-            foreach (var flight in solution.Flights){
-              //  var item = new Db
+        public void SaveResults(DbInstance instance, GeneralSolution solution)
+        {
+
+            Instance.Context.PassagersOnFlight.RemoveRange(Instance.Context.PassagersOnFlight.Where(x=>x.Flight.Instance.Id == instance.Id));
+            Instance.Context.SaveChanges();
+            Instance.Context.FlightsReports.RemoveRange(Instance.Context.FlightsReports.Where(x => x.Instance.Id == instance.Id));
+            Instance.Context.SaveChanges();
+
+            foreach (var flight in solution.Flights)
+            {
+                var report = new DbFlightsReport(){
+                    Origin = flight.Origin,
+                    Destination = flight.Destination,
+                    DepartureTime = flight.DepartureTime,
+                    ArrivalTime = flight.ArrivalTime,
+                    Airplanes = flight.Airplanes,
+                    FuelOnArrival = flight.FuelOnLanding,
+                    FuelOnDeparture = flight.FuelOnTakeOff,
+                    Instance = instance
+                };
+
+                Instance.Context.FlightsReports.Add(report);
+
+               // foreach (var passenger in flight.Passengers){
+                var dbPassenger = new DbPassagensOnFlightReport()
+                {
+                    Flight = report,
+                    Passenger = flight.Passengers
+                };
+                Instance.Context.PassagersOnFlight.Add(dbPassenger);
+                Instance.Context.SaveChanges();
+                //}
             }
 
             foreach (var refuel in solution.Refuels)

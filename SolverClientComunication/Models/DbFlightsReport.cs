@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    class DbFlightsReport : DbContext{
+    public class DbFlightsReport : DbContext{
         
         [Key]
         public long Id { get; set; }
@@ -20,13 +20,23 @@ namespace SolverClientComunication.Models
         public DbAirports Destination { get; set; }
 
         [Required]
+        public double FuelOnDeparture { get; set; }
+
+        [Required]
+        public double FuelOnArrival { get; set; }
+
+
+        [Required]
         public TimeSpan DepartureTime { get; set; }
 
         [Required]
         public  TimeSpan ArrivalTime { get; set; }
 
         [Required]
-        public DbAirplane Airplane { get; set;}
+        public DbAirplanes Airplanes { get; set;}
+
+        [Required]
+        public DbInstance Instance { get; set; }
 
     }
 }

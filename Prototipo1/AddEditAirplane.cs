@@ -17,7 +17,7 @@ namespace Prototipo1
 
         private bool IsAdd { get; set; }
         public DbInstance Instance { get; set; }
-        public DbAirplane CurrentElement { get; set;  }
+        public DbAirplanes CurrentElement { get; set;  }
         public CustomSqlContext Context { get; set; }
 
         public AddEditAirplane(CustomSqlContext context){
