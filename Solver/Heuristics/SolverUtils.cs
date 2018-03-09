@@ -135,7 +135,7 @@ namespace Solver.Heuristics
             var returnedValue = TimeSpan.FromHours(1000000); 
             //TODO: Maybe replace this calculus (time to go) with a input
             if (input.Stretches.ContainsKey(baseAirport) && input.Stretches[baseAirport].ContainsKey(originRequest))
-                returnedValue = TimeSpan.FromHours(input.Stretches[baseAirport][originRequest] / (airplanes.CruiseSpeed * KnotsToKmH));
+                returnedValue = TimeSpan.FromHours(6.25) + TimeSpan.FromHours(input.Stretches[baseAirport][originRequest] / (airplanes.CruiseSpeed * KnotsToKmH));
 
             return returnedValue;
         }
@@ -146,11 +146,13 @@ namespace Solver.Heuristics
             double timeToGo = 0;
             if(input.Stretches.ContainsKey(origin))
                 if (input.Stretches[origin].ContainsKey(destination))
-                    timeToGo = input.Stretches[origin][destination] / (airplanes.CruiseSpeed);
+                    timeToGo = input.Stretches[origin][destination] / (airplanes.CruiseSpeed*KnotsToKmH);
 
             double fuelSpent = 0;
             if (timeToGo > 1)
-                fuelSpent = (timeToGo - 1) * airplanes.FuelConsumptionSecondHour + airplanes.FuelConsumptionFirstHour ;
+                fuelSpent = (timeToGo - 1) * airplanes.FuelConsumptionSecondHour + airplanes.FuelConsumptionFirstHour;
+            else
+                fuelSpent = airplanes.FuelConsumptionFirstHour * timeToGo;
 
 
             return timeToGo != 0? fuelOnTakeOff - fuelSpent : -1;

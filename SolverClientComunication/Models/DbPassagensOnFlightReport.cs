@@ -17,7 +17,7 @@ namespace SolverClientComunication.Models
         public DbFlightsReport Flight { get; set; }
 
         [Required]
-        public List<DbRequests> Passenger { get; set; }
+        public DbRequests Passenger { get; set; }
 
     }
 }

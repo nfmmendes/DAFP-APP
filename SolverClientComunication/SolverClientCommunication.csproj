@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201803081550343_UpdateReportsDefinition.Designer.cs">
       <DependentUpon>201803081550343_UpdateReportsDefinition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803091150312_RemovePassengersOnFlight.cs" />
+    <Compile Include="Migrations\201803091150312_RemovePassengersOnFlight.Designer.cs">
+      <DependentUpon>201803091150312_RemovePassengersOnFlight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091152105_AddPassengersOnFlight.cs" />
+    <Compile Include="Migrations\201803091152105_AddPassengersOnFlight.Designer.cs">
+      <DependentUpon>201803091152105_AddPassengersOnFlight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -109,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803081550343_UpdateReportsDefinition.resx">
       <DependentUpon>201803081550343_UpdateReportsDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091150312_RemovePassengersOnFlight.resx">
+      <DependentUpon>201803091150312_RemovePassengersOnFlight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091152105_AddPassengersOnFlight.resx">
+      <DependentUpon>201803091152105_AddPassengersOnFlight.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

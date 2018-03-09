@@ -156,17 +156,31 @@ namespace Prototipo1
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
             if (instance != null){
+                //Create the input to the solver
                 var input =  SolverInput.BuildSolverInput(Context,instance);
+
+                //Instantiates and call the heuristic
                 var heuristic = new Solver.Heuristics.MainHeuristic(input, true);
                 heuristic.Execute();
+                //Saving the solution
                 HeuristicSolutionController.Instance.SaveResults(instance, heuristic.BestSolution);
+
+                //Warning the end of the optimization
                 MessageBox.Show("Optimization finished");
+
+                instance.Optimized = true;
+                instance.LastOptimization = DateTime.Now;
+                Context.SaveChanges();
                 BuildSolutionPanel(); 
+
             }else{
                 MessageBox.Show("A instance should be selected");
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private void BuildSolutionPanel(){
             this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x=>x.Airplanes.Prefix).Distinct().ToList();
             this.tabControlInputSolution.SelectedIndex = 1; 
@@ -349,10 +363,17 @@ namespace Prototipo1
                 buttonDeleteScenario.Visible = true;
                 buttonOptimizeInstanceTab.Enabled = true;
                 panelInstanceDetails.Visible = true;
+
                 var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
                 var instance = Context.Instances.First(x => x.Name.Equals(instanceName));
+
                 labelDescriptionInstance.Text = instance.Description;
+               
+                
                 FillTables(instance);
+                this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
+                    .Select(x => x.Airplanes.Prefix).Distinct().ToList();
+                this.comboBoxAirplaneSolution.SelectedIndex = 0;
             }
         }
 
@@ -379,9 +400,7 @@ namespace Prototipo1
             var fuels = Context.FuelPrice.Where(x => x.Instance.Id == instance.Id);
 
             foreach (var item in fuels)
-            {
-                dataGridViewFuel.Rows.Add(item.Id,item.Airport.AiportName,"F", item.Currency, item.Value); //TODO: Change This F
-            }
+               dataGridViewFuel.Rows.Add(item.Id,item.Airport.AiportName,"F", item.Currency, item.Value); //TODO: Change This F
         }
 
         /// <summary>
@@ -424,8 +443,9 @@ namespace Prototipo1
             var airplanes = Context.Airplanes.Where(x => x.Instance.Id == instance.Id).ToList();
 
             foreach (var item in airplanes)
-                dataGridViewAirplane.Rows.Add(item.Id, item.Model,item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed, item.FuelConsumptionFirstHour,
-                                              item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity, item.BaseAirport.AiportName);
+                dataGridViewAirplane.Rows.Add(item.Id, item.Model,item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed, 
+                                              item.FuelConsumptionFirstHour,item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity, 
+                                              item.BaseAirport.AiportName);
             
         }
 
@@ -564,7 +584,12 @@ namespace Prototipo1
             var duplicateWindow = new DuplicateInstance(Context);
             duplicateWindow.ShowDialog();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDeleteAirplane_Click(object sender, EventArgs e){
             if (dataGridViewAirplane.SelectedRows.Count > 0)
             {
@@ -589,6 +614,11 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected airplanes");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDeleteAirplaneSeatType_Click(object sender, EventArgs e)
         {
             if (dataGridViewSeatTypes.SelectedRows.Count > 0){
@@ -618,6 +648,11 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected seat types");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDeleteAirport_Click(object sender, EventArgs e){
             
             if (dataGridViewAirport.SelectedRows.Count > 0)
@@ -630,7 +665,7 @@ namespace Prototipo1
                     for (int i = 0; i < dataGridViewAirport.Rows.Count; i++){
 
                         
-
+                        //TODO: Put it in an controller 
                         if (!dataGridViewAirport.Rows[i].Selected) continue;
 
                         var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
@@ -766,6 +801,11 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonEditFuel_Click(object sender, EventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
@@ -780,6 +820,11 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddAirplaneSeatType_Click(object sender, EventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
@@ -790,6 +835,11 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonEditAirplaneSeatType_Click(object sender, EventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
@@ -841,8 +891,48 @@ namespace Prototipo1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e){
+
+        }
+
+        private void comboBoxAirplaneSolution_SelectedIndexChanged(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+            var prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
+
+            if (instance != null){
+                var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == instance.Id && x.Prefix.Equals(prefix));
+                if (airplane != null){
+                    var test = Context.FlightsReports.ToList();
+                    var trips = Context.FlightsReports.Where(x=>x.Instance.Id == instance.Id && x.Airplanes.Prefix.Equals(airplane.Prefix)).ToList();
+
+                    dataGridViewRoutePassagers.Rows.Clear();
+                    dataGridViewRoute.Rows.Clear();
+                    foreach (var item in trips){
+                        dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AiportName,
+                                                                item.FuelOnDeparture, 0,  
+                                                                item.DepartureTime, 
+                                                                item.Destination.AiportName, 
+                                                                item.FuelOnArrival, 0, 
+                                                                item.ArrivalTime);    
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewRoute_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            if (dataGridViewRoute.SelectedRows.Count > 0){
+                var indexRow = dataGridViewRoute.SelectedRows[0].Index;
+                var index = Convert.ToInt64(dataGridViewRoute.Rows[indexRow].Cells[0].Value.ToString());
+
+                var reports = Context.PassagersOnFlight.Where(x => x.Flight.Id.Equals(index)).ToList();
+
+                dataGridViewRoutePassagers.Rows.Clear();
+                foreach (var item in reports)
+                    dataGridViewRoutePassagers.Rows.Add(item.Passenger.Name, item.Passenger.PNR, item.Passenger.Sex, item.Passenger.Class);
+                
+            }
 
         }
     }

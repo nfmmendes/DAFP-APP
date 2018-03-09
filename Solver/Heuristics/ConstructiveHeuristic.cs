@@ -139,27 +139,29 @@ namespace Solver.Heuristics
                                                                                         : choosenAirplane.BaseAirport.MTOW_APE3;
                             double fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, choosenAirplane.BaseAirport,
                                                                                 origin, choosenAirplane);
-                            TimeSpan arrivalTime = SolverUtils.ArrivallFromDepot(Input, choosenAirplane, origin);
+                            TimeSpan arrivalTime =  SolverUtils.ArrivallFromDepot(Input, choosenAirplane, origin);
 
                             fuelOnTakeOff *= SolverUtils.PoundsToKg;
 
                             //TODO: Eventually the plane will do some stops. Decide if it will allowed in this point
                             if (fuelOnLanding > 0)
                             {
-                                var newFlight = new Flight()
-                                {
-                                    Airplanes = choosenAirplane,
-                                    DepartureTime = firstTakeOff,
-                                    ArrivalTime = arrivalTime,
-                                    Origin = choosenAirplane.BaseAirport,
-                                    Destination = origin,
-                                    FuelOnLanding = fuelOnLanding,
-                                    FuelOnTakeOff = fuelOnTakeOff,
-                                    Passengers = new List<DbRequests>()
-                                };
+                                if (arrivalTime < TimeSpan.FromHours(18.25)){
 
-                                ExitedFromDepot.Add(choosenAirplane);
-                                solution.Flights.Add(newFlight);
+                                    var newFlight = new Flight(){
+                                        Airplanes = choosenAirplane,
+                                        DepartureTime = firstTakeOff,
+                                        ArrivalTime = arrivalTime,
+                                        Origin = choosenAirplane.BaseAirport,
+                                        Destination = origin,
+                                        FuelOnLanding = fuelOnLanding,
+                                        FuelOnTakeOff = fuelOnTakeOff,
+                                        Passengers = new List<DbRequests>()
+                                    };
+
+                                    ExitedFromDepot.Add(choosenAirplane);
+                                    solution.Flights.Add(newFlight);
+                                }
                             }
                             else { 
                                 someoneInserted = GoRefuelAndGo(choosenAirplane.BaseAirport, origin, fuelOnTakeOff,
@@ -181,20 +183,23 @@ namespace Solver.Heuristics
                             {
                                 
                                 arrivalTime = SolverUtils.GetArrivalTime(Input, choosenAirplane, departureTime, origin,destination);
+                                if (arrivalTime < TimeSpan.FromHours(18.25)){
 
-                                var newFlight = new Flight(){
-                                    Airplanes = choosenAirplane,
-                                    DepartureTime = departureTime,
-                                    ArrivalTime = arrivalTime,
-                                    Origin = origin,
-                                    Destination = destination,
-                                    FuelOnLanding = fuelOnLanding,
-                                    FuelOnTakeOff = fuelOnTakeOff,
-                                    Passengers = requestItem.Value
-                                };
-
-                                someoneInserted = true;
-                                solution.Flights.Add(newFlight);
+                                    var newFlight = new Flight(){
+                                        Airplanes = choosenAirplane,
+                                        DepartureTime = departureTime,
+                                        ArrivalTime = arrivalTime,
+                                        Origin = origin,
+                                        Destination = destination,
+                                        FuelOnLanding = fuelOnLanding,
+                                        FuelOnTakeOff = fuelOnTakeOff,
+                                        Passengers = requestItem.Value
+                                    };
+                                    requestsAlreadyBoardedOnOrigin.AddRange(requestItem.Value);
+                                    someoneInserted = true;
+                                    solution.Flights.Add(newFlight);
+                                }
+                                
                                 
                             }else{
 
@@ -317,7 +322,7 @@ namespace Solver.Heuristics
                 return true;
 
             }else{
-
+                GoRefuelAndGo(origin,destination,fuelOnTank+maxRefuelQuantity,airplanes, departureTime,solution,requests);
             }
             return false; 
         }

@@ -46,21 +46,31 @@ namespace Prototipo1.Controller
 
                 Instance.Context.FlightsReports.Add(report);
 
-               // foreach (var passenger in flight.Passengers){
-                var dbPassenger = new DbPassagensOnFlightReport()
-                {
-                    Flight = report,
-                    Passenger = flight.Passengers
-                };
-                Instance.Context.PassagersOnFlight.Add(dbPassenger);
+                foreach (var passenger in flight.Passengers){
+                    var dbPassenger = new DbPassagensOnFlightReport()
+                    {
+                        Flight = report,
+                        Passenger = passenger
+                    };
+                    Instance.Context.PassagersOnFlight.Add(dbPassenger);
+                
+                }
                 Instance.Context.SaveChanges();
-                //}
             }
 
-            foreach (var refuel in solution.Refuels)
-            {
-                
+            foreach (var refuel in solution.Refuels){
+                var item = new DbRefuelsReport(){
+                                Instance  = instance,
+                                Airport =  refuel.Airport,
+                                Airplanes = refuel.Airplanes,
+                                Amount = refuel.Amount,
+                                RefuelTime = refuel.RefuelTime
+                          };
+
+                Instance.Context.RefuelsReport.Add(item);
+
             }
+            Instance.Context.SaveChanges();
         }
     }
 }
