@@ -134,6 +134,8 @@ namespace Solver.Heuristics
         public static TimeSpan ArrivallFromDepot(SolverInput input,DbAirplanes airplanes, DbAirports originRequest){
             var baseAirport = airplanes.BaseAirport;
             var returnedValue = TimeSpan.FromHours(1000000); 
+            if(originRequest.Id == airplanes.BaseAirport.Id)
+                return TimeSpan.FromHours(6.25);
             //TODO: Maybe replace this calculus (time to go) with a input
             if (input.Stretches.ContainsKey(baseAirport) && input.Stretches[baseAirport].ContainsKey(originRequest))
                 returnedValue = TimeSpan.FromHours(6.25) + TimeSpan.FromHours(input.Stretches[baseAirport][originRequest] / (airplanes.CruiseSpeed * KnotsToKmH));
@@ -254,10 +256,13 @@ namespace Solver.Heuristics
             double distStretch1 = 100000000;
             double distStretch2 = 100000000;
 
-            if (input.Stretches.ContainsKey(airplane.BaseAirport) && input.Stretches[airplane.BaseAirport].ContainsKey(origin))
+
+            if (airplane.BaseAirport.Id == origin.Id)
+                distStretch1 = 0;
+            else if (input.Stretches.ContainsKey(airplane.BaseAirport) && input.Stretches[airplane.BaseAirport].ContainsKey(origin))
                 distStretch1 = input.Stretches[airplane.BaseAirport][origin]/(airplane.CruiseSpeed*KnotsToKmH);
 
-            if (input.Stretches.ContainsKey(origin) && input.Stretches[destination].ContainsKey(destination))
+            if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
                 distStretch2 = input.Stretches[origin][destination] / (airplane.CruiseSpeed * KnotsToKmH);
 
             return TimeSpan.FromHours(distStretch1) + origin.GroundTime + TimeSpan.FromHours(distStretch2) <= TimeSpan.FromHours(12.5);
@@ -266,7 +271,7 @@ namespace Solver.Heuristics
 
         public static Dictionary<string, int> CapacityByClass(SolverInput input, DbAirplanes airplane){
             var seatList = input.SeatList.Where(x=>x.Airplanes.Id == airplane.Id);
-            return seatList.GroupBy(x => x.seatClass).ToDictionary(x => x.Key, x => x.ToList().Count);
+            return seatList.GroupBy(x => x.seatClass).ToDictionary(x => x.Key, x => x.ToList().First().numberOfSeats);
         }
     }
 }

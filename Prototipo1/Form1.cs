@@ -35,6 +35,7 @@ namespace Prototipo1
             ParametersController.Instance.setContext(Context);
             ImportDataController.Instance.setContext(Context);
             HeuristicSolutionController.Instance.setContext(Context);
+            AirplaneController.Instance.setContext(Context);
 
         }
 
@@ -782,6 +783,9 @@ namespace Prototipo1
                 var indexRow = dataGridViewAirplane.SelectedRows[0].Index;
 
                 addAirplane.OpenToEdit(instance,Convert.ToInt64(dataGridViewAirplane.Rows[indexRow].Cells[0].Value));
+                FillAirplaneTables(instance);
+
+                dataGridViewAirplane.Rows.Clear();
                 FillAirplaneTables(instance);
             }
         }

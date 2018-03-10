@@ -92,8 +92,8 @@ namespace Prototipo1.Controller
 
                     var airportOriginName = row.GetCell(0).StringCellValue;
                     var airportDestinationName = row.GetCell(1).StringCellValue;
-                    var airportOrigin = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportOriginName));
-                    var airportDestination = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportDestinationName));
+                    var airportOrigin = instanceAirports.FirstOrDefault(x =>x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportOriginName));
+                    var airportDestination = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportDestinationName));
 
                     
 
@@ -130,7 +130,7 @@ namespace Prototipo1.Controller
                     if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
                     var airportName = row.GetCell(0).StringCellValue;
                     
-                    var airport = instanceAirports.FirstOrDefault(x => x.AiportName.Equals(airportName));
+                    var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportName));
 
                     if (airport != null){
                         var item = new DbFuelPrice(){
@@ -280,7 +280,7 @@ namespace Prototipo1.Controller
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
                     var airportName = row.GetCell(7).StringCellValue;
-                    var baseAirport = Context.Airports.FirstOrDefault(x => x.AiportName.Equals(airportName));
+                    var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AiportName.Equals(airportName));
 
                     if (baseAirport != null){
                         var item = new DbAirplanes()

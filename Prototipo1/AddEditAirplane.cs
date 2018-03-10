@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Prototipo1.Controller;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 
@@ -16,6 +17,7 @@ namespace Prototipo1
     {
 
         private bool IsAdd { get; set; }
+        private long IdItem { get; set; }
         public DbInstance Instance { get; set; }
         public DbAirplanes CurrentElement { get; set;  }
         public CustomSqlContext Context { get; set; }
@@ -32,11 +34,19 @@ namespace Prototipo1
             this.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="idAIrplane"></param>
         public void OpenToEdit(DbInstance instance, long idAIrplane){
             Instance = instance;
             IsAdd = false;
+            IdItem = idAIrplane; 
 
             CurrentElement = Context.Airplanes.FirstOrDefault(x => x.Id == idAIrplane);
+            comboBoxAirport.DataSource = Context.Airports.Select(x => x.AiportName).ToList();
+
 
             if (CurrentElement != null){
 
@@ -52,8 +62,7 @@ namespace Prototipo1
                 numUDMaxFuel.Value = Convert.ToDecimal(CurrentElement.MaxFuel);
                 numUDCapacity.Value = Convert.ToDecimal(CurrentElement.Capacity);
 
-                comboBoxAirport.DataSource= Context.Airplanes.ToList().Where(x=>x.Instance.Id == CurrentElement.Instance.Id)
-                                                                     .Select(x=>x.BaseAirport.AiportName).Distinct().ToList();
+      
                 comboBoxAirport.SelectedText = CurrentElement.BaseAirport.AiportName;
 
                 this.ShowDialog();
@@ -68,6 +77,30 @@ namespace Prototipo1
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            var airport = Context.Airports.FirstOrDefault(x=>x.AiportName.Equals(comboBoxAirport.SelectedItem.ToString()));
+
+            var airplane = new DbAirplanes()
+            {
+                Model = comboBoxModel.SelectedItem.ToString(),
+                Prefix = textBoxPrefix.Text,
+                BaseAirport = airport,
+                Capacity = Convert.ToInt32(numUDCapacity.Value),
+                CruiseSpeed = Convert.ToDouble(numUDCruiseSpeed.Value),
+                FuelConsumptionFirstHour = Convert.ToInt32(numUDFuelStHour.Value),
+                FuelConsumptionSecondHour = Convert.ToInt32(numUDFuelNdHour.Value),
+                Range = Convert.ToInt32(numUDRange.Value),
+                Weight = Convert.ToInt32(numUDWeight.Value),
+                MaxWeight = Convert.ToInt32(numUDMTOW.Value),
+                MaxFuel = Convert.ToInt32(numUDMaxFuel.Value),
+                Instance = Instance,
+            };
+
+            if(IsAdd)
+                AirplaneController.Instance.AddAirplane(airplane);
+            else
+                AirplaneController.Instance.EditAirplane(airplane,IdItem);
+                
+            this.Close();
 
         }
 

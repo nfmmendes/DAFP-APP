@@ -142,6 +142,10 @@ namespace Solver.Heuristics
 
                         var someoneInserted = false;
                         foreach (var request in requestsOrdered){
+                            
+                            if(requestsAlreadyBoardedOnOrigin.Contains(request))
+                                continue;
+
                             if (!classCapaciy.ContainsKey(request.Class))
                                 continue;
                             if (!classBooking.ContainsKey(request.Class))
@@ -159,7 +163,8 @@ namespace Solver.Heuristics
                         if (someoneInserted){
                             ExitedFromDepot.Add(airplane);
                             CreatedRouteFromDepot(solution, passagersList, airplane, airportCountPair.Key, destination);
-                        }
+                        }else
+                            break;
 
 
                         airplane = airplanesByClosests.FirstOrDefault(x =>
@@ -353,6 +358,7 @@ namespace Solver.Heuristics
                         Passengers = passengers
                     };
                     requestsAlreadyBoardedOnOrigin.AddRange(passengers);
+                    requestsAlreadyBoardedOnOrigin.AddRange(passengers);
                     var someoneInserted = true;
                     solution.Flights.Add(newFlight);
 
@@ -439,6 +445,7 @@ namespace Solver.Heuristics
 
                     solution.Flights.Add(flight1);
                     solution.Flights.Add(flight2);
+                    requestsAlreadyBoardedOnOrigin.AddRange(requests);
                 }
                 else{
                     return RefuelAndGo(airplane, firstStep, airport, destination, solution,firstStepArrival + airport.GroundTime, requests);
@@ -478,6 +485,7 @@ namespace Solver.Heuristics
                 };
 
                 solution.Flights.Add(newFlight);
+                requestsAlreadyBoardedOnOrigin.AddRange(requests);
                 return true;
 
             }else{
