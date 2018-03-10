@@ -16,11 +16,17 @@ namespace Solver.Heuristics
         public enum GreedyStrategie { MostRequestedOrigin, MostRequestedDestination, EarlierRequests}
 
         public GreedyStrategie Strategie { get; set; }
+
+        //============== "Global fields" to make the information interchange between the functions easier =============================
         private List<DbRequests> requestsAlreadyBoardedOnOrigin { get; set; }
         private List<DbRequests> requestsAlreadyFinished { get; set; }
         private List<DbRequests> requestsWithMandatoryStop { get; set; }
         private List<DbRequests> requestsWithMandatorySplit { get; set; }
 
+        
+        private TimeSpan CurrentAirplaneArrivalTime { get; set; }
+        private DbAirports CurrentAirplaneLocation { get; set; }
+        private double CurrentFuelAmount { get; set; }
 
         /// <summary>
         /// 
@@ -63,7 +69,7 @@ namespace Solver.Heuristics
         }
 
         /// <summary>
-        /// 
+        /// Creates a solution based on cosntructive heuristic based on traveling to the more the more frequent destinations
         /// </summary>
         /// <returns></returns>
         private GeneralSolution DoMostRequestedDestinatio()
@@ -112,13 +118,63 @@ namespace Solver.Heuristics
             var orderedNumberOfPassagersByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
             var firstTakeOff = TimeSpan.FromHours(6.25); //TODO: Put it as a parameter. Now it's considered as the sun rise hour
 
-            bool someoneInserted = true;
             HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
 
-            while (someoneInserted){
-                someoneInserted = false;
+            foreach (var airportCountPair in numberOfPassengersByAirport){
 
-                foreach (var element in numberOfPassengersByAirport){
+                var sameStretchRequest = requestsByOrigin[airportCountPair.Key].GroupBy(x=>x.Destination).ToDictionary(x=>x.Key, x=>x.ToList());
+                var airplanesByClosests = SolverUtils.GetAirplanesByProximity(Input, airportCountPair.Key); //Get the airplanes ordered by proximity
+                    
+                foreach (var destination in sameStretchRequest.Keys){
+                    var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd);
+                    var firstDeparture = sameStretchRequest[destination].First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x))
+                                                                        .DepartureTimeWindowEnd;
+
+                    var airplane = airplanesByClosests.FirstOrDefault( x => 
+                                                        SolverUtils.ArrivallFromDepot(Input, x, airportCountPair.Key) < firstDeparture &&
+                                                        !ExitedFromDepot.Contains(x) && 
+                                                        SolverUtils.CanDoInOneDay(Input, x,airportCountPair.Key,destination));
+
+                    while (airplane != null){
+                        List<DbRequests> passagersList = new List<DbRequests>();
+                        Dictionary<string, int> classCapaciy = SolverUtils.CapacityByClass(Input, airplane);
+                        Dictionary<string, int> classBooking = new Dictionary<string, int>();
+
+                        var someoneInserted = false;
+                        foreach (var request in requestsOrdered){
+                            if (!classCapaciy.ContainsKey(request.Class))
+                                continue;
+                            if (!classBooking.ContainsKey(request.Class))
+                                classBooking[request.Class] = 0;
+
+                            if (classBooking[request.Class] >= classCapaciy[request.Class])
+                                continue;
+
+                            classBooking[request.Class]++;
+                            passagersList.Add(request);
+                            someoneInserted = true; 
+
+                        }
+
+                        if (someoneInserted){
+                            ExitedFromDepot.Add(airplane);
+                            CreatedRouteFromDepot(solution, passagersList, airplane, airportCountPair.Key, destination);
+                        }
+
+
+                        airplane = airplanesByClosests.FirstOrDefault(x =>
+                            SolverUtils.ArrivallFromDepot(Input, x, airportCountPair.Key) < firstDeparture &&
+                            !ExitedFromDepot.Contains(x) &&
+                            SolverUtils.CanDoInOneDay(Input, x, airportCountPair.Key, destination));
+                    }
+
+                        
+                        
+                }
+
+                    
+
+                    /*
                     var airportRequestsByRPN = requestsByOrigin[element.Key].OrderBy(x=>x.DepartureTimeWindowEnd)
                                                                             .GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
 
@@ -217,16 +273,119 @@ namespace Solver.Heuristics
                             }
 
                         }
-                        
+                      
 
                         //TODO: Insert flight
-                    }
-                }
+                    }  */
             }
 
             return solution;
         }
 
+        private bool CreatedRouteFromDepot(GeneralSolution solution, List<DbRequests> passengers, 
+                                           DbAirplanes airplane, DbAirports origin, DbAirports destination){
+
+            //Fills with the data about the flight from depot to the first origin
+            double fuelOnTakeOff = airplane.Model.Contains("PC") ? airplane.BaseAirport.MTOW_PC12 : airplane.BaseAirport.MTOW_APE3;
+            double fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, airplane.BaseAirport, origin, airplane);
+            TimeSpan arrivalTime = SolverUtils.ArrivallFromDepot(Input, airplane, origin);
+
+            fuelOnTakeOff *= SolverUtils.PoundsToKg;
+
+            
+            if (fuelOnLanding > 0){
+
+                if (arrivalTime < TimeSpan.FromHours(18.25)){
+
+                    var newFlight = new Flight()
+                    {
+                        Airplanes = airplane,
+                        DepartureTime = TimeSpan.FromHours(6.25), //TODO: Change for something more rational 
+                        ArrivalTime = arrivalTime,
+                        Origin = airplane.BaseAirport,
+                        Destination = origin,
+                        FuelOnLanding = fuelOnLanding,
+                        FuelOnTakeOff = fuelOnTakeOff,
+                        Passengers = new List<DbRequests>()
+                    };
+                    solution.Flights.Add(newFlight);
+
+                    CreateRegularRoute(origin, destination, fuelOnLanding, airplane,arrivalTime + origin.GroundTime, solution, passengers);
+                }
+                return true;
+                
+            }else{
+                var sucess= GoRefuelAndGo(airplane.BaseAirport, origin, fuelOnTakeOff,
+                    airplane, TimeSpan.FromHours(6.25), solution, new List<DbRequests>());
+
+                if (!sucess)
+                    return false; 
+
+                sucess = CreateRegularRoute(origin,destination, CurrentFuelAmount,airplane,
+                                            CurrentAirplaneArrivalTime+CurrentAirplaneLocation.GroundTime,solution,passengers);
+            }
+            return false;
+        }
+
+        private bool CreateRegularRoute(DbAirports origin, DbAirports destination, double fuel, DbAirplanes airplane, TimeSpan departure, 
+                                        GeneralSolution solution, List<DbRequests> passengers)
+        {
+            
+            var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
+
+            //TODO: Include more checks  
+            if (fuelOnLanding > 0)
+            {
+
+                var arrivalTime = SolverUtils.GetArrivalTime(Input, airplane, departure, origin, destination);
+                if (arrivalTime < TimeSpan.FromHours(18.25))
+                {
+
+                    var newFlight = new Flight()
+                    {
+                        Airplanes = airplane,
+                        DepartureTime = departure,
+                        ArrivalTime = arrivalTime,
+                        Origin = origin,
+                        Destination = destination,
+                        FuelOnLanding = fuelOnLanding,
+                        FuelOnTakeOff = fuel,
+                        Passengers = passengers
+                    };
+                    requestsAlreadyBoardedOnOrigin.AddRange(passengers);
+                    var someoneInserted = true;
+                    solution.Flights.Add(newFlight);
+
+                    return someoneInserted;
+                }
+            }
+            else{
+
+                //If the current airport allows refueling 
+                var someoneInserted = false;
+                if (Input.FuelPrice.Any(x => x.Airport.Id == origin.Id))
+                    someoneInserted = RefuelAndGo(airplane, fuel, origin, destination, solution,departure, passengers);
+                else
+                    someoneInserted = GoRefuelAndGo(origin, destination, fuel, airplane, departure,solution, passengers);
+
+
+                return someoneInserted;
+            }
+            return false; 
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <param name="fuelOnTakeOff"></param>
+        /// <param name="airplane"></param>
+        /// <param name="departureTime"></param>
+        /// <param name="solution"></param>
+        /// <param name="requests"></param>
+        /// <returns></returns>
         private bool GoRefuelAndGo(DbAirports origin, DbAirports destination, double fuelOnTakeOff, DbAirplanes airplane,
             TimeSpan departureTime, GeneralSolution solution, List<DbRequests> requests){
             var alternativeRoute = SolverUtils.findStopToFuelAirport(Input,airplane, origin, destination);

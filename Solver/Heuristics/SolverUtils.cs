@@ -14,6 +14,7 @@ namespace Solver.Heuristics
     {
         public static readonly double KnotsToKmH = 1.852;
         public static readonly double PoundsToKg = 0.453592;
+
         /// <summary>
         /// Return the airplanes that can satisfy entirely a list of requests considering only the seats/class capacities
         /// </summary>
@@ -212,7 +213,7 @@ namespace Solver.Heuristics
             return weightPerClass + weightPerPassenger;
         }
 
-        public static double MaxRefuelQuantity(SolverInput input, DbAirplanes airplanes, double fuelOnTank, DbAirports origin, List<DbRequests>requests)
+        public static double MaxRefuelQuantity(SolverInput input, DbAirplanes airplanes, double fuelOnTank, DbAirports origin, List<DbRequests> requests)
         {
             //IF there was not enough fuel on the airplanes to do the trip without a stop, 
             //it is searched an airport to refueling on the track (or refueled on origin airport)
@@ -225,6 +226,47 @@ namespace Solver.Heuristics
 
             double maxRefuelQuantity = Math.Min(MTOW - weight, airplanes.Capacity - fuelOnTank);
             return maxRefuelQuantity;
+        }
+
+        public static List<DbAirplanes> GetAirplanesByProximity(SolverInput input ,DbAirports airport){
+            List<KeyValuePair<TimeSpan, DbAirplanes>> airplanesDistances = new List<KeyValuePair<TimeSpan, DbAirplanes>>();
+
+            foreach (var airplane in input.Airplanes){
+                var timeToGo = TimeSpan.FromHours(100000);
+                if(input.Stretches.ContainsKey(airplane.BaseAirport))
+                    if (input.Stretches[airplane.BaseAirport].ContainsKey(airport))
+                        timeToGo = TimeSpan.FromHours(input.Stretches[airplane.BaseAirport][airport]/(airplane.CruiseSpeed*KnotsToKmH) );
+                airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplanes>(timeToGo,airplane));
+            }
+
+            airplanesDistances.OrderBy(x=>x.Key );
+
+            List<DbAirplanes> returnedList = new List<DbAirplanes>();
+
+            foreach (var airplanes in airplanesDistances)
+                returnedList.Add(airplanes.Value);
+
+            return returnedList;
+        }
+
+        public static bool CanDoInOneDay(SolverInput input, DbAirplanes airplane, DbAirports origin, DbAirports destination)
+        {
+            double distStretch1 = 100000000;
+            double distStretch2 = 100000000;
+
+            if (input.Stretches.ContainsKey(airplane.BaseAirport) && input.Stretches[airplane.BaseAirport].ContainsKey(origin))
+                distStretch1 = input.Stretches[airplane.BaseAirport][origin]/(airplane.CruiseSpeed*KnotsToKmH);
+
+            if (input.Stretches.ContainsKey(origin) && input.Stretches[destination].ContainsKey(destination))
+                distStretch2 = input.Stretches[origin][destination] / (airplane.CruiseSpeed * KnotsToKmH);
+
+            return TimeSpan.FromHours(distStretch1) + origin.GroundTime + TimeSpan.FromHours(distStretch2) <= TimeSpan.FromHours(12.5);
+
+        }
+
+        public static Dictionary<string, int> CapacityByClass(SolverInput input, DbAirplanes airplane){
+            var seatList = input.SeatList.Where(x=>x.Airplanes.Id == airplane.Id);
+            return seatList.GroupBy(x => x.seatClass).ToDictionary(x => x.Key, x => x.ToList().Count);
         }
     }
 }

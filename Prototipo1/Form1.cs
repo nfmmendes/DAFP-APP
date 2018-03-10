@@ -373,7 +373,8 @@ namespace Prototipo1
                 FillTables(instance);
                 this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
                     .Select(x => x.Airplanes.Prefix).Distinct().ToList();
-                this.comboBoxAirplaneSolution.SelectedIndex = 0;
+                if(this.comboBoxAirplaneSolution.Items.Count > 0 )
+                    this.comboBoxAirplaneSolution.SelectedIndex = 0;
             }
         }
 
@@ -898,7 +899,10 @@ namespace Prototipo1
         private void comboBoxAirplaneSolution_SelectedIndexChanged(object sender, EventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-            var prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
+            var prefix = "";
+
+            if(this.comboBoxAirplaneSolution.Items.Count > 0)
+                prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
 
             if (instance != null){
                 var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == instance.Id && x.Prefix.Equals(prefix));

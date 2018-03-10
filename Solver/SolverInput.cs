@@ -76,6 +76,5 @@ namespace Solver
 
             return input;
         }
-
     }
 }
