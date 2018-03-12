@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,6 +16,8 @@ namespace Prototipo1
     public partial class MainForm : Form
     {
         public CustomSqlContext Context = new CustomSqlContext();
+        private int CountStretchePage;
+        private readonly int StretchePageSize=5000; 
 
         /// <summary>
         /// Class constructor
@@ -31,6 +34,9 @@ namespace Prototipo1
                 comboBoxInstancesInstanceTab.SelectedIndex = 0;
             comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
 
+            //Initialize the context of all controllers 
+            //WARNING: Everytime that a new controller is created it's necessary to initialize their context here to allow
+            // its rigth use
             InstancesController.Instance.setContext(Context);
             ParametersController.Instance.setContext(Context);
             ImportDataController.Instance.setContext(Context);
@@ -40,7 +46,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Parser of the instance metadata to a string 
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
@@ -72,34 +78,35 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Open a window where is possible to load the instance data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void instanceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void instanceToolStripMenuItem_Click(object sender, EventArgs e) {
             var instanceLoader = new InstanceLoader(Context);
             instanceLoader.ShowDialog();
             var instances = Context.Instances;
+
+            //After the load window be closed we need to update the instance list 
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
             if (comboBoxInstancesInstanceTab.Items.Count > 0)
                 comboBoxInstancesInstanceTab.SelectedIndex = 0;
-            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+            
 
         }
 
         /// <summary>
-        /// 
+        /// Changes the MILP solver to CPLEX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cplexToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void cplexToolStripMenuItem_Click(object sender, EventArgs e){
             changeSelectedSolver(SolverEnum.CPLEX);
         }
 
         /// <summary>
-        /// 
+        /// Changes the MILP solver to GUROBI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -108,7 +115,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Changes the MILP solver to XPress
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -126,7 +133,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Controls how the menu will display the current MILP solver in the menu strip
         /// </summary>
         /// <param name="solverEnum"></param>
         private void changeSelectedSolver(SolverEnum solverEnum)
@@ -148,7 +155,8 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Function that calls the solver to solve the optimization problem
+        /// TODO: Improve it to call the right heuristic/solver
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -169,8 +177,12 @@ namespace Prototipo1
                 //Warning the end of the optimization
                 MessageBox.Show("Optimization finished");
 
+                //Set the metadata of the instance
                 instance.Optimized = true;
                 instance.LastOptimization = DateTime.Now;
+
+                //Save the modifications on the database
+                Context.Instances.AddOrUpdate(instance);
                 Context.SaveChanges();
                 BuildSolutionPanel(); 
 
@@ -180,11 +192,30 @@ namespace Prototipo1
         }
         
         /// <summary>
-        /// 
+        /// Starts the process of showing the optimization results on the interface
         /// </summary>
         private void BuildSolutionPanel(){
             this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x=>x.Airplanes.Prefix).Distinct().ToList();
             this.tabControlInputSolution.SelectedIndex = 1; 
+            
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void FillRequestSolutionTable(DbInstance instance){
+
+            this.dataGridViewRequestsResult.Rows.Clear();
+            var requests = Context.Requests.Where(x => x.Instance.Id == instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
+
+            var flightList = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id);
+
+            foreach (var key in requests.Keys){
+                var value = requests[key].First();
+                dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AiportName, value.Destination.AiportName, value.DepartureTimeWindowBegin,
+                    value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
+            }
         }
 
 
@@ -391,6 +422,7 @@ namespace Prototipo1
             FillRequestTables(instance);
             FillCurrencyTable(instance);
             FillFuelTable(instance);
+            FillRequestSolutionTable(instance);
         }
 
         /// <summary>
@@ -460,10 +492,12 @@ namespace Prototipo1
             this.dataGridViewStretches.Rows.Clear();
             var stretches = Context.Stretches.Where(x => x.Origin.Instance.Id == instance.Id);
             int cont = 0;
+            CountStretchePage = 1;
+            labelPageStretch.Text = $"{CountStretchePage} of {(int) (stretches.Count() / StretchePageSize + 1)}";
             foreach (var item in stretches){
                 dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
                 cont++;
-                if (cont == 10001)
+                if (cont == StretchePageSize)
                     break; 
             }
 
@@ -502,14 +536,12 @@ namespace Prototipo1
         private void buttonDeleteScenario_Click(object sender, EventArgs e)
         {
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedValue.ToString());
-
             var result = MessageBox.Show($"Do you really want delete the instance {instanceName}?","Warning", MessageBoxButtons.YesNo);
 
 
             if (result == DialogResult.Yes)
                 InstancesController.Instance.FindAndDeleteByName(instanceName);
             
-
             this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
         }
@@ -536,13 +568,11 @@ namespace Prototipo1
         private void FillSeatTypeList(long idAirplane){ 
             this.dataGridViewSeatTypes.Rows.Clear();
             
-                
             var seatTypes = Context.SeatList.Where(x => x.Airplanes.Id == idAirplane).ToList();
 
             //if(seatTypes.Any())
-            foreach (var item in seatTypes){
+            foreach (var item in seatTypes)
                 dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.numberOfSeats, item.luggageWeightLimit);
-            }
         }
 
         /// <summary>
@@ -628,6 +658,7 @@ namespace Prototipo1
                 var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
                 long idAirplane = 0;
 
+                //TODO: Put it in the airplane controller 
                 if (result == DialogResult.Yes)
                 {
                     for (int i = 0; i < dataGridViewSeatTypes.Rows.Count; i++)
@@ -642,7 +673,6 @@ namespace Prototipo1
                     }
 
                     Context.SaveChanges();
-                    var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
                     FillSeatTypeList(idAirplane);
                 }
             }
@@ -690,6 +720,11 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected airplanes");
        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDeleteFuelPrice_Click(object sender, EventArgs e){
             if (dataGridViewFuel.SelectedRows.Count > 0)
             {
@@ -900,6 +935,11 @@ namespace Prototipo1
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxAirplaneSolution_SelectedIndexChanged(object sender, EventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
@@ -928,6 +968,11 @@ namespace Prototipo1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewRoute_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridViewRoute.SelectedRows.Count > 0){
@@ -942,6 +987,154 @@ namespace Prototipo1
                 
             }
 
+        }
+
+
+        #region Stretch table pagination
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonFirstPageStretch_Click(object sender, EventArgs e)
+        {
+
+            dataGridViewStretches.Rows.Clear();
+
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
+
+            var firstPageSize = Math.Min(StretchePageSize, totalSize);
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
+
+            for (int i = 0; i <= firstPageSize; i++)
+                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
+                                               listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+
+            CountStretchePage = 1;
+            labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonPrevPageStretch_Click(object sender, EventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
+
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
+
+            if (CountStretchePage > 1)
+            {
+                dataGridViewStretches.Rows.Clear();
+
+                CountStretchePage--;
+                var firstIndex = StretchePageSize * (CountStretchePage-1);
+                var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
+
+                for (int i = firstIndex; i <= lastIndex; i++)
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
+                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+
+                labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonNextPageStretch_Click(object sender, EventArgs e)
+        {
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
+
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
+
+            if (CountStretchePage <= (int)(listOfStretches.Count() / StretchePageSize)){
+                dataGridViewStretches.Rows.Clear();
+
+                var firstIndex = StretchePageSize * CountStretchePage;
+                var lastIndex = Math.Min(firstIndex + StretchePageSize,totalSize);
+
+                CountStretchePage++;
+
+                for (int i = firstIndex; i < lastIndex; i++)
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
+                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                
+                labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+            }
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonLastPageStretch_Click(object sender, EventArgs e){
+
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            var totalSize = Context.Stretches.Count(x=>x.Origin != null && x.Origin.Instance.Id ==instance.Id );
+            var firstLastPageIndex = totalSize - (totalSize%StretchePageSize);
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList(); 
+            
+            dataGridViewStretches.Rows.Clear();
+
+            
+
+            for (int i = firstLastPageIndex; i < totalSize ; i++)
+                try{
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
+                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                }catch(Exception ex) { }
+
+            CountStretchePage = listOfStretches.Count() / StretchePageSize + 1;
+            labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+
+        }
+        #endregion
+
+        private void dataGridViewRequestsResult_RowEnter(object sender, DataGridViewCellEventArgs e){
+            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (dataGridViewRequestsResult.SelectedRows.Count > 0){
+                var index = dataGridViewRequestsResult.SelectedRows[0].Index;
+                var PNR = dataGridViewRequestsResult.Rows[index].Cells[0].Value.ToString();
+
+                var passengerList = Context.PassagersOnFlight.Where(x=>x.Passenger.PNR.Equals(PNR));
+
+                dataGridViewRequestSolutionDetails.Rows.Clear();
+                
+                foreach (var passenger in passengerList){
+                    //TODO: Discover why these fields are null 
+                    if(passenger.Flight.Origin != null && passenger.Flight.Destination != null)
+                    dataGridViewRequestSolutionDetails.Rows.Add("x", passenger.Passenger.Name,
+                                                                     passenger.Flight.Airplanes.Prefix,
+                                                                     passenger.Flight.Origin.AiportName,
+                                                                     passenger.Flight.DepartureTime,
+                                                                     passenger.Flight.Destination.AiportName,
+                                                                     passenger.Flight.ArrivalTime);
+                }
+                
+
+            }
         }
     }
 }

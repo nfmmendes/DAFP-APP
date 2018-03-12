@@ -265,7 +265,7 @@ namespace Solver.Heuristics
             if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
                 distStretch2 = input.Stretches[origin][destination] / (airplane.CruiseSpeed * KnotsToKmH);
 
-            return TimeSpan.FromHours(distStretch1) + origin.GroundTime + TimeSpan.FromHours(distStretch2) <= TimeSpan.FromHours(12.5);
+            return TimeSpan.FromHours(distStretch1) + origin.GroundTime + TimeSpan.FromHours(distStretch2) <= TimeSpan.FromHours(12.0);
 
         }
 
