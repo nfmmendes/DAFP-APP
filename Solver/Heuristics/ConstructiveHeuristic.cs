@@ -181,6 +181,15 @@ namespace Solver.Heuristics
             return solution;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <param name="passengers"></param>
+        /// <param name="airplane"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         private bool CreatedRouteFromDepot(GeneralSolution solution, List<DbRequests> passengers, 
                                            DbAirplanes airplane, DbAirports origin, DbAirports destination){
 
@@ -190,6 +199,7 @@ namespace Solver.Heuristics
             TimeSpan arrivalTime = SolverUtils.ArrivallFromDepot(Input, airplane, origin);
 
             fuelOnTakeOff *= SolverUtils.PoundsToKg;
+            fuelOnLanding *= SolverUtils.PoundsToKg;
 
             
             if (fuelOnLanding > 0){
@@ -226,11 +236,26 @@ namespace Solver.Heuristics
             return false;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <param name="fuel">Amount of fuel in Kg</param>
+        /// <param name="airplane"></param>
+        /// <param name="departure"></param>
+        /// <param name="solution"></param>
+        /// <param name="passengers"></param>
+        /// <returns></returns>
         private bool CreateRegularRoute(DbAirports origin, DbAirports destination, double fuel, DbAirplanes airplane, TimeSpan departure, 
                                         GeneralSolution solution, List<DbRequests> passengers)
         {
             
             var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
+
+           // fuelOnLanding *= SolverUtils.PoundsToKg;
+
 
             //TODO: Include more checks  
             if (fuelOnLanding > 0)

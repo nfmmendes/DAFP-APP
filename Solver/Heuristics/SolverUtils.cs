@@ -158,7 +158,7 @@ namespace Solver.Heuristics
                 fuelSpent = airplanes.FuelConsumptionFirstHour * timeToGo;
 
 
-            return timeToGo != 0? fuelOnTakeOff - fuelSpent : -1;
+            return Math.Abs(timeToGo) > 0.00001? fuelOnTakeOff - fuelSpent : -1;
         }
 
         public static TimeSpan GetArrivalTime(SolverInput input, DbAirplanes airplanes, TimeSpan departureTime, DbAirports origin, DbAirports destination){

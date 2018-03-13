@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
@@ -948,6 +949,8 @@ namespace Prototipo1
             if(this.comboBoxAirplaneSolution.Items.Count > 0)
                 prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
 
+
+
             if (instance != null){
                 var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == instance.Id && x.Prefix.Equals(prefix));
                 if (airplane != null){
@@ -957,15 +960,44 @@ namespace Prototipo1
                     dataGridViewRoutePassagers.Rows.Clear();
                     dataGridViewRoute.Rows.Clear();
                     foreach (var item in trips){
+
+                        var weightOnDeparture = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnDeparture* 0.453592;
+                        var weightOnArrival = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnArrival * 0.453592;
+
                         dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AiportName,
-                                                                item.FuelOnDeparture, 0,  
+                                                                item.FuelOnDeparture,weightOnDeparture ,  
                                                                 item.DepartureTime, 
                                                                 item.Destination.AiportName, 
-                                                                item.FuelOnArrival, 0, 
+                                                                item.FuelOnArrival, weightOnArrival, 
                                                                 item.ArrivalTime);    
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="flight"></param>
+        /// <returns></returns>
+        private double GetWeightOfPassengers(DbFlightsReport flight){
+            var itemList = Context.PassagersOnFlight.Where(x => x.Flight.Id == flight.Id);
+            var seatList = Context.SeatList.Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
+
+
+            var sum = 0.0;
+            foreach (var item in itemList){
+                var seatClass = seatList.FirstOrDefault(x=>x.seatClass.Equals(item.Passenger.Class));
+                if (seatClass != null)
+                    sum += seatClass.luggageWeightLimit;
+
+                //TODO: Correct to get the values from database. THIS IS WRONG!!!!
+                if (item.Passenger.Sex.Equals("M"))
+                    sum += item.Passenger.IsChildren? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_ManWeight.Value);
+                else
+                    sum += item.Passenger.IsChildren ? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_WomanWeight.Value);
+            }
+            return sum;
         }
 
         /// <summary>
