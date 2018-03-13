@@ -73,6 +73,15 @@ namespace Prototipo1.Controller
 
                 Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.Where(x => x.Origin.Instance.Id.Equals(deleted.Id)));
                 Instance.Context.SaveChanges();
+
+                //TODO: Remove it. It's wrong 
+                Instance.Context.PassagersOnFlight.RemoveRange(
+                    Instance.Context.PassagersOnFlight.Where(x => x.Flight.Instance.Id == deleted.Id).ToList());
+                Instance.Context.FlightsReports.RemoveRange(Instance.Context.FlightsReports.Where(x=>x.Instance.Id == deleted.Id).ToList());
+                
+
+                Instance.Context.SaveChanges();
+
                 Instance.Context.Instances.Remove(deleted);
                 
             } 

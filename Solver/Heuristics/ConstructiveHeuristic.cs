@@ -172,11 +172,20 @@ namespace Solver.Heuristics
                             !ExitedFromDepot.Contains(x) &&
                             SolverUtils.CanDoInOneDay(Input, x, airportCountPair.Key, destination));
                     }
-
-                        
-                        
+   
                 }
             }
+
+            //================================= RETURN TO THE BASE =================================
+            foreach (var airplane in solution.Flights.Select(x=>x.Airplanes).Distinct().ToList()){
+                var airplaneFlights = solution.Flights.Where(x => x.Airplanes.Id == airplane.Id);
+
+                var lastFlight = airplaneFlights.OrderBy(x => x.ArrivalTime).Last();
+                CreateRegularRoute(lastFlight.Destination, airplane.BaseAirport, lastFlight.FuelOnLanding, airplane,
+                    lastFlight.ArrivalTime + lastFlight.Destination.GroundTime, solution, new List<DbRequests>());
+            }
+
+
 
             return solution;
         }
