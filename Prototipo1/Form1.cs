@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Prototipo1.Components;
 using Prototipo1.Controller;
 using Solver;
 using SolverClientComunication;
@@ -424,54 +425,13 @@ namespace Prototipo1
             AirportView.setInstance(instance);
             FillStretchTable(instance);
             AirplaneView.setInstance(instance);
-            FillRequestTables(instance);
-            FillCurrencyTable(instance);
-            FillFuelTable(instance);
+            RequestView.setInstance(instance);
+            FuelPriceView.setInstance(instance);
+            CurrencyView.setInstance(instance);
             FillRequestSolutionTable(instance);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillFuelTable(DbInstance instance){
-            this.dataGridViewFuel.Rows.Clear();
-            var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == instance.Id);
 
-            foreach (var item in fuels)
-               dataGridViewFuel.Rows.Add(item.Id,item.Airport.AiportName,"F", item.Currency, item.Value); //TODO: Change This F
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillCurrencyTable(DbInstance instance)
-        {
-            this.dataGridViewCurrency.Rows.Clear();
-            var exchanges = Context.Exchange.Where(x => x.Instance.Id == instance.Id);
-
-            foreach (var item in exchanges){
-                this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillRequestTables(DbInstance instance)
-        {
-            this.dataGridViewRequest.Rows.Clear();
-            var requests = Context.Requests.ToList().Where(x => x.Instance.Id == instance.Id)
-                                                    .GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
-
-            foreach (var key in requests.Keys){
-                var value = requests[key].First();
-                dataGridViewRequest.Rows.Add(key, key, value.Origin.AiportName, value.Destination?.AiportName, value.DepartureTimeWindowBegin,
-                                                value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
-           }
-        }
 
 
 
@@ -541,28 +501,6 @@ namespace Prototipo1
 
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewRequest_RowEnter(object sender, DataGridViewCellEventArgs e){
-            FillPassengerList(dataGridViewRequest.Rows[e.RowIndex].Cells[0].Value.ToString());
-        }
-
-        /// <summary>
-        /// Fill the data grid view that shows the list of passengers. 
-        /// This function will be called after a row of the request data grid view be selected
-        /// </summary>
-        /// <param name="PNR"></param>
-        private void FillPassengerList(string PNR){
-            this.dataGridViewPassenger.Rows.Clear();
-            var passengers = Context.Requests.Where(x => x.PNR.Equals(PNR));
-
-            foreach (var item in passengers){
-                this.dataGridViewPassenger.Rows.Add(item.Id, item.Name, item.Sex, item.IsChildren, item.Class);
-            }
-        }
 
         /// <summary>
         /// 
@@ -574,39 +512,7 @@ namespace Prototipo1
             duplicateWindow.ShowDialog();
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonDeleteFuelPrice_Click(object sender, EventArgs e){
-            if (dataGridViewFuel.SelectedRows.Count > 0)
-            {
-                var message = "All information related with these prices will be deleted. Do you want continue?";
-                var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
 
-                if (result == DialogResult.Yes)
-                {
-                    for (int i = 0; i < dataGridViewFuel.Rows.Count; i++)
-                    {
-
-                        if (!dataGridViewFuel.Rows[i].Selected) continue;
-
-                        var index = Convert.ToInt64(dataGridViewFuel.Rows[i].Cells[0].Value);
-                        var deleted = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
-
-                        if (deleted != null)
-                            Context.FuelPrice.Remove(deleted);
-                    }
-
-                    Context.SaveChanges();
-                    var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
-                    FillTables(Context.Instances.ToList().First(x => x.Name.Equals(instanceName)));
-                }
-            }
-            else
-                MessageBox.Show("There are no selected airplanes");
-        }
 
 
 
@@ -624,31 +530,9 @@ namespace Prototipo1
             if (instance != null){
                 var addFuel = new AddEditFuel(Context);
                 addFuel.OpenToAdd(instance);
-                FillFuelTable(instance);
+               // FillFuelTable(instance);
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEditFuel_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            if (instance != null && dataGridViewFuel.SelectedRows.Count >0){
-                var addFuel = new AddEditFuel(Context);
-                var index = dataGridViewFuel.SelectedRows[0].Index;
-
-                addFuel.OpenToEdit(instance,Convert.ToInt64(dataGridViewFuel.Rows[index].Cells[0].Value)); //TODO: Get real id
-                
-                FillFuelTable(instance);
-            }
-        }
-
-
-
 
         /// <summary>
         /// 
@@ -665,22 +549,6 @@ namespace Prototipo1
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEditRequest_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            if (instance != null && dataGridViewRequest.SelectedRows.Count >0 ){
-                var editRequest = new AddEditRequest();
-                var rowIndex = dataGridViewRequest.SelectedRows[0].Index;
-                
-                editRequest.OpenToEdit(instance, dataGridViewRequest.Rows[rowIndex].Cells[0].Value.ToString());
-            }
-        }
 
         
         /// <summary>

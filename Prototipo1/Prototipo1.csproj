@@ -109,6 +109,24 @@
     <Compile Include="Components\AirportView.Designer.cs">
       <DependentUpon>AirportView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\CurrencyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CurrencyView.Designer.cs">
+      <DependentUpon>CurrencyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\FuelPriceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\FuelPriceView.Designer.cs">
+      <DependentUpon>FuelPriceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\RequestsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\RequestsView.Designer.cs">
+      <DependentUpon>RequestsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\AirplaneController.cs" />
     <Compile Include="Controller\AirportController.cs" />
     <Compile Include="Controller\FuelController.cs" />
@@ -180,6 +198,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\AirportView.resx">
       <DependentUpon>AirportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\CurrencyView.resx">
+      <DependentUpon>CurrencyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\FuelPriceView.resx">
+      <DependentUpon>FuelPriceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\RequestsView.resx">
+      <DependentUpon>RequestsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateInstance.resx">
       <DependentUpon>CreateInstance.cs</DependentUpon>
