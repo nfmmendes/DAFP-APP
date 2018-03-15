@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Prototipo1.Components;
+using SolverClientComunication;
 
 namespace Prototipo1
 {
@@ -31,7 +33,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.Context = new CustomSqlContext();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -48,35 +50,7 @@ namespace Prototipo1
             this.tabInput = new System.Windows.Forms.TabPage();
             this.tabControlInputTables = new System.Windows.Forms.TabControl();
             this.tabPageAirplanes = new System.Windows.Forms.TabPage();
-            this.buttonDeleteAirplane = new System.Windows.Forms.Button();
-            this.buttonEditAirplane = new System.Windows.Forms.Button();
-            this.buttonAddAirplane = new System.Windows.Forms.Button();
-            this.buttonDeleteAirplaneSeatType = new System.Windows.Forms.Button();
-            this.buttonEditAirplaneSeatType = new System.Windows.Forms.Button();
-            this.buttonAddAirplaneSeatType = new System.Windows.Forms.Button();
-            this.dataGridViewSeatTypes = new System.Windows.Forms.DataGridView();
-            this.SeatTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewAirplane = new System.Windows.Forms.DataGridView();
-            this.AirplaneId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Range = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxWeightTakeOff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CruiseSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstHourConsumption = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecondHourFuelConsumption = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageAirports = new System.Windows.Forms.TabPage();
-            this.buttonDeleteAirport = new System.Windows.Forms.Button();
-            this.buttonEditAirport = new System.Windows.Forms.Button();
-            this.buttonAddAirport = new System.Windows.Forms.Button();
-            this.dataGridViewAirport = new System.Windows.Forms.DataGridView();
             this.AiportAid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -270,18 +244,15 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AirplaneView = new AirplaneView(Context);
+            this.AirportView = new AirportView(Context);
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
             this.tabControlInputSolution.SuspendLayout();
             this.tabInput.SuspendLayout();
             this.tabControlInputTables.SuspendLayout();
-            this.tabPageAirplanes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSeatTypes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirplane)).BeginInit();
             this.tabPageAirports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).BeginInit();
-            this.tabPageRequests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).BeginInit();
             this.tabPageFuel.SuspendLayout();
@@ -317,6 +288,8 @@ namespace Prototipo1
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+   
+
             this.SuspendLayout();
             // 
             // tabControl
@@ -497,14 +470,6 @@ namespace Prototipo1
             // 
             // tabPageAirplanes
             // 
-            this.tabPageAirplanes.Controls.Add(this.buttonDeleteAirplane);
-            this.tabPageAirplanes.Controls.Add(this.buttonEditAirplane);
-            this.tabPageAirplanes.Controls.Add(this.buttonAddAirplane);
-            this.tabPageAirplanes.Controls.Add(this.buttonDeleteAirplaneSeatType);
-            this.tabPageAirplanes.Controls.Add(this.buttonEditAirplaneSeatType);
-            this.tabPageAirplanes.Controls.Add(this.buttonAddAirplaneSeatType);
-            this.tabPageAirplanes.Controls.Add(this.dataGridViewSeatTypes);
-            this.tabPageAirplanes.Controls.Add(this.dataGridViewAirplane);
             this.tabPageAirplanes.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirplanes.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplanes.Name = "tabPageAirplanes";
@@ -513,218 +478,11 @@ namespace Prototipo1
             this.tabPageAirplanes.TabIndex = 0;
             this.tabPageAirplanes.Text = "Airplanes";
             this.tabPageAirplanes.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeleteAirplane
-            // 
-            this.buttonDeleteAirplane.Location = new System.Drawing.Point(697, 251);
-            this.buttonDeleteAirplane.Name = "buttonDeleteAirplane";
-            this.buttonDeleteAirplane.Size = new System.Drawing.Size(91, 34);
-            this.buttonDeleteAirplane.TabIndex = 7;
-            this.buttonDeleteAirplane.Text = "Delete";
-            this.buttonDeleteAirplane.UseVisualStyleBackColor = true;
-            this.buttonDeleteAirplane.Click += new System.EventHandler(this.buttonDeleteAirplane_Click);
-            // 
-            // buttonEditAirplane
-            // 
-            this.buttonEditAirplane.Location = new System.Drawing.Point(466, 251);
-            this.buttonEditAirplane.Name = "buttonEditAirplane";
-            this.buttonEditAirplane.Size = new System.Drawing.Size(91, 34);
-            this.buttonEditAirplane.TabIndex = 6;
-            this.buttonEditAirplane.Text = "Edit";
-            this.buttonEditAirplane.UseVisualStyleBackColor = true;
-            this.buttonEditAirplane.Click += new System.EventHandler(this.buttonEditAirplane_Click);
-            // 
-            // buttonAddAirplane
-            // 
-            this.buttonAddAirplane.Location = new System.Drawing.Point(210, 251);
-            this.buttonAddAirplane.Name = "buttonAddAirplane";
-            this.buttonAddAirplane.Size = new System.Drawing.Size(91, 34);
-            this.buttonAddAirplane.TabIndex = 5;
-            this.buttonAddAirplane.Text = "Add";
-            this.buttonAddAirplane.UseVisualStyleBackColor = true;
-            this.buttonAddAirplane.Click += new System.EventHandler(this.buttonAddAirplane_Click);
-            // 
-            // buttonDeleteAirplaneSeatType
-            // 
-            this.buttonDeleteAirplaneSeatType.Location = new System.Drawing.Point(697, 489);
-            this.buttonDeleteAirplaneSeatType.Name = "buttonDeleteAirplaneSeatType";
-            this.buttonDeleteAirplaneSeatType.Size = new System.Drawing.Size(91, 34);
-            this.buttonDeleteAirplaneSeatType.TabIndex = 4;
-            this.buttonDeleteAirplaneSeatType.Text = "Delete";
-            this.buttonDeleteAirplaneSeatType.UseVisualStyleBackColor = true;
-            this.buttonDeleteAirplaneSeatType.Click += new System.EventHandler(this.buttonDeleteAirplaneSeatType_Click);
-            // 
-            // buttonEditAirplaneSeatType
-            // 
-            this.buttonEditAirplaneSeatType.Location = new System.Drawing.Point(466, 489);
-            this.buttonEditAirplaneSeatType.Name = "buttonEditAirplaneSeatType";
-            this.buttonEditAirplaneSeatType.Size = new System.Drawing.Size(91, 34);
-            this.buttonEditAirplaneSeatType.TabIndex = 3;
-            this.buttonEditAirplaneSeatType.Text = "Edit";
-            this.buttonEditAirplaneSeatType.UseVisualStyleBackColor = true;
-            this.buttonEditAirplaneSeatType.Click += new System.EventHandler(this.buttonEditAirplaneSeatType_Click);
-            // 
-            // buttonAddAirplaneSeatType
-            // 
-            this.buttonAddAirplaneSeatType.Location = new System.Drawing.Point(210, 489);
-            this.buttonAddAirplaneSeatType.Name = "buttonAddAirplaneSeatType";
-            this.buttonAddAirplaneSeatType.Size = new System.Drawing.Size(91, 34);
-            this.buttonAddAirplaneSeatType.TabIndex = 2;
-            this.buttonAddAirplaneSeatType.Text = "Add";
-            this.buttonAddAirplaneSeatType.UseVisualStyleBackColor = true;
-            this.buttonAddAirplaneSeatType.Click += new System.EventHandler(this.buttonAddAirplaneSeatType_Click);
-            // 
-            // dataGridViewSeatTypes
-            // 
-            this.dataGridViewSeatTypes.AllowUserToAddRows = false;
-            this.dataGridViewSeatTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSeatTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SeatTypeId,
-            this.SeatClass,
-            this.NumberSeats,
-            this.MaxLuggageWeight});
-            this.dataGridViewSeatTypes.Location = new System.Drawing.Point(12, 314);
-            this.dataGridViewSeatTypes.Name = "dataGridViewSeatTypes";
-            this.dataGridViewSeatTypes.RowHeadersVisible = false;
-            this.dataGridViewSeatTypes.RowTemplate.Height = 24;
-            this.dataGridViewSeatTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSeatTypes.Size = new System.Drawing.Size(1018, 165);
-            this.dataGridViewSeatTypes.TabIndex = 1;
-            // 
-            // SeatTypeId
-            // 
-            this.SeatTypeId.HeaderText = "Id";
-            this.SeatTypeId.Name = "SeatTypeId";
-            this.SeatTypeId.ReadOnly = true;
-            this.SeatTypeId.Visible = false;
-            // 
-            // SeatClass
-            // 
-            this.SeatClass.HeaderText = "Class";
-            this.SeatClass.Name = "SeatClass";
-            this.SeatClass.Width = 310;
-            // 
-            // NumberSeats
-            // 
-            this.NumberSeats.HeaderText = "Number of Seats";
-            this.NumberSeats.Name = "NumberSeats";
-            this.NumberSeats.Width = 180;
-            // 
-            // MaxLuggageWeight
-            // 
-            this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
-            this.MaxLuggageWeight.Name = "MaxLuggageWeight";
-            this.MaxLuggageWeight.Width = 320;
-            // 
-            // dataGridViewAirplane
-            // 
-            this.dataGridViewAirplane.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewAirplane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAirplane.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.AirplaneId,
-            this.AirplaneModel,
-            this.Prefix,
-            this.Range,
-            this.Weight,
-            this.MaxWeightTakeOff,
-            this.CruiseSpeed,
-            this.FirstHourConsumption,
-            this.SecondHourFuelConsumption,
-            this.MaxFuel,
-            this.Capacity,
-            this.BaseAirport});
-            this.dataGridViewAirplane.Location = new System.Drawing.Point(12, 21);
-            this.dataGridViewAirplane.Name = "dataGridViewAirplane";
-            this.dataGridViewAirplane.RowHeadersVisible = false;
-            this.dataGridViewAirplane.RowTemplate.Height = 24;
-            this.dataGridViewAirplane.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAirplane.Size = new System.Drawing.Size(1018, 214);
-            this.dataGridViewAirplane.TabIndex = 0;
-            this.dataGridViewAirplane.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAirplane_RowEnter);
-            // 
-            // AirplaneId
-            // 
-            this.AirplaneId.HeaderText = "Id";
-            this.AirplaneId.Name = "AirplaneId";
-            this.AirplaneId.ReadOnly = true;
-            this.AirplaneId.Visible = false;
-            // 
-            // AirplaneModel
-            // 
-            this.AirplaneModel.HeaderText = "Model";
-            this.AirplaneModel.Name = "AirplaneModel";
-            // 
-            // Prefix
-            // 
-            this.Prefix.HeaderText = "Prefix";
-            this.Prefix.Name = "Prefix";
-            // 
-            // Range
-            // 
-            this.Range.HeaderText = "Range (Km)";
-            this.Range.Name = "Range";
-            this.Range.Width = 120;
-            // 
-            // Weight
-            // 
-            this.Weight.HeaderText = "Weight (Kg)";
-            this.Weight.Name = "Weight";
-            this.Weight.Width = 120;
-            // 
-            // MaxWeightTakeOff
-            // 
-            this.MaxWeightTakeOff.HeaderText = "Max Weight Take Off (Kg)";
-            this.MaxWeightTakeOff.Name = "MaxWeightTakeOff";
-            this.MaxWeightTakeOff.Width = 180;
-            // 
-            // CruiseSpeed
-            // 
-            this.CruiseSpeed.HeaderText = "Cruise Speed (Knot)";
-            this.CruiseSpeed.Name = "CruiseSpeed";
-            this.CruiseSpeed.Width = 150;
-            // 
-            // FirstHourConsumption
-            // 
-            this.FirstHourConsumption.HeaderText = "1º Hour Fuel Consumption";
-            this.FirstHourConsumption.Name = "FirstHourConsumption";
-            this.FirstHourConsumption.Width = 150;
-            // 
-            // SecondHourFuelConsumption
-            // 
-            this.SecondHourFuelConsumption.HeaderText = "2º Hour Fuel Consumption";
-            this.SecondHourFuelConsumption.Name = "SecondHourFuelConsumption";
-            this.SecondHourFuelConsumption.Width = 150;
-            // 
-            // MaxFuel
-            // 
-            this.MaxFuel.HeaderText = "Max Fuel";
-            this.MaxFuel.Name = "MaxFuel";
-            // 
-            // Capacity
-            // 
-            this.Capacity.HeaderText = "Capacity";
-            this.Capacity.Name = "Capacity";
-            this.Capacity.Width = 90;
-            // 
-            // BaseAirport
-            // 
-            this.BaseAirport.HeaderText = "Base Airport";
-            this.BaseAirport.Name = "BaseAirport";
+            this.tabPageAirplanes.Controls.Add(AirplaneView);
             // 
             // tabPageAirports
             // 
-            this.tabPageAirports.Controls.Add(this.buttonDeleteAirport);
-            this.tabPageAirports.Controls.Add(this.buttonEditAirport);
-            this.tabPageAirports.Controls.Add(this.buttonAddAirport);
-            this.tabPageAirports.Controls.Add(this.dataGridViewAirport);
+            this.tabPageAirports.Controls.Add(this.AirportView);
             this.tabPageAirports.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirports.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirports.Name = "tabPageAirports";
@@ -733,61 +491,7 @@ namespace Prototipo1
             this.tabPageAirports.TabIndex = 1;
             this.tabPageAirports.Text = "Airport";
             this.tabPageAirports.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeleteAirport
-            // 
-            this.buttonDeleteAirport.Location = new System.Drawing.Point(712, 478);
-            this.buttonDeleteAirport.Name = "buttonDeleteAirport";
-            this.buttonDeleteAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonDeleteAirport.TabIndex = 7;
-            this.buttonDeleteAirport.Text = "Delete";
-            this.buttonDeleteAirport.UseVisualStyleBackColor = true;
-            this.buttonDeleteAirport.Click += new System.EventHandler(this.buttonDeleteAirport_Click);
-            // 
-            // buttonEditAirport
-            // 
-            this.buttonEditAirport.Location = new System.Drawing.Point(479, 478);
-            this.buttonEditAirport.Name = "buttonEditAirport";
-            this.buttonEditAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonEditAirport.TabIndex = 6;
-            this.buttonEditAirport.Text = "Edit";
-            this.buttonEditAirport.UseVisualStyleBackColor = true;
-            this.buttonEditAirport.Click += new System.EventHandler(this.buttonEditAirport_Click);
-            // 
-            // buttonAddAirport
-            // 
-            this.buttonAddAirport.Location = new System.Drawing.Point(225, 478);
-            this.buttonAddAirport.Name = "buttonAddAirport";
-            this.buttonAddAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonAddAirport.TabIndex = 5;
-            this.buttonAddAirport.Text = "Add";
-            this.buttonAddAirport.UseVisualStyleBackColor = true;
-            this.buttonAddAirport.Click += new System.EventHandler(this.buttonAddAirport_Click);
-            // 
-            // dataGridViewAirport
-            // 
-            this.dataGridViewAirport.AllowUserToAddRows = false;
-            this.dataGridViewAirport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAirport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.AiportAid,
-            this.AirportName,
-            this.ICAO,
-            this.Latitude,
-            this.Longintude,
-            this.Elevation,
-            this.RunwayLength,
-            this.Region,
-            this.MTOW_APE3,
-            this.MTOW_PC12,
-            this.LandingCost,
-            this.GroundTime});
-            this.dataGridViewAirport.Location = new System.Drawing.Point(11, 32);
-            this.dataGridViewAirport.Name = "dataGridViewAirport";
-            this.dataGridViewAirport.RowHeadersVisible = false;
-            this.dataGridViewAirport.RowTemplate.Height = 24;
-            this.dataGridViewAirport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAirport.Size = new System.Drawing.Size(1013, 419);
-            this.dataGridViewAirport.TabIndex = 0;
+
             // 
             // AiportAid
             // 
@@ -2649,12 +2353,7 @@ namespace Prototipo1
             this.tabControlInputSolution.ResumeLayout(false);
             this.tabInput.ResumeLayout(false);
             this.tabControlInputTables.ResumeLayout(false);
-            this.tabPageAirplanes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSeatTypes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirplane)).EndInit();
             this.tabPageAirports.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).EndInit();
-            this.tabPageRequests.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).EndInit();
             this.tabPageFuel.ResumeLayout(false);
@@ -2709,6 +2408,7 @@ namespace Prototipo1
 
         #endregion
 
+        private CustomSqlContext Context;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabParameters;
         private System.Windows.Forms.Panel panel1;
@@ -2787,15 +2487,14 @@ namespace Prototipo1
         private System.Windows.Forms.TabControl tabControlInputTables;
         private System.Windows.Forms.TabPage tabPageAirplanes;
         private System.Windows.Forms.TabPage tabPageAirports;
+        private AirplaneView AirplaneView;
+        private AirportView AirportView;
         private TabPage tabPageRequests;
-        private DataGridView dataGridViewAirport;
         private DataGridViewTextBoxColumn AirplaneName;
         private TabPage tabPageFuel;
         private DataGridView dataGridViewFuel;
-        private DataGridView dataGridViewAirplane;
         private DataGridView dataGridViewRequest;
         private DataGridView dataGridViewPassenger;
-        private DataGridView dataGridViewSeatTypes;
         private Panel panel5;
         private NumericUpDown numUD_ChildWeight;
         private NumericUpDown numUD_WomanWeight;
@@ -2828,27 +2527,6 @@ namespace Prototipo1
         private Label labelDescriptionInstance;
         private TabPage tabStretche;
         private DataGridView dataGridViewStretches;
-        private DataGridViewTextBoxColumn AirplaneId;
-        private DataGridViewTextBoxColumn AirplaneModel;
-        private DataGridViewTextBoxColumn Prefix;
-        private DataGridViewTextBoxColumn Range;
-        private DataGridViewTextBoxColumn Weight;
-        private DataGridViewTextBoxColumn MaxWeightTakeOff;
-        private DataGridViewTextBoxColumn CruiseSpeed;
-        private DataGridViewTextBoxColumn FirstHourConsumption;
-        private DataGridViewTextBoxColumn SecondHourFuelConsumption;
-        private DataGridViewTextBoxColumn MaxFuel;
-        private DataGridViewTextBoxColumn Capacity;
-        private DataGridViewTextBoxColumn BaseAirport;
-        private Button buttonDeleteAirplane;
-        private Button buttonEditAirplane;
-        private Button buttonAddAirplane;
-        private Button buttonDeleteAirplaneSeatType;
-        private Button buttonEditAirplaneSeatType;
-        private Button buttonAddAirplaneSeatType;
-        private Button buttonDeleteAirport;
-        private Button buttonEditAirport;
-        private Button buttonAddAirport;
         private DataGridViewTextBoxColumn AiportAid;
         private DataGridViewTextBoxColumn AirportName;
         private DataGridViewTextBoxColumn ICAO;
@@ -2887,10 +2565,6 @@ namespace Prototipo1
         private DataGridViewTextBoxColumn CurrencyName;
         private DataGridViewTextBoxColumn CurrencySymbol;
         private DataGridViewTextBoxColumn Value;
-        private DataGridViewTextBoxColumn SeatTypeId;
-        private DataGridViewTextBoxColumn SeatClass;
-        private DataGridViewTextBoxColumn NumberSeats;
-        private DataGridViewTextBoxColumn MaxLuggageWeight;
         private DataGridViewTextBoxColumn IdPassenger;
         private DataGridViewTextBoxColumn Passenger;
         private DataGridViewTextBoxColumn Sex;

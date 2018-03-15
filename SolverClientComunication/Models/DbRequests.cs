@@ -40,10 +40,10 @@ namespace SolverClientComunication.Models
         public TimeSpan ArrivalTimeWindowEnd { get; set; }
 
         [Required]
-        public DbAirports Origin { get; set; }
+        public virtual DbAirports Origin { get; set; }
 
         [Required]
-        public DbAirports Destination { get; set; }
+        public virtual DbAirports Destination { get; set; }
 
         [Required]
         public DbInstance Instance { get; set; }

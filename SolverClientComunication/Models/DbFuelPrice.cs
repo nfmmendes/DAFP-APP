@@ -14,7 +14,7 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
     
         [Required]
-        public DbAirports Airport { get; set; }
+        public virtual DbAirports Airport { get; set; }
 
         [Required]
         public string Currency { get; set; }

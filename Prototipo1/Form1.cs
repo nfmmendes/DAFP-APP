@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Prototipo1.Controller;
 using Solver;
@@ -16,7 +17,7 @@ namespace Prototipo1
 {
     public partial class MainForm : Form
     {
-        public CustomSqlContext Context = new CustomSqlContext();
+        
         private int CountStretchePage;
         private readonly int StretchePageSize=5000; 
 
@@ -29,6 +30,8 @@ namespace Prototipo1
         public MainForm()
         {
             InitializeComponent();
+            
+
             var instances = Context.Instances;
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
             if(comboBoxInstancesInstanceTab.Items.Count>0)
@@ -43,6 +46,7 @@ namespace Prototipo1
             ImportDataController.Instance.setContext(Context);
             HeuristicSolutionController.Instance.setContext(Context);
             AirplaneController.Instance.setContext(Context);
+            
 
         }
 
@@ -417,9 +421,9 @@ namespace Prototipo1
         /// <param name="instance"></param>
         private void FillTables(DbInstance instance)
         {
-            FillAiportsTable(instance);
+            AirportView.setInstance(instance);
             FillStretchTable(instance);
-            FillAirplaneTables(instance);
+            AirplaneView.setInstance(instance);
             FillRequestTables(instance);
             FillCurrencyTable(instance);
             FillFuelTable(instance);
@@ -432,7 +436,7 @@ namespace Prototipo1
         /// <param name="instance"></param>
         private void FillFuelTable(DbInstance instance){
             this.dataGridViewFuel.Rows.Clear();
-            var fuels = Context.FuelPrice.Where(x => x.Instance.Id == instance.Id);
+            var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == instance.Id);
 
             foreach (var item in fuels)
                dataGridViewFuel.Rows.Add(item.Id,item.Airport.AiportName,"F", item.Currency, item.Value); //TODO: Change This F
@@ -459,30 +463,17 @@ namespace Prototipo1
         private void FillRequestTables(DbInstance instance)
         {
             this.dataGridViewRequest.Rows.Clear();
-            var requests = Context.Requests.Where(x => x.Instance.Id == instance.Id).GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
+            var requests = Context.Requests.ToList().Where(x => x.Instance.Id == instance.Id)
+                                                    .GroupBy(x=>x.PNR).ToDictionary(x=>x.Key, x=>x.ToList());
 
             foreach (var key in requests.Keys){
                 var value = requests[key].First();
-                dataGridViewRequest.Rows.Add(key, key, value.Origin.AiportName, value.Destination.AiportName, value.DepartureTimeWindowBegin,
+                dataGridViewRequest.Rows.Add(key, key, value.Origin.AiportName, value.Destination?.AiportName, value.DepartureTimeWindowBegin,
                                                 value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillAirplaneTables(DbInstance instance)
-        {
-            this.dataGridViewAirplane.Rows.Clear();
-            var airplanes = Context.Airplanes.Where(x => x.Instance.Id == instance.Id).ToList();
 
-            foreach (var item in airplanes)
-                dataGridViewAirplane.Rows.Add(item.Id, item.Model,item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed, 
-                                              item.FuelConsumptionFirstHour,item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity, 
-                                              item.BaseAirport.AiportName);
-            
-        }
 
         /// <summary>
         /// 
@@ -491,12 +482,12 @@ namespace Prototipo1
         private void FillStretchTable(DbInstance instance)
         {
             this.dataGridViewStretches.Rows.Clear();
-            var stretches = Context.Stretches.Where(x => x.Origin.Instance.Id == instance.Id);
+            var stretches = Context.Stretches.ToList().Where(x => x.Origin.Instance.Id == instance.Id);
             int cont = 0;
             CountStretchePage = 1;
             labelPageStretch.Text = $"{CountStretchePage} of {(int) (stretches.Count() / StretchePageSize + 1)}";
             foreach (var item in stretches){
-                dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
+                    dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
                 cont++;
                 if (cont == StretchePageSize)
                     break; 
@@ -504,20 +495,6 @@ namespace Prototipo1
 
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillAiportsTable(DbInstance instance)
-        {
-            this.dataGridViewAirport.Rows.Clear();
-            var airports = Context.Airports.Where(x => x.Instance.Id == instance.Id);
-            foreach (var item in airports){
-                dataGridViewAirport.Rows.Add(item.Id, item.AiportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
-                                             item.RunwayLength, item.Region, item.MTOW_APE3, item.MTOW_PC12, item.LandingCost, item.GroundTime);
-            }
-        }
 
         /// <summary>
         /// 
@@ -562,28 +539,7 @@ namespace Prototipo1
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="idAirplane"></param>
-        private void FillSeatTypeList(long idAirplane){ 
-            this.dataGridViewSeatTypes.Rows.Clear();
-            
-            var seatTypes = Context.SeatList.Where(x => x.Airplanes.Id == idAirplane).ToList();
 
-            //if(seatTypes.Any())
-            foreach (var item in seatTypes)
-                dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.numberOfSeats, item.luggageWeightLimit);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewAirplane_RowEnter(object sender, DataGridViewCellEventArgs e){
-            FillSeatTypeList(Convert.ToInt64(dataGridViewAirplane.Rows[e.RowIndex].Cells[0].Value));
-        }
 
         /// <summary>
         /// 
@@ -623,109 +579,6 @@ namespace Prototipo1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonDeleteAirplane_Click(object sender, EventArgs e){
-            if (dataGridViewAirplane.SelectedRows.Count > 0)
-            {
-               var message = "All information related with these airplanes will be deleted. Do you want continue?";
-               var result =  MessageBox.Show(message,"",MessageBoxButtons.YesNo);
-
-               if (result == DialogResult.Yes){
-                   for(int i=0 ;i< dataGridViewAirplane.Rows.Count; i++){
-                       if (!dataGridViewAirplane.Rows[i].Selected) continue;
-
-                       var index = Convert.ToInt64(dataGridViewAirplane.Rows[i].Cells[0].Value);
-                       var deleted = Context.Airplanes.FirstOrDefault(x=>x.Id ==index);
-                       if(deleted!= null)
-                       Context.Airplanes.Remove(deleted);
-                   }
-                   
-                   Context.SaveChanges();
-                   var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
-                   FillAirplaneTables(Context.Instances.ToList().First(x=>x.Name.Equals(instanceName)));
-               }
-            }else
-                MessageBox.Show("There are no selected airplanes");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonDeleteAirplaneSeatType_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewSeatTypes.SelectedRows.Count > 0){
-                var message = "All information related with these seats will be deleted. Do you want continue?";
-                var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
-                long idAirplane = 0;
-
-                //TODO: Put it in the airplane controller 
-                if (result == DialogResult.Yes)
-                {
-                    for (int i = 0; i < dataGridViewSeatTypes.Rows.Count; i++)
-                    {
-                        if (!dataGridViewSeatTypes.Rows[i].Selected) continue;
-
-                        var index = Convert.ToInt64(dataGridViewSeatTypes.Rows[i].Cells[0].Value);
-                        var deleted = Context.SeatList.FirstOrDefault(x => x.Id == index);
-                        idAirplane = deleted.Airplanes.Id;
-                        if (deleted != null)
-                            Context.SeatList.Remove(deleted);
-                    }
-
-                    Context.SaveChanges();
-                    FillSeatTypeList(idAirplane);
-                }
-            }
-            else
-                MessageBox.Show("There are no selected seat types");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonDeleteAirport_Click(object sender, EventArgs e){
-            
-            if (dataGridViewAirport.SelectedRows.Count > 0)
-            {
-                var message = "All information related with these airports will be deleted. Do you want continue?";
-                var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                {
-                    for (int i = 0; i < dataGridViewAirport.Rows.Count; i++){
-
-                        
-                        //TODO: Put it in an controller 
-                        if (!dataGridViewAirport.Rows[i].Selected) continue;
-
-                        var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
-                        var deleted = Context.Airports.FirstOrDefault(x => x.Id == index);
-                        Context.Stretches.RemoveRange(Context.Stretches.Where(x => x.Origin.Id == deleted.Id).ToList());
-                        Context.Stretches.RemoveRange(Context.Stretches.Where(x => x.Destination.Id == deleted.Id).ToList());
-                        Context.Airplanes.RemoveRange(Context.Airplanes.Where(x=> x.BaseAirport.Id == deleted.Id)).ToList();
-                        Context.SaveChanges();
-
-                        if (deleted != null)
-                            Context.Airports.Remove(deleted);
-                    }
-
-                    Context.SaveChanges();
-                    var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
-                    FillTables(Context.Instances.ToList().First(x => x.Name.Equals(instanceName)));
-                }
-            }
-            else
-                MessageBox.Show("There are no selected airplanes");
-       }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void buttonDeleteFuelPrice_Click(object sender, EventArgs e){
             if (dataGridViewFuel.SelectedRows.Count > 0)
             {
@@ -739,7 +592,7 @@ namespace Prototipo1
 
                         if (!dataGridViewFuel.Rows[i].Selected) continue;
 
-                        var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
+                        var index = Convert.ToInt64(dataGridViewFuel.Rows[i].Cells[0].Value);
                         var deleted = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
 
                         if (deleted != null)
@@ -755,76 +608,9 @@ namespace Prototipo1
                 MessageBox.Show("There are no selected airplanes");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAddAirport_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
-            if (instance != null){
-                var addAirport = new AddEditAirport();
-                addAirport.OpenToAdd(instance);
-                FillAiportsTable(instance);
-            }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEditAirport_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
-            if (instance != null){
-                var addAirport = new AddEditAirport();
-                addAirport.OpenToEdit(instance,0); //TODO: get real instance
-                FillAiportsTable(instance);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAddAirplane_Click(object sender, EventArgs e){
-
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            if (instance != null){
-                var addAirplane = new AddEditAirplane(Context);
-                addAirplane.OpenToAdd(instance);
-                FillAirplaneTables(instance);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEditAirplane_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-            
-            if (instance != null && dataGridViewAirplane.SelectedRows.Count >0){
-                var addAirplane = new AddEditAirplane(Context);
-
-                var indexRow = dataGridViewAirplane.SelectedRows[0].Index;
-
-                addAirplane.OpenToEdit(instance,Convert.ToInt64(dataGridViewAirplane.Rows[indexRow].Cells[0].Value));
-                FillAirplaneTables(instance);
-
-                dataGridViewAirplane.Rows.Clear();
-                FillAirplaneTables(instance);
-            }
-        }
 
         /// <summary>
         /// 
@@ -861,37 +647,7 @@ namespace Prototipo1
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAddAirplaneSeatType_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
-            if (instance != null){
-                var addSeat = new AddEditSeatType(Context);
-                addSeat.OpenToAdd(instance);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEditAirplaneSeatType_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-
-            if (instance != null && dataGridViewSeatTypes.SelectedRows.Count > 0){
-                var addSeat = new AddEditSeatType(Context);
-                var index = dataGridViewSeatTypes.SelectedRows[0].Index;
-                addSeat.OpenToEdit(instance,Convert.ToInt64(dataGridViewSeatTypes.Rows[0].Cells[0].Value)); //TODO: replace by the real ID
-            }
-        }
 
 
         /// <summary>
@@ -1142,6 +898,11 @@ namespace Prototipo1
         }
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewRequestsResult_RowEnter(object sender, DataGridViewCellEventArgs e){
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
