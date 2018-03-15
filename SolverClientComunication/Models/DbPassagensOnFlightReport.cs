@@ -14,10 +14,10 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
-        public DbFlightsReport Flight { get; set; }
+        public virtual DbFlightsReport Flight { get; set; }
 
         [Required]
-        public DbRequests Passenger { get; set; }
+        public virtual DbRequests Passenger { get; set; }
 
     }
 }

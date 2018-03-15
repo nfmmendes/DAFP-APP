@@ -19,20 +19,16 @@ namespace Prototipo1.Components
         public DbInstance Instance { get; set; }
 
 
-        public FuelPriceView(CustomSqlContext context)
-        {
+        public FuelPriceView(CustomSqlContext context){
             InitializeComponent();
             Context = context;
         }
-
-
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="instance"></param>
-        public void setInstance(DbInstance instance)
-        {
+        public void setInstance(DbInstance instance){
             Instance = instance;
             FillFuelTable();
 
@@ -96,8 +92,7 @@ namespace Prototipo1.Components
         /// 
         /// </summary>
         /// <param name="instance"></param>
-        private void FillFuelTable()
-        {
+        private void FillFuelTable(){
            // this.dataGridViewFuel.Rows.Clear();
             var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == Instance.Id);
 

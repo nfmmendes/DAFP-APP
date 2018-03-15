@@ -14,10 +14,10 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
-        public DbAirports Origin { get; set; }
+        public virtual DbAirports Origin { get; set; }
 
         [Required]
-        public DbAirports Destination { get; set; }
+        public virtual DbAirports Destination { get; set; }
 
         [Required]
         public double FuelOnDeparture { get; set; }
@@ -33,7 +33,7 @@ namespace SolverClientComunication.Models
         public  TimeSpan ArrivalTime { get; set; }
 
         [Required]
-        public DbAirplanes Airplanes { get; set;}
+        public virtual DbAirplanes Airplanes { get; set;}
 
         [Required]
         public DbInstance Instance { get; set; }

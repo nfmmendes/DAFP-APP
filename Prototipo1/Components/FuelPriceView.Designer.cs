@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAddFuel = new System.Windows.Forms.Button();
             this.dataGridViewFuel = new System.Windows.Forms.DataGridView();
             this.IdFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,15 +50,15 @@
             this.buttonDeleteFuelPrice.UseVisualStyleBackColor = true;
             this.buttonDeleteFuelPrice.Click += new System.EventHandler(this.buttonDeleteFuelPrice_Click);
             // 
-            // button2
+            // buttonEdit
             // 
-            this.button2.Location = new System.Drawing.Point(473, 291);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 34);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Edit";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.buttonEditFuel_Click);
+            this.buttonEdit.Location = new System.Drawing.Point(473, 291);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(91, 34);
+            this.buttonEdit.TabIndex = 10;
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEditFuel_Click);
             // 
             // buttonAddFuel
             // 
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.buttonDeleteFuelPrice);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAddFuel);
             this.Controls.Add(this.dataGridViewFuel);
             this.Name = "FuelPriceView";
@@ -135,7 +135,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonDeleteFuelPrice;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAddFuel;
         private System.Windows.Forms.DataGridView dataGridViewFuel;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdFuel;

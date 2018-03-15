@@ -121,11 +121,29 @@
     <Compile Include="Components\FuelPriceView.Designer.cs">
       <DependentUpon>FuelPriceView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\RefuelSolutionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\RefuelSolutionView.Designer.cs">
+      <DependentUpon>RefuelSolutionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\RequestSolutionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\RequestSolutionView.Designer.cs">
+      <DependentUpon>RequestSolutionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\RequestsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\RequestsView.Designer.cs">
       <DependentUpon>RequestsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\StretchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\StretchView.Designer.cs">
+      <DependentUpon>StretchView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller\AirplaneController.cs" />
     <Compile Include="Controller\AirportController.cs" />
@@ -205,8 +223,17 @@
     <EmbeddedResource Include="Components\FuelPriceView.resx">
       <DependentUpon>FuelPriceView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\RefuelSolutionView.resx">
+      <DependentUpon>RefuelSolutionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\RequestSolutionView.resx">
+      <DependentUpon>RequestSolutionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\RequestsView.resx">
       <DependentUpon>RequestsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\StretchView.resx">
+      <DependentUpon>StretchView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateInstance.resx">
       <DependentUpon>CreateInstance.cs</DependentUpon>

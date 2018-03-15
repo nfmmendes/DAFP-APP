@@ -207,22 +207,7 @@ namespace Prototipo1
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void FillRequestSolutionTable(DbInstance instance){
 
-            this.dataGridViewRequestsResult.Rows.Clear();
-            var requests = Context.Requests.Where(x => x.Instance.Id == instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
-
-            var flightList = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id);
-
-            foreach (var key in requests.Keys){
-                var value = requests[key].First();
-                dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AiportName, value.Destination.AiportName, value.DepartureTimeWindowBegin,
-                    value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
-            }
-        }
 
 
         /// <summary>
@@ -423,37 +408,16 @@ namespace Prototipo1
         private void FillTables(DbInstance instance)
         {
             AirportView.setInstance(instance);
-            FillStretchTable(instance);
+            StretchView.setInstance(instance);
             AirplaneView.setInstance(instance);
             RequestView.setInstance(instance);
             FuelPriceView.setInstance(instance);
             CurrencyView.setInstance(instance);
-            FillRequestSolutionTable(instance);
+            RequestSolutionView.setInstance(instance);
         }
 
 
 
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        private void FillStretchTable(DbInstance instance)
-        {
-            this.dataGridViewStretches.Rows.Clear();
-            var stretches = Context.Stretches.ToList().Where(x => x.Origin.Instance.Id == instance.Id);
-            int cont = 0;
-            CountStretchePage = 1;
-            labelPageStretch.Text = $"{CountStretchePage} of {(int) (stretches.Count() / StretchePageSize + 1)}";
-            foreach (var item in stretches){
-                    dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
-                cont++;
-                if (cont == StretchePageSize)
-                    break; 
-            }
-
-        }
 
 
         /// <summary>
@@ -647,155 +611,8 @@ namespace Prototipo1
 
 
         #region Stretch table pagination
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonFirstPageStretch_Click(object sender, EventArgs e)
-        {
-
-            dataGridViewStretches.Rows.Clear();
-
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
-
-            var firstPageSize = Math.Min(StretchePageSize, totalSize);
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
-
-            for (int i = 0; i <= firstPageSize; i++)
-                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                                               listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
-
-            CountStretchePage = 1;
-            labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonPrevPageStretch_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
-
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
-
-            if (CountStretchePage > 1)
-            {
-                dataGridViewStretches.Rows.Clear();
-
-                CountStretchePage--;
-                var firstIndex = StretchePageSize * (CountStretchePage-1);
-                var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
-
-                for (int i = firstIndex; i <= lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
-
-                labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonNextPageStretch_Click(object sender, EventArgs e)
-        {
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == instance.Id);
-
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList();
-
-            if (CountStretchePage <= (int)(listOfStretches.Count() / StretchePageSize)){
-                dataGridViewStretches.Rows.Clear();
-
-                var firstIndex = StretchePageSize * CountStretchePage;
-                var lastIndex = Math.Min(firstIndex + StretchePageSize,totalSize);
-
-                CountStretchePage++;
-
-                for (int i = firstIndex; i < lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
-                
-                labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
-            }
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonLastPageStretch_Click(object sender, EventArgs e){
-
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            var totalSize = Context.Stretches.Count(x=>x.Origin != null && x.Origin.Instance.Id ==instance.Id );
-            var firstLastPageIndex = totalSize - (totalSize%StretchePageSize);
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == instance.Id).ToList(); 
-            
-            dataGridViewStretches.Rows.Clear();
-
-            
-
-            for (int i = firstLastPageIndex; i < totalSize ; i++)
-                try{
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
-                }catch(Exception ex) { }
-
-            CountStretchePage = listOfStretches.Count() / StretchePageSize + 1;
-            labelPageStretch.Text = $"{CountStretchePage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
-
-        }
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewRequestsResult_RowEnter(object sender, DataGridViewCellEventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
-            if (dataGridViewRequestsResult.SelectedRows.Count > 0){
-                var index = dataGridViewRequestsResult.SelectedRows[0].Index;
-                var PNR = dataGridViewRequestsResult.Rows[index].Cells[0].Value.ToString();
-
-                var passengerList = Context.PassagersOnFlight.Where(x=>x.Passenger.PNR.Equals(PNR));
-
-                dataGridViewRequestSolutionDetails.Rows.Clear();
-                
-                foreach (var passenger in passengerList){
-                    //TODO: Discover why these fields are null 
-                    if(passenger.Flight.Origin != null && passenger.Flight.Destination != null)
-                    dataGridViewRequestSolutionDetails.Rows.Add("x", passenger.Passenger.Name,
-                                                                     passenger.Flight.Airplanes.Prefix,
-                                                                     passenger.Flight.Origin.AiportName,
-                                                                     passenger.Flight.DepartureTime,
-                                                                     passenger.Flight.Destination.AiportName,
-                                                                     passenger.Flight.ArrivalTime);
-                }
-                
-
-            }
-        }
     }
 }
