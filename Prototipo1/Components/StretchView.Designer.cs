@@ -103,6 +103,7 @@
             // dataGridViewStretches
             // 
             this.dataGridViewStretches.AllowUserToAddRows = false;
+            this.dataGridViewStretches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewStretches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStretches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StretcheId,
@@ -127,19 +128,16 @@
             // 
             this.OriginStretche.HeaderText = "Origin";
             this.OriginStretche.Name = "OriginStretche";
-            this.OriginStretche.Width = 370;
             // 
             // DestinationStretche
             // 
             this.DestinationStretche.HeaderText = "Destination";
             this.DestinationStretche.Name = "DestinationStretche";
-            this.DestinationStretche.Width = 200;
             // 
             // DistanceStretche
             // 
             this.DistanceStretche.HeaderText = "Distance (Km)";
             this.DistanceStretche.Name = "DistanceStretche";
-            this.DistanceStretche.Width = 200;
             // 
             // StretchView
             // 

@@ -120,6 +120,7 @@
             // dataGridViewSeatTypes
             // 
             this.dataGridViewSeatTypes.AllowUserToAddRows = false;
+            this.dataGridViewSeatTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSeatTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSeatTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SeatTypeId,
@@ -145,19 +146,16 @@
             // 
             this.SeatClass.HeaderText = "Class";
             this.SeatClass.Name = "SeatClass";
-            this.SeatClass.Width = 310;
             // 
             // NumberSeats
             // 
             this.NumberSeats.HeaderText = "Number of Seats";
             this.NumberSeats.Name = "NumberSeats";
-            this.NumberSeats.Width = 180;
             // 
             // MaxLuggageWeight
             // 
             this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
             this.MaxLuggageWeight.Name = "MaxLuggageWeight";
-            this.MaxLuggageWeight.Width = 320;
             // 
             // dataGridViewAirplane
             // 

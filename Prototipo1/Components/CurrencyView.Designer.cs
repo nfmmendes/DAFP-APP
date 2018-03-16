@@ -69,6 +69,7 @@
             // dataGridViewCurrency
             // 
             this.dataGridViewCurrency.AllowUserToAddRows = false;
+            this.dataGridViewCurrency.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCurrency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCurrency.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CurrencyId,
@@ -94,19 +95,16 @@
             // 
             this.CurrencyName.HeaderText = "Currency";
             this.CurrencyName.Name = "CurrencyName";
-            this.CurrencyName.Width = 370;
             // 
             // CurrencySymbol
             // 
             this.CurrencySymbol.HeaderText = "Symbol";
             this.CurrencySymbol.Name = "CurrencySymbol";
-            this.CurrencySymbol.Width = 200;
             // 
             // Value
             // 
             this.Value.HeaderText = "Value (1 to US$)";
             this.Value.Name = "Value";
-            this.Value.Width = 200;
             // 
             // CurrencyView
             // 

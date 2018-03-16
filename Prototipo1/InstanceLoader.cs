@@ -111,17 +111,29 @@ namespace Prototipo1
                  instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(this.comboBoxInstances.SelectedValue.ToString()));
             }
 
-            this.Enabled = false; 
-          if (instance != null){
-             if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
-                ImportDataController.Instance.importNetworkData(networkFileChoosenLabel.Text,instance,loadAirports,loadStretches,loadFuel);
-             if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
-                    ImportDataController.Instance.importAirplanesData(this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
-             if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
-                    ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, instance, loadRequest);
-          }
+            this.Enabled = false;
+            var now = DateTime.Now;
+            if (instance != null){
+               if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
+                  ImportDataController.Instance.importNetworkData(now, networkFileChoosenLabel.Text,instance,loadAirports,loadStretches,loadFuel);
+               if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
+                  ImportDataController.Instance.importAirplanesData(now, this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
+               if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
+                  ImportDataController.Instance.importRequestData(now, this.choosenRequestFileLabel.Text, instance, loadRequest);
+              }
             this.Enabled = true; 
-            // ImportDataController.Instance.importRequestData(this.choosenRequestFileLabel.Text, new DbInstance());
+            var newErrosFound = Context.ImportErrors.Any(x=>x.Instance.Id == instance.Id && x.ImportationHour.Equals(now));
+
+            if (newErrosFound){
+                var seeErrors = MessageBox.Show("Import data finished with errors. Do you want to see it now?","",MessageBoxButtons.YesNo);
+
+                if(seeErrors == DialogResult.Yes) { 
+                    var importDataLog = new ImportDataLog(Context, instance);
+                    importDataLog.ShowDialog();
+                }
+            }else
+                MessageBox.Show("Import data finished without errors");
+            this.Close();
         }
 
         /// <summary>

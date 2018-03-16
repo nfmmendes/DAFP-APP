@@ -27,23 +27,33 @@ namespace Prototipo1.Controller
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="now"></param>
         /// <param name="fileName"></param>
         /// <param name="instance"></param>
         /// <param name="loadAirports"></param>
         /// <param name="loadStretches"></param>
-        public void importNetworkData(string fileName, DbInstance instance,bool loadAirports, bool loadStretches, bool loadFuelInformation)
+        /// <param name="loadFuelInformation"></param>
+        public void importNetworkData(DateTime now, string fileName, DbInstance instance,bool loadAirports, bool loadStretches, bool loadFuelInformation)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
+            var importHour = now;
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+
             var sheet = hssfwb.GetSheet("Airport");
+            var iatas = new HashSet<string>();
             if (sheet != null && loadAirports){
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
                     IRow row = sheet.GetRow(i);
                     if (row == null) break;
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                    if (iatas.Contains(row.GetCell(1).StringCellValue)){
+                        continue;
+                    }
 
                     var item = new DbAirports()
                     {
@@ -66,21 +76,21 @@ namespace Prototipo1.Controller
                     if (row.GetCell(5).CellType == CellType.Numeric )
                         item.RunwayLength = Convert.ToInt32(row.GetCell(5).NumericCellValue);
 
-                    try
-                    {
-                        Instance.Context.Airports.AddOrUpdate(item);
-                        Instance.Context.SaveChanges();
+                    try{
+                     Instance.Context.Airports.Add(item);
+                     //    
                     }catch (DbEntityValidationException e){
                         ShowErros(e);
                     }
                     
                 }
+                Instance.Context.SaveChanges();
             }
 
             var sheet2 = hssfwb.GetSheet("Stretches");
-
+            //Context.Configuration.ValidateOnSaveEnabled = false;
             if (sheet2 != null && loadStretches){
-                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
+                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AiportName, x=>x);
                 List<DbStretches> newItems = new List<DbStretches>();
                 for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
                     IRow row = sheet2.GetRow(i);
@@ -92,12 +102,20 @@ namespace Prototipo1.Controller
 
                     var airportOriginName = row.GetCell(0).StringCellValue;
                     var airportDestinationName = row.GetCell(1).StringCellValue;
-                    var airportOrigin = instanceAirports.FirstOrDefault(x =>x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportOriginName));
-                    var airportDestination = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportDestinationName));
-
-                    
+                                    
+                    var airportOrigin = instanceAirports.ContainsKey(airportOriginName) ? instanceAirports[airportOriginName] : null;
+                    var airportDestination = instanceAirports.ContainsKey(airportDestinationName) ? instanceAirports[airportDestinationName] : null;
 
                     if (airportOrigin != null && airportDestination != null){
+
+                        if (i % 5000 == 0)
+                        {
+                            Instance.Context.Stretches.AddRange(newItems);
+                            Instance.Context.SaveChanges();
+                            newItems.Clear();
+                           
+                        }
+
                         var item = new DbStretches(){
                             Origin = airportOrigin,
                             Destination = airportDestination,
@@ -113,8 +131,9 @@ namespace Prototipo1.Controller
                     }
 
                 }
-                Instance.Context.Stretches.AddRange(newItems);
+               // Instance.Context.Stretches.AddRange(newItems);
                 Instance.Context.SaveChanges();
+               // Context.Configuration.ValidateOnSaveEnabled = true;
             }
 
             var sheet3 = hssfwb.GetSheet("Fuel Prices");
@@ -144,7 +163,7 @@ namespace Prototipo1.Controller
                 }
                 Instance.Context.SaveChanges();
             }
-
+            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
         }
 
         /// <summary>
@@ -168,20 +187,23 @@ namespace Prototipo1.Controller
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="now"></param>
         /// <param name="fileName"></param>
         /// <param name="instance"></param>
         /// <param name="loadRequests"></param>
-        public void importRequestData(string fileName, DbInstance instance,bool loadRequests)
+        public void importRequestData(DateTime now, string fileName, DbInstance instance,bool loadRequests)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
-            var importHour = DateTime.Now;
-
+            var importHour = now;
+            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
             var sheet = hssfwb.GetSheet("Request");
-            if (sheet != null)
-            {
+
+            if (sheet != null){
+                
+                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id && !string.IsNullOrEmpty(x.IATA)).ToDictionary(x => x.IATA, x => x);
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
                     IRow row = sheet.GetRow(i);
@@ -195,10 +217,8 @@ namespace Prototipo1.Controller
                         continue;
                     }
 
-                    var airportOrigin = Instance.Context.Airports.FirstOrDefault(x=>x.Instance.Id == instance.Id 
-                                                                                && x.IATA.Equals(originIATA));
-                    var airportDestination = Instance.Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id 
-                                                                                   && x.IATA.Equals(destinationIATA));
+                    var airportOrigin = instanceAirports.ContainsKey(originIATA) ? instanceAirports[originIATA] : null;
+                    var airportDestination = instanceAirports.ContainsKey(destinationIATA) ? instanceAirports[destinationIATA] : null;
 
                     if (airportOrigin == null || airportDestination == null){
                         CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
@@ -229,9 +249,8 @@ namespace Prototipo1.Controller
                 }catch (DbEntityValidationException e){
                     ShowErros(e);
                 }
-                
-
             }
+            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
         }
 
         /// <summary>
@@ -263,13 +282,14 @@ namespace Prototipo1.Controller
         /// <param name="instance"></param>
         /// <param name="loadAirplanes"></param>
         /// <param name="loadSeats"></param>
-        public void importAirplanesData(string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
+        public void importAirplanesData(DateTime now, string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
         {
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
-            var importHour = DateTime.Now;
+            var importHour = now;
 
+            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
             var sheet = hssfwb.GetSheet("Airplanes");
             if (sheet != null && loadAirplanes){
@@ -368,6 +388,7 @@ namespace Prototipo1.Controller
                 }
                 Instance.Context.SaveChanges();
             }
+            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
         }
     }
 }

@@ -188,6 +188,12 @@
     <Compile Include="FormAdvancedOptions.Designer.cs">
       <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportDataLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportDataLog.Designer.cs">
+      <DependentUpon>ImportDataLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstanceLoader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdvancedOptions.resx">
       <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportDataLog.resx">
+      <DependentUpon>ImportDataLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceLoader.resx">
       <DependentUpon>InstanceLoader.cs</DependentUpon>

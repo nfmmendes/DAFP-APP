@@ -72,6 +72,7 @@
             // dataGridViewFuel
             // 
             this.dataGridViewFuel.AllowUserToAddRows = false;
+            this.dataGridViewFuel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewFuel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFuel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdFuel,
@@ -98,25 +99,21 @@
             // 
             this.Airport.HeaderText = "Airport";
             this.Airport.Name = "Airport";
-            this.Airport.Width = 270;
             // 
             // Fuel
             // 
             this.Fuel.HeaderText = "Fuel";
             this.Fuel.Name = "Fuel";
-            this.Fuel.Width = 150;
             // 
             // Currency
             // 
             this.Currency.HeaderText = "Currency";
             this.Currency.Name = "Currency";
-            this.Currency.Width = 180;
             // 
             // PricePerLitre
             // 
             this.PricePerLitre.HeaderText = "Price Per Litre";
             this.PricePerLitre.Name = "PricePerLitre";
-            this.PricePerLitre.Width = 200;
             // 
             // FuelPriceView
             // 

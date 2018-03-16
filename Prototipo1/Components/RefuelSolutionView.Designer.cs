@@ -45,6 +45,7 @@
             // dataGridViewSolutionRefuel
             // 
             this.dataGridViewSolutionRefuel.AllowUserToAddRows = false;
+            this.dataGridViewSolutionRefuel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSolutionRefuel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSolutionRefuel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AirplanePrefix,
@@ -65,43 +66,36 @@
             // 
             this.AirplanePrefix.HeaderText = "Airplanes";
             this.AirplanePrefix.Name = "AirplanePrefix";
-            this.AirplanePrefix.Width = 150;
             // 
             // AirportRefuel
             // 
             this.AirportRefuel.HeaderText = "Airport";
             this.AirportRefuel.Name = "AirportRefuel";
-            this.AirportRefuel.Width = 180;
             // 
             // RefuelHour
             // 
             this.RefuelHour.HeaderText = "Hour";
             this.RefuelHour.Name = "RefuelHour";
-            this.RefuelHour.Width = 120;
             // 
             // FuelType
             // 
             this.FuelType.HeaderText = "Fuel Type";
             this.FuelType.Name = "FuelType";
-            this.FuelType.Width = 150;
             // 
             // Volume
             // 
             this.Volume.HeaderText = "Volume";
             this.Volume.Name = "Volume";
-            this.Volume.Width = 120;
             // 
             // UnitPrice
             // 
             this.UnitPrice.HeaderText = "Price";
             this.UnitPrice.Name = "UnitPrice";
-            this.UnitPrice.Width = 120;
             // 
             // Total
             // 
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
-            this.Total.Width = 120;
             // 
             // buttonDeleteFuelPrice
             // 

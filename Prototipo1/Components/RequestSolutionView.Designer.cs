@@ -113,6 +113,7 @@
             // dataGridViewRequestsResult
             // 
             this.dataGridViewRequestsResult.AllowUserToAddRows = false;
+            this.dataGridViewRequestsResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRequestsResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRequestsResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SolutionRequestId,
@@ -158,25 +159,21 @@
             // 
             this.SolutionRequestMinDep.HeaderText = "Minimum Departure Time";
             this.SolutionRequestMinDep.Name = "SolutionRequestMinDep";
-            this.SolutionRequestMinDep.Width = 170;
             // 
             // SolutionRequestMaxDep
             // 
             this.SolutionRequestMaxDep.HeaderText = "Maximum Departure Time";
             this.SolutionRequestMaxDep.Name = "SolutionRequestMaxDep";
-            this.SolutionRequestMaxDep.Width = 170;
             // 
             // SolutionRequestMinArr
             // 
             this.SolutionRequestMinArr.HeaderText = "Minimum Arrival Time";
             this.SolutionRequestMinArr.Name = "SolutionRequestMinArr";
-            this.SolutionRequestMinArr.Width = 150;
             // 
             // SolutionRequestMaxArr
             // 
             this.SolutionRequestMaxArr.HeaderText = "Maximum Arrival Time";
             this.SolutionRequestMaxArr.Name = "SolutionRequestMaxArr";
-            this.SolutionRequestMaxArr.Width = 150;
             // 
             // RequestSolutionView
             // 

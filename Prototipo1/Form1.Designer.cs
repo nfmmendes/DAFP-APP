@@ -38,6 +38,13 @@ namespace Prototipo1
             this.StretchView = new StretchView(Context);
             this.RefuelSolutionView =new  RefuelSolutionView(Context);
             this.RequestSolutionView = new RequestSolutionView(Context);
+            this.tabPageAirplanes.Controls.Add(AirplaneView);
+            this.tabPageAirports.Controls.Add(AirportView);
+            this.tabPageFuel.Controls.Add(FuelPriceView);
+            this.tabExchangeRate.Controls.Add(CurrencyView);
+            this.tabStretches.Controls.Add(StretchView);
+            this.tabPageRefuels.Controls.Add(RefuelSolutionView);
+            this.tabPageSolutionRequests.Controls.Add(RequestSolutionView);
         }
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -398,6 +405,7 @@ namespace Prototipo1
             // 
             // tabPageAirplanes
             // 
+            this.tabPageAirplanes.Controls.Add(AirplaneView);
             this.tabPageAirplanes.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirplanes.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplanes.Name = "tabPageAirplanes";
@@ -409,6 +417,7 @@ namespace Prototipo1
             // 
             // tabPageAirports
             // 
+            this.tabPageAirports.Controls.Add(AirportView);
             this.tabPageAirports.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirports.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirports.Name = "tabPageAirports";
@@ -420,6 +429,7 @@ namespace Prototipo1
             // 
             // tabPageRequests
             // 
+            this.tabPageRequests.Controls.Add(RequestView);
             this.tabPageRequests.Location = new System.Drawing.Point(104, 4);
             this.tabPageRequests.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageRequests.Name = "tabPageRequests";
@@ -431,6 +441,7 @@ namespace Prototipo1
             // 
             // tabPageFuel
             // 
+            this.tabPageFuel.Controls.Add(FuelPriceView);
             this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
             this.tabPageFuel.Name = "tabPageFuel";
             this.tabPageFuel.Size = new System.Drawing.Size(1078, 546);
@@ -439,7 +450,8 @@ namespace Prototipo1
             this.tabPageFuel.UseVisualStyleBackColor = true;
             // 
             // tabExchangeRate
-            // 
+            //
+            this.tabExchangeRate.Controls.Add(CurrencyView);
             this.tabExchangeRate.Location = new System.Drawing.Point(104, 4);
             this.tabExchangeRate.Name = "tabExchangeRate";
             this.tabExchangeRate.Padding = new System.Windows.Forms.Padding(3);
@@ -450,6 +462,7 @@ namespace Prototipo1
             // 
             // tabStretches
             // 
+            this.tabStretches.Controls.Add(StretchView);
             this.tabStretches.Location = new System.Drawing.Point(104, 4);
             this.tabStretches.Name = "tabStretches";
             this.tabStretches.Padding = new System.Windows.Forms.Padding(3);
@@ -671,6 +684,7 @@ namespace Prototipo1
             // 
             // tabPageRefuels
             // 
+            this.tabPageRefuels.Controls.Add(RefuelSolutionView);
             this.tabPageRefuels.Location = new System.Drawing.Point(104, 4);
             this.tabPageRefuels.Name = "tabPageRefuels";
             this.tabPageRefuels.Size = new System.Drawing.Size(1078, 546);
@@ -679,7 +693,8 @@ namespace Prototipo1
             this.tabPageRefuels.UseVisualStyleBackColor = true;
             // 
             // tabPageSolutionRequests
-            // 
+            //
+            this.tabPageSolutionRequests.Controls.Add(RequestSolutionView);
             this.tabPageSolutionRequests.Location = new System.Drawing.Point(104, 4);
             this.tabPageSolutionRequests.Name = "tabPageSolutionRequests";
             this.tabPageSolutionRequests.Size = new System.Drawing.Size(1078, 546);
@@ -1829,4 +1844,6 @@ namespace Prototipo1
         private TabPage tabStretches;
     }
 }
+
+
 

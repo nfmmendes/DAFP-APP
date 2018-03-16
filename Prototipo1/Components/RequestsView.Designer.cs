@@ -111,6 +111,7 @@
             // dataGridViewPassenger
             // 
             this.dataGridViewPassenger.AllowUserToAddRows = false;
+            this.dataGridViewPassenger.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewPassenger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPassenger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdPassenger,
@@ -136,29 +137,26 @@
             // 
             this.Passenger.HeaderText = "Passenger";
             this.Passenger.Name = "Passenger";
-            this.Passenger.Width = 300;
             // 
             // Sex
             // 
             this.Sex.HeaderText = "Sex";
             this.Sex.Name = "Sex";
-            this.Sex.Width = 260;
             // 
             // IsKid
             // 
             this.IsKid.HeaderText = "Is Children";
             this.IsKid.Name = "IsKid";
-            this.IsKid.Width = 120;
             // 
             // Class
             // 
             this.Class.HeaderText = "Class";
             this.Class.Name = "Class";
-            this.Class.Width = 245;
             // 
             // dataGridViewRequest
             // 
             this.dataGridViewRequest.AllowUserToAddRows = false;
+            this.dataGridViewRequest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRequest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RequestId,
@@ -204,25 +202,21 @@
             // 
             this.MinDeparture.HeaderText = "Minimum Departure Time";
             this.MinDeparture.Name = "MinDeparture";
-            this.MinDeparture.Width = 170;
             // 
             // MaxDeparture
             // 
             this.MaxDeparture.HeaderText = "Maximum Departure Time";
             this.MaxDeparture.Name = "MaxDeparture";
-            this.MaxDeparture.Width = 170;
             // 
             // MinArrival
             // 
             this.MinArrival.HeaderText = "Minimum Arrival Time";
             this.MinArrival.Name = "MinArrival";
-            this.MinArrival.Width = 150;
             // 
             // MaxArrival
             // 
             this.MaxArrival.HeaderText = "Maximum Arrival Time";
             this.MaxArrival.Name = "MaxArrival";
-            this.MaxArrival.Width = 150;
             // 
             // RequestsView
             // 
