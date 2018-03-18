@@ -581,6 +581,7 @@ namespace Prototipo1
             this.MapRoutView.Location = new System.Drawing.Point(34, 23);
             this.MapRoutView.Name = "MapRoutView";
             this.MapRoutView.Size = new System.Drawing.Size(1021, 500);
+            this.MapRoutView.Context = this.Context;
             this.MapRoutView.TabIndex = 0;
             // 
             // tabPageAirplaneUsage

@@ -50,6 +50,8 @@ namespace Prototipo1.Components
             this.GMapControl.Size = new System.Drawing.Size(960, 423);
             this.GMapControl.TabIndex = 0;
             this.GMapControl.Zoom = 2D;
+            this.GMapControl.Scroll += new System.Windows.Forms.ScrollEventHandler(this.GMapControl_Scroll);
+            this.GMapControl.DoubleClick += new System.EventHandler(this.GMapControl_DoubleClick);
             // 
             // comboBoxAirplane
             // 

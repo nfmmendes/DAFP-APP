@@ -16,17 +16,58 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 using SolverClientComunication;
+using SolverClientComunication.Models;
 
 namespace Prototipo1.Components
 {
     public partial class MapRoutesView : UserControl
     {
 
+        private DbInstance Instance { get; set; }
+        public CustomSqlContext Context;
         private static Regex Parser = new Regex("^(?<deg>[-+0-9]+)[^0-9]+(?<min>[0-9]+)[^0-9]+(?<sec>[0-9.,]+)[^0-9.,ENSW]+(?<pos>[ENSW]*)$");
 
         public MapRoutesView(){
             InitializeComponent();
+
         }
+
+        public void setInstance(DbInstance instance){
+            Instance = instance;
+            GMapControl.Overlays.Clear();
+            setOverlayMarker();
+            this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x=>x.Prefix).ToList();
+
+        }
+
+        private void setOverlayMarker(){
+            GMapOverlay markers = new GMapOverlay("markers");
+
+
+            if (Context.Instances.Any())
+            {
+                var airportsList = Context.Airports.Where(x => x.Instance.Id == Instance.Id);
+                foreach (var item in airportsList)
+                {
+                    Debug.Write(item.Latitude);
+                    var _lat = TransformCoordinate(item.Latitude);
+                    Debug.Write(item.Longitude);
+                    var _long = TransformCoordinate(item.Longitude);
+
+
+                    var newMarker = new GMarkerGoogle(new PointLatLng(_lat, _long), GMarkerGoogleType.red_small);
+                    newMarker.ToolTip = new GMapToolTip(newMarker);
+                    newMarker.ToolTip.Fill = new SolidBrush(Color.White);
+                    newMarker.ToolTipText = item.AiportName;
+
+                    markers.Markers.Add(newMarker);
+                }
+            }
+
+            GMapControl.Overlays.Add(markers);
+        }
+
+
         
         /// <summary>
         /// 
@@ -35,7 +76,6 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void MapRoutesView_Load(object sender, EventArgs e)
         {
-            var Context = new CustomSqlContext();
             //use google provider
             GMapControl.MapProvider = GoogleMapProvider.Instance;
             //get tiles from server only
@@ -49,29 +89,7 @@ namespace Prototipo1.Components
             GMapControl.Zoom = 5;
             GMapControl.DragButton = MouseButtons.Left;
 
-            GMapOverlay markers = new GMapOverlay("markers");
-
-
-            if (Context.Instances.Any()){
-                var firstInstance = Context.Instances.First();
-                var airportsList = Context.Airports.Where(x => x.Instance.Id == firstInstance.Id);
-                foreach (var item in airportsList){
-                    Debug.Write(item.Latitude);
-                    var _lat = TransformCoordinate(item.Latitude);
-                    Debug.Write(item.Longitude);
-                    var _long = TransformCoordinate(item.Longitude);
-
-                    
-                    var newMarker = new GMarkerGoogle(new PointLatLng(_lat, _long), GMarkerGoogleType.red_small);
-                    newMarker.ToolTip = new GMapToolTip(newMarker);
-                    newMarker.ToolTip.Fill = new SolidBrush(Color.White);
-                    newMarker.ToolTipText = item.AiportName;
-
-                    markers.Markers.Add(newMarker);   
-                }
-            }
-
-            GMapControl.Overlays.Add(markers);
+            setOverlayMarker();
         }
 
 
@@ -129,7 +147,7 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void comboBoxAirplane_SelectedIndexChanged(object sender, EventArgs e){
-
+            
         }
 
 
@@ -164,6 +182,17 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonZoomOut_Click(object sender, EventArgs e){
             GMapControl.Zoom -= 1;
+        }
+
+        private void GMapControl_DoubleClick(object sender, EventArgs e){
+            GMapControl.Zoom += 0.25;
+        }
+
+        private void GMapControl_Scroll(object sender, ScrollEventArgs e){
+            if(e.OldValue > e.NewValue)
+                GMapControl.Zoom += 0.5;
+            else 
+                GMapControl.Zoom -= 0.5;
         }
     }
 }

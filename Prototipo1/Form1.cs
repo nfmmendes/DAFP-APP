@@ -203,12 +203,8 @@ namespace Prototipo1
         private void BuildSolutionPanel(){
             this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x=>x.Airplanes.Prefix).Distinct().ToList();
             this.tabControlInputSolution.SelectedIndex = 1; 
-            
-
         }
-
-
-
+        
 
         /// <summary>
         /// 
@@ -405,8 +401,7 @@ namespace Prototipo1
         /// 
         /// </summary>
         /// <param name="instance"></param>
-        private void FillTables(DbInstance instance)
-        {
+        private void FillTables(DbInstance instance){
             AirportView.setInstance(instance);
             StretchView.setInstance(instance);
             AirplaneView.setInstance(instance);
@@ -414,6 +409,7 @@ namespace Prototipo1
             FuelPriceView.setInstance(instance);
             CurrencyView.setInstance(instance);
             RequestSolutionView.setInstance(instance);
+            MapRoutView.setInstance(instance);
         }
 
 
