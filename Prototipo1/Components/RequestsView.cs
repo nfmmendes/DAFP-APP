@@ -18,10 +18,8 @@ namespace Prototipo1.Components
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
-        public RequestsView(CustomSqlContext context)
-        {
+        public RequestsView(){
             InitializeComponent();
-            Context = context;
         }
 
         /// <summary>

@@ -30,14 +30,14 @@ namespace Prototipo1
 
         private void InitializeViews(){
             this.Context = new CustomSqlContext();
-            this.AirportView = new AirportView(Context);
-            this.AirplaneView = new AirplaneView(Context);
-            this.RequestView = new RequestsView(Context);
-            this.CurrencyView = new CurrencyView(Context);
-            this.FuelPriceView = new FuelPriceView(Context);
-            this.StretchView = new StretchView(Context);
-            this.RefuelSolutionView =new  RefuelSolutionView(Context);
-            this.RequestSolutionView = new RequestSolutionView(Context);
+            this.AirportView = new AirportView();
+            this.AirplaneView = new AirplaneView();
+            this.RequestView = new RequestsView();
+            this.CurrencyView = new CurrencyView();
+            this.FuelPriceView = new FuelPriceView();
+            this.StretchView = new StretchView();
+            this.RefuelSolutionView =new  RefuelSolutionView();
+            this.RequestSolutionView = new RequestSolutionView();
             this.tabPageAirplanes.Controls.Add(AirplaneView);
             this.tabPageAirports.Controls.Add(AirportView);
             this.tabPageFuel.Controls.Add(FuelPriceView);
@@ -52,15 +52,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            this.Context = new CustomSqlContext();
-            this.RequestSolutionView = new RequestSolutionView(Context);
-            this.AirportView = new AirportView(Context);
-            this.AirplaneView = new AirplaneView(Context);
-            this.RequestView = new RequestsView(Context);
-            this.CurrencyView = new CurrencyView(Context);
-            this.FuelPriceView = new FuelPriceView(Context);
-            this.StretchView = new StretchView(Context);
-            this.RefuelSolutionView = new RefuelSolutionView(Context);
+            this.Context = new SolverClientComunication.CustomSqlContext();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -77,15 +69,21 @@ namespace Prototipo1
             this.tabInput = new System.Windows.Forms.TabPage();
             this.tabControlInputTables = new System.Windows.Forms.TabControl();
             this.tabPageAirplanes = new System.Windows.Forms.TabPage();
+            this.AirplaneView = new Prototipo1.Components.AirplaneView();
             this.tabPageAirports = new System.Windows.Forms.TabPage();
+            this.AirportView = new Prototipo1.Components.AirportView();
             this.tabPageRequests = new System.Windows.Forms.TabPage();
+            this.RequestView = new Prototipo1.Components.RequestsView();
             this.tabPageFuel = new System.Windows.Forms.TabPage();
+            this.FuelPriceView = new Prototipo1.Components.FuelPriceView();
             this.tabExchangeRate = new System.Windows.Forms.TabPage();
+            this.CurrencyView = new Prototipo1.Components.CurrencyView();
             this.tabStretches = new System.Windows.Forms.TabPage();
+            this.StretchView = new Prototipo1.Components.StretchView();
             this.tabSolution = new System.Windows.Forms.TabPage();
             this.tabControlInstanceSolution = new System.Windows.Forms.TabControl();
             this.tabPageRouteVisualization = new System.Windows.Forms.TabPage();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.MapRoutView = new Prototipo1.Components.MapRoutesView();
             this.tabPageAirplaneUsage = new System.Windows.Forms.TabPage();
             this.dataGridViewRoutePassagers = new System.Windows.Forms.DataGridView();
             this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,7 +104,9 @@ namespace Prototipo1
             this.label18 = new System.Windows.Forms.Label();
             this.comboBoxAirplaneSolution = new System.Windows.Forms.ComboBox();
             this.tabPageRefuels = new System.Windows.Forms.TabPage();
+            this.RefuelSolutionView = new Prototipo1.Components.RefuelSolutionView();
             this.tabPageSolutionRequests = new System.Windows.Forms.TabPage();
+            this.RequestSolutionView = new Prototipo1.Components.RequestSolutionView();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxInstancesInstanceTab = new System.Windows.Forms.ComboBox();
             this.buttonOptimizeInstanceTab = new System.Windows.Forms.Button();
@@ -203,12 +203,20 @@ namespace Prototipo1
             this.tabControlInputSolution.SuspendLayout();
             this.tabInput.SuspendLayout();
             this.tabControlInputTables.SuspendLayout();
+            this.tabPageAirplanes.SuspendLayout();
+            this.tabPageAirports.SuspendLayout();
+            this.tabPageRequests.SuspendLayout();
+            this.tabPageFuel.SuspendLayout();
+            this.tabExchangeRate.SuspendLayout();
+            this.tabStretches.SuspendLayout();
             this.tabSolution.SuspendLayout();
             this.tabControlInstanceSolution.SuspendLayout();
             this.tabPageRouteVisualization.SuspendLayout();
             this.tabPageAirplaneUsage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoutePassagers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
+            this.tabPageRefuels.SuspendLayout();
+            this.tabPageSolutionRequests.SuspendLayout();
             this.tabParameters.SuspendLayout();
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -405,7 +413,7 @@ namespace Prototipo1
             // 
             // tabPageAirplanes
             // 
-            this.tabPageAirplanes.Controls.Add(AirplaneView);
+            this.tabPageAirplanes.Controls.Add(this.AirplaneView);
             this.tabPageAirplanes.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirplanes.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplanes.Name = "tabPageAirplanes";
@@ -415,9 +423,19 @@ namespace Prototipo1
             this.tabPageAirplanes.Text = "Airplanes";
             this.tabPageAirplanes.UseVisualStyleBackColor = true;
             // 
+            // AirplaneView
+            // 
+            this.AirplaneView.AutoSize = true;
+            this.AirplaneView.Context = Context;
+            this.AirplaneView.Instance = null;
+            this.AirplaneView.Location = new System.Drawing.Point(20, 20);
+            this.AirplaneView.Name = "AirplaneView";
+            this.AirplaneView.Size = new System.Drawing.Size(1026, 524);
+            this.AirplaneView.TabIndex = 0;
+            // 
             // tabPageAirports
             // 
-            this.tabPageAirports.Controls.Add(AirportView);
+            this.tabPageAirports.Controls.Add(this.AirportView);
             this.tabPageAirports.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirports.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirports.Name = "tabPageAirports";
@@ -427,9 +445,18 @@ namespace Prototipo1
             this.tabPageAirports.Text = "Airport";
             this.tabPageAirports.UseVisualStyleBackColor = true;
             // 
+            // AirportView
+            // 
+            this.AirportView.Context = Context;
+            this.AirportView.Instance = null;
+            this.AirportView.Location = new System.Drawing.Point(0, 0);
+            this.AirportView.Name = "AirportView";
+            this.AirportView.Size = new System.Drawing.Size(1119, 526);
+            this.AirportView.TabIndex = 0;
+            // 
             // tabPageRequests
             // 
-            this.tabPageRequests.Controls.Add(RequestView);
+            this.tabPageRequests.Controls.Add(this.RequestView);
             this.tabPageRequests.Location = new System.Drawing.Point(104, 4);
             this.tabPageRequests.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageRequests.Name = "tabPageRequests";
@@ -439,9 +466,18 @@ namespace Prototipo1
             this.tabPageRequests.Text = "Requests";
             this.tabPageRequests.UseVisualStyleBackColor = true;
             // 
+            // RequestView
+            // 
+            this.RequestView.Context = Context;
+            this.RequestView.Instance = null;
+            this.RequestView.Location = new System.Drawing.Point(0, 0);
+            this.RequestView.Name = "RequestView";
+            this.RequestView.Size = new System.Drawing.Size(1081, 544);
+            this.RequestView.TabIndex = 0;
+            // 
             // tabPageFuel
             // 
-            this.tabPageFuel.Controls.Add(FuelPriceView);
+            this.tabPageFuel.Controls.Add(this.FuelPriceView);
             this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
             this.tabPageFuel.Name = "tabPageFuel";
             this.tabPageFuel.Size = new System.Drawing.Size(1078, 546);
@@ -449,9 +485,18 @@ namespace Prototipo1
             this.tabPageFuel.Text = "Fuel";
             this.tabPageFuel.UseVisualStyleBackColor = true;
             // 
+            // FuelPriceView
+            // 
+            this.FuelPriceView.Context = Context;
+            this.FuelPriceView.Instance = null;
+            this.FuelPriceView.Location = new System.Drawing.Point(0, 0);
+            this.FuelPriceView.Name = "FuelPriceView";
+            this.FuelPriceView.Size = new System.Drawing.Size(1048, 509);
+            this.FuelPriceView.TabIndex = 0;
+            // 
             // tabExchangeRate
-            //
-            this.tabExchangeRate.Controls.Add(CurrencyView);
+            // 
+            this.tabExchangeRate.Controls.Add(this.CurrencyView);
             this.tabExchangeRate.Location = new System.Drawing.Point(104, 4);
             this.tabExchangeRate.Name = "tabExchangeRate";
             this.tabExchangeRate.Padding = new System.Windows.Forms.Padding(3);
@@ -460,9 +505,18 @@ namespace Prototipo1
             this.tabExchangeRate.Text = "Exchange Rates";
             this.tabExchangeRate.UseVisualStyleBackColor = true;
             // 
+            // CurrencyView
+            // 
+            this.CurrencyView.Context = Context;
+            this.CurrencyView.Instance = null;
+            this.CurrencyView.Location = new System.Drawing.Point(0, 0);
+            this.CurrencyView.Name = "CurrencyView";
+            this.CurrencyView.Size = new System.Drawing.Size(1045, 438);
+            this.CurrencyView.TabIndex = 0;
+            // 
             // tabStretches
             // 
-            this.tabStretches.Controls.Add(StretchView);
+            this.tabStretches.Controls.Add(this.StretchView);
             this.tabStretches.Location = new System.Drawing.Point(104, 4);
             this.tabStretches.Name = "tabStretches";
             this.tabStretches.Padding = new System.Windows.Forms.Padding(3);
@@ -470,6 +524,15 @@ namespace Prototipo1
             this.tabStretches.TabIndex = 5;
             this.tabStretches.Text = "Stretches";
             this.tabStretches.UseVisualStyleBackColor = true;
+            // 
+            // StretchView
+            // 
+            this.StretchView.Context = Context;
+            this.StretchView.Instance = null;
+            this.StretchView.Location = new System.Drawing.Point(0, 0);
+            this.StretchView.Name = "StretchView";
+            this.StretchView.Size = new System.Drawing.Size(1040, 550);
+            this.StretchView.TabIndex = 0;
             // 
             // tabSolution
             // 
@@ -503,7 +566,7 @@ namespace Prototipo1
             // 
             // tabPageRouteVisualization
             // 
-            this.tabPageRouteVisualization.Controls.Add(this.webBrowser1);
+            this.tabPageRouteVisualization.Controls.Add(this.MapRoutView);
             this.tabPageRouteVisualization.Location = new System.Drawing.Point(104, 4);
             this.tabPageRouteVisualization.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageRouteVisualization.Name = "tabPageRouteVisualization";
@@ -513,17 +576,12 @@ namespace Prototipo1
             this.tabPageRouteVisualization.Text = "Route Vizualization";
             this.tabPageRouteVisualization.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
+            // MapRoutView
             // 
-            this.webBrowser1.AllowNavigation = false;
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(20, 20);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(1038, 506);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Url = new System.Uri("https://www.openstreetmap.org/", System.UriKind.Absolute);
+            this.MapRoutView.Location = new System.Drawing.Point(34, 23);
+            this.MapRoutView.Name = "MapRoutView";
+            this.MapRoutView.Size = new System.Drawing.Size(1021, 500);
+            this.MapRoutView.TabIndex = 0;
             // 
             // tabPageAirplaneUsage
             // 
@@ -684,7 +742,7 @@ namespace Prototipo1
             // 
             // tabPageRefuels
             // 
-            this.tabPageRefuels.Controls.Add(RefuelSolutionView);
+            this.tabPageRefuels.Controls.Add(this.RefuelSolutionView);
             this.tabPageRefuels.Location = new System.Drawing.Point(104, 4);
             this.tabPageRefuels.Name = "tabPageRefuels";
             this.tabPageRefuels.Size = new System.Drawing.Size(1078, 546);
@@ -692,15 +750,33 @@ namespace Prototipo1
             this.tabPageRefuels.Text = "Refuels";
             this.tabPageRefuels.UseVisualStyleBackColor = true;
             // 
+            // RefuelSolutionView
+            // 
+            this.RefuelSolutionView.Context = Context;
+            this.RefuelSolutionView.Instance = null;
+            this.RefuelSolutionView.Location = new System.Drawing.Point(0, 0);
+            this.RefuelSolutionView.Name = "RefuelSolutionView";
+            this.RefuelSolutionView.Size = new System.Drawing.Size(1069, 454);
+            this.RefuelSolutionView.TabIndex = 0;
+            // 
             // tabPageSolutionRequests
-            //
-            this.tabPageSolutionRequests.Controls.Add(RequestSolutionView);
+            // 
+            this.tabPageSolutionRequests.Controls.Add(this.RequestSolutionView);
             this.tabPageSolutionRequests.Location = new System.Drawing.Point(104, 4);
             this.tabPageSolutionRequests.Name = "tabPageSolutionRequests";
             this.tabPageSolutionRequests.Size = new System.Drawing.Size(1078, 546);
             this.tabPageSolutionRequests.TabIndex = 3;
             this.tabPageSolutionRequests.Text = "Requests";
             this.tabPageSolutionRequests.UseVisualStyleBackColor = true;
+            // 
+            // RequestSolutionView
+            // 
+            this.RequestSolutionView.Context = Context;
+            this.RequestSolutionView.Instance = null;
+            this.RequestSolutionView.Location = new System.Drawing.Point(0, 0);
+            this.RequestSolutionView.Name = "RequestSolutionView";
+            this.RequestSolutionView.Size = new System.Drawing.Size(1077, 500);
+            this.RequestSolutionView.TabIndex = 0;
             // 
             // label7
             // 
@@ -1657,6 +1733,13 @@ namespace Prototipo1
             this.tabControlInputSolution.ResumeLayout(false);
             this.tabInput.ResumeLayout(false);
             this.tabControlInputTables.ResumeLayout(false);
+            this.tabPageAirplanes.ResumeLayout(false);
+            this.tabPageAirplanes.PerformLayout();
+            this.tabPageAirports.ResumeLayout(false);
+            this.tabPageRequests.ResumeLayout(false);
+            this.tabPageFuel.ResumeLayout(false);
+            this.tabExchangeRate.ResumeLayout(false);
+            this.tabStretches.ResumeLayout(false);
             this.tabSolution.ResumeLayout(false);
             this.tabControlInstanceSolution.ResumeLayout(false);
             this.tabPageRouteVisualization.ResumeLayout(false);
@@ -1664,6 +1747,8 @@ namespace Prototipo1
             this.tabPageAirplaneUsage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoutePassagers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();
+            this.tabPageRefuels.ResumeLayout(false);
+            this.tabPageSolutionRequests.ResumeLayout(false);
             this.tabParameters.ResumeLayout(false);
             this.panelParamSelectInstance.ResumeLayout(false);
             this.panelParamSelectInstance.PerformLayout();
@@ -1792,7 +1877,6 @@ namespace Prototipo1
         private TabControl tabControlInstanceSolution;
         private TabPage tabPageRouteVisualization;
         private TabPage tabPageAirplaneUsage;
-        private WebBrowser webBrowser1;
         private DataGridView dataGridViewRoute;
         private Label label18;
         private ComboBox comboBoxAirplaneSolution;
@@ -1842,6 +1926,7 @@ namespace Prototipo1
         private TabPage tabPageFuel;
         private TabPage tabExchangeRate;
         private TabPage tabStretches;
+        private MapRoutesView MapRoutView;
     }
 }
 

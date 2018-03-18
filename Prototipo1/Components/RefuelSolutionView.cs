@@ -18,8 +18,7 @@ namespace Prototipo1.Components
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
-        public RefuelSolutionView(CustomSqlContext context){
-            Context = context;
+        public RefuelSolutionView(){
             InitializeComponent();
         }
 

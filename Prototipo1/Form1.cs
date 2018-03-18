@@ -31,7 +31,7 @@ namespace Prototipo1
         public MainForm()
         {
             InitializeComponent();
-            
+        
 
             var instances = Context.Instances;
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();

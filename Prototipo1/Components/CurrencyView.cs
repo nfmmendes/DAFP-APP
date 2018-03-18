@@ -19,9 +19,8 @@ namespace Prototipo1.Components
         public DbInstance Instance { get; set; }
 
 
-        public CurrencyView(CustomSqlContext context){
+        public CurrencyView(){
             InitializeComponent();
-            Context = context;
         }
 
 

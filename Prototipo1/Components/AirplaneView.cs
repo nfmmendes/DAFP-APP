@@ -21,11 +21,8 @@ namespace Prototipo1.Components
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public AirplaneView(CustomSqlContext context)
-        {
+        public AirplaneView(){
             InitializeComponent();
-            Context = context;
-
         }
 
         /// <summary>

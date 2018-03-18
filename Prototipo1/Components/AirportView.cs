@@ -17,10 +17,8 @@ namespace Prototipo1.Components
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
-        public AirportView(CustomSqlContext context)
-        {
+        public AirportView(){
             InitializeComponent();
-            Context = context;
         }
 
         /// <summary>

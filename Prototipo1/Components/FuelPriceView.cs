@@ -19,9 +19,8 @@ namespace Prototipo1.Components
         public DbInstance Instance { get; set; }
 
 
-        public FuelPriceView(CustomSqlContext context){
-            InitializeComponent();
-            Context = context;
+        public FuelPriceView(){
+            InitializeComponent();            
         }
 
         /// <summary>

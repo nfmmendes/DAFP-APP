@@ -38,6 +38,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GMap.NET.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WindowsForms.1.7.1\lib\net40\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WindowsForms.1.7.1\lib\net40\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -120,6 +126,12 @@
     </Compile>
     <Compile Include="Components\FuelPriceView.Designer.cs">
       <DependentUpon>FuelPriceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MapRoutesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MapRoutesView.Designer.cs">
+      <DependentUpon>MapRoutesView.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\RefuelSolutionView.cs">
       <SubType>UserControl</SubType>
@@ -228,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\FuelPriceView.resx">
       <DependentUpon>FuelPriceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MapRoutesView.resx">
+      <DependentUpon>MapRoutesView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\RefuelSolutionView.resx">
       <DependentUpon>RefuelSolutionView.cs</DependentUpon>

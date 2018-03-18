@@ -20,9 +20,8 @@ namespace Prototipo1.Components
         private int CountStretchesPage { get; set; }
         private int StretchePageSize { get; set; }
 
-        public StretchView(CustomSqlContext context){
+        public StretchView(){
             InitializeComponent();
-            Context = context;
             CountStretchesPage = 1;
             StretchePageSize = 5000;
         }
