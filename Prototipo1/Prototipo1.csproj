@@ -85,6 +85,12 @@
     <Compile Include="AddEditAirport.Designer.cs">
       <DependentUpon>AddEditAirport.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditCurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditCurrency.Designer.cs">
+      <DependentUpon>AddEditCurrency.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditFuel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,7 @@
     <Compile Include="Controller\AbstractController.cs" />
     <Compile Include="Controller\AirplaneController.cs" />
     <Compile Include="Controller\AirportController.cs" />
+    <Compile Include="Controller\ExchangeRatesController.cs" />
     <Compile Include="Controller\FuelController.cs" />
     <Compile Include="Controller\HeuristicSolutionController.cs" />
     <Compile Include="Controller\ImportDataController.cs" />
@@ -178,11 +185,11 @@
     <Compile Include="DuplicateScenario.Designer.cs">
       <DependentUpon>DuplicateScenario.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditStretch.cs">
+    <Compile Include="AddEditStretch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditStretch.Designer.cs">
-      <DependentUpon>EditStretch.cs</DependentUpon>
+    <Compile Include="AddEditStretch.Designer.cs">
+      <DependentUpon>AddEditStretch.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -221,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditAirport.resx">
       <DependentUpon>AddEditAirport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditCurrency.resx">
+      <DependentUpon>AddEditCurrency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditFuel.resx">
       <DependentUpon>AddEditFuel.cs</DependentUpon>
@@ -264,8 +274,8 @@
     <EmbeddedResource Include="DuplicateScenario.resx">
       <DependentUpon>DuplicateScenario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditStretch.resx">
-      <DependentUpon>EditStretch.cs</DependentUpon>
+    <EmbeddedResource Include="AddEditStretch.resx">
+      <DependentUpon>AddEditStretch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

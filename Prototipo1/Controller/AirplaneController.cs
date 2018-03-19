@@ -9,7 +9,8 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    public class AirplaneController{
+    public class AirplaneController : AbstractController<DbAirplanes, CustomSqlContext>
+    {
 
         private CustomSqlContext Context { get; set; }
         public static readonly AirplaneController Instance = new AirplaneController();
@@ -18,7 +19,7 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void setContext(CustomSqlContext context){
+        public override void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
     
@@ -27,7 +28,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="airplane"></param>
         /// <param name="Id"></param>
-        public void Edit(DbAirplanes airplane, long Id){
+        public override void Edit(DbAirplanes airplane, long Id){
             var item = Instance.Context.Airplanes.FirstOrDefault(x=>x.Id == Id);
 
             if (item != null){
@@ -50,17 +51,23 @@ namespace Prototipo1.Controller
             Instance.Context.SaveChanges();
         }
 
-        public void Add(DbAirplanes airplane){
+        public override void Delete(DbAirplanes item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Add(DbAirplanes airplane){
             if(IsValidItem(airplane))
             Instance.Context.Airplanes.AddOrUpdate(airplane);
             Instance.Context.SaveChanges();
         }
 
-        private bool IsValidItem(DbAirplanes airplane){
-            if (airplane != null)
+        protected override bool IsValidItem(DbAirplanes item)
+        {
+            if (item != null)
                 return true;
             else
-                return false; 
+                return false;
         }
     }
 }

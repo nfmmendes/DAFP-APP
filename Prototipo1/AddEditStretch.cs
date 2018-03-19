@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Prototipo1
 {
-    public partial class EditStretch : Form
+    public partial class AddEditStretch : Form
     {
-        public EditStretch()
+        public AddEditStretch()
         {
             InitializeComponent();
         }

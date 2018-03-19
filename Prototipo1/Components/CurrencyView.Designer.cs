@@ -47,6 +47,7 @@
             this.buttonDeleteCurrency.TabIndex = 17;
             this.buttonDeleteCurrency.Text = "Delete";
             this.buttonDeleteCurrency.UseVisualStyleBackColor = true;
+            this.buttonDeleteCurrency.Click += new System.EventHandler(this.buttonDeleteCurrency_Click);
             // 
             // buttonEditCurrency
             // 
@@ -56,6 +57,7 @@
             this.buttonEditCurrency.TabIndex = 16;
             this.buttonEditCurrency.Text = "Edit";
             this.buttonEditCurrency.UseVisualStyleBackColor = true;
+            this.buttonEditCurrency.Click += new System.EventHandler(this.buttonEditCurrency_Click);
             // 
             // buttonAddCurrency
             // 
@@ -65,6 +67,7 @@
             this.buttonAddCurrency.TabIndex = 15;
             this.buttonAddCurrency.Text = "Add";
             this.buttonAddCurrency.UseVisualStyleBackColor = true;
+            this.buttonAddCurrency.Click += new System.EventHandler(this.buttonAddCurrency_Click);
             // 
             // dataGridViewCurrency
             // 

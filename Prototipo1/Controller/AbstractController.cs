@@ -8,12 +8,12 @@ using SolverClientComunication;
 
 namespace Prototipo1.Controller
 {
-    abstract class AbstractController{
-        protected CustomSqlContext Context { get; set; }
-        public abstract void setContext(CustomSqlContext context);
-        public abstract void Add(DbContext item);
-        public abstract void Edit(DbContext item, long IdItem);
-        public abstract void Delete(DbContext item);
-        public abstract bool isValidItem(DbContext item);
+    public abstract class AbstractController<IDbContext, ISQLContex>{
+        protected ISQLContex Context { get; set; }
+        public abstract void setContext(ISQLContex context);
+        public abstract void Add(IDbContext item);
+        public abstract void Edit(IDbContext item, long IdItem);
+        public abstract void Delete(IDbContext item);
+        protected abstract bool IsValidItem(IDbContext item);
     }
 }

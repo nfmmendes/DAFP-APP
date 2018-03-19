@@ -34,7 +34,7 @@ namespace Prototipo1
                 return; 
             }
 
-            InstancesController.Instance.AddInstance(this.textBoxScenarioName.Text, this.textBoxScenarioDescription.Text);
+            InstancesController.Instance.Add(this.textBoxScenarioName.Text, this.textBoxScenarioDescription.Text);
             this.Close();
         }
     }

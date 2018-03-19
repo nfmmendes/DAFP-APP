@@ -10,7 +10,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class AirportController {
+    class AirportController : AbstractController<DbAirports, CustomSqlContext> {
         private CustomSqlContext Context { get; set; }
         public static readonly AirportController Instance = new AirportController();
 
@@ -19,7 +19,7 @@ namespace Prototipo1.Controller
         /// It's mandatory use this function BEFORE any operation, otherwise you'll get a null pointer like exception 
         /// </summary>
         /// <param name="context"></param>
-        public  void setContext(CustomSqlContext context){
+        public override void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
 
@@ -27,8 +27,8 @@ namespace Prototipo1.Controller
         /// Add a new airplane in the database
         /// </summary>
         /// <param name="airport">Airplane that will be added</param>
-        public  void Add(DbAirports airport){
-            if (IsValidAirport(airport)){
+        public override void Add(DbAirports airport){
+            if (IsValidItem(airport)){
                 Instance.Context.Airports.AddOrUpdate(airport);
                 Instance.Context.SaveChanges();
             }
@@ -39,7 +39,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="airport">New data</param>
         /// <param name="IdAirport">Id of the airport that will be edited</param>
-        public  void Edit(DbAirports airport, long IdAirport)
+        public override void Edit(DbAirports airport, long IdAirport)
         {
 
             var item = Instance.Context.Airports.First(x => x.Id == IdAirport);
@@ -64,20 +64,32 @@ namespace Prototipo1.Controller
             
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public override void Delete(DbAirports item){
+            throw new NotImplementedException();
+        }
 
         //TODO: Improve this function
         /// <summary>
         /// Function that makes the validation of a airport before it be inserted on the database
         /// </summary>
-        /// <param name="airport">Object verified</param>
+        /// <param name="item">Object verified</param>
         /// <returns></returns>
-        private bool IsValidAirport(DbAirports airport){
-            if (airport != null) { 
-                return !string.IsNullOrEmpty(airport.AiportName) && airport.Latitude != null && airport.Longitude != null;
-                
-            }else 
+        protected override bool IsValidItem(DbAirports item){
+
+            if (item != null){
+                return !string.IsNullOrEmpty(item.AiportName) && item.Latitude != null && item.Longitude != null;
+
+            }
+            else
                 return false;
         }
+
+
+        
+        
     }
 }

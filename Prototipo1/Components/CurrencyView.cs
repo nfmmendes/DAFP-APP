@@ -38,7 +38,7 @@ namespace Prototipo1.Components
 
 
         /// <summary>
-        /// 
+        /// Fill the currency table with the data of a specific instance
         /// </summary>
         /// <param name="instance"></param>
         private void FillCurrencyTable(){
@@ -49,6 +49,49 @@ namespace Prototipo1.Components
             foreach (var item in exchanges)
             {
                 this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
+            }
+        }
+
+        /// <summary>
+        /// Add a currency to the instance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddCurrency_Click(object sender, EventArgs e){
+            var add = new AddEditCurrency();
+            add.OpenToAdd();
+        }
+
+        /// <summary>
+        /// Edit a currency on the instance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditCurrency_Click(object sender, EventArgs e){
+            if (dataGridViewCurrency.SelectedRows.Count > 0){
+                var first = dataGridViewCurrency.SelectedRows[0].Index;
+                var index = Convert.ToInt64(dataGridViewCurrency.Rows[first].Cells[0].Value);
+                
+                var element = Context.Exchange.FirstOrDefault(x => x.Id == index);
+                if (element != null){
+                    var edit = new AddEditCurrency();
+                    edit.OpenToEdit(element,index);
+                }
+                
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDeleteCurrency_Click(object sender, EventArgs e){
+            if (dataGridViewCurrency.SelectedRows.Count > 0){
+                var first = dataGridViewCurrency.SelectedRows[0].Index;
+                var index = Convert.ToInt64(dataGridViewCurrency.Rows[first].Cells[0].Value);
+
+                Context.Exchange.Remove(Context.Exchange.First(x => x.Id == index));
             }
         }
     }

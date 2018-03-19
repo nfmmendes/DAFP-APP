@@ -53,7 +53,7 @@ namespace Prototipo1
         /// <param name="e"></param>
         private void buttonEditScenario_Click(object sender, EventArgs e){
             
-            InstancesController.Instance.EditInstance(InstanceId,textBoxScenarioName.Text,textBoxScenarioDescription.Text);
+            InstancesController.Instance.Edit(InstanceId,textBoxScenarioName.Text,textBoxScenarioDescription.Text);
             this.Close();
         }
 

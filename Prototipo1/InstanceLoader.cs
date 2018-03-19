@@ -101,7 +101,7 @@ namespace Prototipo1
             if (this.radioButtonNew.Checked == true)
             {
                 if (!string.IsNullOrEmpty(this.textBoxInstance.Text)){
-                    InstancesController.Instance.AddInstance(this.textBoxInstance.Text);
+                    InstancesController.Instance.Add(this.textBoxInstance.Text);
                 }else
                     MessageBox.Show("You should type the instance name");
 

@@ -94,7 +94,7 @@
             this.buttonEditScenario.UseVisualStyleBackColor = true;
             this.buttonEditScenario.Click += new System.EventHandler(this.buttonEditScenario_Click);
             // 
-            // EditInstance
+            // Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

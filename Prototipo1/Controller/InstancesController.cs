@@ -11,7 +11,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class InstancesController
+    class InstancesController :AbstractController<DbInstance, CustomSqlContext>
     {
         private CustomSqlContext Context { get; set; }
         public static readonly InstancesController Instance = new InstancesController();
@@ -20,8 +20,45 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void setContext(CustomSqlContext context){
+        public override void setContext(CustomSqlContext context){
             Instance.Context = context; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public override void Add(DbInstance item){
+            Instance.Add(item.Name,item.Description);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="IdItem"></param>
+        public override void Edit(DbInstance item, long IdItem)
+        {
+            Instance.Edit(IdItem, item.Name, item.Description);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public override void Delete(DbInstance item)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected override bool IsValidItem(DbInstance item)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -29,7 +66,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        public void AddInstance(string name, string description = ""){
+        public void Add(string name, string description = ""){
             var solverInstance = new DbInstance()
             {
                 CreatedOn = DateTime.Now,
@@ -52,7 +89,7 @@ namespace Prototipo1.Controller
         /// <param name="instanceId"></param>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        public void EditInstance(long instanceId, string name, string description){
+        public void Edit(long instanceId, string name, string description){
             var entity = Instance.Context.Instances.FirstOrDefault(x => x.Id == instanceId);
             if (entity != null){
                 entity.Name = name;

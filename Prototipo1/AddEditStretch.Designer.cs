@@ -1,6 +1,6 @@
 ﻿namespace Prototipo1
 {
-    partial class EditStretch
+    partial class AddEditStretch
     {
         /// <summary>
         /// Required designer variable.
