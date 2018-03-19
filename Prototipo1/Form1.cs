@@ -48,6 +48,8 @@ namespace Prototipo1
             HeuristicSolutionController.Instance.setContext(Context);
             AirplaneController.Instance.setContext(Context);
             AirportController.Instance.setContext(Context);
+            ExchangeRatesController.Instance.setContext(Context);
+            FuelController.Instance.setContext(Context);
         }
 
         /// <summary>

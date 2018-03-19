@@ -9,6 +9,7 @@ using SolverClientComunication;
 namespace Prototipo1.Controller
 {
     public abstract class AbstractController<IDbContext, ISQLContex>{
+        
         protected ISQLContex Context { get; set; }
         public abstract void setContext(ISQLContex context);
         public abstract void Add(IDbContext item);

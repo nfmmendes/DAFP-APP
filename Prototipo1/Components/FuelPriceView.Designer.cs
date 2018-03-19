@@ -68,6 +68,7 @@
             this.buttonAddFuel.TabIndex = 9;
             this.buttonAddFuel.Text = "Add";
             this.buttonAddFuel.UseVisualStyleBackColor = true;
+            this.buttonAddFuel.Click += new System.EventHandler(this.buttonAddFuel_Click);
             // 
             // dataGridViewFuel
             // 

@@ -46,8 +46,7 @@ namespace Prototipo1.Components
             this.dataGridViewCurrency.Rows.Clear();
             var exchanges = Context.Exchange.Where(x => x.Instance.Id == Instance.Id);
 
-            foreach (var item in exchanges)
-            {
+            foreach (var item in exchanges){
                 this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
             }
         }
@@ -59,7 +58,8 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonAddCurrency_Click(object sender, EventArgs e){
             var add = new AddEditCurrency();
-            add.OpenToAdd();
+            add.OpenToAdd(Instance);
+            FillCurrencyTable();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Prototipo1.Components
                     var edit = new AddEditCurrency();
                     edit.OpenToEdit(element,index);
                 }
-                
+                FillCurrencyTable();
             }
         }
 
@@ -92,7 +92,9 @@ namespace Prototipo1.Components
                 var index = Convert.ToInt64(dataGridViewCurrency.Rows[first].Cells[0].Value);
 
                 Context.Exchange.Remove(Context.Exchange.First(x => x.Id == index));
+                Context.SaveChanges();
             }
+            FillCurrencyTable();
         }
     }
 }

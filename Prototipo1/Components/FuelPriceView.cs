@@ -65,6 +65,8 @@ namespace Prototipo1.Components
             }
             else
                 MessageBox.Show("There are no selected airplanes");
+
+            FillFuelTable();
         }
 
         /// <summary>
@@ -72,15 +74,15 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonEditFuel_Click(object sender, EventArgs e)
-        {
+        private void buttonEditFuel_Click(object sender, EventArgs e){
   
-            if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0)
-            {
+            if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0){
                 var addFuel = new AddEditFuel(Context);
                 var index = dataGridViewFuel.SelectedRows[0].Index;
+                var fuel = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
 
-                addFuel.OpenToEdit(Instance, Convert.ToInt64(dataGridViewFuel.Rows[index].Cells[0].Value)); //TODO: Get real id
+                if(fuel!= null)
+                    addFuel.OpenToEdit(fuel, index); 
 
                 FillFuelTable();
             }
@@ -92,12 +94,27 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="instance"></param>
         private void FillFuelTable(){
-           // this.dataGridViewFuel.Rows.Clear();
+            this.dataGridViewFuel.Rows.Clear();
             var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == Instance.Id);
 
             foreach (var item in fuels)
                 dataGridViewFuel.Rows.Add(item.Id, item.Airport.AiportName, "F", item.Currency, item.Value); //TODO: Change This F
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddFuel_Click(object sender, EventArgs e){
+            if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0){
+                var addFuel = new AddEditFuel(Context);
+                var index = dataGridViewFuel.SelectedRows[0].Index;
+
+                addFuel.OpenToAdd(Instance); //TODO: Get real id
+
+                FillFuelTable();
+            }
+        }
     }
 }

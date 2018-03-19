@@ -18,7 +18,7 @@ namespace SolverClientComunication.Models
         public string CurrencySymbol { get; set; }
 
         [Required]
-        public Decimal ValueInDolar { get; set; }
+        public Double ValueInDolar { get; set; }
 
         [Required]
         public DbInstance Instance { get; set; }

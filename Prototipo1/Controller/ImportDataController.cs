@@ -142,7 +142,7 @@ namespace Prototipo1.Controller
                 
                 for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
                 {
-                    IRow row = sheet2.GetRow(i);
+                    IRow row = sheet3.GetRow(i);
                     if (row == null) break;
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 

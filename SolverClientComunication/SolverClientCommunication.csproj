@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201803091152105_AddPassengersOnFlight.Designer.cs">
       <DependentUpon>201803091152105_AddPassengersOnFlight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803191726434_newValueType.cs" />
+    <Compile Include="Migrations\201803191726434_newValueType.Designer.cs">
+      <DependentUpon>201803191726434_newValueType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803091152105_AddPassengersOnFlight.resx">
       <DependentUpon>201803091152105_AddPassengersOnFlight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803191726434_newValueType.resx">
+      <DependentUpon>201803191726434_newValueType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
