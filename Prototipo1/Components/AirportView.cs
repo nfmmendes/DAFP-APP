@@ -64,9 +64,7 @@ namespace Prototipo1.Components
 
                 if (result == DialogResult.Yes)
                 {
-                    for (int i = 0; i < dataGridViewAirport.Rows.Count; i++)
-                    {
-
+                    for (int i = 0; i < dataGridViewAirport.Rows.Count; i++){
 
                         //TODO: Put it in an controller 
                         if (!dataGridViewAirport.Rows[i].Selected) continue;
@@ -83,8 +81,6 @@ namespace Prototipo1.Components
                     }
 
                     Context.SaveChanges();
-                   // var instanceName = getSelectedInstanceName(comboBoxInstancesInstanceTab.SelectedItem.ToString());
-                   // FillTables(Context.Instances.ToList().First(x => x.Name.Equals(instanceName)));
                 }
             }
             else
@@ -99,11 +95,16 @@ namespace Prototipo1.Components
         private void buttonEditAirport_Click(object sender, EventArgs e)
         {
 
-            if (Instance != null)
-            {
-                var addAirport = new AddEditAirport();
-                addAirport.OpenToEdit(Instance, 0); //TODO: get real instance
-                FillAirportsTable();
+            if (Instance != null){
+
+                if (dataGridViewAirport.SelectedRows.Count > 0){
+                    var first = dataGridViewAirport.SelectedRows[0].Index;
+                    var indexAirport = Convert.ToInt64(dataGridViewAirport.Rows[first].Cells[0].Value);
+                    var addAirport = new AddEditAirport(Context);
+                    addAirport.OpenToEdit(Instance, indexAirport); //TODO: get real instance
+                    FillAirportsTable();
+                }else
+                    MessageBox.Show("Select one airport");
             }
         }
 
@@ -112,13 +113,9 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonAddAirport_Click(object sender, EventArgs e)
-        {
-            
-
-            if (Instance != null)
-            {
-                var addAirport = new AddEditAirport();
+        private void buttonAddAirport_Click(object sender, EventArgs e){
+            if (Instance != null){
+                var addAirport = new AddEditAirport(Context);
                 addAirport.OpenToAdd(Instance);
                 FillAirportsTable();
             }

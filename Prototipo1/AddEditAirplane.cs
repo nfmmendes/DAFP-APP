@@ -69,9 +69,6 @@ namespace Prototipo1
             }else
                 MessageBox.Show("Internal error on edit");
 
-
-
-            
         }
 
 
@@ -96,9 +93,9 @@ namespace Prototipo1
             };
 
             if(IsAdd)
-                AirplaneController.Instance.AddAirplane(airplane);
+                AirplaneController.Instance.Add(airplane);
             else
-                AirplaneController.Instance.EditAirplane(airplane,IdItem);
+                AirplaneController.Instance.Edit(airplane,IdItem);
                 
             this.Close();
 

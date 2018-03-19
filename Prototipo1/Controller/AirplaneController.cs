@@ -27,7 +27,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="airplane"></param>
         /// <param name="Id"></param>
-        public void EditAirplane(DbAirplanes airplane, long Id){
+        public void Edit(DbAirplanes airplane, long Id){
             var item = Instance.Context.Airplanes.FirstOrDefault(x=>x.Id == Id);
 
             if (item != null){
@@ -50,7 +50,7 @@ namespace Prototipo1.Controller
             Instance.Context.SaveChanges();
         }
 
-        public void AddAirplane(DbAirplanes airplane){
+        public void Add(DbAirplanes airplane){
             if(IsValidItem(airplane))
             Instance.Context.Airplanes.AddOrUpdate(airplane);
             Instance.Context.SaveChanges();

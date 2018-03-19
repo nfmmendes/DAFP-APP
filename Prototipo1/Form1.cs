@@ -47,8 +47,7 @@ namespace Prototipo1
             ImportDataController.Instance.setContext(Context);
             HeuristicSolutionController.Instance.setContext(Context);
             AirplaneController.Instance.setContext(Context);
-            
-
+            AirportController.Instance.setContext(Context);
         }
 
         /// <summary>
