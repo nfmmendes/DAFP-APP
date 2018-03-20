@@ -31,7 +31,7 @@ namespace Prototipo1
             this.Instance =instance;
 
             comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == instance.Id)
-                .Select(x => x.AiportName).ToList();
+                .Select(x => x.AirportName).ToList();
             comboBoxCurrency.DataSource = Context.Exchange.ToList().Where(x => x.Instance.Id == instance.Id)
                 .Select(x => x.CurrencySymbol).ToList();
             
@@ -49,8 +49,8 @@ namespace Prototipo1
 
             if (CurrentElement != null){
                 comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
-                    .Select(x => x.AiportName).ToList();
-                comboBoxAirport.Text = CurrentElement.Airport.AiportName;
+                    .Select(x => x.AirportName).ToList();
+                comboBoxAirport.Text = CurrentElement.Airport.AirportName;
                 comboBoxFuel.Text = "F";
                 comboBoxCurrency.DataSource = Context.Exchange.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
                     .Select(x => x.CurrencySymbol).ToList();
@@ -70,7 +70,7 @@ namespace Prototipo1
 
         private void buttonSave_Click(object sender, EventArgs e){
 
-            var airport = Context.Airports.FirstOrDefault(x=>x.AiportName.Equals(comboBoxAirport.SelectedItem.ToString()));
+            var airport = Context.Airports.FirstOrDefault(x=>x.AirportName.Equals(comboBoxAirport.SelectedItem.ToString()));
             if (airport != null)
             {
                 var item = new DbFuelPrice(){

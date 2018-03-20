@@ -46,7 +46,7 @@ namespace Prototipo1.Components
             foreach (var key in requests.Keys)
             {
                 var value = requests[key].First();
-                dataGridViewRequest.Rows.Add(key, key, value.Origin.AiportName, value.Destination?.AiportName, value.DepartureTimeWindowBegin,
+                dataGridViewRequest.Rows.Add(key, key, value.Origin.AirportName, value.Destination?.AirportName, value.DepartureTimeWindowBegin,
                     value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
             }
         }
@@ -85,7 +85,7 @@ namespace Prototipo1.Components
         private void buttonEditRequest_Click(object sender, EventArgs e){
             
             if (Instance != null && dataGridViewRequest.SelectedRows.Count > 0){
-                var editRequest = new AddEditRequest();
+                var editRequest = new AddEditRequest(Context);
                 var rowIndex = dataGridViewRequest.SelectedRows[0].Index;
 
                 editRequest.OpenToEdit(Instance, dataGridViewRequest.Rows[rowIndex].Cells[0].Value.ToString());

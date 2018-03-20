@@ -57,7 +57,7 @@ namespace Prototipo1.Controller
 
                     var item = new DbAirports()
                     {
-                        AiportName = row.GetCell(0).StringCellValue,
+                        AirportName = row.GetCell(0).StringCellValue,
                         GroundTime =row.GetCell(9).CellType != CellType.String? 
                                                                row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
                         IATA = row.GetCell(1).StringCellValue,
@@ -69,7 +69,9 @@ namespace Prototipo1.Controller
                         Instance = instance
                     };
 
-                    if (row.GetCell(4).CellType == CellType.Numeric )
+                    if (row.GetCell(4) == null)
+                        item.Elevation = -1; 
+                    else if (row.GetCell(4).CellType == CellType.Numeric )
                         item.Elevation = Convert.ToInt32(row.GetCell(4).NumericCellValue);
                     if (row.GetCell(10).CellType == CellType.Numeric )
                         item.LandingCost = Convert.ToInt32(row.GetCell(10).NumericCellValue);
@@ -90,7 +92,7 @@ namespace Prototipo1.Controller
             var sheet2 = hssfwb.GetSheet("Stretches");
             //Context.Configuration.ValidateOnSaveEnabled = false;
             if (sheet2 != null && loadStretches){
-                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AiportName, x=>x);
+                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AirportName, x=>x);
                 List<DbStretches> newItems = new List<DbStretches>();
                 for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
                     IRow row = sheet2.GetRow(i);
@@ -149,7 +151,7 @@ namespace Prototipo1.Controller
                     if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
                     var airportName = row.GetCell(0).StringCellValue;
                     
-                    var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AiportName.Equals(airportName));
+                    var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AirportName.Equals(airportName));
 
                     if (airport != null){
                         var item = new DbFuelPrice(){
@@ -300,7 +302,7 @@ namespace Prototipo1.Controller
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
                     var airportName = row.GetCell(7).StringCellValue;
-                    var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AiportName.Equals(airportName));
+                    var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
 
                     if (baseAirport != null){
                         var item = new DbAirplanes()

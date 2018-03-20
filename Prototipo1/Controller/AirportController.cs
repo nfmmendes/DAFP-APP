@@ -44,7 +44,7 @@ namespace Prototipo1.Controller
 
             var item = Instance.Context.Airports.First(x => x.Id == IdAirport);
             
-            item.AiportName = airport.AiportName;
+            item.AirportName = airport.AirportName;
             item.IATA = airport.IATA;
             item.Region = airport.Region;
             item.Elevation = airport.Elevation;
@@ -81,7 +81,7 @@ namespace Prototipo1.Controller
         protected override bool IsValidItem(DbAirports item){
 
             if (item != null){
-                return !string.IsNullOrEmpty(item.AiportName) && item.Latitude != null && item.Longitude != null;
+                return !string.IsNullOrEmpty(item.AirportName) && item.Latitude != null && item.Longitude != null;
 
             }
             else

@@ -58,7 +58,7 @@ namespace Prototipo1.Components
                     var newMarker = new GMarkerGoogle(new PointLatLng(_lat, _long), GMarkerGoogleType.red_small);
                     newMarker.ToolTip = new GMapToolTip(newMarker);
                     newMarker.ToolTip.Fill = new SolidBrush(Color.White);
-                    newMarker.ToolTipText = item.AiportName;
+                    newMarker.ToolTipText = item.AirportName;
 
                     markers.Markers.Add(newMarker);
                 }

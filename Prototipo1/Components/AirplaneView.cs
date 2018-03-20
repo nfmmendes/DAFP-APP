@@ -72,7 +72,7 @@ namespace Prototipo1.Components
             foreach (var item in airplanes)
                 dataGridViewAirplane.Rows.Add(item.Id, item.Model, item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed,
                     item.FuelConsumptionFirstHour, item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity,
-                    item.BaseAirport?.AiportName);
+                    item.BaseAirport?.AirportName);
 
         }
 

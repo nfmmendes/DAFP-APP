@@ -45,7 +45,7 @@ namespace Prototipo1
             IdItem = idAIrplane; 
 
             CurrentElement = Context.Airplanes.FirstOrDefault(x => x.Id == idAIrplane);
-            comboBoxAirport.DataSource = Context.Airports.Select(x => x.AiportName).ToList();
+            comboBoxAirport.DataSource = Context.Airports.Select(x => x.AirportName).ToList();
 
 
             if (CurrentElement != null){
@@ -63,7 +63,7 @@ namespace Prototipo1
                 numUDCapacity.Value = Convert.ToDecimal(CurrentElement.Capacity);
 
       
-                comboBoxAirport.SelectedText = CurrentElement.BaseAirport.AiportName;
+                comboBoxAirport.SelectedText = CurrentElement.BaseAirport.AirportName;
 
                 this.ShowDialog();
             }else
@@ -74,7 +74,7 @@ namespace Prototipo1
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            var airport = Context.Airports.FirstOrDefault(x=>x.AiportName.Equals(comboBoxAirport.SelectedItem.ToString()));
+            var airport = Context.Airports.FirstOrDefault(x=>x.AirportName.Equals(comboBoxAirport.SelectedItem.ToString()));
 
             var airplane = new DbAirplanes()
             {

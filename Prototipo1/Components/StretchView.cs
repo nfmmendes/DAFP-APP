@@ -53,8 +53,8 @@ namespace Prototipo1.Components
             var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id).ToList();
 
             for (int i = 0; i <= firstPageSize; i++)
-                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                                               listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
+                                               listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
 
             CountStretchesPage = 1;
             labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
@@ -83,8 +83,8 @@ namespace Prototipo1.Components
                 var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
 
                 for (int i = firstIndex; i <= lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
+                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
 
                 labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
             }
@@ -114,8 +114,8 @@ namespace Prototipo1.Components
                 CountStretchesPage++;
 
                 for (int i = firstIndex; i < lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
+                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
 
                 labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
             }
@@ -141,8 +141,8 @@ namespace Prototipo1.Components
             for (int i = firstLastPageIndex; i < totalSize; i++)
                 try
                 {
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AiportName,
-                        listOfStretches[i].Destination.AiportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
+                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
                 }
                 catch (Exception ex) { }
 
@@ -166,7 +166,7 @@ namespace Prototipo1.Components
             labelPageStretch.Text = $"{CountStretchesPage} of {(int)(stretches.Count() / StretchePageSize + 1)}";
             foreach (var item in stretches)
             {
-                dataGridViewStretches.Rows.Add(item.Id, item.Origin.AiportName, item.Destination.AiportName, item.Distance);
+                dataGridViewStretches.Rows.Add(item.Id, item.Origin.AirportName, item.Destination.AirportName, item.Distance);
                 cont++;
                 if (cont == StretchePageSize)
                     break;

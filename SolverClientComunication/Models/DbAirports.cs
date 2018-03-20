@@ -16,7 +16,7 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
-        public string AiportName { get; set; }
+        public string AirportName { get; set; }
         
         [Required]
         public string Latitude { get; set; }
@@ -30,7 +30,7 @@ namespace SolverClientComunication.Models
         [MaxLength(25)]
         public string Region { get; set; }
 
-        [Range(0,20000)]
+        [Range(-1,20000)]
         public int Elevation { get; set; }
 
         public int RunwayLength { get; set; }

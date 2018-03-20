@@ -43,7 +43,7 @@ namespace Prototipo1.Components
             this.dataGridViewAirport.Rows.Clear();
             var airports = Context.Airports.ToList().Where(x => x.Instance.Id == Instance.Id);
             foreach (var item in airports){
-                dataGridViewAirport.Rows.Add(item.Id, item.AiportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
+                dataGridViewAirport.Rows.Add(item.Id, item.AirportName, item.IATA, item.Latitude, item.Longitude, item.Elevation,
                     item.RunwayLength, item.Region, item.MTOW_APE3, item.MTOW_PC12, item.LandingCost, item.GroundTime);
             }
         }

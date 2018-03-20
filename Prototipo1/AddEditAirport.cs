@@ -43,7 +43,7 @@ namespace Prototipo1
 
             CurrentElement = Context.Airports.FirstOrDefault(x => x.Id == idAiport);
             if (CurrentElement != null){
-                textBoxName.Text = CurrentElement.AiportName;
+                textBoxName.Text = CurrentElement.AirportName;
                 textBoxIATA.Text = CurrentElement.IATA;
                 textBoxRegion.Text = CurrentElement.Region;
                 numUD_Elevation.Value = CurrentElement.Elevation;
@@ -95,7 +95,7 @@ namespace Prototipo1
 
         private void buttonSave_Click(object sender, EventArgs e){
             var airport = new DbAirports(){
-                AiportName = textBoxName.Text,
+                AirportName = textBoxName.Text,
                 IATA = textBoxIATA.Text,
                 Region = textBoxRegion.Text,
                 Elevation = Convert.ToInt32(numUD_Elevation.Value),

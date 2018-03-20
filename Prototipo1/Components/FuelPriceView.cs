@@ -98,7 +98,7 @@ namespace Prototipo1.Components
             var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == Instance.Id);
 
             foreach (var item in fuels)
-                dataGridViewFuel.Rows.Add(item.Id, item.Airport.AiportName, "F", item.Currency, item.Value); //TODO: Change This F
+                dataGridViewFuel.Rows.Add(item.Id, item.Airport.AirportName, "F", item.Currency, item.Value); //TODO: Change This F
         }
 
         /// <summary>

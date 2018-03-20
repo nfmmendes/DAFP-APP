@@ -437,12 +437,17 @@ namespace Prototipo1
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedValue.ToString());
             var result = MessageBox.Show($"Do you really want delete the instance {instanceName}?","Warning", MessageBoxButtons.YesNo);
 
-
+            this.comboBoxInstancesInstanceTab.Text = "";
             if (result == DialogResult.Yes)
                 InstancesController.Instance.FindAndDeleteByName(instanceName);
             
             this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
+
+            var first = Context.Instances.FirstOrDefault();
+
+            //if(first != null)
+                FillTables(first);
         }
 
         /// <summary>
@@ -505,7 +510,7 @@ namespace Prototipo1
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
 
             if (instance != null){
-                var addRequest = new AddEditRequest();
+                var addRequest = new AddEditRequest(Context);
                 addRequest.OpenToAdd(instance);
             }
         }
@@ -549,10 +554,10 @@ namespace Prototipo1
                         var weightOnDeparture = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnDeparture* 0.453592;
                         var weightOnArrival = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnArrival * 0.453592;
 
-                        dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AiportName,
+                        dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AirportName,
                                                                 item.FuelOnDeparture,weightOnDeparture ,  
                                                                 item.DepartureTime, 
-                                                                item.Destination.AiportName, 
+                                                                item.Destination.AirportName, 
                                                                 item.FuelOnArrival, weightOnArrival, 
                                                                 item.ArrivalTime);    
                     }
