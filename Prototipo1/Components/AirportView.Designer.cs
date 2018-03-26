@@ -64,12 +64,12 @@
             this.MTOW_PC12,
             this.LandingCost,
             this.GroundTime});
-            this.dataGridViewAirport.Location = new System.Drawing.Point(11, 32);
+            this.dataGridViewAirport.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewAirport.Name = "dataGridViewAirport";
             this.dataGridViewAirport.RowHeadersVisible = false;
             this.dataGridViewAirport.RowTemplate.Height = 24;
             this.dataGridViewAirport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewAirport.Size = new System.Drawing.Size(1013, 419);
+            this.dataGridViewAirport.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewAirport.TabIndex = 0;
             // 
             // AiportAid
@@ -142,7 +142,7 @@
             // 
             // buttonDeleteAirport
             // 
-            this.buttonDeleteAirport.Location = new System.Drawing.Point(712, 478);
+            this.buttonDeleteAirport.Location = new System.Drawing.Point(1035, 105);
             this.buttonDeleteAirport.Name = "buttonDeleteAirport";
             this.buttonDeleteAirport.Size = new System.Drawing.Size(91, 34);
             this.buttonDeleteAirport.TabIndex = 7;
@@ -152,7 +152,7 @@
             // 
             // buttonEditAirport
             // 
-            this.buttonEditAirport.Location = new System.Drawing.Point(479, 478);
+            this.buttonEditAirport.Location = new System.Drawing.Point(1035, 55);
             this.buttonEditAirport.Name = "buttonEditAirport";
             this.buttonEditAirport.Size = new System.Drawing.Size(91, 34);
             this.buttonEditAirport.TabIndex = 6;
@@ -162,7 +162,7 @@
             // 
             // buttonAddAirport
             // 
-            this.buttonAddAirport.Location = new System.Drawing.Point(225, 478);
+            this.buttonAddAirport.Location = new System.Drawing.Point(1035, 5);
             this.buttonAddAirport.Name = "buttonAddAirport";
             this.buttonAddAirport.Size = new System.Drawing.Size(91, 34);
             this.buttonAddAirport.TabIndex = 5;
@@ -178,7 +178,7 @@
             this.Controls.Add(this.buttonAddAirport);
             this.Controls.Add(this.dataGridViewAirport);
             this.Name = "AirportView";
-            this.Size = new System.Drawing.Size(1119, 526);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).EndInit();
             this.ResumeLayout(false);
 

@@ -44,7 +44,7 @@
             // 
             // buttonNextPageStretch
             // 
-            this.buttonNextPageStretch.Location = new System.Drawing.Point(558, 411);
+            this.buttonNextPageStretch.Location = new System.Drawing.Point(558, 419);
             this.buttonNextPageStretch.Name = "buttonNextPageStretch";
             this.buttonNextPageStretch.Size = new System.Drawing.Size(42, 34);
             this.buttonNextPageStretch.TabIndex = 22;
@@ -54,7 +54,7 @@
             // 
             // buttonLastPageStretch
             // 
-            this.buttonLastPageStretch.Location = new System.Drawing.Point(612, 411);
+            this.buttonLastPageStretch.Location = new System.Drawing.Point(612, 419);
             this.buttonLastPageStretch.Name = "buttonLastPageStretch";
             this.buttonLastPageStretch.Size = new System.Drawing.Size(42, 34);
             this.buttonLastPageStretch.TabIndex = 21;
@@ -65,7 +65,7 @@
             // labelPageStretch
             // 
             this.labelPageStretch.AutoSize = true;
-            this.labelPageStretch.Location = new System.Drawing.Point(464, 417);
+            this.labelPageStretch.Location = new System.Drawing.Point(464, 425);
             this.labelPageStretch.Name = "labelPageStretch";
             this.labelPageStretch.Size = new System.Drawing.Size(32, 17);
             this.labelPageStretch.TabIndex = 20;
@@ -73,7 +73,7 @@
             // 
             // buttonFirstPageStretch
             // 
-            this.buttonFirstPageStretch.Location = new System.Drawing.Point(338, 411);
+            this.buttonFirstPageStretch.Location = new System.Drawing.Point(338, 419);
             this.buttonFirstPageStretch.Name = "buttonFirstPageStretch";
             this.buttonFirstPageStretch.Size = new System.Drawing.Size(42, 34);
             this.buttonFirstPageStretch.TabIndex = 19;
@@ -83,7 +83,7 @@
             // 
             // buttonPrevPageStretch
             // 
-            this.buttonPrevPageStretch.Location = new System.Drawing.Point(392, 411);
+            this.buttonPrevPageStretch.Location = new System.Drawing.Point(392, 419);
             this.buttonPrevPageStretch.Name = "buttonPrevPageStretch";
             this.buttonPrevPageStretch.Size = new System.Drawing.Size(42, 34);
             this.buttonPrevPageStretch.TabIndex = 18;
@@ -93,7 +93,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(447, 469);
+            this.buttonEdit.Location = new System.Drawing.Point(1035, 5);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(91, 34);
             this.buttonEdit.TabIndex = 17;
@@ -110,12 +110,12 @@
             this.OriginStretche,
             this.DestinationStretche,
             this.DistanceStretche});
-            this.dataGridViewStretches.Location = new System.Drawing.Point(14, 20);
+            this.dataGridViewStretches.Location = new System.Drawing.Point(14, 5);
             this.dataGridViewStretches.Name = "dataGridViewStretches";
             this.dataGridViewStretches.RowHeadersVisible = false;
             this.dataGridViewStretches.RowTemplate.Height = 24;
             this.dataGridViewStretches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStretches.Size = new System.Drawing.Size(1008, 374);
+            this.dataGridViewStretches.Size = new System.Drawing.Size(1000, 400);
             this.dataGridViewStretches.TabIndex = 16;
             // 
             // StretcheId
@@ -150,7 +150,7 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.dataGridViewStretches);
             this.Name = "StretchView";
-            this.Size = new System.Drawing.Size(1040, 550);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStretches)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

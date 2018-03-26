@@ -42,7 +42,7 @@
             // 
             // buttonDeleteFuelPrice
             // 
-            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(704, 291);
+            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(1035, 105);
             this.buttonDeleteFuelPrice.Name = "buttonDeleteFuelPrice";
             this.buttonDeleteFuelPrice.Size = new System.Drawing.Size(91, 34);
             this.buttonDeleteFuelPrice.TabIndex = 11;
@@ -52,7 +52,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(473, 291);
+            this.buttonEdit.Location = new System.Drawing.Point(1035, 55);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(91, 34);
             this.buttonEdit.TabIndex = 10;
@@ -62,7 +62,7 @@
             // 
             // buttonAddFuel
             // 
-            this.buttonAddFuel.Location = new System.Drawing.Point(217, 291);
+            this.buttonAddFuel.Location = new System.Drawing.Point(1035, 5);
             this.buttonAddFuel.Name = "buttonAddFuel";
             this.buttonAddFuel.Size = new System.Drawing.Size(91, 34);
             this.buttonAddFuel.TabIndex = 9;
@@ -81,12 +81,12 @@
             this.Fuel,
             this.Currency,
             this.PricePerLitre});
-            this.dataGridViewFuel.Location = new System.Drawing.Point(14, 32);
+            this.dataGridViewFuel.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewFuel.Name = "dataGridViewFuel";
             this.dataGridViewFuel.RowHeadersVisible = false;
             this.dataGridViewFuel.RowTemplate.Height = 24;
             this.dataGridViewFuel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFuel.Size = new System.Drawing.Size(1008, 223);
+            this.dataGridViewFuel.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewFuel.TabIndex = 8;
             // 
             // IdFuel
@@ -124,7 +124,7 @@
             this.Controls.Add(this.buttonAddFuel);
             this.Controls.Add(this.dataGridViewFuel);
             this.Name = "FuelPriceView";
-            this.Size = new System.Drawing.Size(1048, 509);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuel)).EndInit();
             this.ResumeLayout(false);
 

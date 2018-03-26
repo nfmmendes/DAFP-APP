@@ -41,7 +41,7 @@
             // 
             // buttonDeleteCurrency
             // 
-            this.buttonDeleteCurrency.Location = new System.Drawing.Point(717, 323);
+            this.buttonDeleteCurrency.Location = new System.Drawing.Point(1035, 105);
             this.buttonDeleteCurrency.Name = "buttonDeleteCurrency";
             this.buttonDeleteCurrency.Size = new System.Drawing.Size(91, 34);
             this.buttonDeleteCurrency.TabIndex = 17;
@@ -51,7 +51,7 @@
             // 
             // buttonEditCurrency
             // 
-            this.buttonEditCurrency.Location = new System.Drawing.Point(484, 323);
+            this.buttonEditCurrency.Location = new System.Drawing.Point(1035, 55);
             this.buttonEditCurrency.Name = "buttonEditCurrency";
             this.buttonEditCurrency.Size = new System.Drawing.Size(91, 34);
             this.buttonEditCurrency.TabIndex = 16;
@@ -61,7 +61,7 @@
             // 
             // buttonAddCurrency
             // 
-            this.buttonAddCurrency.Location = new System.Drawing.Point(230, 323);
+            this.buttonAddCurrency.Location = new System.Drawing.Point(1035, 5);
             this.buttonAddCurrency.Name = "buttonAddCurrency";
             this.buttonAddCurrency.Size = new System.Drawing.Size(91, 34);
             this.buttonAddCurrency.TabIndex = 15;
@@ -79,12 +79,12 @@
             this.CurrencyName,
             this.CurrencySymbol,
             this.Value});
-            this.dataGridViewCurrency.Location = new System.Drawing.Point(16, 25);
+            this.dataGridViewCurrency.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewCurrency.Name = "dataGridViewCurrency";
             this.dataGridViewCurrency.RowHeadersVisible = false;
             this.dataGridViewCurrency.RowTemplate.Height = 24;
             this.dataGridViewCurrency.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCurrency.Size = new System.Drawing.Size(1008, 223);
+            this.dataGridViewCurrency.Size = new System.Drawing.Size(1008, 450);
             this.dataGridViewCurrency.TabIndex = 14;
             // 
             // CurrencyId
@@ -117,7 +117,7 @@
             this.Controls.Add(this.buttonAddCurrency);
             this.Controls.Add(this.dataGridViewCurrency);
             this.Name = "CurrencyView";
-            this.Size = new System.Drawing.Size(1045, 438);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCurrency)).EndInit();
             this.ResumeLayout(false);
 

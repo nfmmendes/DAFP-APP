@@ -33,16 +33,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxInstancesInstanceTab = new System.Windows.Forms.ComboBox();
+            this.comboBoxInstances = new System.Windows.Forms.ComboBox();
             this.dataGridViewDatetime = new System.Windows.Forms.DataGridView();
             this.ImportTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDetail = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RowLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDatetime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetail)).BeginInit();
             this.SuspendLayout();
             // 
             // label7
@@ -55,13 +55,15 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Instance";
             // 
-            // comboBoxInstancesInstanceTab
+            // comboBoxInstances
             // 
-            this.comboBoxInstancesInstanceTab.FormattingEnabled = true;
-            this.comboBoxInstancesInstanceTab.Location = new System.Drawing.Point(26, 46);
-            this.comboBoxInstancesInstanceTab.Name = "comboBoxInstancesInstanceTab";
-            this.comboBoxInstancesInstanceTab.Size = new System.Drawing.Size(373, 24);
-            this.comboBoxInstancesInstanceTab.TabIndex = 13;
+            this.comboBoxInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.comboBoxInstances.FormattingEnabled = true;
+            this.comboBoxInstances.Location = new System.Drawing.Point(26, 46);
+            this.comboBoxInstances.Name = "comboBoxInstances";
+            this.comboBoxInstances.Size = new System.Drawing.Size(373, 30);
+            this.comboBoxInstances.TabIndex = 13;
+            this.comboBoxInstances.SelectedIndexChanged += new System.EventHandler(this.comboBoxInstances_SelectedIndexChanged);
             // 
             // dataGridViewDatetime
             // 
@@ -93,7 +95,7 @@
             this.dataGridViewDatetime.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDatetime.Size = new System.Drawing.Size(1016, 168);
             this.dataGridViewDatetime.TabIndex = 15;
-            this.dataGridViewDatetime.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridViewDatetime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDatetime_CellClick);
             // 
             // ImportTime
             // 
@@ -102,10 +104,10 @@
             this.ImportTime.Name = "ImportTime";
             this.ImportTime.ReadOnly = true;
             // 
-            // dataGridView2
+            // dataGridViewDetail
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridViewDetail.AllowUserToAddRows = false;
+            this.dataGridViewDetail.AllowUserToDeleteRows = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,15 +115,15 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Sheet,
             this.RowLine,
             this.Message});
-            this.dataGridView2.Location = new System.Drawing.Point(26, 327);
-            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridViewDetail.Location = new System.Drawing.Point(26, 327);
+            this.dataGridViewDetail.Name = "dataGridViewDetail";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -129,11 +131,11 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(1016, 181);
-            this.dataGridView2.TabIndex = 16;
+            this.dataGridViewDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewDetail.RowHeadersVisible = false;
+            this.dataGridViewDetail.RowTemplate.Height = 24;
+            this.dataGridViewDetail.Size = new System.Drawing.Size(1016, 181);
+            this.dataGridViewDetail.TabIndex = 16;
             // 
             // File
             // 
@@ -168,14 +170,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1069, 553);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridViewDetail);
             this.Controls.Add(this.dataGridViewDatetime);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.comboBoxInstancesInstanceTab);
+            this.Controls.Add(this.comboBoxInstances);
             this.Name = "ImportDataLog";
             this.Text = "Import Data Log";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDatetime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,10 +186,10 @@
         #endregion
 
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBoxInstancesInstanceTab;
+        private System.Windows.Forms.ComboBox comboBoxInstances;
         private System.Windows.Forms.DataGridView dataGridViewDatetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImportTime;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn File;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn RowLine;

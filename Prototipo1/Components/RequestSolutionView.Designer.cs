@@ -61,11 +61,11 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            this.dataGridViewRequestSolutionDetails.Location = new System.Drawing.Point(24, 287);
+            this.dataGridViewRequestSolutionDetails.Location = new System.Drawing.Point(10, 295);
             this.dataGridViewRequestSolutionDetails.Name = "dataGridViewRequestSolutionDetails";
             this.dataGridViewRequestSolutionDetails.RowHeadersVisible = false;
             this.dataGridViewRequestSolutionDetails.RowTemplate.Height = 24;
-            this.dataGridViewRequestSolutionDetails.Size = new System.Drawing.Size(1017, 179);
+            this.dataGridViewRequestSolutionDetails.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewRequestSolutionDetails.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn1
@@ -124,12 +124,12 @@
             this.SolutionRequestMaxDep,
             this.SolutionRequestMinArr,
             this.SolutionRequestMaxArr});
-            this.dataGridViewRequestsResult.Location = new System.Drawing.Point(24, 24);
+            this.dataGridViewRequestsResult.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewRequestsResult.Name = "dataGridViewRequestsResult";
             this.dataGridViewRequestsResult.RowHeadersVisible = false;
             this.dataGridViewRequestsResult.RowTemplate.Height = 24;
             this.dataGridViewRequestsResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRequestsResult.Size = new System.Drawing.Size(1015, 191);
+            this.dataGridViewRequestsResult.Size = new System.Drawing.Size(1000, 220);
             this.dataGridViewRequestsResult.TabIndex = 7;
             this.dataGridViewRequestsResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRequestsResult_RowEnter);
             // 
@@ -181,7 +181,7 @@
             this.Controls.Add(this.dataGridViewRequestSolutionDetails);
             this.Controls.Add(this.dataGridViewRequestsResult);
             this.Name = "RequestSolutionView";
-            this.Size = new System.Drawing.Size(1077, 500);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestSolutionDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestsResult)).EndInit();
             this.ResumeLayout(false);

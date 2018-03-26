@@ -413,10 +413,6 @@ namespace Prototipo1
             MapRoutView.setInstance(instance);
         }
 
-
-
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -612,9 +608,16 @@ namespace Prototipo1
         }
 
 
+
         #region Stretch table pagination
         #endregion
 
-
+        private void importDataLogToolStripMenuItem_Click(object sender, EventArgs e){
+            if (Context.Instances.Any()){
+                var importDataLog = new ImportDataLog(Context, null);
+                importDataLog.ShowDialog();
+            }
+            
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Prototipo1
         /// </summary>
         private void InitializeComponent()
         {
-            this.Context = new SolverClientComunication.CustomSqlContext();
+            Context = new SolverClientComunication.CustomSqlContext();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInstances = new System.Windows.Forms.TabPage();
             this.buttonDeleteScenario = new System.Windows.Forms.Button();
@@ -197,6 +197,8 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importDataLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -243,7 +245,7 @@ namespace Prototipo1
             this.tabControl.Location = new System.Drawing.Point(27, 61);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1223, 852);
+            this.tabControl.Size = new System.Drawing.Size(1398, 852);
             this.tabControl.TabIndex = 0;
             // 
             // tabInstances
@@ -260,7 +262,7 @@ namespace Prototipo1
             this.tabInstances.Location = new System.Drawing.Point(4, 40);
             this.tabInstances.Name = "tabInstances";
             this.tabInstances.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInstances.Size = new System.Drawing.Size(1215, 808);
+            this.tabInstances.Size = new System.Drawing.Size(1390, 808);
             this.tabInstances.TabIndex = 1;
             this.tabInstances.Text = "Instances";
             this.tabInstances.UseVisualStyleBackColor = true;
@@ -311,7 +313,7 @@ namespace Prototipo1
             this.panelInstanceDetails.ForeColor = System.Drawing.Color.White;
             this.panelInstanceDetails.Location = new System.Drawing.Point(20, 75);
             this.panelInstanceDetails.Name = "panelInstanceDetails";
-            this.panelInstanceDetails.Size = new System.Drawing.Size(1164, 43);
+            this.panelInstanceDetails.Size = new System.Drawing.Size(1331, 43);
             this.panelInstanceDetails.TabIndex = 13;
             this.panelInstanceDetails.Visible = false;
             // 
@@ -376,7 +378,7 @@ namespace Prototipo1
             this.tabControlInputSolution.Location = new System.Drawing.Point(6, 146);
             this.tabControlInputSolution.Name = "tabControlInputSolution";
             this.tabControlInputSolution.SelectedIndex = 0;
-            this.tabControlInputSolution.Size = new System.Drawing.Size(1203, 639);
+            this.tabControlInputSolution.Size = new System.Drawing.Size(1345, 639);
             this.tabControlInputSolution.TabIndex = 14;
             // 
             // tabInput
@@ -385,7 +387,7 @@ namespace Prototipo1
             this.tabInput.Location = new System.Drawing.Point(4, 31);
             this.tabInput.Name = "tabInput";
             this.tabInput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInput.Size = new System.Drawing.Size(1195, 604);
+            this.tabInput.Size = new System.Drawing.Size(1337, 604);
             this.tabInput.TabIndex = 0;
             this.tabInput.Text = "Input";
             this.tabInput.UseVisualStyleBackColor = true;
@@ -406,7 +408,7 @@ namespace Prototipo1
             this.tabControlInputTables.Name = "tabControlInputTables";
             this.tabControlInputTables.Padding = new System.Drawing.Point(200, 200);
             this.tabControlInputTables.SelectedIndex = 0;
-            this.tabControlInputTables.Size = new System.Drawing.Size(1186, 554);
+            this.tabControlInputTables.Size = new System.Drawing.Size(1328, 554);
             this.tabControlInputTables.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlInputTables.TabIndex = 0;
             this.tabControlInputTables.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlInputTables_DrawItem);
@@ -418,7 +420,7 @@ namespace Prototipo1
             this.tabPageAirplanes.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplanes.Name = "tabPageAirplanes";
             this.tabPageAirplanes.Padding = new System.Windows.Forms.Padding(20);
-            this.tabPageAirplanes.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageAirplanes.Size = new System.Drawing.Size(1220, 546);
             this.tabPageAirplanes.TabIndex = 0;
             this.tabPageAirplanes.Text = "Airplanes";
             this.tabPageAirplanes.UseVisualStyleBackColor = true;
@@ -428,9 +430,9 @@ namespace Prototipo1
             this.AirplaneView.AutoSize = true;
             this.AirplaneView.Context = Context;
             this.AirplaneView.Instance = null;
-            this.AirplaneView.Location = new System.Drawing.Point(20, 20);
+            this.AirplaneView.Location = new System.Drawing.Point(15, 15);
             this.AirplaneView.Name = "AirplaneView";
-            this.AirplaneView.Size = new System.Drawing.Size(1026, 524);
+            this.AirplaneView.Size = new System.Drawing.Size(1180, 530);
             this.AirplaneView.TabIndex = 0;
             // 
             // tabPageAirports
@@ -440,7 +442,7 @@ namespace Prototipo1
             this.tabPageAirports.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirports.Name = "tabPageAirports";
             this.tabPageAirports.Padding = new System.Windows.Forms.Padding(20);
-            this.tabPageAirports.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageAirports.Size = new System.Drawing.Size(1220, 546);
             this.tabPageAirports.TabIndex = 1;
             this.tabPageAirports.Text = "Airport";
             this.tabPageAirports.UseVisualStyleBackColor = true;
@@ -449,9 +451,9 @@ namespace Prototipo1
             // 
             this.AirportView.Context = Context;
             this.AirportView.Instance = null;
-            this.AirportView.Location = new System.Drawing.Point(0, 0);
+            this.AirportView.Location = new System.Drawing.Point(15, 15);
             this.AirportView.Name = "AirportView";
-            this.AirportView.Size = new System.Drawing.Size(1119, 526);
+            this.AirportView.Size = new System.Drawing.Size(1180, 530);
             this.AirportView.TabIndex = 0;
             // 
             // tabPageRequests
@@ -461,7 +463,7 @@ namespace Prototipo1
             this.tabPageRequests.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageRequests.Name = "tabPageRequests";
             this.tabPageRequests.Padding = new System.Windows.Forms.Padding(20);
-            this.tabPageRequests.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageRequests.Size = new System.Drawing.Size(1220, 546);
             this.tabPageRequests.TabIndex = 2;
             this.tabPageRequests.Text = "Requests";
             this.tabPageRequests.UseVisualStyleBackColor = true;
@@ -470,9 +472,9 @@ namespace Prototipo1
             // 
             this.RequestView.Context = Context;
             this.RequestView.Instance = null;
-            this.RequestView.Location = new System.Drawing.Point(0, 0);
+            this.RequestView.Location = new System.Drawing.Point(15, 15);
             this.RequestView.Name = "RequestView";
-            this.RequestView.Size = new System.Drawing.Size(1081, 544);
+            this.RequestView.Size = new System.Drawing.Size(1180, 530);
             this.RequestView.TabIndex = 0;
             // 
             // tabPageFuel
@@ -480,7 +482,7 @@ namespace Prototipo1
             this.tabPageFuel.Controls.Add(this.FuelPriceView);
             this.tabPageFuel.Location = new System.Drawing.Point(104, 4);
             this.tabPageFuel.Name = "tabPageFuel";
-            this.tabPageFuel.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageFuel.Size = new System.Drawing.Size(1220, 546);
             this.tabPageFuel.TabIndex = 3;
             this.tabPageFuel.Text = "Fuel";
             this.tabPageFuel.UseVisualStyleBackColor = true;
@@ -489,9 +491,9 @@ namespace Prototipo1
             // 
             this.FuelPriceView.Context = Context;
             this.FuelPriceView.Instance = null;
-            this.FuelPriceView.Location = new System.Drawing.Point(0, 0);
+            this.FuelPriceView.Location = new System.Drawing.Point(15, 15);
             this.FuelPriceView.Name = "FuelPriceView";
-            this.FuelPriceView.Size = new System.Drawing.Size(1048, 509);
+            this.FuelPriceView.Size = new System.Drawing.Size(1180, 530);
             this.FuelPriceView.TabIndex = 0;
             // 
             // tabExchangeRate
@@ -500,7 +502,7 @@ namespace Prototipo1
             this.tabExchangeRate.Location = new System.Drawing.Point(104, 4);
             this.tabExchangeRate.Name = "tabExchangeRate";
             this.tabExchangeRate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExchangeRate.Size = new System.Drawing.Size(1078, 546);
+            this.tabExchangeRate.Size = new System.Drawing.Size(1220, 546);
             this.tabExchangeRate.TabIndex = 4;
             this.tabExchangeRate.Text = "Exchange Rates";
             this.tabExchangeRate.UseVisualStyleBackColor = true;
@@ -509,9 +511,9 @@ namespace Prototipo1
             // 
             this.CurrencyView.Context = Context;
             this.CurrencyView.Instance = null;
-            this.CurrencyView.Location = new System.Drawing.Point(0, 0);
+            this.CurrencyView.Location = new System.Drawing.Point(15, 15);
             this.CurrencyView.Name = "CurrencyView";
-            this.CurrencyView.Size = new System.Drawing.Size(1045, 438);
+            this.CurrencyView.Size = new System.Drawing.Size(1180, 530);
             this.CurrencyView.TabIndex = 0;
             // 
             // tabStretches
@@ -520,7 +522,7 @@ namespace Prototipo1
             this.tabStretches.Location = new System.Drawing.Point(104, 4);
             this.tabStretches.Name = "tabStretches";
             this.tabStretches.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStretches.Size = new System.Drawing.Size(1078, 546);
+            this.tabStretches.Size = new System.Drawing.Size(1220, 546);
             this.tabStretches.TabIndex = 5;
             this.tabStretches.Text = "Stretches";
             this.tabStretches.UseVisualStyleBackColor = true;
@@ -529,9 +531,9 @@ namespace Prototipo1
             // 
             this.StretchView.Context = Context;
             this.StretchView.Instance = null;
-            this.StretchView.Location = new System.Drawing.Point(0, 0);
+            this.StretchView.Location = new System.Drawing.Point(15, 15);
             this.StretchView.Name = "StretchView";
-            this.StretchView.Size = new System.Drawing.Size(1040, 550);
+            this.StretchView.Size = new System.Drawing.Size(1180, 530);
             this.StretchView.TabIndex = 0;
             // 
             // tabSolution
@@ -540,7 +542,7 @@ namespace Prototipo1
             this.tabSolution.Location = new System.Drawing.Point(4, 31);
             this.tabSolution.Name = "tabSolution";
             this.tabSolution.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSolution.Size = new System.Drawing.Size(1195, 604);
+            this.tabSolution.Size = new System.Drawing.Size(1337, 604);
             this.tabSolution.TabIndex = 1;
             this.tabSolution.Text = "Solution";
             this.tabSolution.UseVisualStyleBackColor = true;
@@ -554,12 +556,12 @@ namespace Prototipo1
             this.tabControlInstanceSolution.Controls.Add(this.tabPageSolutionRequests);
             this.tabControlInstanceSolution.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControlInstanceSolution.ItemSize = new System.Drawing.Size(40, 100);
-            this.tabControlInstanceSolution.Location = new System.Drawing.Point(4, 25);
+            this.tabControlInstanceSolution.Location = new System.Drawing.Point(15, 15);
             this.tabControlInstanceSolution.Multiline = true;
             this.tabControlInstanceSolution.Name = "tabControlInstanceSolution";
             this.tabControlInstanceSolution.Padding = new System.Drawing.Point(200, 200);
             this.tabControlInstanceSolution.SelectedIndex = 0;
-            this.tabControlInstanceSolution.Size = new System.Drawing.Size(1186, 554);
+            this.tabControlInstanceSolution.Size = new System.Drawing.Size(1316, 554);
             this.tabControlInstanceSolution.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlInstanceSolution.TabIndex = 1;
             this.tabControlInstanceSolution.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlOtherTables_DrawItem);
@@ -571,17 +573,17 @@ namespace Prototipo1
             this.tabPageRouteVisualization.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageRouteVisualization.Name = "tabPageRouteVisualization";
             this.tabPageRouteVisualization.Padding = new System.Windows.Forms.Padding(20);
-            this.tabPageRouteVisualization.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageRouteVisualization.Size = new System.Drawing.Size(1208, 546);
             this.tabPageRouteVisualization.TabIndex = 0;
             this.tabPageRouteVisualization.Text = "Route Vizualization";
             this.tabPageRouteVisualization.UseVisualStyleBackColor = true;
             // 
             // MapRoutView
             // 
-            this.MapRoutView.Location = new System.Drawing.Point(34, 23);
+            this.MapRoutView.Context = Context;
+            this.MapRoutView.Location = new System.Drawing.Point(15, 15);
             this.MapRoutView.Name = "MapRoutView";
-            this.MapRoutView.Size = new System.Drawing.Size(1021, 500);
-            this.MapRoutView.Context = this.Context;
+            this.MapRoutView.Size = new System.Drawing.Size(1180, 530);
             this.MapRoutView.TabIndex = 0;
             // 
             // tabPageAirplaneUsage
@@ -594,7 +596,7 @@ namespace Prototipo1
             this.tabPageAirplaneUsage.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplaneUsage.Name = "tabPageAirplaneUsage";
             this.tabPageAirplaneUsage.Padding = new System.Windows.Forms.Padding(20);
-            this.tabPageAirplaneUsage.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageAirplaneUsage.Size = new System.Drawing.Size(1208, 546);
             this.tabPageAirplaneUsage.TabIndex = 1;
             this.tabPageAirplaneUsage.Text = "Airplanes Usage";
             this.tabPageAirplaneUsage.UseVisualStyleBackColor = true;
@@ -746,7 +748,7 @@ namespace Prototipo1
             this.tabPageRefuels.Controls.Add(this.RefuelSolutionView);
             this.tabPageRefuels.Location = new System.Drawing.Point(104, 4);
             this.tabPageRefuels.Name = "tabPageRefuels";
-            this.tabPageRefuels.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageRefuels.Size = new System.Drawing.Size(1208, 546);
             this.tabPageRefuels.TabIndex = 2;
             this.tabPageRefuels.Text = "Refuels";
             this.tabPageRefuels.UseVisualStyleBackColor = true;
@@ -755,9 +757,9 @@ namespace Prototipo1
             // 
             this.RefuelSolutionView.Context = Context;
             this.RefuelSolutionView.Instance = null;
-            this.RefuelSolutionView.Location = new System.Drawing.Point(0, 0);
+            this.RefuelSolutionView.Location = new System.Drawing.Point(15, 15);
             this.RefuelSolutionView.Name = "RefuelSolutionView";
-            this.RefuelSolutionView.Size = new System.Drawing.Size(1069, 454);
+            this.RefuelSolutionView.Size = new System.Drawing.Size(1178, 530);
             this.RefuelSolutionView.TabIndex = 0;
             // 
             // tabPageSolutionRequests
@@ -765,7 +767,7 @@ namespace Prototipo1
             this.tabPageSolutionRequests.Controls.Add(this.RequestSolutionView);
             this.tabPageSolutionRequests.Location = new System.Drawing.Point(104, 4);
             this.tabPageSolutionRequests.Name = "tabPageSolutionRequests";
-            this.tabPageSolutionRequests.Size = new System.Drawing.Size(1078, 546);
+            this.tabPageSolutionRequests.Size = new System.Drawing.Size(1208, 546);
             this.tabPageSolutionRequests.TabIndex = 3;
             this.tabPageSolutionRequests.Text = "Requests";
             this.tabPageSolutionRequests.UseVisualStyleBackColor = true;
@@ -774,9 +776,9 @@ namespace Prototipo1
             // 
             this.RequestSolutionView.Context = Context;
             this.RequestSolutionView.Instance = null;
-            this.RequestSolutionView.Location = new System.Drawing.Point(0, 0);
+            this.RequestSolutionView.Location = new System.Drawing.Point(12, 12);
             this.RequestSolutionView.Name = "RequestSolutionView";
-            this.RequestSolutionView.Size = new System.Drawing.Size(1077, 500);
+            this.RequestSolutionView.Size = new System.Drawing.Size(1180, 530);
             this.RequestSolutionView.TabIndex = 0;
             // 
             // label7
@@ -819,7 +821,7 @@ namespace Prototipo1
             this.tabParameters.Location = new System.Drawing.Point(4, 40);
             this.tabParameters.Name = "tabParameters";
             this.tabParameters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParameters.Size = new System.Drawing.Size(1215, 808);
+            this.tabParameters.Size = new System.Drawing.Size(1390, 808);
             this.tabParameters.TabIndex = 0;
             this.tabParameters.Text = "Parameters";
             this.tabParameters.UseVisualStyleBackColor = true;
@@ -1517,12 +1519,13 @@ namespace Prototipo1
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.configurationToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1462, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1712,17 +1715,33 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importDataLogToolStripMenuItem});
+            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // importDataLogToolStripMenuItem
+            // 
+            this.importDataLogToolStripMenuItem.Name = "importDataLogToolStripMenuItem";
+            this.importDataLogToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.importDataLogToolStripMenuItem.Text = "Import Data Log";
+            this.importDataLogToolStripMenuItem.Click += new System.EventHandler(this.importDataLogToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1262, 977);
+            this.ClientSize = new System.Drawing.Size(1462, 977);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1280, 1024);
-            this.MinimumSize = new System.Drawing.Size(1280, 1024);
+            this.MaximumSize = new System.Drawing.Size(1480, 1024);
+            this.MinimumSize = new System.Drawing.Size(1480, 1024);
             this.Name = "MainForm";
             this.Text = "Unimore - Optimizer 1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1876,7 +1895,6 @@ namespace Prototipo1
         private Label label6;
         private Label label5;
         private TabControl tabControlInstanceSolution;
-        private TabPage tabPageRouteVisualization;
         private TabPage tabPageAirplaneUsage;
         private DataGridView dataGridViewRoute;
         private Label label18;
@@ -1927,7 +1945,10 @@ namespace Prototipo1
         private TabPage tabPageFuel;
         private TabPage tabExchangeRate;
         private TabPage tabStretches;
+        private TabPage tabPageRouteVisualization;
         private MapRoutesView MapRoutView;
+        private ToolStripMenuItem viewToolStripMenuItem;
+        private ToolStripMenuItem importDataLogToolStripMenuItem;
     }
 }
 

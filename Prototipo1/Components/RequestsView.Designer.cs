@@ -55,7 +55,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(725, 486);
+            this.button5.Location = new System.Drawing.Point(1035, 395);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(91, 34);
             this.button5.TabIndex = 21;
@@ -64,7 +64,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(492, 486);
+            this.button6.Location = new System.Drawing.Point(1035, 345);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(91, 34);
             this.button6.TabIndex = 20;
@@ -73,7 +73,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(238, 486);
+            this.button7.Location = new System.Drawing.Point(1035, 295);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(91, 34);
             this.button7.TabIndex = 19;
@@ -82,7 +82,7 @@
             // 
             // buttonRemoveRequest
             // 
-            this.buttonRemoveRequest.Location = new System.Drawing.Point(725, 228);
+            this.buttonRemoveRequest.Location = new System.Drawing.Point(1035, 105);
             this.buttonRemoveRequest.Name = "buttonRemoveRequest";
             this.buttonRemoveRequest.Size = new System.Drawing.Size(91, 34);
             this.buttonRemoveRequest.TabIndex = 18;
@@ -91,7 +91,7 @@
             // 
             // buttonEditRequest
             // 
-            this.buttonEditRequest.Location = new System.Drawing.Point(492, 228);
+            this.buttonEditRequest.Location = new System.Drawing.Point(1035, 55);
             this.buttonEditRequest.Name = "buttonEditRequest";
             this.buttonEditRequest.Size = new System.Drawing.Size(91, 34);
             this.buttonEditRequest.TabIndex = 17;
@@ -101,7 +101,7 @@
             // 
             // buttonAddRequest
             // 
-            this.buttonAddRequest.Location = new System.Drawing.Point(238, 228);
+            this.buttonAddRequest.Location = new System.Drawing.Point(1035, 5);
             this.buttonAddRequest.Name = "buttonAddRequest";
             this.buttonAddRequest.Size = new System.Drawing.Size(91, 34);
             this.buttonAddRequest.TabIndex = 16;
@@ -119,11 +119,11 @@
             this.Sex,
             this.IsKid,
             this.Class});
-            this.dataGridViewPassenger.Location = new System.Drawing.Point(23, 284);
+            this.dataGridViewPassenger.Location = new System.Drawing.Point(10, 295);
             this.dataGridViewPassenger.Name = "dataGridViewPassenger";
             this.dataGridViewPassenger.RowHeadersVisible = false;
             this.dataGridViewPassenger.RowTemplate.Height = 24;
-            this.dataGridViewPassenger.Size = new System.Drawing.Size(1013, 189);
+            this.dataGridViewPassenger.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewPassenger.TabIndex = 15;
             // 
             // IdPassenger
@@ -167,12 +167,12 @@
             this.MaxDeparture,
             this.MinArrival,
             this.MaxArrival});
-            this.dataGridViewRequest.Location = new System.Drawing.Point(21, 16);
+            this.dataGridViewRequest.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewRequest.Name = "dataGridViewRequest";
             this.dataGridViewRequest.RowHeadersVisible = false;
             this.dataGridViewRequest.RowTemplate.Height = 24;
             this.dataGridViewRequest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRequest.Size = new System.Drawing.Size(1015, 191);
+            this.dataGridViewRequest.Size = new System.Drawing.Size(1000, 220);
             this.dataGridViewRequest.TabIndex = 14;
             this.dataGridViewRequest.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRequest_RowEnter);
             // 
@@ -230,7 +230,7 @@
             this.Controls.Add(this.dataGridViewPassenger);
             this.Controls.Add(this.dataGridViewRequest);
             this.Name = "RequestsView";
-            this.Size = new System.Drawing.Size(1081, 544);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).EndInit();
             this.ResumeLayout(false);

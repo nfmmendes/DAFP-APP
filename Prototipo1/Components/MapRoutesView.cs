@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -24,7 +25,7 @@ namespace Prototipo1.Components
     {
 
         private DbInstance Instance { get; set; }
-        public CustomSqlContext Context;
+        public CustomSqlContext Context { get; set; }
         private static Regex Parser = new Regex("^(?<deg>[-+0-9]+)[^0-9]+(?<min>[0-9]+)[^0-9]+(?<sec>[0-9.,]+)[^0-9.,ENSW]+(?<pos>[ENSW]*)$");
 
         public MapRoutesView(){
@@ -35,25 +36,29 @@ namespace Prototipo1.Components
         public void setInstance(DbInstance instance){
             Instance = instance;
             GMapControl.Overlays.Clear();
-            setOverlayMarker();
-            this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x=>x.Prefix).ToList();
+            radioButtonAllPoints.Checked = true;
+
+            if (Instance.Optimized){
+                this.comboBoxAirplane.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
+                                                          .Select(x => x.Airplanes.Prefix).Distinct().ToList();
+            }else{
+                this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
+            }
+             
 
         }
 
-        private void setOverlayMarker(){
+        private void setOverlayMarker(List<DbAirports> airportsList){
             GMapOverlay markers = new GMapOverlay("markers");
+            GMapControl.Overlays.Clear();
 
+            if (Context.Instances.Any()){
+                foreach (var item in airportsList){
 
-            if (Context.Instances.Any())
-            {
-                var airportsList = Context.Airports.Where(x => x.Instance.Id == Instance.Id);
-                foreach (var item in airportsList)
-                {
                     Debug.Write(item.Latitude);
                     var _lat = TransformCoordinate(item.Latitude);
                     Debug.Write(item.Longitude);
                     var _long = TransformCoordinate(item.Longitude);
-
 
                     var newMarker = new GMarkerGoogle(new PointLatLng(_lat, _long), GMarkerGoogleType.red_small);
                     newMarker.ToolTip = new GMapToolTip(newMarker);
@@ -65,6 +70,48 @@ namespace Prototipo1.Components
             }
 
             GMapControl.Overlays.Add(markers);
+
+            if (radioButtonAirplane.Checked || radioButtonSolution.Checked){
+                GMapOverlay polyOverlay = new GMapOverlay("polygons");
+
+
+                var flights = new List<DbFlightsReport>();
+
+                if (radioButtonSolution.Checked){
+                    flights = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id).ToList();
+                }else{
+                    var airplane = Context.Airplanes.FirstOrDefault(x => x.Prefix.Equals(comboBoxAirplane.SelectedItem.ToString()) &&
+                                                                         x.Instance.Id == Instance.Id);
+                    if(airplane!= null)
+                       flights = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id && x.Airplanes.Id == airplane.Id).ToList();
+
+                }
+                    
+
+                foreach (var item in flights){
+                    var points = new List<PointLatLng>();
+                    points.Add(new PointLatLng(TransformCoordinate(item.Origin.Latitude), TransformCoordinate(item.Origin.Longitude)));
+                    points.Add(new PointLatLng(TransformCoordinate(item.Destination.Latitude), TransformCoordinate(item.Destination.Longitude)));
+                    points.Add(new PointLatLng(TransformCoordinate(item.Origin.Latitude), TransformCoordinate(item.Origin.Longitude)));
+                    GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+                    polygon.Stroke = new Pen(Color.Red, 1);
+                    polyOverlay.Polygons.Add(polygon);
+                }
+
+                /*
+                points.Add(new PointLatLng(-25.969562, 32.585789));
+                points.Add(new PointLatLng(-25.966205, 32.588171));
+                points.Add(new PointLatLng(-25.968134, 32.591647));
+                points.Add(new PointLatLng(-25.971684, 32.589759));
+                GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+                polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+                polygon.Stroke = new Pen(Color.Red, 1);
+                polyOverlay.Polygons.Add(polygon);
+                */
+                GMapControl.Overlays.Add(polyOverlay);
+            }
+            
+
         }
 
 
@@ -74,8 +121,7 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MapRoutesView_Load(object sender, EventArgs e)
-        {
+        private void MapRoutesView_Load(object sender, EventArgs e){
             //use google provider
             GMapControl.MapProvider = GoogleMapProvider.Instance;
             //get tiles from server only
@@ -89,7 +135,7 @@ namespace Prototipo1.Components
             GMapControl.Zoom = 5;
             GMapControl.DragButton = MouseButtons.Left;
 
-            setOverlayMarker();
+            radioButtonAllPoints.Checked = true; 
         }
 
 
@@ -104,11 +150,10 @@ namespace Prototipo1.Components
                 coordinate = coordinate.Replace("'","'00''");
 
             // If it starts and finishes with a quote, strip them off
-            if (coordinate.StartsWith("\"") && coordinate.EndsWith("\""))
-            {
+            if (coordinate.StartsWith("\"") && coordinate.EndsWith("\"")){
                 coordinate = coordinate.Substring(1, coordinate.Length - 2).Replace("\"\"", "\"");
             }
-
+            
             // Now parse using the regex parser
             Match match = Parser.Match(coordinate);
             if (!match.Success)
@@ -135,9 +180,6 @@ namespace Prototipo1.Components
                 Debug.Write($"\t{result}\n");
                 return result;
             }
-
-           
-            
         }
         
 
@@ -147,24 +189,11 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void comboBoxAirplane_SelectedIndexChanged(object sender, EventArgs e){
-            
+            if(radioButtonAirplane.Checked)
+                DrawAirportsOnAirplaneRoute();
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MapRoutesView_KeyDown(object sender, KeyEventArgs e){
-            var _lat = GMapControl.Position.Lat;
-            var _long = GMapControl.Position.Lng;
-
-            if (e.KeyCode.Equals(Keys.Up))
-                GMapControl.Position = new PointLatLng(_lat + 0.05, _long);
-            else if (e.KeyCode.Equals(Keys.Down))
-                GMapControl.Position = new PointLatLng(_lat - 0.05, _long);
-        }
 
         /// <summary>
         /// 
@@ -184,15 +213,79 @@ namespace Prototipo1.Components
             GMapControl.Zoom -= 1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GMapControl_DoubleClick(object sender, EventArgs e){
             GMapControl.Zoom += 0.25;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GMapControl_Scroll(object sender, ScrollEventArgs e){
             if(e.OldValue > e.NewValue)
                 GMapControl.Zoom += 0.5;
             else 
                 GMapControl.Zoom -= 0.5;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButtonAllPoints_CheckedChanged(object sender, EventArgs e){
+            if (radioButtonAllPoints.Checked){
+                setOverlayMarker(Context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButtonSolution_CheckedChanged(object sender, EventArgs e){
+            if (radioButtonSolution.Checked){
+                var airports = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id).Select(x=>x.Origin).Distinct().ToList();
+                airports = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Destination).Distinct().ToList();
+
+                airports = airports.Distinct().ToList();
+                setOverlayMarker(airports);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButtonAirplane_CheckedChanged(object sender, EventArgs e){
+            if (radioButtonAirplane.Checked)
+                DrawAirportsOnAirplaneRoute();
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void DrawAirportsOnAirplaneRoute(){
+            var airplane = Context.Airplanes.FirstOrDefault(x => x.Prefix.Equals(comboBoxAirplane.SelectedItem.ToString()) &&
+                                                                 x.Instance.Id == Instance.Id);
+
+            if (airplane != null){
+                var airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id)
+                    .Select(x => x.Origin).Distinct().ToList();
+                airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id).Select(x => x.Destination).Distinct().ToList();
+
+                airports = airports.Distinct().ToList();
+                setOverlayMarker(airports);
+            }
         }
     }
 }

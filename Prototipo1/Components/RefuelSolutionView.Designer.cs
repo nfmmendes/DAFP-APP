@@ -55,11 +55,11 @@
             this.Volume,
             this.UnitPrice,
             this.Total});
-            this.dataGridViewSolutionRefuel.Location = new System.Drawing.Point(27, 19);
+            this.dataGridViewSolutionRefuel.Location = new System.Drawing.Point(10, 5);
             this.dataGridViewSolutionRefuel.Name = "dataGridViewSolutionRefuel";
             this.dataGridViewSolutionRefuel.RowHeadersVisible = false;
             this.dataGridViewSolutionRefuel.RowTemplate.Height = 24;
-            this.dataGridViewSolutionRefuel.Size = new System.Drawing.Size(1004, 195);
+            this.dataGridViewSolutionRefuel.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewSolutionRefuel.TabIndex = 1;
             // 
             // AirplanePrefix
@@ -99,7 +99,7 @@
             // 
             // buttonDeleteFuelPrice
             // 
-            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(689, 293);
+            this.buttonDeleteFuelPrice.Location = new System.Drawing.Point(1035, 105);
             this.buttonDeleteFuelPrice.Name = "buttonDeleteFuelPrice";
             this.buttonDeleteFuelPrice.Size = new System.Drawing.Size(91, 34);
             this.buttonDeleteFuelPrice.TabIndex = 14;
@@ -109,7 +109,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(458, 293);
+            this.buttonEdit.Location = new System.Drawing.Point(1035, 55);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(91, 34);
             this.buttonEdit.TabIndex = 13;
@@ -119,7 +119,7 @@
             // 
             // buttonAddFuel
             // 
-            this.buttonAddFuel.Location = new System.Drawing.Point(202, 293);
+            this.buttonAddFuel.Location = new System.Drawing.Point(1035, 5);
             this.buttonAddFuel.Name = "buttonAddFuel";
             this.buttonAddFuel.Size = new System.Drawing.Size(91, 34);
             this.buttonAddFuel.TabIndex = 12;
@@ -135,7 +135,7 @@
             this.Controls.Add(this.buttonAddFuel);
             this.Controls.Add(this.dataGridViewSolutionRefuel);
             this.Name = "RefuelSolutionView";
-            this.Size = new System.Drawing.Size(1069, 454);
+            this.Size = new System.Drawing.Size(1180, 530);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSolutionRefuel)).EndInit();
             this.ResumeLayout(false);
 

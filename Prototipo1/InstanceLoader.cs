@@ -121,8 +121,10 @@ namespace Prototipo1
                if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
                   ImportDataController.Instance.importRequestData(now, this.choosenRequestFileLabel.Text, instance, loadRequest);
               }
-            this.Enabled = true; 
-            var newErrosFound = Context.ImportErrors.Any(x=>x.Instance.Id == instance.Id && x.ImportationHour.Equals(now));
+            this.Enabled = true;
+
+            var nowString = now.ToString("G");
+            var newErrosFound = Context.ImportErrors.ToList().Any(x=>x.Instance.Id == instance.Id && x.ImportationHour.ToString("G").Equals(nowString));
 
             if (newErrosFound){
                 var seeErrors = MessageBox.Show("Import data finished with errors. Do you want to see it now?","",MessageBoxButtons.YesNo);
@@ -134,6 +136,10 @@ namespace Prototipo1
             }else
                 MessageBox.Show("Import data finished without errors");
             this.Close();
+        }
+
+        private bool DateTimeEquals(DateTime a, DateTime b){
+            return a.ToString("G").Equals(b.ToString("G"));
         }
 
         /// <summary>
