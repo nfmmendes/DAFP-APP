@@ -65,9 +65,9 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Remove a airport on database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">airport to be deleted</param>
         public override void Delete(DbAirports item){
             throw new NotImplementedException();
         }

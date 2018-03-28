@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Prototipo1.Components;
 using Prototipo1.Controller;
 using Solver;
-using SolverClientComunication;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
@@ -34,6 +29,7 @@ namespace Prototipo1
         
 
             var instances = Context.Instances;
+            //Fill the list of instances on the main combo box
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
             if(comboBoxInstancesInstanceTab.Items.Count>0)
                 comboBoxInstancesInstanceTab.SelectedIndex = 0;
@@ -131,7 +127,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Changes the MILP solver to COIN-OR
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -145,11 +141,13 @@ namespace Prototipo1
         /// <param name="solverEnum"></param>
         private void changeSelectedSolver(SolverEnum solverEnum)
         {
+            //Set all checks to false...
             this.cplexToolStripMenuItem.Checked = false;
             this.gurobiToolStripMenuItem.Checked = false;
             this.coinORToolStripMenuItem.Checked = false;
             this.xpressToolStripMenuItem.Checked = false;
 
+            ///..Because just one option must be true
             if (solverEnum.Equals(SolverEnum.CPLEX))
                 cplexToolStripMenuItem.Checked = true;
             else if (solverEnum.Equals(SolverEnum.GUROBI))
@@ -208,7 +206,7 @@ namespace Prototipo1
 
 
         /// <summary>
-        /// 
+        /// Function to catch the event of clicking in the CreateInstance button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -223,12 +221,13 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Function to catch de event of clicking in the EditParam button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonEditParams_Click(object sender, EventArgs e)
         {
+            ///It changes the state of objects on the view to enable using the elements that allow to edit the data
             buttonEditParams.Visible = false;
             buttonSaveParams.Visible = true;
             buttonCancelSaveParams.Visible = true;
@@ -325,7 +324,7 @@ namespace Prototipo1
 #endregion
 
         /// <summary>
-        /// 
+        /// Function that will deal with the procedure of saving the parameters of the model after a edition
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -333,6 +332,7 @@ namespace Prototipo1
         {
 
             DisableParametersEdition();
+            //Change/Save the parameters of all instances
             if (this.radioButtonGenSettingY.Checked){
                 ParametersController.Instance.UpdateAllInstances(radioButtonTimeWindowYes.Checked,
                                                                 radioButtonPickAllYes.Checked,radioButtonDeliverAllYes.Checked, 
@@ -340,6 +340,7 @@ namespace Prototipo1
                                                                 Convert.ToInt32(numUD_ManWeight.Value),Convert.ToInt32(numUD_WomanWeight.Value), 
                                                                 Convert.ToInt32(numUD_ChildWeight.Value),Convert.ToInt32(numUD_TimeLimit.Value));
             }
+            //Change/Save the parameters of just one instance 
             else{
                 var instanceName = getSelectedInstanceName(this.comboBoxInstanceParamTab.SelectedValue.ToString());
                 var instance = Context.Instances.First(x => x.Name.Equals(instanceName));
@@ -353,7 +354,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Disable/Hide all the controls that allow the parameters edition
         /// </summary>
         private void DisableParametersEdition(){
             radioButtonDeliverAllNo.Enabled = radioButtonDeliverAllYes.Enabled = false;
@@ -372,7 +373,7 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Alter the instance currently selected and refresh the data grid views 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -397,9 +398,9 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Reload all the data tables to show the data of the instance 
         /// </summary>
-        /// <param name="instance"></param>
+        /// <param name="instance">The instance that will be showed on the view</param>
         private void FillTables(DbInstance instance){
             AirportView.setInstance(instance);
             StretchView.setInstance(instance);
@@ -413,22 +414,23 @@ namespace Prototipo1
         }
 
         /// <summary>
-        /// 
+        /// Return the name of a instance given the value selected in the main combo box
         /// </summary>
         /// <returns></returns>
-        public string getSelectedInstanceName(string selectedValue){
+        private string getSelectedInstanceName(string selectedValue){
             var selectedLabel = selectedValue; 
             var instanceName = selectedLabel.Split('(')[0];
             return instanceName.Substring(0, instanceName.Length - 1);
         }
 
         /// <summary>
-        /// 
+        /// Catch and deal the event of clicking in the button delete scenario
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonDeleteScenario_Click(object sender, EventArgs e)
         {
+
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedValue.ToString());
             var result = MessageBox.Show($"Do you really want delete the instance {instanceName}?","Warning", MessageBoxButtons.YesNo);
 
@@ -436,17 +438,18 @@ namespace Prototipo1
             if (result == DialogResult.Yes)
                 InstancesController.Instance.FindAndDeleteByName(instanceName);
             
+            //Update the list of scenarios after delete the scenario
             this.comboBoxInstancesInstanceTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
             this.comboBoxInstanceParamTab.DataSource = Context.Instances.ToList().Select(shortInstanceDescription).ToList();
 
             var first = Context.Instances.FirstOrDefault();
 
-            //if(first != null)
-                FillTables(first);
+            
+            FillTables(first);
         }
 
         /// <summary>
-        /// 
+        /// Catch and deal the event of editing a scenario
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -461,10 +464,8 @@ namespace Prototipo1
         }
 
 
-
-
         /// <summary>
-        /// 
+        /// Catch and deal the event of duplicating a instance 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -473,46 +474,12 @@ namespace Prototipo1
             duplicateWindow.ShowDialog();
         }
         
-
-
-
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAddFuel_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            if (instance != null){
-                var addFuel = new AddEditFuel(Context);
-                addFuel.OpenToAdd(instance);
-               // FillFuelTable(instance);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAddRequest_Click(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-
-            if (instance != null){
-                var addRequest = new AddEditRequest(Context);
-                addRequest.OpenToAdd(instance);
-            }
-        }
         
-        #region Stretch table pagination
-        #endregion
-
+        /// <summary>
+        /// Shows the import data log 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void importDataLogToolStripMenuItem_Click(object sender, EventArgs e){
             if (Context.Instances.Any()){
                 var importDataLog = new ImportDataLog(Context, null);

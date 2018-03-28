@@ -9,25 +9,27 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
+    /// <summary>
+    /// Class to control the manipulation of the data about the airports
+    /// </summary>
     public class AirplaneController : AbstractController<DbAirplanes, CustomSqlContext>
     {
 
-        private CustomSqlContext Context { get; set; }
         public static readonly AirplaneController Instance = new AirplaneController();
 
         /// <summary>
-        /// 
+        /// Sets the object that access the database
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">Object that will access the database </param>
         public override void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
-    
+
         /// <summary>
-        /// 
+        /// Edit a airport on database
         /// </summary>
-        /// <param name="airplane"></param>
-        /// <param name="Id"></param>
+        /// <param name="airplane">Airplane with new values</param>
+        /// <param name="Id">Airplane Id</param>
         public override void Edit(DbAirplanes airplane, long Id){
             var item = Instance.Context.Airplanes.FirstOrDefault(x=>x.Id == Id);
 
@@ -51,19 +53,30 @@ namespace Prototipo1.Controller
             Instance.Context.SaveChanges();
         }
 
-        public override void Delete(DbAirplanes item)
-        {
+        /// <summary>
+        /// Remove a airplane on database
+        /// </summary>
+        /// <param name="item">Airplane to be deleted</param>
+        public override void Delete(DbAirplanes item){
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///  Add a airplane on database
+        /// </summary>
+        /// <param name="airplane">Item that will be added</param>
         public override void Add(DbAirplanes airplane){
             if(IsValidItem(airplane))
             Instance.Context.Airplanes.AddOrUpdate(airplane);
             Instance.Context.SaveChanges();
         }
 
-        protected override bool IsValidItem(DbAirplanes item)
-        {
+        /// <summary>
+        /// Validade a airplane object object
+        /// </summary>
+        /// <param name="item">Airplane object to be verified</param>
+        /// <returns></returns>
+        protected override bool IsValidItem(DbAirplanes item){
             if (item != null)
                 return true;
             else
