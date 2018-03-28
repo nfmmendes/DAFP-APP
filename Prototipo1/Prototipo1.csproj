@@ -111,6 +111,12 @@
     <Compile Include="AddEditSeatType.Designer.cs">
       <DependentUpon>AddEditSeatType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\AirplaneUseSolutionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\AirplaneUseSolutionView.Designer.cs">
+      <DependentUpon>AirplaneUseSolutionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\AirplaneView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditSeatType.resx">
       <DependentUpon>AddEditSeatType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\AirplaneUseSolutionView.resx">
+      <DependentUpon>AirplaneUseSolutionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\AirplaneView.resx">
       <DependentUpon>AirplaneView.cs</DependentUpon>

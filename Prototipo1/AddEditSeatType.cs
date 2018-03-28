@@ -41,7 +41,6 @@ namespace Prototipo1
 
             if (CurrentElement != null){
                 this.textBoxClass.Text = CurrentElement.seatClass;
-                this.numUDNumberSeats.Value = CurrentElement.numberOfSeats;
                 this.numUDLuggageWeight.Value = Convert.ToDecimal(CurrentElement.luggageWeightLimit);
             }
 

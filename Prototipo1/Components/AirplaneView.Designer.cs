@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonDeleteAirplane = new System.Windows.Forms.Button();
             this.buttonEditAirplane = new System.Windows.Forms.Button();
             this.buttonAddAirplane = new System.Windows.Forms.Button();
@@ -36,10 +36,6 @@
             this.buttonEditAirplaneSeatType = new System.Windows.Forms.Button();
             this.buttonAddAirplaneSeatType = new System.Windows.Forms.Button();
             this.dataGridViewSeatTypes = new System.Windows.Forms.DataGridView();
-            this.SeatTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberSeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewAirplane = new System.Windows.Forms.DataGridView();
             this.AirplaneId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +50,9 @@
             this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
+            this.SeatTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSeatTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirplane)).BeginInit();
             this.SuspendLayout();
@@ -126,7 +125,6 @@
             this.dataGridViewSeatTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SeatTypeId,
             this.SeatClass,
-            this.NumberSeats,
             this.MaxLuggageWeight});
             this.dataGridViewSeatTypes.Location = new System.Drawing.Point(10, 295);
             this.dataGridViewSeatTypes.Name = "dataGridViewSeatTypes";
@@ -136,39 +134,17 @@
             this.dataGridViewSeatTypes.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewSeatTypes.TabIndex = 9;
             // 
-            // SeatTypeId
-            // 
-            this.SeatTypeId.HeaderText = "Id";
-            this.SeatTypeId.Name = "SeatTypeId";
-            this.SeatTypeId.ReadOnly = true;
-            this.SeatTypeId.Visible = false;
-            // 
-            // SeatClass
-            // 
-            this.SeatClass.HeaderText = "Class";
-            this.SeatClass.Name = "SeatClass";
-            // 
-            // NumberSeats
-            // 
-            this.NumberSeats.HeaderText = "Number of Seats";
-            this.NumberSeats.Name = "NumberSeats";
-            // 
-            // MaxLuggageWeight
-            // 
-            this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
-            this.MaxLuggageWeight.Name = "MaxLuggageWeight";
-            // 
             // dataGridViewAirplane
             // 
             this.dataGridViewAirplane.AllowUserToAddRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAirplane.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewAirplane.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAirplane.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AirplaneId,
@@ -271,6 +247,23 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Available Classes";
             // 
+            // SeatTypeId
+            // 
+            this.SeatTypeId.HeaderText = "Id";
+            this.SeatTypeId.Name = "SeatTypeId";
+            this.SeatTypeId.ReadOnly = true;
+            this.SeatTypeId.Visible = false;
+            // 
+            // SeatClass
+            // 
+            this.SeatClass.HeaderText = "Class";
+            this.SeatClass.Name = "SeatClass";
+            // 
+            // MaxLuggageWeight
+            // 
+            this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
+            this.MaxLuggageWeight.Name = "MaxLuggageWeight";
+            // 
             // AirplaneView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -302,10 +295,6 @@
         private System.Windows.Forms.Button buttonEditAirplaneSeatType;
         private System.Windows.Forms.Button buttonAddAirplaneSeatType;
         private System.Windows.Forms.DataGridView dataGridViewSeatTypes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeatTypeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeatClass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumberSeats;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxLuggageWeight;
         private System.Windows.Forms.DataGridView dataGridViewAirplane;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirplaneId;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirplaneModel;
@@ -320,5 +309,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Capacity;
         private System.Windows.Forms.DataGridViewTextBoxColumn BaseAirport;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeatTypeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeatClass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxLuggageWeight;
     }
 }

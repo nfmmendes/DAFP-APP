@@ -33,7 +33,7 @@ namespace Solver.Heuristics
             {
                 returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) &&
                                                                                y.Airplanes.Id == x.Id &&
-                                                                               y.numberOfSeats >= countRequestsByClass[key])).ToList();
+                                                                               y.Airplanes.Capacity >= countRequestsByClass[key])).ToList();
             }
 
             return returnedList;
@@ -55,8 +55,7 @@ namespace Solver.Heuristics
             //TODO: Improve it
             //TODO: The number of seats here is greater than zero, but it should be checked on the input
             foreach (var key in countRequestsByClass.Keys){
-                returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) && y.Airplanes.Id == x.Id &&
-                                                                               y.numberOfSeats >= 0)).ToList();
+                returnedList = returnedList.Where(x => input.SeatList.Any(y => y.seatClass.Equals(key) && y.Airplanes.Id == x.Id)).ToList();
             }
 
             return returnedList;
@@ -269,9 +268,5 @@ namespace Solver.Heuristics
 
         }
 
-        public static Dictionary<string, int> CapacityByClass(SolverInput input, DbAirplanes airplane){
-            var seatList = input.SeatList.Where(x=>x.Airplanes.Id == airplane.Id);
-            return seatList.GroupBy(x => x.seatClass).ToDictionary(x => x.Key, x => x.ToList().First().numberOfSeats);
-        }
     }
 }

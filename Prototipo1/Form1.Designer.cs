@@ -85,24 +85,6 @@ namespace Prototipo1
             this.tabPageRouteVisualization = new System.Windows.Forms.TabPage();
             this.MapRoutView = new Prototipo1.Components.MapRoutesView();
             this.tabPageAirplaneUsage = new System.Windows.Forms.TabPage();
-            this.dataGridViewRoutePassagers = new System.Windows.Forms.DataGridView();
-            this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewRoute = new System.Windows.Forms.DataGridView();
-            this.IdAirplaneResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RouteId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchOrigin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FuelOnDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WeightOnDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlightDepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FuelOnArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WeightOnArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlightArrivalTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label18 = new System.Windows.Forms.Label();
-            this.comboBoxAirplaneSolution = new System.Windows.Forms.ComboBox();
             this.tabPageRefuels = new System.Windows.Forms.TabPage();
             this.RefuelSolutionView = new Prototipo1.Components.RefuelSolutionView();
             this.tabPageSolutionRequests = new System.Windows.Forms.TabPage();
@@ -180,6 +162,8 @@ namespace Prototipo1
             this.instanceToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importDataLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cplexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,8 +181,7 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importDataLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AirplaneUseSolutionView = new Prototipo1.Components.AirplaneUseSolutionView();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -215,8 +198,6 @@ namespace Prototipo1
             this.tabControlInstanceSolution.SuspendLayout();
             this.tabPageRouteVisualization.SuspendLayout();
             this.tabPageAirplaneUsage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoutePassagers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             this.tabPageRefuels.SuspendLayout();
             this.tabPageSolutionRequests.SuspendLayout();
             this.tabParameters.SuspendLayout();
@@ -588,10 +569,7 @@ namespace Prototipo1
             // 
             // tabPageAirplaneUsage
             // 
-            this.tabPageAirplaneUsage.Controls.Add(this.dataGridViewRoutePassagers);
-            this.tabPageAirplaneUsage.Controls.Add(this.dataGridViewRoute);
-            this.tabPageAirplaneUsage.Controls.Add(this.label18);
-            this.tabPageAirplaneUsage.Controls.Add(this.comboBoxAirplaneSolution);
+            this.tabPageAirplaneUsage.Controls.Add(this.AirplaneUseSolutionView);
             this.tabPageAirplaneUsage.Location = new System.Drawing.Point(104, 4);
             this.tabPageAirplaneUsage.Margin = new System.Windows.Forms.Padding(20);
             this.tabPageAirplaneUsage.Name = "tabPageAirplaneUsage";
@@ -600,148 +578,6 @@ namespace Prototipo1
             this.tabPageAirplaneUsage.TabIndex = 1;
             this.tabPageAirplaneUsage.Text = "Airplanes Usage";
             this.tabPageAirplaneUsage.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewRoutePassagers
-            // 
-            this.dataGridViewRoutePassagers.AllowUserToAddRows = false;
-            this.dataGridViewRoutePassagers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRoutePassagers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.StretchPassenger,
-            this.StretchPNR,
-            this.StretchSex,
-            this.StretchClass});
-            this.dataGridViewRoutePassagers.Location = new System.Drawing.Point(16, 350);
-            this.dataGridViewRoutePassagers.Name = "dataGridViewRoutePassagers";
-            this.dataGridViewRoutePassagers.RowHeadersVisible = false;
-            this.dataGridViewRoutePassagers.RowTemplate.Height = 24;
-            this.dataGridViewRoutePassagers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoutePassagers.Size = new System.Drawing.Size(1017, 162);
-            this.dataGridViewRoutePassagers.TabIndex = 6;
-            // 
-            // StretchPassenger
-            // 
-            this.StretchPassenger.HeaderText = "Passenger";
-            this.StretchPassenger.Name = "StretchPassenger";
-            this.StretchPassenger.Width = 360;
-            // 
-            // StretchPNR
-            // 
-            this.StretchPNR.HeaderText = "PNR";
-            this.StretchPNR.Name = "StretchPNR";
-            this.StretchPNR.Width = 150;
-            // 
-            // StretchSex
-            // 
-            this.StretchSex.HeaderText = "Sex";
-            this.StretchSex.Name = "StretchSex";
-            this.StretchSex.Width = 150;
-            // 
-            // StretchClass
-            // 
-            this.StretchClass.HeaderText = "Class";
-            this.StretchClass.Name = "StretchClass";
-            this.StretchClass.Width = 150;
-            // 
-            // dataGridViewRoute
-            // 
-            this.dataGridViewRoute.AllowUserToAddRows = false;
-            this.dataGridViewRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRoute.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdAirplaneResult,
-            this.RouteId,
-            this.StretchOrigin,
-            this.FuelOnDeparture,
-            this.WeightOnDeparture,
-            this.FlightDepartureTime,
-            this.StretchDestination,
-            this.FuelOnArrival,
-            this.WeightOnArrival,
-            this.FlightArrivalTime});
-            this.dataGridViewRoute.Location = new System.Drawing.Point(16, 96);
-            this.dataGridViewRoute.Name = "dataGridViewRoute";
-            this.dataGridViewRoute.RowHeadersVisible = false;
-            this.dataGridViewRoute.RowTemplate.Height = 24;
-            this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoute.Size = new System.Drawing.Size(1017, 190);
-            this.dataGridViewRoute.TabIndex = 5;
-            this.dataGridViewRoute.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoute_RowEnter);
-            // 
-            // IdAirplaneResult
-            // 
-            this.IdAirplaneResult.HeaderText = "Id";
-            this.IdAirplaneResult.Name = "IdAirplaneResult";
-            this.IdAirplaneResult.ReadOnly = true;
-            this.IdAirplaneResult.Visible = false;
-            // 
-            // RouteId
-            // 
-            this.RouteId.HeaderText = "Route ID";
-            this.RouteId.Name = "RouteId";
-            this.RouteId.Visible = false;
-            this.RouteId.Width = 120;
-            // 
-            // StretchOrigin
-            // 
-            this.StretchOrigin.HeaderText = "Origin";
-            this.StretchOrigin.Name = "StretchOrigin";
-            this.StretchOrigin.Width = 200;
-            // 
-            // FuelOnDeparture
-            // 
-            this.FuelOnDeparture.HeaderText = "Fuel On Departure";
-            this.FuelOnDeparture.Name = "FuelOnDeparture";
-            // 
-            // WeightOnDeparture
-            // 
-            this.WeightOnDeparture.HeaderText = "Weight On Departure";
-            this.WeightOnDeparture.Name = "WeightOnDeparture";
-            this.WeightOnDeparture.Width = 150;
-            // 
-            // FlightDepartureTime
-            // 
-            this.FlightDepartureTime.HeaderText = "Departure Time";
-            this.FlightDepartureTime.Name = "FlightDepartureTime";
-            // 
-            // StretchDestination
-            // 
-            this.StretchDestination.HeaderText = "Destination";
-            this.StretchDestination.Name = "StretchDestination";
-            this.StretchDestination.Width = 200;
-            // 
-            // FuelOnArrival
-            // 
-            this.FuelOnArrival.HeaderText = "Fuel On Arrival";
-            this.FuelOnArrival.Name = "FuelOnArrival";
-            this.FuelOnArrival.Width = 120;
-            // 
-            // WeightOnArrival
-            // 
-            this.WeightOnArrival.HeaderText = "Weight On Arrival";
-            this.WeightOnArrival.Name = "WeightOnArrival";
-            this.WeightOnArrival.Width = 150;
-            // 
-            // FlightArrivalTime
-            // 
-            this.FlightArrivalTime.HeaderText = "Arrival Time";
-            this.FlightArrivalTime.Name = "FlightArrivalTime";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 12);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 24);
-            this.label18.TabIndex = 4;
-            this.label18.Text = "Airplanes";
-            // 
-            // comboBoxAirplaneSolution
-            // 
-            this.comboBoxAirplaneSolution.FormattingEnabled = true;
-            this.comboBoxAirplaneSolution.Location = new System.Drawing.Point(12, 39);
-            this.comboBoxAirplaneSolution.Name = "comboBoxAirplaneSolution";
-            this.comboBoxAirplaneSolution.Size = new System.Drawing.Size(220, 30);
-            this.comboBoxAirplaneSolution.TabIndex = 3;
-            this.comboBoxAirplaneSolution.SelectedIndexChanged += new System.EventHandler(this.comboBoxAirplaneSolution_SelectedIndexChanged);
             // 
             // tabPageRefuels
             // 
@@ -776,7 +612,7 @@ namespace Prototipo1
             // 
             this.RequestSolutionView.Context = Context;
             this.RequestSolutionView.Instance = null;
-            this.RequestSolutionView.Location = new System.Drawing.Point(12, 12);
+            this.RequestSolutionView.Location = new System.Drawing.Point(15, 15);
             this.RequestSolutionView.Name = "RequestSolutionView";
             this.RequestSolutionView.Size = new System.Drawing.Size(1180, 530);
             this.RequestSolutionView.TabIndex = 0;
@@ -1583,6 +1419,22 @@ namespace Prototipo1
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
             this.closeToolStripMenuItem.Text = "Close";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importDataLogToolStripMenuItem});
+            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // importDataLogToolStripMenuItem
+            // 
+            this.importDataLogToolStripMenuItem.Name = "importDataLogToolStripMenuItem";
+            this.importDataLogToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.importDataLogToolStripMenuItem.Text = "Import Data Log";
+            this.importDataLogToolStripMenuItem.Click += new System.EventHandler(this.importDataLogToolStripMenuItem_Click);
+            // 
             // configurationToolStripMenuItem
             // 
             this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1715,21 +1567,14 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // viewToolStripMenuItem
+            // AirplaneUseSolutionView
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importDataLogToolStripMenuItem});
-            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // importDataLogToolStripMenuItem
-            // 
-            this.importDataLogToolStripMenuItem.Name = "importDataLogToolStripMenuItem";
-            this.importDataLogToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.importDataLogToolStripMenuItem.Text = "Import Data Log";
-            this.importDataLogToolStripMenuItem.Click += new System.EventHandler(this.importDataLogToolStripMenuItem_Click);
+            this.AirplaneUseSolutionView.Context = Context;
+            this.AirplaneUseSolutionView.Instance = null;
+            this.AirplaneUseSolutionView.Location = new System.Drawing.Point(15, 15);
+            this.AirplaneUseSolutionView.Name = "AirplaneUseSolutionView";
+            this.AirplaneUseSolutionView.Size = new System.Drawing.Size(1180, 530);
+            this.AirplaneUseSolutionView.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -1764,9 +1609,6 @@ namespace Prototipo1
             this.tabControlInstanceSolution.ResumeLayout(false);
             this.tabPageRouteVisualization.ResumeLayout(false);
             this.tabPageAirplaneUsage.ResumeLayout(false);
-            this.tabPageAirplaneUsage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoutePassagers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).EndInit();
             this.tabPageRefuels.ResumeLayout(false);
             this.tabPageSolutionRequests.ResumeLayout(false);
             this.tabParameters.ResumeLayout(false);
@@ -1896,14 +1738,6 @@ namespace Prototipo1
         private Label label5;
         private TabControl tabControlInstanceSolution;
         private TabPage tabPageAirplaneUsage;
-        private DataGridView dataGridViewRoute;
-        private Label label18;
-        private ComboBox comboBoxAirplaneSolution;
-        private DataGridView dataGridViewRoutePassagers;
-        private DataGridViewTextBoxColumn StretchPassenger;
-        private DataGridViewTextBoxColumn StretchPNR;
-        private DataGridViewTextBoxColumn StretchSex;
-        private DataGridViewTextBoxColumn StretchClass;
         private Panel panel7;
         private RadioButton radioButtonHeuristic;
         private RadioButton radioButtonExact;
@@ -1928,16 +1762,6 @@ namespace Prototipo1
         private ToolStripMenuItem duplicateInstanceToolStripMenuItem;
         private TabPage tabPageRefuels;
         private TabPage tabPageSolutionRequests;
-        private DataGridViewTextBoxColumn IdAirplaneResult;
-        private DataGridViewTextBoxColumn RouteId;
-        private DataGridViewTextBoxColumn StretchOrigin;
-        private DataGridViewTextBoxColumn FuelOnDeparture;
-        private DataGridViewTextBoxColumn WeightOnDeparture;
-        private DataGridViewTextBoxColumn FlightDepartureTime;
-        private DataGridViewTextBoxColumn StretchDestination;
-        private DataGridViewTextBoxColumn FuelOnArrival;
-        private DataGridViewTextBoxColumn WeightOnArrival;
-        private DataGridViewTextBoxColumn FlightArrivalTime;
         private TabControl tabControlInputTables;
         private TabPage tabPageAirplanes;
         private TabPage tabPageAirports;
@@ -1949,6 +1773,7 @@ namespace Prototipo1
         private MapRoutesView MapRoutView;
         private ToolStripMenuItem viewToolStripMenuItem;
         private ToolStripMenuItem importDataLogToolStripMenuItem;
+        private AirplaneUseSolutionView AirplaneUseSolutionView;
     }
 }
 

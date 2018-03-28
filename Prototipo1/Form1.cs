@@ -197,15 +197,15 @@ namespace Prototipo1
                 MessageBox.Show("A instance should be selected");
             }
         }
-        
+
         /// <summary>
         /// Starts the process of showing the optimization results on the interface
         /// </summary>
         private void BuildSolutionPanel(){
-            this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x=>x.Airplanes.Prefix).Distinct().ToList();
-            this.tabControlInputSolution.SelectedIndex = 1; 
+           // this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x => x.Airplanes.Prefix).Distinct().ToList();
+            this.tabControlInputSolution.SelectedIndex = 1;
         }
-        
+
 
         /// <summary>
         /// 
@@ -391,10 +391,8 @@ namespace Prototipo1
                
                 
                 FillTables(instance);
-                this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
-                    .Select(x => x.Airplanes.Prefix).Distinct().ToList();
-                if(this.comboBoxAirplaneSolution.Items.Count > 0 )
-                    this.comboBoxAirplaneSolution.SelectedIndex = 0;
+            //  XX
+                
             }
         }
 
@@ -411,6 +409,7 @@ namespace Prototipo1
             CurrencyView.setInstance(instance);
             RequestSolutionView.setInstance(instance);
             MapRoutView.setInstance(instance);
+            AirplaneUseSolutionView.setInstance(instance);
         }
 
         /// <summary>
@@ -510,105 +509,7 @@ namespace Prototipo1
                 addRequest.OpenToAdd(instance);
             }
         }
-
-
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonEdit_Click(object sender, EventArgs e){
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBoxAirplaneSolution_SelectedIndexChanged(object sender, EventArgs e){
-            var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
-            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
-            var prefix = "";
-
-            if(this.comboBoxAirplaneSolution.Items.Count > 0)
-                prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
-
-
-
-            if (instance != null){
-                var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == instance.Id && x.Prefix.Equals(prefix));
-                if (airplane != null){
-                    var test = Context.FlightsReports.ToList();
-                    var trips = Context.FlightsReports.Where(x=>x.Instance.Id == instance.Id && x.Airplanes.Prefix.Equals(airplane.Prefix)).ToList();
-
-                    dataGridViewRoutePassagers.Rows.Clear();
-                    dataGridViewRoute.Rows.Clear();
-                    foreach (var item in trips){
-
-                        var weightOnDeparture = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnDeparture* 0.453592;
-                        var weightOnArrival = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnArrival * 0.453592;
-
-                        dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AirportName,
-                                                                item.FuelOnDeparture,weightOnDeparture ,  
-                                                                item.DepartureTime, 
-                                                                item.Destination.AirportName, 
-                                                                item.FuelOnArrival, weightOnArrival, 
-                                                                item.ArrivalTime);    
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="flight"></param>
-        /// <returns></returns>
-        private double GetWeightOfPassengers(DbFlightsReport flight){
-            var itemList = Context.PassagersOnFlight.Where(x => x.Flight.Id == flight.Id);
-            var seatList = Context.SeatList.Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
-
-
-            var sum = 0.0;
-            foreach (var item in itemList){
-                var seatClass = seatList.FirstOrDefault(x=>x.seatClass.Equals(item.Passenger.Class));
-                if (seatClass != null)
-                    sum += seatClass.luggageWeightLimit;
-
-                //TODO: Correct to get the values from database. THIS IS WRONG!!!!
-                if (item.Passenger.Sex.Equals("M"))
-                    sum += item.Passenger.IsChildren? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_ManWeight.Value);
-                else
-                    sum += item.Passenger.IsChildren ? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_WomanWeight.Value);
-            }
-            return sum;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewRoute_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewRoute.SelectedRows.Count > 0){
-                var indexRow = dataGridViewRoute.SelectedRows[0].Index;
-                var index = Convert.ToInt64(dataGridViewRoute.Rows[indexRow].Cells[0].Value.ToString());
-
-                var reports = Context.PassagersOnFlight.Where(x => x.Flight.Id.Equals(index)).ToList();
-
-                dataGridViewRoutePassagers.Rows.Clear();
-                foreach (var item in reports)
-                    dataGridViewRoutePassagers.Rows.Add(item.Passenger.Name, item.Passenger.PNR, item.Passenger.Sex, item.Passenger.Class);
-                
-            }
-
-        }
-
-
-
         #region Stretch table pagination
         #endregion
 

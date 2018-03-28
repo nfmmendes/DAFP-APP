@@ -47,7 +47,7 @@ namespace Prototipo1.Components
 
             //if(seatTypes.Any())
             foreach (var item in seatTypes)
-                dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.numberOfSeats, item.luggageWeightLimit);
+                dataGridViewSeatTypes.Rows.Add(item.Id, item.seatClass, item.luggageWeightLimit);
         }
 
         /// <summary>
@@ -55,8 +55,7 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewAirplane_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
+        private void dataGridViewAirplane_RowEnter(object sender, DataGridViewCellEventArgs e){
             FillSeatTypeList(Convert.ToInt64(dataGridViewAirplane.Rows[e.RowIndex].Cells[0].Value));
         }
 

@@ -21,9 +21,6 @@ namespace SolverClientComunication.Models
         public string seatClass { get; set; }
 
         [Required]
-        public int numberOfSeats { get; set; }
-
-        [Required]
         public double luggageWeightLimit { get; set; }
     }
 }

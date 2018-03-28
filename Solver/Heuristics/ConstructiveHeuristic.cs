@@ -50,7 +50,7 @@ namespace Solver.Heuristics
                                                                   Input.Stretches[x.Origin].ContainsKey(x.Destination) 
                                                                   || Input.Stretches[x.Origin][x.Destination] > maxRange).ToList();
 
-            var maxCapacityByClass = Input.SeatList.GroupBy(x=>x.seatClass).ToDictionary(x=>x.Key, x=>x.Max(y=>y.numberOfSeats));
+
             var maxTotalCapacity = Input.Airplanes.Max(x => x.Capacity);
             var numRequestsByPNR = Input.Requests.GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList().Count);
             
@@ -136,8 +136,7 @@ namespace Solver.Heuristics
                                                         SolverUtils.CanDoInOneDay(Input, x,airportCountPair.Key,destination));
 
                     while (airplane != null){
-                        List<DbRequests> passagersList = new List<DbRequests>();
-                        Dictionary<string, int> classCapaciy = SolverUtils.CapacityByClass(Input, airplane);
+                        List<DbRequests> passengersList = new List<DbRequests>();
                         Dictionary<string, int> classBooking = new Dictionary<string, int>();
 
                         var someoneInserted = false;
@@ -146,23 +145,21 @@ namespace Solver.Heuristics
                             if(requestsAlreadyBoardedOnOrigin.Contains(request))
                                 continue;
 
-                            if (!classCapaciy.ContainsKey(request.Class))
+                            if (!Input.SeatList.Any(x=>x.Airplanes.Id == airplane.Id && x.seatClass.Equals(request.Class)))
                                 continue;
                             if (!classBooking.ContainsKey(request.Class))
                                 classBooking[request.Class] = 0;
 
-                            if (classBooking[request.Class] >= classCapaciy[request.Class])
-                                continue;
-
-                            classBooking[request.Class]++;
-                            passagersList.Add(request);
+                            passengersList.Add(request);
+                            if (passengersList.Count > airplane.Capacity)
+                                break;
                             someoneInserted = true; 
 
                         }
 
                         if (someoneInserted){
                             ExitedFromDepot.Add(airplane);
-                            CreatedRouteFromDepot(solution, passagersList, airplane, airportCountPair.Key, destination);
+                            CreatedRouteFromDepot(solution, passengersList, airplane, airportCountPair.Key, destination);
                         }else
                             break;
 

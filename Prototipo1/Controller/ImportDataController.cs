@@ -378,8 +378,7 @@ namespace Prototipo1.Controller
                         var item = new DbSeats(){
                             Airplanes = airplane,
                             seatClass = row.GetCell(1).StringCellValue,
-                            numberOfSeats = Convert.ToInt32(row.GetCell(2).NumericCellValue),
-                            luggageWeightLimit = row.GetCell(3).NumericCellValue
+                            luggageWeightLimit = row.GetCell(2).NumericCellValue
                         };
 
                         Instance.Context.SeatList.Add(item);
