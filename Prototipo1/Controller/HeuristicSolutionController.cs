@@ -15,22 +15,29 @@ namespace Prototipo1.Controller
         public static readonly HeuristicSolutionController Instance = new HeuristicSolutionController();
 
         /// <summary>
-        /// 
+        /// Sets the object that access the database
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">Object that will access the database </param>
         public void setContext(CustomSqlContext context)
         {
             Instance.Context = context;
         }
 
+        /// <summary>
+        /// This function saves the results of an instance optimization on the database
+        /// </summary>
+        /// <param name="instance">Instance that was optimized</param>
+        /// <param name="solution">Solution of the optimization</param>
         public void SaveResults(DbInstance instance, GeneralSolution solution)
         {
 
+            //Remove the previous soltuion
             Instance.Context.PassagersOnFlight.RemoveRange(Instance.Context.PassagersOnFlight.Where(x=>x.Flight.Instance.Id == instance.Id));
             Instance.Context.SaveChanges();
             Instance.Context.FlightsReports.RemoveRange(Instance.Context.FlightsReports.Where(x => x.Instance.Id == instance.Id));
             Instance.Context.SaveChanges();
-
+            
+            //Fill the list of flights planned in the optimization solution
             foreach (var flight in solution.Flights)
             {
                 var report = new DbFlightsReport(){
@@ -46,9 +53,9 @@ namespace Prototipo1.Controller
 
                 Instance.Context.FlightsReports.Add(report);
 
+                //Fills the list of passengers of each flight
                 foreach (var passenger in flight.Passengers){
-                    var dbPassenger = new DbPassagensOnFlightReport()
-                    {
+                    var dbPassenger = new DbPassagensOnFlightReport(){
                         Flight = report,
                         Passenger = passenger
                     };
@@ -58,6 +65,7 @@ namespace Prototipo1.Controller
                 Instance.Context.SaveChanges();
             }
 
+            //Fill the refuels done during the flight
             foreach (var refuel in solution.Refuels){
                 var item = new DbRefuelsReport(){
                                 Instance  = instance,

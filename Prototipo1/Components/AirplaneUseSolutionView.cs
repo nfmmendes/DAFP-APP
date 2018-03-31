@@ -17,13 +17,16 @@ namespace Prototipo1.Components
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public AirplaneUseSolutionView(){
             InitializeComponent();
         }
 
 
         /// <summary>
-        /// 
+        /// Function to deal with the event of changing the selected index of the airplane combo box
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -32,23 +35,22 @@ namespace Prototipo1.Components
            
             var prefix = "";
 
+            //Get the airplane prefix selected on the combo box
             if (this.comboBoxAirplaneSolution.Items.Count > 0)
                 prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
-
-
 
             if (Instance != null)
             {
                 var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == Instance.Id && x.Prefix.Equals(prefix));
                 if (airplane != null)
                 {
-                    var test = Context.FlightsReports.ToList();
+                    // Get the information of all flights that were performed by the airplane selected
                     var trips = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id && x.Airplanes.Prefix.Equals(airplane.Prefix)).ToList();
 
+                    //Replace the data of the previous airplane flights by the data about the new airplane flights
                     dataGridViewRoutePassagers.Rows.Clear();
                     dataGridViewRoute.Rows.Clear();
-                    foreach (var item in trips)
-                    {
+                    foreach (var item in trips){
 
                         var weightOnDeparture = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnDeparture * 0.453592;
                         var weightOnArrival = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnArrival * 0.453592;
@@ -67,7 +69,9 @@ namespace Prototipo1.Components
 
 
         /// <summary>
-        /// 
+        /// Get the weight of the passengers based on the parameters set to the instance that the flight belongs
+        /// In other words, the flight belongs to the solution of an instance, and this instance has specific values to men, women and children weghts.
+        /// The total weight of the airplane passengers is calculated based on these values. 
         /// </summary>
         /// <param name="flight"></param>
         /// <returns></returns>
@@ -77,8 +81,8 @@ namespace Prototipo1.Components
 
 
             var sum = 0.0;
-            foreach (var item in itemList)
-            {
+            foreach (var item in itemList){
+
                 var seatClass = seatList.FirstOrDefault(x => x.seatClass.Equals(item.Passenger.Class));
                 if (seatClass != null)
                     sum += seatClass.luggageWeightLimit;
@@ -96,7 +100,7 @@ namespace Prototipo1.Components
         }
 
         /// <summary>
-        /// 
+        /// Function that deals with the event of selecting a row in the data grid view that describes a flight/route
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -117,14 +121,16 @@ namespace Prototipo1.Components
         }
 
         /// <summary>
-        /// 
+        /// Set the instance that will have its data showed
         /// </summary>
         /// <param name="instance"></param>
         public void setInstance(DbInstance instance){
             Instance = instance;
+            this.comboBoxAirplaneSolution.DataSource = null; 
 
-            this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
-                .Select(x => x.Airplanes.Prefix).Distinct().ToList();
+            if(Context.FlightsReports.Any())
+                this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
+                                                                  .Select(x => x.Airplanes.Prefix).Distinct().ToList();
             if (this.comboBoxAirplaneSolution.Items.Count > 0)
                 this.comboBoxAirplaneSolution.SelectedIndex = 0;
 

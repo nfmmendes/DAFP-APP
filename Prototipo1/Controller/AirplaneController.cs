@@ -26,7 +26,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// Edit a airport on database
+        /// Edit an airport on database
         /// </summary>
         /// <param name="airplane">Airplane with new values</param>
         /// <param name="Id">Airplane Id</param>
@@ -54,7 +54,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// Remove a airplane on database
+        /// Remove an airplane on database
         /// </summary>
         /// <param name="item">Airplane to be deleted</param>
         public override void Delete(DbAirplanes item){
@@ -62,7 +62,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        ///  Add a airplane on database
+        ///  Add an airplane on database
         /// </summary>
         /// <param name="airplane">Item that will be added</param>
         public override void Add(DbAirplanes airplane){

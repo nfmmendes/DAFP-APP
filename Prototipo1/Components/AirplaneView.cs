@@ -18,15 +18,15 @@ namespace Prototipo1.Components
         public DbInstance Instance { get; set; }
 
         /// <summary>
-        /// 
+        /// Sets the object that access the database
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">Object that will access the database </param>
         public AirplaneView(){
             InitializeComponent();
         }
 
         /// <summary>
-        /// 
+        /// Set the instance that will have its data showed
         /// </summary>
         /// <param name="instance"></param>
         public void setInstance(DbInstance instance){
@@ -36,9 +36,9 @@ namespace Prototipo1.Components
         }
 
         /// <summary>
-        /// 
+        /// Fill the seat class information based on the airplane id
         /// </summary>
-        /// <param name="idAirplane"></param>
+        /// <param name="idAirplane">Id of the airplane</param>
         private void FillSeatTypeList(long idAirplane)
         {
             this.dataGridViewSeatTypes.Rows.Clear();
@@ -51,7 +51,7 @@ namespace Prototipo1.Components
         }
 
         /// <summary>
-        /// 
+        /// This function deals with the event of selecting a row on the airplane table
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -60,18 +60,22 @@ namespace Prototipo1.Components
         }
 
         /// <summary>
-        /// 
+        /// Fill the instance airplane data 
         /// </summary>
         /// <param name="instance"></param>
         private void FillAirplaneTables(){
 
             this.dataGridViewAirplane.Rows.Clear();
-            var airplanes = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).ToList();
+            this.dataGridViewSeatTypes.Rows.Clear();
+            if (Context.Airplanes.Any()){
+                var airplanes = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).ToList();
 
-            foreach (var item in airplanes)
-                dataGridViewAirplane.Rows.Add(item.Id, item.Model, item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed,
-                    item.FuelConsumptionFirstHour, item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity,
-                    item.BaseAirport?.AirportName);
+                foreach (var item in airplanes)
+                    dataGridViewAirplane.Rows.Add(item.Id, item.Model, item.Prefix, item.Range, item.Weight, item.MaxWeight, item.CruiseSpeed,
+                        item.FuelConsumptionFirstHour, item.FuelConsumptionSecondHour, item.MaxFuel, item.Capacity,
+                        item.BaseAirport?.AirportName);
+            }
+            
 
         }
 

@@ -37,12 +37,17 @@ namespace Prototipo1.Components
             Instance = instance;
             GMapControl.Overlays.Clear();
             radioButtonAllPoints.Checked = true;
+            comboBoxAirplane.DataSource = null; 
+            if (instance == null)
+                return; 
 
             if (Instance.Optimized){
-                this.comboBoxAirplane.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
-                                                          .Select(x => x.Airplanes.Prefix).Distinct().ToList();
+                if(Context.FlightsReports.Any())
+                    this.comboBoxAirplane.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
+                                                                  .Select(x => x.Airplanes.Prefix).Distinct().ToList();
             }else{
-                this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
+                if(Context.Airplanes.Any())
+                    this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
             }
              
 
@@ -240,7 +245,8 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void radioButtonAllPoints_CheckedChanged(object sender, EventArgs e){
-            if (radioButtonAllPoints.Checked){
+            if (radioButtonAllPoints.Checked && Context.Airports.Any())
+            {
                 setOverlayMarker(Context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList());
             }
         }

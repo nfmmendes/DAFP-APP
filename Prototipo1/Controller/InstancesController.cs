@@ -13,59 +13,58 @@ namespace Prototipo1.Controller
 {
     class InstancesController :AbstractController<DbInstance, CustomSqlContext>
     {
-        private CustomSqlContext Context { get; set; }
+        
         public static readonly InstancesController Instance = new InstancesController();
 
         /// <summary>
-        /// 
+        /// Sets the object that access the database
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">Object that will access the database </param>
         public override void setContext(CustomSqlContext context){
             Instance.Context = context; 
         }
 
         /// <summary>
-        /// 
+        /// Add a new instance on the database
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">Instance object that will be inserted</param>
         public override void Add(DbInstance item){
             Instance.Add(item.Name,item.Description);
         }
 
         /// <summary>
-        /// 
+        /// Edit an instance 
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="IdItem"></param>
-        public override void Edit(DbInstance item, long IdItem)
-        {
+        /// <param name="item">Instance that will be edited, already with the new values</param>
+        /// <param name="IdItem">Id of the instance</param>
+        public override void Edit(DbInstance item, long IdItem){
             Instance.Edit(IdItem, item.Name, item.Description);
         }
 
         /// <summary>
-        /// 
+        /// Delete an instance
         /// </summary>
         /// <param name="item"></param>
         public override void Delete(DbInstance item)
         {
+            //TODO: Pass the delete procedure to this function
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 
+        /// Verify if an instance object is valid to be in the database 
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected override bool IsValidItem(DbInstance item)
-        {
+        protected override bool IsValidItem(DbInstance item){
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 
+        /// Create and add an instance on database based on a name and a description
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
+        /// <param name="name">Name of the instance</param>
+        /// <param name="description">Description of the instance (Optional)</param>
         public void Add(string name, string description = ""){
             var solverInstance = new DbInstance()
             {
@@ -84,11 +83,11 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Edit an instance given a its Id
         /// </summary>
-        /// <param name="instanceId"></param>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
+        /// <param name="instanceId">Id of the instance that will be edited</param>
+        /// <param name="name">New name of the instance</param>
+        /// <param name="description">New description of the instance </param>
         public void Edit(long instanceId, string name, string description){
             var entity = Instance.Context.Instances.FirstOrDefault(x => x.Id == instanceId);
             if (entity != null){
@@ -100,7 +99,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// This function, given a instance name, finds and deletes it 
         /// </summary>
         /// <param name="name"></param>
         public void FindAndDeleteByName(string name)
@@ -128,8 +127,8 @@ namespace Prototipo1.Controller
         /// <summary>
         /// Copy all the information of a instance to another, except the metadata
         /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="newInstance"></param>
+        /// <param name="instance">Source instance</param>
+        /// <param name="newInstance">Destination instance</param>
         public void CopyInstance(DbInstance previousInstance, DbInstance newInstance){
             //TODO: Implement
         }

@@ -39,15 +39,17 @@ namespace Prototipo1.Components
         {
 
             this.dataGridViewRequestsResult.Rows.Clear();
-            var requests = Context.Requests.Where(x => x.Instance.Id == Instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
+            if (Context.Requests.Any()){
+                var requests = Context.Requests.Where(x => x.Instance.Id == Instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
 
-            //var flightList = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id);
+                //var flightList = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id);
 
-            foreach (var key in requests.Keys)
-            {
-                var value = requests[key].First();
-                dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AirportName, value.Destination.AirportName, value.DepartureTimeWindowBegin,
-                    value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
+                foreach (var key in requests.Keys){
+                    var value = requests[key].First();
+                    dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AirportName,
+                        value.Destination.AirportName, value.DepartureTimeWindowBegin,
+                        value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
+                }
             }
         }
 

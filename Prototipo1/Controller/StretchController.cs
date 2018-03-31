@@ -11,26 +11,46 @@ namespace Prototipo1.Controller
 {
     class StretchController: AbstractController<DbStretches, CustomSqlContext>
     {
-        public override void setContext(CustomSqlContext context)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        public override void setContext(CustomSqlContext context){
             throw new NotImplementedException();
         }
 
-        public override void Add(DbStretches item)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public override void Add(DbStretches item){
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="IdItem"></param>
         public override void Edit(DbStretches item, long IdItem)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public override void Delete(DbStretches item)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected override bool IsValidItem(DbStretches item)
         {
             throw new NotImplementedException();

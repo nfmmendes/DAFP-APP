@@ -44,11 +44,13 @@ namespace Prototipo1.Components
         private void FillCurrencyTable(){
 
             this.dataGridViewCurrency.Rows.Clear();
-            var exchanges = Context.Exchange.Where(x => x.Instance.Id == Instance.Id);
+            if (Context.Exchange.Any()){
+                var exchanges = Context.Exchange.Where(x => x.Instance.Id == Instance.Id);
 
-            foreach (var item in exchanges){
-                this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
+                foreach (var item in exchanges)
+                    this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
             }
+            
         }
 
         /// <summary>

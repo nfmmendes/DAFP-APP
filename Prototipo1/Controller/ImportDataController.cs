@@ -19,42 +19,52 @@ namespace Prototipo1.Controller
         private CustomSqlContext Context { get; set; }
         public static readonly ImportDataController Instance = new ImportDataController();
 
-        public void setContext(CustomSqlContext context)
-        {
+        /// <summary>
+        /// Sets the object that access the database
+        /// </summary>
+        /// <param name="context">Object that will access the database </param>
+        public void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
 
         /// <summary>
-        /// 
+        /// This function imports the data concerning to the network (Airports, routes and refuel points)
         /// </summary>
-        /// <param name="now"></param>
-        /// <param name="fileName"></param>
-        /// <param name="instance"></param>
-        /// <param name="loadAirports"></param>
-        /// <param name="loadStretches"></param>
-        /// <param name="loadFuelInformation"></param>
+        /// <param name="now">Instant that starts the optizimation - It will be used to build the log</param>
+        /// <param name="fileName">Name of file that contains the data</param>
+        /// <param name="instance">Instance where the data will be inserted</param>
+        /// <param name="loadAirports">It defines if the sheet "Airport" will be loaded </param>
+        /// <param name="loadStretches">It defines if the sheet "Stretches" will be loaded</param>
+        /// <param name="loadFuelInformation"> If the sheet "Fuel Prices" will be loaded </param>
         public void importNetworkData(DateTime now, string fileName, DbInstance instance,bool loadAirports, bool loadStretches, bool loadFuelInformation)
         {
+            //Default procedure to open a excel file using the library NPOI
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
-
-            var importHour = now;
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+
             Instance.Context.Configuration.AutoDetectChangesEnabled = false;
 
+            //Try to get the sheet caled "Airport"
             var sheet = hssfwb.GetSheet("Airport");
             var iatas = new HashSet<string>();
             if (sheet != null && loadAirports){
+                //The first line is reserved to headers
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
-                    IRow row = sheet.GetRow(i);
+                    //Get the i-esim row
+                    IRow row = sheet.GetRow(i);     
                     if (row == null) break;
+
+                    //If all lines are blank the reading procedure stops
+                    //TODO: Create a error log
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
-                    if (iatas.Contains(row.GetCell(1).StringCellValue)){
+                    //Check if the first cell (airport name) is present. If it's not, it's impossible to identify the airport
+                    if (iatas.Contains(row.GetCell(1).StringCellValue))
                         continue;
-                    }
-
+                    
+                    //Create DbAirport object to add it on the database
                     var item = new DbAirports()
                     {
                         AirportName = row.GetCell(0).StringCellValue,
@@ -69,6 +79,7 @@ namespace Prototipo1.Controller
                         Instance = instance
                     };
 
+                    //Solve some problems related with the data format and lack of information
                     if (row.GetCell(4) == null)
                         item.Elevation = -1; 
                     else if (row.GetCell(4).CellType == CellType.Numeric )
@@ -89,35 +100,44 @@ namespace Prototipo1.Controller
                 Instance.Context.SaveChanges();
             }
 
+            //Select the sheet called "Stretches"
             var sheet2 = hssfwb.GetSheet("Stretches");
-            //Context.Configuration.ValidateOnSaveEnabled = false;
+            
             if (sheet2 != null && loadStretches){
+                //Get the name of all airports already registered
+                //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
+                //stretch will be not added to the instance
                 var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AirportName, x=>x);
                 List<DbStretches> newItems = new List<DbStretches>();
+                //The first row is reserved to the hearders
                 for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
                     IRow row = sheet2.GetRow(i);
                     if (row == null) break;
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
+                    //If the field "Origin" or the field "Destination" is empty, there is nothing to add
                     if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
                     if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)) continue; //TODO: Error
 
+
                     var airportOriginName = row.GetCell(0).StringCellValue;
                     var airportDestinationName = row.GetCell(1).StringCellValue;
-                                    
+                    
+                    //Get the airports based on their names
                     var airportOrigin = instanceAirports.ContainsKey(airportOriginName) ? instanceAirports[airportOriginName] : null;
                     var airportDestination = instanceAirports.ContainsKey(airportDestinationName) ? instanceAirports[airportDestinationName] : null;
 
                     if (airportOrigin != null && airportDestination != null){
 
-                        if (i % 5000 == 0)
-                        {
+                        //Try to make the insert procedure quicker 
+                        if (i % 5000 == 0){
                             Instance.Context.Stretches.AddRange(newItems);
                             Instance.Context.SaveChanges();
                             newItems.Clear();
                            
                         }
 
+                        //Create a stretch object to be added to the database
                         var item = new DbStretches(){
                             Origin = airportOrigin,
                             Destination = airportDestination,
@@ -133,26 +153,33 @@ namespace Prototipo1.Controller
                     }
 
                 }
-               // Instance.Context.Stretches.AddRange(newItems);
                 Instance.Context.SaveChanges();
-               // Context.Configuration.ValidateOnSaveEnabled = true;
+               
             }
 
+            // Get the sheed called "Fuel Prices"
             var sheet3 = hssfwb.GetSheet("Fuel Prices");
+
             if (loadFuelInformation && sheet3 != null){
+                //Get the name of all aiports
                 var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
                 
+                //The first row is reserved to the headers
                 for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
                 {
+                    //Get the information of the row i
                     IRow row = sheet3.GetRow(i);
                     if (row == null) break;
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
+                    //If the airport field is empty the row will be not added to the database
                     if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
                     var airportName = row.GetCell(0).StringCellValue;
                     
+                    //Get the airport by its name
                     var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AirportName.Equals(airportName));
 
+                    //Generate the fuel price object to be added to the database 
                     if (airport != null){
                         var item = new DbFuelPrice(){
                             Instance = instance,
@@ -169,64 +196,73 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Function to show the errors in the database procedures. It's is used mainly to debug purposes 
         /// </summary>
         /// <param name="e"></param>
         private void ShowErros(DbEntityValidationException e)
         {
-            foreach (var eve in e.EntityValidationErrors)
-            {
+            foreach (var eve in e.EntityValidationErrors){
                 Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                     eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                foreach (var ve in eve.ValidationErrors)
-                {
-                    Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                        ve.PropertyName, ve.ErrorMessage);
+                foreach (var ve in eve.ValidationErrors){
+                    Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",ve.PropertyName, ve.ErrorMessage);
                 }
             }
         }
 
         /// <summary>
-        /// 
+        /// Import the data that describes the requests of the optimization period
         /// </summary>
-        /// <param name="now"></param>
-        /// <param name="fileName"></param>
-        /// <param name="instance"></param>
-        /// <param name="loadRequests"></param>
-        public void importRequestData(DateTime now, string fileName, DbInstance instance,bool loadRequests)
+        /// <param name="now">Instant the the procedure started</param>
+        /// <param name="fileName">Name of file where the data is</param>
+        /// <param name="instance">Name of the instance where the data will be stored</param>
+        /// <param name="loadRequests">Indicate if the load request data will be read</param>
+        public void importRequestData(DateTime now, string fileName, DbInstance instance,bool loadRequests = true)
         {
+            //Default procedure to open a excel file using the library NPOI
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
             var importHour = now;
-            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+            Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
+                                                                                //It need to be set to true in the end of procedure
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+
+            //Open the sheet called "Request"
             var sheet = hssfwb.GetSheet("Request");
 
             if (sheet != null){
-                
+                //Create a dictionary that links a aiport IATA code to the airport. Airports without a IATA code registered are not mapped
                 var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id && !string.IsNullOrEmpty(x.IATA)).ToDictionary(x => x.IATA, x => x);
+                //The first line is reserved to the headers
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
+                    //Get the data of the row i
                     IRow row = sheet.GetRow(i);
                     if (row == null) break;
+                    //If all the fields of that row are empty, finish the procedure
+                    //TODO: Create a error log to this case
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
                     var originIATA = row.GetCell(5).StringCellValue;
                     var destinationIATA = row.GetCell(6).StringCellValue;
+                    //Verify if the IATA codes fields have non null or empty values. If it is false, it's generated a log error
                     if (string.IsNullOrEmpty(originIATA) || string.IsNullOrEmpty(destinationIATA)){
                         CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Null origin or destination airport name");
                         continue;
                     }
 
+                    //Get the airport given the IATA
                     var airportOrigin = instanceAirports.ContainsKey(originIATA) ? instanceAirports[originIATA] : null;
                     var airportDestination = instanceAirports.ContainsKey(destinationIATA) ? instanceAirports[destinationIATA] : null;
 
+                    //If some of the airports are not found a error log is generated
                     if (airportOrigin == null || airportDestination == null){
                         CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
                         continue;
                     }
 
+                    //Generated a DbRequest object to the added on the database 
                     var item = new DbRequests()
                     {
                         Name = row.GetCell(0).StringCellValue,
@@ -256,14 +292,14 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Function to create and store the import data that describes the errors in import data
         /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="fileName"></param>
-        /// <param name="sheet"></param>
-        /// <param name="importHour"></param>
-        /// <param name="i"></param>
-        /// <param name="msg"></param>
+        /// <param name="instance">Instance in which the error happened</param>
+        /// <param name="fileName">Name of the file that was being read</param>
+        /// <param name="sheet">Name of the sheet that was being read</param>
+        /// <param name="importHour">Import hour</param>
+        /// <param name="i">Line that was being read</param>
+        /// <param name="msg">Error message</param>
         private void CreateImportErrorLog(DbInstance instance,string fileName,string sheet,  DateTime importHour, int i,string msg)
         {
             Instance.Context.ImportErrors.Add(new DbImportErrors()
@@ -278,33 +314,40 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Read all the data that describe the airports 
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="instance"></param>
-        /// <param name="loadAirplanes"></param>
-        /// <param name="loadSeats"></param>
+        /// <param name="fileName">Name of the file that contains the airplane data</param>
+        /// <param name="instance">Instance that will be read</param>
+        /// <param name="loadAirplanes">If the data about the airplanes will be read</param>
+        /// <param name="loadSeats">If the data about load seats will be read</param>
         public void importAirplanesData(DateTime now, string fileName, DbInstance instance,bool loadAirplanes, bool loadSeats)
         {
+            //Default procedure to open a excel file using the library NPOI
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
 
             var importHour = now;
 
-            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+            Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker. This field must be set to true in the end
             XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+
+            //Get the sheet called "Airplanes" if it exist
             var sheet = hssfwb.GetSheet("Airplanes");
             if (sheet != null && loadAirplanes){
+                //The first row is reserved to readers 
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
-                    IRow row = sheet.GetRow(i);
+                    IRow row = sheet.GetRow(i);         //Get the row i
                     if (row == null) break;
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
+                    //Get the data about the airport base and checks if this airport is registered on the database, otherwise will be generated
+                    //a error log 
                     var airportName = row.GetCell(7).StringCellValue;
                     var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
 
                     if (baseAirport != null){
+                        //Generate the DbAirplane object to be added on the database
                         var item = new DbAirplanes()
                         {
                             Model = row.GetCell(0).StringCellValue,
@@ -325,8 +368,7 @@ namespace Prototipo1.Controller
                     }
                     else
                     {
-                        Instance.Context.ImportErrors.Add(new DbImportErrors()
-                        {
+                        Instance.Context.ImportErrors.Add(new DbImportErrors(){
                             ImportationHour = importHour,
                             File = "Airplanes",
                             Instance = instance,
@@ -340,12 +382,16 @@ namespace Prototipo1.Controller
                 
             }
 
+            //Get the sheet called "Seat List"
             sheet = hssfwb.GetSheet("Seat List");
             if (sheet != null && loadSeats){
+                //The first row is reserved to the headers 
                 for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
                 {
-                    IRow row = sheet.GetRow(i);
+                    IRow row = sheet.GetRow(i); //Get the data of the row i
                     if (row == null) break;
+                    //If all the fields of the row are empty, the import procedure stops
+                    //TODO: Generate a error log
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
                     //Data validation
@@ -373,6 +419,7 @@ namespace Prototipo1.Controller
                     var airplane = Instance.Context.Airplanes.FirstOrDefault(x=>x.Instance.Id == instance.Id 
                                                                              && x.Prefix.Equals(prefix));
 
+                    //Generate the airplane object that will be added to the database
                     if (airplane != null){
 
                         var item = new DbSeats(){

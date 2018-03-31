@@ -11,6 +11,10 @@ using SolverClientComunication.Enums;
 
 namespace Prototipo1.Controller
 {
+    //TODO: Evaluate if it possible to put this class as a derived from the AbstractController class 
+    /// <summary>
+    /// Control the optimization parameters of the instances
+    /// </summary>
     class ParametersController
     {
         private CustomSqlContext Context { get; set; }
@@ -18,7 +22,9 @@ namespace Prototipo1.Controller
 
         private Dictionary<ParametersEnum, string> DefaultParameters { get; set;  }
 
-
+        /// <summary>
+        /// Set the default values of the optimization parameters
+        /// </summary>
         private ParametersController()
         {
             DefaultParameters = new Dictionary<ParametersEnum, string>();
@@ -33,10 +39,18 @@ namespace Prototipo1.Controller
             DefaultParameters[ParametersEnum.TIME_LIMIT] = "45";
         }
 
+        /// <summary>
+        /// Sets the object that access the database
+        /// </summary>
+        /// <param name="context">Object that will access the database </param>
         public void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
 
+        /// <summary>
+        /// Set the default parameters values of an instance
+        /// </summary>
+        /// <param name="solverInstance"></param>
         public void setDefaultParameters(DbInstance solverInstance)
         {
             var newParameters = new List<DbParameters>();
@@ -54,6 +68,19 @@ namespace Prototipo1.Controller
             }
         }
 
+        /// <summary>
+        /// Change the parameters values of an instancce 
+        /// </summary>
+        /// <param name="instance">Instance that will be its parameters changed</param>
+        /// <param name="useTimeWindows">If the time windows (to departure and arrival) will be used</param>
+        /// <param name="pickAll"> If all the passengers MUST be picked on origin</param>
+        /// <param name="deliverAll">If all the passengers MUST be delivered on the destination</param>
+        /// <param name="startFromDepot">Make the airplanes starts the route from the airplane base </param>
+        /// <param name="comebackToDepot">If the airplane need to come back to the airplane base in the end of the day</param>
+        /// <param name="averageWeightMan">The average weight of men</param>
+        /// <param name="averageWeightWoman">The average weight of women</param>
+        /// <param name="averageChildWeight">The average weight of Child</param>
+        /// <param name="timeLimit">Maximum time to the algorithm rum</param>
         public void UpdateInstanceParameters(DbInstance instance, bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
                                        bool startFromDepot = true, bool comebackToDepot = true, int averageWeightMan = 75,
                                        int averageWeightWoman = 65, int averageChildWeight = 30, int timeLimit = 45)
@@ -85,6 +112,18 @@ namespace Prototipo1.Controller
             foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
         }
 
+        /// <summary>
+        /// Update all the parameters of all instances 
+        /// </summary>
+        /// <param name="useTimeWindows">If the time windows (to departure and arrival) will be used</param>
+        /// <param name="pickAll"> If all the passengers MUST be picked on origin</param>
+        /// <param name="deliverAll">If all the passengers MUST be delivered on the destination</param>
+        /// <param name="startFromDepot">Make the airplanes starts the route from the airplane base </param>
+        /// <param name="comebackToDepot">If the airplane need to come back to the airplane base in the end of the day</param>
+        /// <param name="averageWeightMan">The average weight of men</param>
+        /// <param name="averageWeightWoman">The average weight of women</param>
+        /// <param name="averageChildWeight">The average weight of Child</param>
+        /// <param name="timeLimit">Maximum time to the algorithm rum</param>
         public void UpdateAllInstances(bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
                                        bool startFromDepot = true,bool comebackToDepot = true, int averageWeightMan = 75, 
                                        int averageWeightWoman = 65,int averageChildWeight = 30,int timeLimit = 45){
@@ -115,11 +154,19 @@ namespace Prototipo1.Controller
             
         }
 
+        /// <summary>
+        /// Update the value of a parameter and save it on the database 
+        /// </summary>
+        /// <param name="param">Parameter item</param>
         private void UpdateAndSave(DbParameters param){
             Instance.Context.Parameters.AddOrUpdate(param);
             Instance.Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Show errors related with operations on the data base. It's used for debugging purposes only
+        /// </summary>
+        /// <param name="e"></param>
         private void ShowErros(DbEntityValidationException e)
         {
             foreach (var eve in e.EntityValidationErrors)

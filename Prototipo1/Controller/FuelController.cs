@@ -10,13 +10,13 @@ using SolverClientComunication.Models;
 namespace Prototipo1.Controller
 {
     class FuelController: AbstractController<DbFuelPrice, CustomSqlContext>{
-        private CustomSqlContext Context { get; set; }
+        
         public static readonly FuelController Instance = new FuelController();
 
         /// <summary>
-        /// 
+        /// Sets the object that access the database
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">Object that will access the database </param>
         public override void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
@@ -33,7 +33,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// Edit a element of the database (if this element is stored on database)
+        /// Edit a fuel price of the database (if this element is stored on database)
         /// </summary>
         /// <param name="item"></param>
         /// <param name="IdItem"></param>
@@ -51,7 +51,7 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// Delete a item of the database, if this item is stored there
+        /// Delete a fuel price of the database, if this item is stored there
         /// </summary>
         /// <param name="item">Item to the deleted</param>
         public override void Delete(DbFuelPrice item){
