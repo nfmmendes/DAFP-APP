@@ -43,8 +43,7 @@ namespace Prototipo1.Components
             var requests = Context.Requests.ToList().Where(x => x.Instance.Id == Instance.Id)
                 .GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
 
-            foreach (var key in requests.Keys)
-            {
+            foreach (var key in requests.Keys){
                 var value = requests[key].First();
                 dataGridViewRequest.Rows.Add(key, key, value.Origin.AirportName, value.Destination?.AirportName, value.DepartureTimeWindowBegin,
                     value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
@@ -90,6 +89,45 @@ namespace Prototipo1.Components
 
                 editRequest.OpenToEdit(Instance, dataGridViewRequest.Rows[rowIndex].Cells[0].Value.ToString());
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDeletePassenger_Click(object sender, EventArgs e){
+            if (this.dataGridViewPassenger.SelectedRows.Count>0){
+                var index = Convert.ToInt64(this.dataGridViewPassenger.Rows[this.dataGridViewPassenger.SelectedRows[0].Index].Cells[0].Value);
+
+                var deleted = Context.Requests.First(x => x.Id == index);
+                if (deleted != null){
+                    var PNR = deleted.PNR;
+                    Context.Requests.Remove(deleted);
+                    Context.SaveChanges();
+                    FillRequestTables();
+                    FillPassengerList(PNR);
+                }
+                
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEditPassenger_Click(object sender, EventArgs e){
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddPassenger_Click(object sender, EventArgs e){
+
         }
     }
 }

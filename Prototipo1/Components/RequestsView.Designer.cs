@@ -28,18 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.buttonDeletePassenger = new System.Windows.Forms.Button();
+            this.buttonEditPassenger = new System.Windows.Forms.Button();
+            this.buttonAddPassenger = new System.Windows.Forms.Button();
             this.buttonRemoveRequest = new System.Windows.Forms.Button();
             this.buttonEditRequest = new System.Windows.Forms.Button();
             this.buttonAddRequest = new System.Windows.Forms.Button();
             this.dataGridViewPassenger = new System.Windows.Forms.DataGridView();
-            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRequest = new System.Windows.Forms.DataGridView();
             this.RequestId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,36 +44,44 @@
             this.MaxDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).BeginInit();
             this.SuspendLayout();
             // 
-            // button5
+            // buttonDeletePassenger
             // 
-            this.button5.Location = new System.Drawing.Point(1035, 395);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(91, 34);
-            this.button5.TabIndex = 21;
-            this.button5.Text = "Delete";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonDeletePassenger.Location = new System.Drawing.Point(1035, 395);
+            this.buttonDeletePassenger.Name = "buttonDeletePassenger";
+            this.buttonDeletePassenger.Size = new System.Drawing.Size(91, 34);
+            this.buttonDeletePassenger.TabIndex = 21;
+            this.buttonDeletePassenger.Text = "Delete";
+            this.buttonDeletePassenger.UseVisualStyleBackColor = true;
+            this.buttonDeletePassenger.Click += new System.EventHandler(this.buttonDeletePassenger_Click);
             // 
-            // button6
+            // buttonEditPassenger
             // 
-            this.button6.Location = new System.Drawing.Point(1035, 345);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(91, 34);
-            this.button6.TabIndex = 20;
-            this.button6.Text = "Edit";
-            this.button6.UseVisualStyleBackColor = true;
+            this.buttonEditPassenger.Location = new System.Drawing.Point(1035, 345);
+            this.buttonEditPassenger.Name = "buttonEditPassenger";
+            this.buttonEditPassenger.Size = new System.Drawing.Size(91, 34);
+            this.buttonEditPassenger.TabIndex = 20;
+            this.buttonEditPassenger.Text = "Edit";
+            this.buttonEditPassenger.UseVisualStyleBackColor = true;
+            this.buttonEditPassenger.Click += new System.EventHandler(this.buttonEditPassenger_Click);
             // 
-            // button7
+            // buttonAddPassenger
             // 
-            this.button7.Location = new System.Drawing.Point(1035, 295);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(91, 34);
-            this.button7.TabIndex = 19;
-            this.button7.Text = "Add";
-            this.button7.UseVisualStyleBackColor = true;
+            this.buttonAddPassenger.Location = new System.Drawing.Point(1035, 295);
+            this.buttonAddPassenger.Name = "buttonAddPassenger";
+            this.buttonAddPassenger.Size = new System.Drawing.Size(91, 34);
+            this.buttonAddPassenger.TabIndex = 19;
+            this.buttonAddPassenger.Text = "Add";
+            this.buttonAddPassenger.UseVisualStyleBackColor = true;
+            this.buttonAddPassenger.Click += new System.EventHandler(this.buttonAddPassenger_Click);
             // 
             // buttonRemoveRequest
             // 
@@ -123,35 +126,9 @@
             this.dataGridViewPassenger.Name = "dataGridViewPassenger";
             this.dataGridViewPassenger.RowHeadersVisible = false;
             this.dataGridViewPassenger.RowTemplate.Height = 24;
+            this.dataGridViewPassenger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPassenger.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewPassenger.TabIndex = 15;
-            // 
-            // IdPassenger
-            // 
-            this.IdPassenger.HeaderText = "Id";
-            this.IdPassenger.Name = "IdPassenger";
-            this.IdPassenger.ReadOnly = true;
-            this.IdPassenger.Visible = false;
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
             // 
             // dataGridViewRequest
             // 
@@ -218,12 +195,41 @@
             this.MaxArrival.HeaderText = "Maximum Arrival Time";
             this.MaxArrival.Name = "MaxArrival";
             // 
+            // IdPassenger
+            // 
+            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IdPassenger.HeaderText = "Id";
+            this.IdPassenger.Name = "IdPassenger";
+            this.IdPassenger.ReadOnly = true;
+            this.IdPassenger.Visible = false;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.ReadOnly = true;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            // 
             // RequestsView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.buttonDeletePassenger);
+            this.Controls.Add(this.buttonEditPassenger);
+            this.Controls.Add(this.buttonAddPassenger);
             this.Controls.Add(this.buttonRemoveRequest);
             this.Controls.Add(this.buttonEditRequest);
             this.Controls.Add(this.buttonAddRequest);
@@ -239,18 +245,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button buttonDeletePassenger;
+        private System.Windows.Forms.Button buttonEditPassenger;
+        private System.Windows.Forms.Button buttonAddPassenger;
         private System.Windows.Forms.Button buttonRemoveRequest;
         private System.Windows.Forms.Button buttonEditRequest;
         private System.Windows.Forms.Button buttonAddRequest;
         private System.Windows.Forms.DataGridView dataGridViewPassenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
         private System.Windows.Forms.DataGridView dataGridViewRequest;
         private System.Windows.Forms.DataGridViewTextBoxColumn RequestId;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookingNumber;
@@ -260,5 +261,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxDeparture;
         private System.Windows.Forms.DataGridViewTextBoxColumn MinArrival;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxArrival;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
     }
 }

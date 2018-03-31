@@ -99,6 +99,12 @@
     <Compile Include="AddEditFuel.Designer.cs">
       <DependentUpon>AddEditFuel.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditPassenger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditPassenger.Designer.cs">
+      <DependentUpon>AddEditPassenger.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditFuel.resx">
       <DependentUpon>AddEditFuel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditPassenger.resx">
+      <DependentUpon>AddEditPassenger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditRequest.resx">
       <DependentUpon>AddEditRequest.cs</DependentUpon>

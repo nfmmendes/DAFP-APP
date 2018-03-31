@@ -71,9 +71,22 @@ namespace Prototipo1.Components
 
                         var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
                         var deleted = Context.Airports.FirstOrDefault(x => x.Id == index);
-                        Context.Stretches.RemoveRange(Context.Stretches.Where(x => x.Origin.Id == deleted.Id).ToList());
-                        Context.Stretches.RemoveRange(Context.Stretches.Where(x => x.Destination.Id == deleted.Id).ToList());
-                        Context.Airplanes.RemoveRange(Context.Airplanes.Where(x => x.BaseAirport.Id == deleted.Id)).ToList();
+                        var stretchDelete = Context.Stretches.Where(x=> x.Origin.Id == deleted.Id || x.Destination.Id == deleted.Id);
+                        var requestsDelete = Context.Requests.Where(x=>x.Origin.Id == deleted.Id || x.Destination.Id == deleted.Id);
+                        var fuelDelete = Context.FuelPrice.Where(x => x.Airport.Id == deleted.Id);
+
+                        if (fuelDelete.Any())
+                            Context.FuelPrice.RemoveRange(fuelDelete.ToList());
+
+                        if (requestsDelete.Any())
+                            Context.Requests.RemoveRange(requestsDelete.ToList());
+
+                        if(stretchDelete.Any())
+                            Context.Stretches.RemoveRange(stretchDelete.ToList());
+
+                        var airplanesDelete = Context.Airplanes.Where(x => x.BaseAirport.Id == deleted.Id);
+                        if(airplanesDelete.Any())
+                            Context.Airplanes.RemoveRange(airplanesDelete.ToList());
                         Context.SaveChanges();
 
                         if (deleted != null)
@@ -81,6 +94,7 @@ namespace Prototipo1.Components
                     }
 
                     Context.SaveChanges();
+                    FillAirportsTable();
                 }
             }
             else
