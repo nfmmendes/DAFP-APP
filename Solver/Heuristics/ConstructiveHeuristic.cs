@@ -54,7 +54,6 @@ namespace Solver.Heuristics
             var maxTotalCapacity = Input.Airplanes.Max(x => x.Capacity);
             var numRequestsByPNR = Input.Requests.GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList().Count);
             
-            //TODO: Include the classes on this query
             requestsWithMandatorySplit = Input.Requests.Where(x => numRequestsByPNR[x.PNR] > maxTotalCapacity).ToList();
 
             if (Strategie == GreedyStrategie.MostRequestedOrigin){

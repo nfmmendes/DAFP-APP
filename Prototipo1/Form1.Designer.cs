@@ -85,6 +85,7 @@ namespace Prototipo1
             this.tabPageRouteVisualization = new System.Windows.Forms.TabPage();
             this.MapRoutView = new Prototipo1.Components.MapRoutesView();
             this.tabPageAirplaneUsage = new System.Windows.Forms.TabPage();
+            this.AirplaneUseSolutionView = new Prototipo1.Components.AirplaneUseSolutionView();
             this.tabPageRefuels = new System.Windows.Forms.TabPage();
             this.RefuelSolutionView = new Prototipo1.Components.RefuelSolutionView();
             this.tabPageSolutionRequests = new System.Windows.Forms.TabPage();
@@ -181,7 +182,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AirplaneUseSolutionView = new Prototipo1.Components.AirplaneUseSolutionView();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -579,6 +579,15 @@ namespace Prototipo1
             this.tabPageAirplaneUsage.Text = "Airplanes Usage";
             this.tabPageAirplaneUsage.UseVisualStyleBackColor = true;
             // 
+            // AirplaneUseSolutionView
+            // 
+            this.AirplaneUseSolutionView.Context = Context;
+            this.AirplaneUseSolutionView.Instance = null;
+            this.AirplaneUseSolutionView.Location = new System.Drawing.Point(15, 15);
+            this.AirplaneUseSolutionView.Name = "AirplaneUseSolutionView";
+            this.AirplaneUseSolutionView.Size = new System.Drawing.Size(1180, 530);
+            this.AirplaneUseSolutionView.TabIndex = 0;
+            // 
             // tabPageRefuels
             // 
             this.tabPageRefuels.Controls.Add(this.RefuelSolutionView);
@@ -679,7 +688,7 @@ namespace Prototipo1
             this.panelParamSelectInstance.ForeColor = System.Drawing.Color.White;
             this.panelParamSelectInstance.Location = new System.Drawing.Point(375, 15);
             this.panelParamSelectInstance.Name = "panelParamSelectInstance";
-            this.panelParamSelectInstance.Size = new System.Drawing.Size(789, 90);
+            this.panelParamSelectInstance.Size = new System.Drawing.Size(991, 90);
             this.panelParamSelectInstance.TabIndex = 16;
             this.panelParamSelectInstance.Visible = false;
             // 
@@ -764,7 +773,7 @@ namespace Prototipo1
             this.panel6.Controls.Add(this.panel4);
             this.panel6.Location = new System.Drawing.Point(11, 140);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1153, 501);
+            this.panel6.Size = new System.Drawing.Size(1355, 501);
             this.panel6.TabIndex = 12;
             // 
             // panel7
@@ -985,7 +994,7 @@ namespace Prototipo1
             // 
             this.buttonCancelSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonCancelSaveParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonCancelSaveParams.Location = new System.Drawing.Point(679, 324);
+            this.buttonCancelSaveParams.Location = new System.Drawing.Point(1181, 146);
             this.buttonCancelSaveParams.Name = "buttonCancelSaveParams";
             this.buttonCancelSaveParams.Size = new System.Drawing.Size(150, 48);
             this.buttonCancelSaveParams.TabIndex = 21;
@@ -998,7 +1007,7 @@ namespace Prototipo1
             // 
             this.buttonSaveParams.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonSaveParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonSaveParams.Location = new System.Drawing.Point(320, 324);
+            this.buttonSaveParams.Location = new System.Drawing.Point(1181, 78);
             this.buttonSaveParams.Name = "buttonSaveParams";
             this.buttonSaveParams.Size = new System.Drawing.Size(150, 48);
             this.buttonSaveParams.TabIndex = 20;
@@ -1011,7 +1020,7 @@ namespace Prototipo1
             // 
             this.buttonEditParams.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonEditParams.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonEditParams.Location = new System.Drawing.Point(782, 236);
+            this.buttonEditParams.Location = new System.Drawing.Point(1181, 15);
             this.buttonEditParams.Name = "buttonEditParams";
             this.buttonEditParams.Size = new System.Drawing.Size(150, 48);
             this.buttonEditParams.TabIndex = 19;
@@ -1566,15 +1575,6 @@ namespace Prototipo1
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // AirplaneUseSolutionView
-            // 
-            this.AirplaneUseSolutionView.Context = Context;
-            this.AirplaneUseSolutionView.Instance = null;
-            this.AirplaneUseSolutionView.Location = new System.Drawing.Point(15, 15);
-            this.AirplaneUseSolutionView.Name = "AirplaneUseSolutionView";
-            this.AirplaneUseSolutionView.Size = new System.Drawing.Size(1180, 530);
-            this.AirplaneUseSolutionView.TabIndex = 0;
             // 
             // MainForm
             // 

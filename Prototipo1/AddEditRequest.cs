@@ -21,17 +21,37 @@ namespace Prototipo1
         private string CurrentPNR { get; set; }
         private CustomSqlContext Context { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public AddEditRequest(CustomSqlContext context){
             InitializeComponent();
             Context = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         public void OpenToAdd(DbInstance instance){
             Instance = instance;
             IsAdd = true;
+
+            this.comboBoxOrigin.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == instance.Id).Select(x => x.AirportName).ToList();
+            this.comboBoxDestination.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == instance.Id).Select(x => x.AirportName).ToList();
+
+            this.comboBoxOrigin.SelectedIndex = 0;
+            this.comboBoxDestination.SelectedIndex = 0;
+
             this.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="PNRCode"></param>
         public void OpenToEdit(DbInstance instance, string PNRCode){
             Instance = instance;
             IsAdd = false;
@@ -61,20 +81,54 @@ namespace Prototipo1
                 numUD_Hr_MaxArr.Value = currentElement.ArrivalTimeWindowEnd.Hours;
                 numUD_Min_MaxArr.Value = currentElement.ArrivalTimeWindowEnd.Minutes;
             }
-
             
-
             this.ShowDialog(); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e){
 
             if (IsAdd){
+
+                if (string.IsNullOrEmpty(this.textBoxPNR.Text)){
+                    MessageBox.Show("The PNR field can not be empty");
+                    return;
+                }
+                    
+
                 var result = MessageBox.Show("You need add passengers in this request. Would you like to do it now?" +
                                              " If you say no, a fake passenger will be created", "", MessageBoxButtons.YesNo);
 
-            }
-            else{
+                if (result == DialogResult.Yes){
+                    var passenger = new AddEditPassenger(Context,textBoxPNR.Text);
+
+                    
+                    var originName = this.comboBoxOrigin.SelectedItem.ToString();
+                    var destinationName = this.comboBoxDestination.SelectedItem.ToString();
+                    var origin = Context.Airports.FirstOrDefault(x=>x.Instance.Id == Instance.Id && x.AirportName.Equals(originName));
+
+                    var pnr = this.textBoxPNR.Text;
+                    var destination = Context.Airports.FirstOrDefault(x =>x.Instance.Id == Instance.Id && x.AirportName.Equals(destinationName));
+                    var minDeparture = TimeSpan.FromHours(Convert.ToInt32(numUD_Hr_MinDep.Value)) + TimeSpan.FromMinutes(Convert.ToInt32(numUD_Min_MinDep.Value));
+                    var maxDeparture = TimeSpan.FromHours(Convert.ToInt32(numUD_Hr_MaxDep.Value)) + TimeSpan.FromMinutes(Convert.ToInt32(numUD_Min_MaxDep.Value));
+                    var minArrival = TimeSpan.FromHours(Convert.ToInt32(numUD_Hr_MinArr.Value)) + TimeSpan.FromMinutes(Convert.ToInt32(numUD_Min_MinArr.Value));
+                    var maxArrival = TimeSpan.FromHours(Convert.ToInt32(numUD_Hr_MaxArr.Value)) + TimeSpan.FromMinutes(Convert.ToInt32(numUD_Min_MaxArr.Value));
+
+                    
+
+                    if(origin != null && destination != null)
+                        passenger.OpenToAdd(Instance,pnr,origin, destination,minDeparture,maxDeparture,minArrival,maxArrival);
+                    else
+                        MessageBox.Show("Airports not found. Observe the values selected");
+                }else{
+                    
+                }
+
+            }else{
 
                 var changed = Context.Requests.Where(x => x.PNR.Equals(this.textBoxPNR.Text)).ToList();
 
@@ -106,7 +160,11 @@ namespace Prototipo1
             this.Close();
         }
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCancel_Click(object sender, EventArgs e){
             this.Close();
         }

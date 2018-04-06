@@ -71,7 +71,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(417, 372);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(126, 43);
-            this.buttonCancel.TabIndex = 17;
+            this.buttonCancel.TabIndex = 13;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -81,7 +81,7 @@
             this.buttonSave.Location = new System.Drawing.Point(230, 372);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(126, 43);
-            this.buttonSave.TabIndex = 16;
+            this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -102,7 +102,7 @@
             this.textBoxPNR.Location = new System.Drawing.Point(100, 44);
             this.textBoxPNR.Name = "textBoxPNR";
             this.textBoxPNR.Size = new System.Drawing.Size(221, 28);
-            this.textBoxPNR.TabIndex = 19;
+            this.textBoxPNR.TabIndex = 1;
             // 
             // label2
             // 
@@ -138,9 +138,24 @@
             // 
             this.numUD_Hr_MinDep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Hr_MinDep.Location = new System.Drawing.Point(37, 182);
+            this.numUD_Hr_MinDep.Maximum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.numUD_Hr_MinDep.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             this.numUD_Hr_MinDep.Name = "numUD_Hr_MinDep";
             this.numUD_Hr_MinDep.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Hr_MinDep.TabIndex = 25;
+            this.numUD_Hr_MinDep.TabIndex = 4;
+            this.numUD_Hr_MinDep.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -166,9 +181,14 @@
             // 
             this.numUD_Min_MinDep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Min_MinDep.Location = new System.Drawing.Point(149, 184);
+            this.numUD_Min_MinDep.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
             this.numUD_Min_MinDep.Name = "numUD_Min_MinDep";
             this.numUD_Min_MinDep.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Min_MinDep.TabIndex = 27;
+            this.numUD_Min_MinDep.TabIndex = 5;
             // 
             // label7
             // 
@@ -184,9 +204,14 @@
             // 
             this.numUD_Min_MaxDep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Min_MaxDep.Location = new System.Drawing.Point(609, 184);
+            this.numUD_Min_MaxDep.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
             this.numUD_Min_MaxDep.Name = "numUD_Min_MaxDep";
             this.numUD_Min_MaxDep.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Min_MaxDep.TabIndex = 32;
+            this.numUD_Min_MaxDep.TabIndex = 7;
             // 
             // label8
             // 
@@ -202,9 +227,24 @@
             // 
             this.numUD_Hr_MaxDep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Hr_MaxDep.Location = new System.Drawing.Point(497, 182);
+            this.numUD_Hr_MaxDep.Maximum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.numUD_Hr_MaxDep.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             this.numUD_Hr_MaxDep.Name = "numUD_Hr_MaxDep";
             this.numUD_Hr_MaxDep.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Hr_MaxDep.TabIndex = 30;
+            this.numUD_Hr_MaxDep.TabIndex = 6;
+            this.numUD_Hr_MaxDep.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // label9
             // 
@@ -230,9 +270,14 @@
             // 
             this.numUD_Min_MinArr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Min_MinArr.Location = new System.Drawing.Point(149, 265);
+            this.numUD_Min_MinArr.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
             this.numUD_Min_MinArr.Name = "numUD_Min_MinArr";
             this.numUD_Min_MinArr.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Min_MinArr.TabIndex = 37;
+            this.numUD_Min_MinArr.TabIndex = 9;
             // 
             // label11
             // 
@@ -248,9 +293,24 @@
             // 
             this.numUD_Hr_MinArr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Hr_MinArr.Location = new System.Drawing.Point(37, 263);
+            this.numUD_Hr_MinArr.Maximum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.numUD_Hr_MinArr.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             this.numUD_Hr_MinArr.Name = "numUD_Hr_MinArr";
             this.numUD_Hr_MinArr.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Hr_MinArr.TabIndex = 35;
+            this.numUD_Hr_MinArr.TabIndex = 8;
+            this.numUD_Hr_MinArr.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // label12
             // 
@@ -276,9 +336,14 @@
             // 
             this.numUD_Min_MaxArr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Min_MaxArr.Location = new System.Drawing.Point(609, 269);
+            this.numUD_Min_MaxArr.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
             this.numUD_Min_MaxArr.Name = "numUD_Min_MaxArr";
             this.numUD_Min_MaxArr.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Min_MaxArr.TabIndex = 42;
+            this.numUD_Min_MaxArr.TabIndex = 11;
             // 
             // label14
             // 
@@ -294,9 +359,24 @@
             // 
             this.numUD_Hr_MaxArr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUD_Hr_MaxArr.Location = new System.Drawing.Point(497, 267);
+            this.numUD_Hr_MaxArr.Maximum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.numUD_Hr_MaxArr.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             this.numUD_Hr_MaxArr.Name = "numUD_Hr_MaxArr";
             this.numUD_Hr_MaxArr.Size = new System.Drawing.Size(60, 28);
-            this.numUD_Hr_MaxArr.TabIndex = 40;
+            this.numUD_Hr_MaxArr.TabIndex = 10;
+            this.numUD_Hr_MaxArr.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // label15
             // 
@@ -315,7 +395,7 @@
             this.comboBoxOrigin.Location = new System.Drawing.Point(100, 89);
             this.comboBoxOrigin.Name = "comboBoxOrigin";
             this.comboBoxOrigin.Size = new System.Drawing.Size(220, 30);
-            this.comboBoxOrigin.TabIndex = 44;
+            this.comboBoxOrigin.TabIndex = 2;
             // 
             // comboBoxDestination
             // 
@@ -324,7 +404,7 @@
             this.comboBoxDestination.Location = new System.Drawing.Point(497, 92);
             this.comboBoxDestination.Name = "comboBoxDestination";
             this.comboBoxDestination.Size = new System.Drawing.Size(220, 30);
-            this.comboBoxDestination.TabIndex = 45;
+            this.comboBoxDestination.TabIndex = 3;
             // 
             // AddEditRequest
             // 

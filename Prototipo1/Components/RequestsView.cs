@@ -40,8 +40,7 @@ namespace Prototipo1.Components
         private void FillRequestTables()
         {
             this.dataGridViewRequest.Rows.Clear();
-            var requests = Context.Requests.ToList().Where(x => x.Instance.Id == Instance.Id)
-                .GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
+            var requests = Context.Requests.ToList().Where(x => x.Instance.Id == Instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
 
             foreach (var key in requests.Keys){
                 var value = requests[key].First();
@@ -75,6 +74,21 @@ namespace Prototipo1.Components
             }
         }
 
+        private TimeSpan TransformToTimespan(string time){
+            var split = time.Split(':');
+            if (split.Length == 3)
+                return    TimeSpan.FromHours(Convert.ToInt32(split[0])) 
+                        + TimeSpan.FromMinutes(Convert.ToInt32(split[1])) 
+                        + TimeSpan.FromSeconds(Convert.ToInt32(split[2]));
+            else if (split.Length == 2)
+                return TimeSpan.FromHours(Convert.ToInt32(split[0]))
+                       + TimeSpan.FromMinutes(Convert.ToInt32(split[1]));
+            else{
+                MessageBox.Show("Time data in wrong format");
+                return TimeSpan.MinValue;
+            }
+
+        }
 
         /// <summary>
         /// 
@@ -127,7 +141,56 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonAddPassenger_Click(object sender, EventArgs e){
+            if (dataGridViewPassenger.SelectedRows.Count > 0){
+                var rowIndex = dataGridViewRequest.SelectedRows[0].Index;
 
+                var pnr = dataGridViewRequest.Rows[rowIndex].Cells[1].Value.ToString();
+                var originName = dataGridViewRequest.Rows[rowIndex].Cells[2].Value.ToString();
+                var destinationName = dataGridViewRequest.Rows[rowIndex].Cells[3].Value.ToString();
+                var minDeparture = TransformToTimespan(dataGridViewRequest.Rows[rowIndex].Cells[4].Value.ToString());
+                var maxDeparture = TransformToTimespan(dataGridViewRequest.Rows[rowIndex].Cells[5].Value.ToString());
+                var minArrival = TransformToTimespan(dataGridViewRequest.Rows[rowIndex].Cells[6].Value.ToString());
+                var maxArrival = TransformToTimespan(dataGridViewRequest.Rows[rowIndex].Cells[7].Value.ToString());
+
+                var origin = Context.Airports.FirstOrDefault(x => x.Instance.Id == Instance.Id && x.AirportName.Equals(originName));
+                var destination = Context.Airports.FirstOrDefault(x => x.Instance.Id == Instance.Id && x.AirportName.Equals(destinationName));
+
+                if (origin != null && destination != null && !string.IsNullOrEmpty(pnr)){
+                    var addPassenger = new AddEditPassenger(Context, pnr);
+                    addPassenger.OpenToAdd(Instance,pnr,origin,destination,minDeparture,maxDeparture,minArrival,maxArrival);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddRequest_Click(object sender, EventArgs e){
+            var add = new AddEditRequest(Context);
+            add.OpenToAdd(Instance);
+            FillRequestTables();
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRemoveRequest_Click(object sender, EventArgs e){
+            if (dataGridViewRequest.SelectedRows.Count > 0){
+                var index = dataGridViewRequest.SelectedRows[0].Index;
+
+                var PNR = dataGridViewRequest.Rows[index].Cells[0].Value.ToString();
+                Context.Requests.RemoveRange(Context.Requests.Where(x => x.PNR.Equals(PNR)));
+                Context.SaveChanges();
+                FillRequestTables();
+                FillPassengerList(PNR);
+            }
+            else
+                MessageBox.Show("Select on request in the table");
         }
     }
 }
