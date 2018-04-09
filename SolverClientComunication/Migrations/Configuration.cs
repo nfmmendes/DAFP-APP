@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using SolverClientComunication.Models;
 
 namespace SolverClientComunication.Migrations
@@ -12,6 +14,7 @@ namespace SolverClientComunication.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+
         }
 
         protected override void Seed(SolverClientComunication.CustomSqlContext context)

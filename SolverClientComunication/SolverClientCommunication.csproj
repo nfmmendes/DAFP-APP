@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201804091817414_newStretchConfiguration.Designer.cs">
       <DependentUpon>201804091817414_newStretchConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804092151346_newStretchConfiguration2.cs" />
+    <Compile Include="Migrations\201804092151346_newStretchConfiguration2.Designer.cs">
+      <DependentUpon>201804092151346_newStretchConfiguration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804092203443_newStretchConfiguration2Undo.cs" />
+    <Compile Include="Migrations\201804092203443_newStretchConfiguration2Undo.Designer.cs">
+      <DependentUpon>201804092203443_newStretchConfiguration2Undo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -151,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804091817414_newStretchConfiguration.resx">
       <DependentUpon>201804091817414_newStretchConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804092151346_newStretchConfiguration2.resx">
+      <DependentUpon>201804092151346_newStretchConfiguration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804092203443_newStretchConfiguration2Undo.resx">
+      <DependentUpon>201804092203443_newStretchConfiguration2Undo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
