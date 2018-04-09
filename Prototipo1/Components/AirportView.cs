@@ -71,7 +71,7 @@ namespace Prototipo1.Components
 
                         var index = Convert.ToInt64(dataGridViewAirport.Rows[i].Cells[0].Value);
                         var deleted = Context.Airports.FirstOrDefault(x => x.Id == index);
-                        var stretchDelete = Context.Stretches.Where(x=> x.Origin.Id == deleted.Id || x.Destination.Id == deleted.Id);
+                        var stretchDelete = Context.Stretches.Where(x=> x.InstanceId == deleted.Instance.Id && (x.Origin.Equals(deleted.AirportName) || x.Destination.Equals(deleted.AirportName)));
                         var requestsDelete = Context.Requests.Where(x=>x.Origin.Id == deleted.Id || x.Destination.Id == deleted.Id);
                         var fuelDelete = Context.FuelPrice.Where(x => x.Airport.Id == deleted.Id);
 

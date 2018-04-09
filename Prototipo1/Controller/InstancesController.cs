@@ -108,7 +108,7 @@ namespace Prototipo1.Controller
             if (deleted != null){
 
                 Instance.Context.Configuration.AutoDetectChangesEnabled = false;
-                Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.ToList().Where(x => x.Origin.Instance.Id.Equals(deleted.Id)));
+                Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.ToList().Where(x => x.InstanceId == deleted.Id));
                 Instance.Context.SaveChanges();
                 Instance.Context.Configuration.AutoDetectChangesEnabled = true;
 

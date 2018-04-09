@@ -47,14 +47,13 @@ namespace Prototipo1.Components
 
             dataGridViewStretches.Rows.Clear();
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id);
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
 
             var firstPageSize = Math.Min(StretchePageSize, totalSize);
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id).ToList();
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             for (int i = 0; i <= firstPageSize; i++)
-                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
-                                               listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
+                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
 
             CountStretchesPage = 1;
             labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
@@ -70,9 +69,9 @@ namespace Prototipo1.Components
         {
 
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id);
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
 
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id).ToList();
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             if (CountStretchesPage > 1)
             {
@@ -83,8 +82,7 @@ namespace Prototipo1.Components
                 var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
 
                 for (int i = firstIndex; i <= lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
-                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
 
                 labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
             }
@@ -100,9 +98,9 @@ namespace Prototipo1.Components
         {
             
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id);
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
 
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id).ToList();
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             if (CountStretchesPage <= (int)(listOfStretches.Count() / StretchePageSize))
             {
@@ -114,8 +112,7 @@ namespace Prototipo1.Components
                 CountStretchesPage++;
 
                 for (int i = firstIndex; i < lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
-                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
 
                 labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
             }
@@ -130,9 +127,9 @@ namespace Prototipo1.Components
         private void buttonLastPageStretch_Click(object sender, EventArgs e)
         {
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id);
+            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
             var firstLastPageIndex = totalSize - (totalSize % StretchePageSize);
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.Origin.Instance.Id == Instance.Id).ToList();
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             dataGridViewStretches.Rows.Clear();
 
@@ -141,8 +138,7 @@ namespace Prototipo1.Components
             for (int i = firstLastPageIndex; i < totalSize; i++)
                 try
                 {
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin.AirportName,
-                        listOfStretches[i].Destination.AirportName, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
                 }
                 catch (Exception ex) { }
 
@@ -160,13 +156,13 @@ namespace Prototipo1.Components
         private void FillStretchTable()
         {
             this.dataGridViewStretches.Rows.Clear();
-            var stretches = Context.Stretches.ToList().Where(x => x.Origin.Instance.Id == Instance.Id);
+            var stretches = Context.Stretches.ToList().Where(x => x.InstanceId == Instance.Id);
             int cont = 0;
             CountStretchesPage = 1;
             labelPageStretch.Text = $"{CountStretchesPage} of {(int)(stretches.Count() / StretchePageSize + 1)}";
             foreach (var item in stretches)
             {
-                dataGridViewStretches.Rows.Add(item.Id, item.Origin.AirportName, item.Destination.AirportName, item.Distance);
+                dataGridViewStretches.Rows.Add(item.Id, item.Origin, item.Destination, item.Distance);
                 cont++;
                 if (cont == StretchePageSize)
                     break;

@@ -141,9 +141,10 @@ namespace Prototipo1.Controller
 
                         //Create a stretch object to be added to the database
                         var item = new DbStretches(){
-                            Origin = airportOrigin,
-                            Destination = airportDestination,
-                            Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue)
+                            Origin = airportOriginName,
+                            Destination = airportDestinationName,
+                            Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue),
+                            InstanceId = instance.Id
                         };
 
                         try{

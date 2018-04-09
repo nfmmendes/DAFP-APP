@@ -13,11 +13,12 @@ namespace SolverClientComunication.Models
         [Key]
         public long Id { get;  set; }
 
-        [Key]
-        public virtual DbAirports Origin { get; set; }
+        public string Origin { get; set; }
 
-        [Key]
-        public virtual DbAirports Destination { get; set; }
+        public string Destination { get; set; }
+
+        public long InstanceId { get; set;  }
+
 
         [Required]
         public int Distance { get; set; }

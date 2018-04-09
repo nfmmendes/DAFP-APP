@@ -86,6 +86,10 @@
     <Compile Include="Migrations\201803271857027_removeSeatClassCount.Designer.cs">
       <DependentUpon>201803271857027_removeSeatClassCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804091817414_newStretchConfiguration.cs" />
+    <Compile Include="Migrations\201804091817414_newStretchConfiguration.Designer.cs">
+      <DependentUpon>201804091817414_newStretchConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803271857027_removeSeatClassCount.resx">
       <DependentUpon>201803271857027_removeSeatClassCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804091817414_newStretchConfiguration.resx">
+      <DependentUpon>201804091817414_newStretchConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
