@@ -36,10 +36,10 @@ namespace Prototipo1.Components
             var prefix = "";
 
             //Get the airplane prefix selected on the combo box
-            if (this.comboBoxAirplaneSolution.Items.Count > 0)
+            if (this.comboBoxAirplaneSolution.Items.Count > 0 && Instance.Optimized)
                 prefix = this.comboBoxAirplaneSolution.SelectedItem.ToString();
 
-            if (Instance != null)
+            if (Instance != null && Instance.Optimized)
             {
                 var airplane = Context.Airplanes.FirstOrDefault(x => x.Instance.Id == Instance.Id && x.Prefix.Equals(prefix));
                 if (airplane != null)

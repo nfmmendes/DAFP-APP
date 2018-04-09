@@ -107,8 +107,10 @@ namespace Prototipo1.Controller
             var deleted = Instance.Context.Instances.FirstOrDefault(x => x.Name.Equals(name));
             if (deleted != null){
 
-                Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.Where(x => x.Origin.Instance.Id.Equals(deleted.Id)));
+                Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+                Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.ToList().Where(x => x.Origin.Instance.Id.Equals(deleted.Id)));
                 Instance.Context.SaveChanges();
+                Instance.Context.Configuration.AutoDetectChangesEnabled = true;
 
                 //TODO: Remove it. It's wrong 
                 Instance.Context.PassagersOnFlight.RemoveRange(

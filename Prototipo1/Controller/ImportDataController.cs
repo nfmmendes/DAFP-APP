@@ -104,6 +104,8 @@ namespace Prototipo1.Controller
             var sheet2 = hssfwb.GetSheet("Stretches");
             
             if (sheet2 != null && loadStretches){
+                Context.Configuration.ValidateOnSaveEnabled = false;
+
                 //Get the name of all airports already registered
                 //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
                 //stretch will be not added to the instance
@@ -154,7 +156,7 @@ namespace Prototipo1.Controller
 
                 }
                 Instance.Context.SaveChanges();
-               
+                Context.Configuration.ValidateOnSaveEnabled = false;
             }
 
             // Get the sheed called "Fuel Prices"
