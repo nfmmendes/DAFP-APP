@@ -61,9 +61,9 @@ namespace Prototipo1
             this.panelInstanceDetails = new System.Windows.Forms.Panel();
             this.labelDescriptionInstance = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.labelLastOptimization = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labelIsOptimized = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabControlInputSolution = new System.Windows.Forms.TabControl();
             this.tabInput = new System.Windows.Forms.TabPage();
@@ -103,6 +103,18 @@ namespace Prototipo1
             this.radioButtonGenSettingY = new System.Windows.Forms.RadioButton();
             this.radioButtonGenSettingN = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numUD_Sunset_M = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.numUD_Sunset_H = new System.Windows.Forms.NumericUpDown();
+            this.label26 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numUD_SunriseM = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.numUD_SunriseH = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.radioButtonHeuristic = new System.Windows.Forms.RadioButton();
             this.radioButtonExact = new System.Windows.Forms.RadioButton();
@@ -204,6 +216,12 @@ namespace Prototipo1
             this.panelParamSelectInstance.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_Sunset_M)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_Sunset_H)).BeginInit();
+            this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_SunriseM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_SunriseH)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).BeginInit();
             this.panel5.SuspendLayout();
@@ -287,9 +305,9 @@ namespace Prototipo1
             this.panelInstanceDetails.BackColor = System.Drawing.Color.DarkRed;
             this.panelInstanceDetails.Controls.Add(this.labelDescriptionInstance);
             this.panelInstanceDetails.Controls.Add(this.label15);
-            this.panelInstanceDetails.Controls.Add(this.label11);
+            this.panelInstanceDetails.Controls.Add(this.labelLastOptimization);
             this.panelInstanceDetails.Controls.Add(this.label10);
-            this.panelInstanceDetails.Controls.Add(this.label9);
+            this.panelInstanceDetails.Controls.Add(this.labelIsOptimized);
             this.panelInstanceDetails.Controls.Add(this.label8);
             this.panelInstanceDetails.ForeColor = System.Drawing.Color.White;
             this.panelInstanceDetails.Location = new System.Drawing.Point(20, 75);
@@ -315,14 +333,14 @@ namespace Prototipo1
             this.label15.TabIndex = 5;
             this.label15.Text = "Description:";
             // 
-            // label11
+            // labelLastOptimization
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1086, 11);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 24);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "No";
+            this.labelLastOptimization.AutoSize = true;
+            this.labelLastOptimization.Location = new System.Drawing.Point(1086, 11);
+            this.labelLastOptimization.Name = "labelLastOptimization";
+            this.labelLastOptimization.Size = new System.Drawing.Size(35, 24);
+            this.labelLastOptimization.TabIndex = 4;
+            this.labelLastOptimization.Text = "No";
             // 
             // label10
             // 
@@ -333,15 +351,15 @@ namespace Prototipo1
             this.label10.TabIndex = 3;
             this.label10.Text = "Last optimization:";
             // 
-            // label9
+            // labelIsOptimized
             // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(838, 11);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 24);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "No";
+            this.labelIsOptimized.AutoSize = true;
+            this.labelIsOptimized.ForeColor = System.Drawing.Color.White;
+            this.labelIsOptimized.Location = new System.Drawing.Point(838, 11);
+            this.labelIsOptimized.Name = "labelIsOptimized";
+            this.labelIsOptimized.Size = new System.Drawing.Size(35, 24);
+            this.labelIsOptimized.TabIndex = 2;
+            this.labelIsOptimized.Text = "No";
             // 
             // label8
             // 
@@ -686,9 +704,9 @@ namespace Prototipo1
             this.panelParamSelectInstance.Controls.Add(this.comboBoxInstanceParamTab);
             this.panelParamSelectInstance.Controls.Add(this.label13);
             this.panelParamSelectInstance.ForeColor = System.Drawing.Color.White;
-            this.panelParamSelectInstance.Location = new System.Drawing.Point(375, 15);
+            this.panelParamSelectInstance.Location = new System.Drawing.Point(461, 15);
             this.panelParamSelectInstance.Name = "panelParamSelectInstance";
-            this.panelParamSelectInstance.Size = new System.Drawing.Size(991, 90);
+            this.panelParamSelectInstance.Size = new System.Drawing.Size(905, 57);
             this.panelParamSelectInstance.TabIndex = 16;
             this.panelParamSelectInstance.Visible = false;
             // 
@@ -696,7 +714,7 @@ namespace Prototipo1
             // 
             this.comboBoxInstanceParamTab.Font = new System.Drawing.Font("Arial Narrow", 12.2F);
             this.comboBoxInstanceParamTab.FormattingEnabled = true;
-            this.comboBoxInstanceParamTab.Location = new System.Drawing.Point(12, 51);
+            this.comboBoxInstanceParamTab.Location = new System.Drawing.Point(128, 11);
             this.comboBoxInstanceParamTab.Name = "comboBoxInstanceParamTab";
             this.comboBoxInstanceParamTab.Size = new System.Drawing.Size(762, 32);
             this.comboBoxInstanceParamTab.TabIndex = 16;
@@ -704,7 +722,7 @@ namespace Prototipo1
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 11);
+            this.label13.Location = new System.Drawing.Point(22, 11);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(100, 33);
             this.label13.TabIndex = 15;
@@ -719,7 +737,7 @@ namespace Prototipo1
             this.panel8.ForeColor = System.Drawing.Color.White;
             this.panel8.Location = new System.Drawing.Point(11, 15);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(345, 90);
+            this.panel8.Size = new System.Drawing.Size(444, 57);
             this.panel8.TabIndex = 15;
             // 
             // label12
@@ -736,7 +754,7 @@ namespace Prototipo1
             this.radioButtonGenSettingY.AutoSize = true;
             this.radioButtonGenSettingY.Checked = true;
             this.radioButtonGenSettingY.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonGenSettingY.Location = new System.Drawing.Point(12, 54);
+            this.radioButtonGenSettingY.Location = new System.Drawing.Point(211, 17);
             this.radioButtonGenSettingY.Name = "radioButtonGenSettingY";
             this.radioButtonGenSettingY.Size = new System.Drawing.Size(55, 26);
             this.radioButtonGenSettingY.TabIndex = 13;
@@ -749,7 +767,7 @@ namespace Prototipo1
             // 
             this.radioButtonGenSettingN.AutoSize = true;
             this.radioButtonGenSettingN.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonGenSettingN.Location = new System.Drawing.Point(164, 54);
+            this.radioButtonGenSettingN.Location = new System.Drawing.Point(363, 17);
             this.radioButtonGenSettingN.Name = "radioButtonGenSettingN";
             this.radioButtonGenSettingN.Size = new System.Drawing.Size(49, 26);
             this.radioButtonGenSettingN.TabIndex = 14;
@@ -759,6 +777,8 @@ namespace Prototipo1
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.DarkRed;
+            this.panel6.Controls.Add(this.panel11);
+            this.panel6.Controls.Add(this.panel10);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.panel5);
             this.panel6.Controls.Add(this.buttonCancelSaveParams);
@@ -771,10 +791,150 @@ namespace Prototipo1
             this.panel6.Controls.Add(this.panel2);
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.panel4);
-            this.panel6.Location = new System.Drawing.Point(11, 140);
+            this.panel6.Location = new System.Drawing.Point(11, 90);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1355, 501);
+            this.panel6.Size = new System.Drawing.Size(1355, 551);
             this.panel6.TabIndex = 12;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.White;
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.label24);
+            this.panel11.Controls.Add(this.numUD_Sunset_M);
+            this.panel11.Controls.Add(this.label25);
+            this.panel11.Controls.Add(this.numUD_Sunset_H);
+            this.panel11.Controls.Add(this.label26);
+            this.panel11.Location = new System.Drawing.Point(554, 236);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(586, 40);
+            this.panel11.TabIndex = 25;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(424, 9);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(28, 24);
+            this.label24.TabIndex = 6;
+            this.label24.Text = "m";
+            // 
+            // numUD_Sunset_M
+            // 
+            this.numUD_Sunset_M.Font = new System.Drawing.Font("Arial Narrow", 10.8F);
+            this.numUD_Sunset_M.Location = new System.Drawing.Point(369, 5);
+            this.numUD_Sunset_M.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numUD_Sunset_M.Name = "numUD_Sunset_M";
+            this.numUD_Sunset_M.Size = new System.Drawing.Size(55, 28);
+            this.numUD_Sunset_M.TabIndex = 5;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(316, 7);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(21, 24);
+            this.label25.TabIndex = 4;
+            this.label25.Text = "h";
+            // 
+            // numUD_Sunset_H
+            // 
+            this.numUD_Sunset_H.Font = new System.Drawing.Font("Arial Narrow", 10.8F);
+            this.numUD_Sunset_H.Location = new System.Drawing.Point(261, 3);
+            this.numUD_Sunset_H.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numUD_Sunset_H.Name = "numUD_Sunset_H";
+            this.numUD_Sunset_H.Size = new System.Drawing.Size(55, 28);
+            this.numUD_Sunset_H.TabIndex = 3;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(3, 7);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(133, 24);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "Sunset Time:";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.White;
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.label23);
+            this.panel10.Controls.Add(this.numUD_SunriseM);
+            this.panel10.Controls.Add(this.label20);
+            this.panel10.Controls.Add(this.numUD_SunriseH);
+            this.panel10.Controls.Add(this.label18);
+            this.panel10.Location = new System.Drawing.Point(554, 180);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(586, 40);
+            this.panel10.TabIndex = 24;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(424, 9);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(28, 24);
+            this.label23.TabIndex = 6;
+            this.label23.Text = "m";
+            // 
+            // numUD_SunriseM
+            // 
+            this.numUD_SunriseM.Font = new System.Drawing.Font("Arial Narrow", 10.8F);
+            this.numUD_SunriseM.Location = new System.Drawing.Point(369, 5);
+            this.numUD_SunriseM.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numUD_SunriseM.Name = "numUD_SunriseM";
+            this.numUD_SunriseM.Size = new System.Drawing.Size(55, 28);
+            this.numUD_SunriseM.TabIndex = 5;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(316, 7);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(21, 24);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "h";
+            // 
+            // numUD_SunriseH
+            // 
+            this.numUD_SunriseH.Font = new System.Drawing.Font("Arial Narrow", 10.8F);
+            this.numUD_SunriseH.Location = new System.Drawing.Point(261, 3);
+            this.numUD_SunriseH.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numUD_SunriseH.Name = "numUD_SunriseH";
+            this.numUD_SunriseH.Size = new System.Drawing.Size(55, 28);
+            this.numUD_SunriseH.TabIndex = 3;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(3, 7);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(140, 24);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Sunrise Time:";
             // 
             // panel7
             // 
@@ -1032,7 +1192,7 @@ namespace Prototipo1
             // 
             this.buttonOptimizeInstance.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonOptimizeInstance.ForeColor = System.Drawing.Color.DarkRed;
-            this.buttonOptimizeInstance.Location = new System.Drawing.Point(418, 436);
+            this.buttonOptimizeInstance.Location = new System.Drawing.Point(529, 469);
             this.buttonOptimizeInstance.Name = "buttonOptimizeInstance";
             this.buttonOptimizeInstance.Size = new System.Drawing.Size(316, 48);
             this.buttonOptimizeInstance.TabIndex = 18;
@@ -1617,6 +1777,14 @@ namespace Prototipo1
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_Sunset_M)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_Sunset_H)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_SunriseM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUD_SunriseH)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUD_TimeLimit)).EndInit();
@@ -1676,9 +1844,9 @@ namespace Prototipo1
         private System.Windows.Forms.TabPage tabInput;
         private System.Windows.Forms.TabPage tabSolution;
         private System.Windows.Forms.Panel panelInstanceDetails;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelLastOptimization;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelIsOptimized;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonOptimizeInstanceTab;
         private System.Windows.Forms.Label label7;
@@ -1774,6 +1942,18 @@ namespace Prototipo1
         private ToolStripMenuItem viewToolStripMenuItem;
         private ToolStripMenuItem importDataLogToolStripMenuItem;
         private AirplaneUseSolutionView AirplaneUseSolutionView;
+        private Panel panel10;
+        private Label label18;
+        private Panel panel11;
+        private Label label24;
+        private NumericUpDown numUD_Sunset_M;
+        private Label label25;
+        private NumericUpDown numUD_Sunset_H;
+        private Label label26;
+        private Label label23;
+        private NumericUpDown numUD_SunriseM;
+        private Label label20;
+        private NumericUpDown numUD_SunriseH;
     }
 }
 

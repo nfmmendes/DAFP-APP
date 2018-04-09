@@ -409,12 +409,7 @@ namespace Prototipo1.Controller
                         CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Number of seats not available");
                         continue;
                     }
-
-                    if (row.GetCell(3).CellType == CellType.String && string.IsNullOrEmpty(row.GetCell(3).StringCellValue)){
-                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Luggage information not available");
-                        continue;
-                    }
-
+                    
                     var prefix = row.GetCell(0).StringCellValue;
                     var airplane = Instance.Context.Airplanes.FirstOrDefault(x=>x.Instance.Id == instance.Id 
                                                                              && x.Prefix.Equals(prefix));

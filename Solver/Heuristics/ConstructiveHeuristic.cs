@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SolutionData;
 using Solver.SolutionData;
 using SolverClientComunication;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Solver.Heuristics
@@ -115,7 +116,10 @@ namespace Solver.Heuristics
             }
 
             var orderedNumberOfPassagersByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
-            var firstTakeOff = TimeSpan.FromHours(6.25); //TODO: Put it as a parameter. Now it's considered as the sun rise hour
+            var sunriseTime = Input.Parameters.First(x => x.Code.Equals(ParametersEnum.SUNRISE_TIME.DbCode)).Value;
+            var splitedSunrise = sunriseTime.Split(':');
+            var firstTakeOff = splitedSunrise.Length > 1? TimeSpan.FromHours(Convert.ToInt32(splitedSunrise[0])+Convert.ToDouble(splitedSunrise[1])/100): TimeSpan.MinValue; 
+           
 
             HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
 
@@ -206,7 +210,11 @@ namespace Solver.Heuristics
             fuelOnTakeOff *= SolverUtils.PoundsToKg;
             fuelOnLanding *= SolverUtils.PoundsToKg;
 
-            
+
+            var sunriseTime = Input.Parameters.First(x => x.Code.Equals(ParametersEnum.SUNRISE_TIME.DbCode)).Value;
+            var splitedSunrise = sunriseTime.Split(':');
+            var firstTakeOff = splitedSunrise.Length > 1 ? TimeSpan.FromHours(Convert.ToInt32(splitedSunrise[0]) + Convert.ToDouble(splitedSunrise[1]) / 100) : TimeSpan.MinValue;
+
             if (fuelOnLanding > 0){
 
                 if (arrivalTime < TimeSpan.FromHours(18.25)){
@@ -214,7 +222,7 @@ namespace Solver.Heuristics
                     var newFlight = new Flight()
                     {
                         Airplanes = airplane,
-                        DepartureTime = TimeSpan.FromHours(6.25), //TODO: Change for something more rational 
+                        DepartureTime = firstTakeOff, 
                         ArrivalTime = arrivalTime,
                         Origin = airplane.BaseAirport,
                         Destination = origin,

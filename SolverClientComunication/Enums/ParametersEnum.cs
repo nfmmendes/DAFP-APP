@@ -19,7 +19,9 @@ namespace SolverClientComunication.Enums
         public static readonly ParametersEnum AVERAGE_MEN_WEIGHT = new ParametersEnum("Average men weight", "AVERAGE_MEN_WEIGHT");
         public static readonly ParametersEnum AVERAGE_WOMEN_WEIGHT  = new ParametersEnum("Average women weight", "AVERAGE_WOMEN_WEIGHT");
         public static readonly ParametersEnum AVERAGE_CHILDREN_WEIGHT = new ParametersEnum("Average childrem weight", "AVERAGE_CHILDREN_WEIGHT");
-        public static readonly ParametersEnum TIME_LIMIT = new ParametersEnum("Time limit", "Time limit");
+        public static readonly ParametersEnum TIME_LIMIT = new ParametersEnum("Time limit", "TIME_LIMIT");
+        public static readonly ParametersEnum SUNSET_TIME = new ParametersEnum("Sunset Time", "SUNSET_TIME");
+        public static readonly ParametersEnum SUNRISE_TIME = new ParametersEnum("Sunrise Time", "SUNRISE_TIME");
 
         private ParametersEnum(string label, string dbCode) : base(label, dbCode)
         {

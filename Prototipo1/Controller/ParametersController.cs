@@ -37,6 +37,8 @@ namespace Prototipo1.Controller
             DefaultParameters[ParametersEnum.AVERAGE_WOMEN_WEIGHT] = "65";
             DefaultParameters[ParametersEnum.AVERAGE_CHILDREN_WEIGHT] = "30";
             DefaultParameters[ParametersEnum.TIME_LIMIT] = "45";
+            DefaultParameters[ParametersEnum.SUNRISE_TIME] = "6:15";
+            DefaultParameters[ParametersEnum.SUNSET_TIME] = "18:15";
         }
 
         /// <summary>

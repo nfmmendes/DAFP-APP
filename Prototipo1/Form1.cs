@@ -185,6 +185,8 @@ namespace Prototipo1
                 //Set the metadata of the instance
                 instance.Optimized = true;
                 instance.LastOptimization = DateTime.Now;
+                labelIsOptimized.Text = "Yes";
+                labelLastOptimization.Text = instance.LastOptimization.Value.ToString("G");
 
                 //Save the modifications on the database
                 Context.Instances.AddOrUpdate(instance);
@@ -389,7 +391,8 @@ namespace Prototipo1
                 var instance = Context.Instances.First(x => x.Name.Equals(instanceName));
 
                 labelDescriptionInstance.Text = instance.Description;
-               
+                labelIsOptimized.Text = instance.Optimized ? "Yes" : "No";
+                labelLastOptimization.Text = instance.Optimized ? instance.LastOptimization.Value.ToString("G"): "";
                 
                 FillTables(instance);
             //  XX
@@ -487,5 +490,7 @@ namespace Prototipo1
             }
             
         }
+
+   
     }
 }
