@@ -132,7 +132,7 @@ namespace Prototipo1.Controller
                     if (airportOrigin != null && airportDestination != null){
 
                         //Try to make the insert procedure quicker 
-                        if (i % 5000 == 0){
+                        if (i % 50 == 0){
                             Instance.Context.Stretches.AddRange(newItems);
                             Instance.Context.SaveChanges();
                             newItems.Clear();

@@ -64,6 +64,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device.Portable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3f6d3f5f65b761a0, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Device.Location.Portable.1.0.0\lib\System.Device.Portable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -186,6 +189,7 @@
     <Compile Include="Controller\ImportDataController.cs" />
     <Compile Include="Controller\InstancesController.cs" />
     <Compile Include="Controller\ParametersController.cs" />
+    <Compile Include="Controller\PreCheckOptimizationController.cs" />
     <Compile Include="Controller\StretchController.cs" />
     <Compile Include="CreateInstance.cs">
       <SubType>Form</SubType>
@@ -234,6 +238,12 @@
     </Compile>
     <Compile Include="InstanceLoader.Designer.cs">
       <DependentUpon>InstanceLoader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreCheckOptimizationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreCheckOptimizationView.Designer.cs">
+      <DependentUpon>PreCheckOptimizationView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceLoader.resx">
       <DependentUpon>InstanceLoader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreCheckOptimizationView.resx">
+      <DependentUpon>PreCheckOptimizationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\OptimizationAlertTypeEnum.cs" />
     <Compile Include="Enums\ParametersEnum.cs" />
     <Compile Include="Migrations\201802181745260_InitialDatabase.cs" />
     <Compile Include="Migrations\201802181745260_InitialDatabase.Designer.cs">
@@ -98,6 +99,10 @@
     <Compile Include="Migrations\201804092203443_newStretchConfiguration2Undo.Designer.cs">
       <DependentUpon>201804092203443_newStretchConfiguration2Undo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804101208483_OptimmizationWarningTable.cs" />
+    <Compile Include="Migrations\201804101208483_OptimmizationWarningTable.Designer.cs">
+      <DependentUpon>201804101208483_OptimmizationWarningTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbAirplanes.cs" />
     <Compile Include="Models\DbAirports.cs" />
@@ -107,6 +112,7 @@
     <Compile Include="Models\DbGeneralParametersDefault.cs" />
     <Compile Include="Models\DbImportErrors.cs" />
     <Compile Include="Models\DbInstance.cs" />
+    <Compile Include="Models\DbOptimizationAlerts.cs" />
     <Compile Include="Models\DbParameters.cs" />
     <Compile Include="Models\DbPassagensOnFlightReport.cs" />
     <Compile Include="Models\DbRefuelsReport.cs" />
@@ -126,7 +132,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804092203443_newStretchConfiguration2Undo.resx">
       <DependentUpon>201804092203443_newStretchConfiguration2Undo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101208483_OptimmizationWarningTable.resx">
+      <DependentUpon>201804101208483_OptimmizationWarningTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

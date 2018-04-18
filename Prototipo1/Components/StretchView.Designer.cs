@@ -39,6 +39,7 @@
             this.OriginStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DestinationStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DistanceStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonDistances = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStretches)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,9 +140,20 @@
             this.DistanceStretche.HeaderText = "Distance (Km)";
             this.DistanceStretche.Name = "DistanceStretche";
             // 
+            // buttonDistances
+            // 
+            this.buttonDistances.Location = new System.Drawing.Point(1035, 55);
+            this.buttonDistances.Name = "buttonDistances";
+            this.buttonDistances.Size = new System.Drawing.Size(91, 49);
+            this.buttonDistances.TabIndex = 23;
+            this.buttonDistances.Text = "Calculate Distances";
+            this.buttonDistances.UseVisualStyleBackColor = true;
+            this.buttonDistances.Click += new System.EventHandler(this.buttonDistances_Click);
+            // 
             // StretchView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.buttonDistances);
             this.Controls.Add(this.buttonNextPageStretch);
             this.Controls.Add(this.buttonLastPageStretch);
             this.Controls.Add(this.labelPageStretch);
@@ -170,5 +182,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginStretche;
         private System.Windows.Forms.DataGridViewTextBoxColumn DestinationStretche;
         private System.Windows.Forms.DataGridViewTextBoxColumn DistanceStretche;
+        private System.Windows.Forms.Button buttonDistances;
     }
 }

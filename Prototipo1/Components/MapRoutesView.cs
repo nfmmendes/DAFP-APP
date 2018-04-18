@@ -149,7 +149,7 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="coordinate"></param>
         /// <returns></returns>
-        private double TransformCoordinate(string coordinate){
+        public static double TransformCoordinate(string coordinate){
 
             if(!coordinate.Contains("''"))
                 coordinate = coordinate.Replace("'","'00''");

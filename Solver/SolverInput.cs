@@ -67,11 +67,16 @@ namespace Solver
             input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30;
 
             input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
-            var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id);
-            foreach (var stretch in stretchesOfInstance){
-                var origin = context.Airports.FirstOrDefault(x=>x.AirportName.Equals(stretch.Origin));
-                var destination = context.Airports.FirstOrDefault(x => x.AirportName.Equals(stretch.Destination));
+            var stretchesOfInstance = context.Stretches.ToList().Where(x => x.InstanceId == Instance.Id);
+            int i = 0; 
 
+            var airportByName = context.Airports.Where(x=>x.Instance.Id == Instance.Id).ToDictionary(x=>x.AirportName, x=>x);
+
+
+            foreach (var stretch in stretchesOfInstance){
+                var origin = airportByName.ContainsKey(stretch.Origin)?airportByName[stretch.Origin]: null;
+                var destination = airportByName.ContainsKey(stretch.Destination) ? airportByName[stretch.Destination] : null;
+                i++;
                 if (origin == null || destination == null)
                     continue;
 

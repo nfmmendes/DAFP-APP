@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Models;
+using System.Device.Location;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Prototipo1.Components
 {
@@ -170,7 +174,72 @@ namespace Prototipo1.Components
 
         }
 
+        private void buttonDistances_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("This function will clear all the distance current data and replace it " +
+                                         "by straight line distances. Do you want continue?", "",MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes){
+                dataGridViewStretches.Rows.Clear();
+                dataGridViewStretches.Refresh();
+                Context.Stretches.RemoveRange(Context.Stretches.Where(x => x.InstanceId == Instance.Id));
+                Context.SaveChanges();
+
+                Thread.Sleep(5000);
+
+                var airports = Context.Airports.Where(x => x.Instance.Id == Instance.Id);
+
+                var coordinatesByName = airports.ToDictionary(x => x.AirportName, x => new KeyValuePair<string, string>(x.Latitude,x.Longitude));
+
+                var doubleCoordinatesByName = new Dictionary<string, KeyValuePair<double,double>>();
+
+                foreach (var item in coordinatesByName){
+                    var latitude = MapRoutesView.TransformCoordinate(item.Value.Key);
+                    var longitude = MapRoutesView.TransformCoordinate(item.Value.Value);
+
+                    doubleCoordinatesByName[item.Key] = new KeyValuePair<double, double>(latitude, longitude);
+                }
+                Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
+                //It need to be set to true in the end of procedure
+                foreach (var origin in doubleCoordinatesByName.Keys){
+                    foreach (var destination in doubleCoordinatesByName.Keys){
+
+                        if(origin.Equals(destination))
+                            continue;
+                        var distance = calculateDistance(doubleCoordinatesByName[origin], doubleCoordinatesByName[destination]);
+
+                        var item = new DbStretches(){
+                            Distance = (int)distance,
+                            Origin = origin,
+                            Destination = destination,
+                            InstanceId = Instance.Id
+                        };
+
+                        Context.Stretches.Add(item);
+                    }
+                    Context.SaveChanges();
+                }
+                Context.Configuration.AutoDetectChangesEnabled = true;    //This is done to make the procedure quicker
+                                                                          //It need to be set to true in the end of procedure
+                FillStretchTable();
+            }
+
+        }
 
 
+        private double calculateDistance(KeyValuePair<double, double> origin, KeyValuePair<double, double> destination)
+        {
+            var latOrigin = origin.Key;
+            var longOrigin = origin.Value;
+            var latDestination = destination.Key;
+            var longDestination = destination.Value;
+
+            var sCoord = new GeoCoordinate(latOrigin, longOrigin);
+            var eCoord = new GeoCoordinate(latDestination, longDestination);
+
+            return sCoord.GetDistanceTo(eCoord);
+
+
+        }
     }
 }

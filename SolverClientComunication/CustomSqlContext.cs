@@ -23,6 +23,7 @@ namespace SolverClientComunication
         public DbSet<DbRefuelsReport> RefuelsReport { get; set; }
         public DbSet<DbFlightsReport> FlightsReports { get; set; }
         public DbSet<DbPassagensOnFlightReport> PassagersOnFlight { get; set; }
+        public DbSet<DbOptimizationAlerts> OptimizationAlerts { get; set; }
             
         // Your context has been configured to use a 'CustomSqlContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
