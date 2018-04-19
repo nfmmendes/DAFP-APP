@@ -182,5 +182,14 @@ namespace Prototipo1.Controller
                 }
             }
         }
+
+        public DbParameters Clone(DbParameters original, DbInstance instance=null){
+            DbParameters newItem = new DbParameters();
+            newItem.Code = original.Code;
+            newItem.Value = original.Value;
+            newItem.Instance = original.Instance;
+
+            return newItem;
+        }
     }
 }

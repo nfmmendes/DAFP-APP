@@ -10,7 +10,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class AirportController : AbstractController<DbAirports, CustomSqlContext> {
+    class AirportController :  AbstractController<DbAirports, CustomSqlContext> {
         private CustomSqlContext Context { get; set; }
         public static readonly AirportController Instance = new AirportController();
 
@@ -70,6 +70,32 @@ namespace Prototipo1.Controller
         /// <param name="item">airport to be deleted</param>
         public override void Delete(DbAirports item){
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public DbAirports Clone(DbAirports original, DbInstance instance){
+            var newItem = new DbAirports();
+
+            newItem.AirportName = original.AirportName;
+            newItem.Latitude = original.Latitude;
+            newItem.Longitude = original.Longitude;
+            newItem.IATA = original.IATA;
+            newItem.Region = original.Region;
+            newItem.Elevation = original.Elevation;
+            newItem.RunwayLength = original.RunwayLength;
+            newItem.MTOW_APE3 = original.MTOW_APE3;
+            newItem.MTOW_PC12 = original.MTOW_PC12;
+            newItem.LandingCost = original.LandingCost;
+            newItem.GroundTime = original.GroundTime;
+
+            if(instance!= null)
+                newItem.Instance = instance;
+            return newItem;
         }
 
         //TODO: Improve this function

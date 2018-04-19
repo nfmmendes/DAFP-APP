@@ -184,7 +184,7 @@ namespace Prototipo1.Components
                 var index = dataGridViewRequest.SelectedRows[0].Index;
 
                 var PNR = dataGridViewRequest.Rows[index].Cells[0].Value.ToString();
-                Context.Requests.RemoveRange(Context.Requests.Where(x => x.PNR.Equals(PNR)));
+                Context.Requests.Remove(Context.Requests.First(x => x.PNR.Equals(PNR) && x.Instance.Id == Instance.Id));
                 Context.SaveChanges();
                 FillRequestTables();
                 FillPassengerList(PNR);

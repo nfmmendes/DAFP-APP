@@ -70,5 +70,24 @@ namespace Prototipo1.Controller
         protected override bool IsValidItem(DbExchangeRates item){
             return ! (item == null || string.IsNullOrEmpty(item.CurrencyName) || string.IsNullOrEmpty(item.CurrencySymbol) );
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public DbExchangeRates Clone(DbExchangeRates original, DbInstance instance= null){
+            DbExchangeRates newItem = new DbExchangeRates();
+
+            newItem.CurrencyName = original.CurrencyName;
+            newItem.CurrencySymbol = original.CurrencySymbol;
+            newItem.ValueInDolar = original.ValueInDolar;
+
+            if (instance != null)
+                newItem.Instance = instance; 
+
+            return newItem;
+        }
     }
 }

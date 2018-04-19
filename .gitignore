@@ -1,4 +1,5 @@
-/.vs/Prototipo1/v15/Server/sqlite3/*.lock
+.vs
+/.vs/Prototipo1/v15/Server/sqlite3/.lock
 *.pdb
 *.exe
 *.cache
@@ -8,5 +9,5 @@ Debug
 /Common
 /.vs/Prototipo1/v15/Server/sqlite3
 /.vs/Prototipo1/v15/Server/sqlite3/*.ide
-/.vs/Prototipo1/v15/*.suo
+/.vs/Prototipo1/v15/.suo
 Release

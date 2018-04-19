@@ -132,7 +132,103 @@ namespace Prototipo1.Controller
         /// <param name="instance">Source instance</param>
         /// <param name="newInstance">Destination instance</param>
         public void CopyInstance(DbInstance previousInstance, DbInstance newInstance){
-            //TODO: Implement
+            
+            var airplanes = Context.Airplanes.ToList().Where(x=>x.Instance.Id == previousInstance.Id);
+            var airports = Context.Airports.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var exchange = Context.Exchange.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var fuelPrice = Context.FuelPrice.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var parameters = Context.Parameters.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var requests = Context.Requests.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var seats = Context.SeatList.ToList().Where(x => x.Airplanes.Instance.Id == previousInstance.Id);
+            var stretches = Context.Stretches.ToList().Where(x => x.InstanceId == previousInstance.Id);
+
+            //Clone and save the airport data
+            foreach (var item in airports)
+                Context.Airports.Add(AirportController.Instance.Clone(item, newInstance));
+            Context.SaveChanges();
+
+            //Clone and save the airplane data
+            foreach (var item in airplanes)
+                Context.Airplanes.Add(AirplaneController.Instance.Clone(item, newInstance));
+            Context.SaveChanges();
+
+
+            //Clone and save the exchange rate data
+            foreach (var item in exchange){
+                Context.Exchange.Add(ExchangeRatesController.Instance.Clone(item, newInstance));
+            }
+            Context.SaveChanges();
+
+            //Clone and save the fuel price data
+            foreach (var item in fuelPrice){
+                Context.FuelPrice.Add(FuelController.Instance.Clone(item, newInstance));
+            }
+            Context.SaveChanges();
+
+            //Clone and save the parameters data                
+            ParametersController.Instance.setContext(Context);
+            foreach (var item in parameters){
+                Context.Parameters.Add(ParametersController.Instance.Clone(item, newInstance));
+            }
+            Context.SaveChanges();
+
+            //Clone and sabe the requests data 
+            //TODO: Create a controller and put this code on it
+            foreach (var item in requests){
+                var origin = Context.Airports.ToList().FirstOrDefault(x=>x.IATA.Equals(item.Origin.IATA) && x.Instance.Id == newInstance.Id);
+                var destination = Context.Airports.ToList().FirstOrDefault(x => x.IATA.Equals(item.Destination.IATA) && x.Instance.Id == newInstance.Id);
+
+                if (origin != null && destination != null){
+                    var newItem = new DbRequests();
+                    newItem.Origin = origin;
+                    newItem.Destination = destination;
+                    newItem.Name = item.Name;
+                    newItem.PNR = item.PNR;
+                    newItem.IsChildren = item.IsChildren;
+                    newItem.Sex = item.Sex;
+                    newItem.Class = item.Class; 
+                    newItem.DepartureTimeWindowBegin = item.DepartureTimeWindowBegin;
+                    newItem.DepartureTimeWindowEnd = item.DepartureTimeWindowEnd;
+                    newItem.ArrivalTimeWindowBegin = item.ArrivalTimeWindowBegin;
+                    newItem.ArrivalTimeWindowEnd = item.ArrivalTimeWindowEnd;
+                    newItem.Instance = newInstance;
+
+                    Context.Requests.Add(newItem);
+                    
+                }
+              
+            }
+            Context.SaveChanges();
+
+            //Clone and save the seat list data
+            foreach (var item in seats){
+                var airplane = Context.Airplanes.FirstOrDefault(x=>x.Prefix == item.Airplanes.Prefix && x.Instance.Id == newInstance.Id);
+
+                if (airplane != null)
+                    
+                    Context.SeatList.Add(new DbSeats(){
+                        Airplanes = airplane,
+                        luggageWeightLimit = item.luggageWeightLimit,
+                        seatClass = item.seatClass
+                    });
+            }
+            Context.SaveChanges();
+
+
+            //Clone and save the stretches list
+            Context.Configuration.AutoDetectChangesEnabled = false;
+            foreach (var item in stretches)
+            {
+                Context.Stretches.Add(new DbStretches()
+                {
+                    Origin = item.Origin,
+                    Destination = item.Destination,
+                    InstanceId = newInstance.Id,
+                    Distance = item.Distance
+                });
+            }
+            Context.Configuration.AutoDetectChangesEnabled = true;
+            Context.SaveChanges();
         }
     }
 }

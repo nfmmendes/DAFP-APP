@@ -69,9 +69,22 @@ namespace Prototipo1
             var instanceName = getSelectedInstanceName(this.comboBoxInstance.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
             if (!string.IsNullOrEmpty(this.textBoxInstanceName.Text) && instance != null){
-                InstancesController.Instance.Add(textBoxInstanceName.Text, textBoxScenarioDescription.Text);
-                var newInstance = Context.Instances.FirstOrDefault(x => x.Name.Equals(textBoxInstanceName.Text));
-                InstancesController.Instance.CopyInstance(instance, newInstance);
+
+                try{
+
+                    InstancesController.Instance.Add(textBoxInstanceName.Text, textBoxScenarioDescription.Text);
+                    var newInstance = Context.Instances.FirstOrDefault(x => x.Name.Equals(textBoxInstanceName.Text));
+                    InstancesController.Instance.CopyInstance(instance, newInstance);
+                    MessageBox.Show("The operation finished sucessfully");
+
+                }catch (Exception exception){
+                    MessageBox.Show(exception.Message);
+                }
+                finally
+                {
+                    this.Close();
+                }
+                
             }
 
         }

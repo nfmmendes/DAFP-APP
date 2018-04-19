@@ -69,5 +69,39 @@ namespace Prototipo1.Controller
         protected override bool IsValidItem(DbFuelPrice item){
             return !(item == null || item.Airport == null || string.IsNullOrEmpty(item.Currency) || string.IsNullOrEmpty(item.Value) || item.Instance ==null );
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public DbFuelPrice Clone(DbFuelPrice original, DbInstance instance=null){
+            DbFuelPrice newItem = new DbFuelPrice();
+
+            newItem.Currency = original.Currency;
+            newItem.Value = original.Value;
+
+            if (instance != null)
+            {
+
+                var airport = Context.Airports.FirstOrDefault(x => x.IATA.Equals(original.Airport.IATA) && x.Instance.Id == instance.Id);
+
+                if (airport != null)
+                    newItem.Airport = airport;
+                else
+                {
+                    var controller = new AirportController();
+                    controller.setContext(Context);
+                    airport = controller.Clone(original.Airport, instance);
+                    newItem.Airport = airport;
+                }
+                newItem.Instance = instance;
+            }
+            else
+                newItem.Airport = original.Airport;
+
+            return newItem;
+        }
     }
 }

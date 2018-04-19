@@ -82,5 +82,47 @@ namespace Prototipo1.Controller
             else
                 return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public DbAirplanes Clone(DbAirplanes original, DbInstance instance = null) { 
+
+            var newItem = new DbAirplanes();
+            newItem.Prefix = original.Prefix;
+            newItem.Range = original.Range;
+            newItem.Weight = original.Weight;
+            newItem.MaxWeight = original.MaxWeight;
+            newItem.FuelConsumptionFirstHour = original.FuelConsumptionFirstHour;
+            newItem.FuelConsumptionSecondHour = original.FuelConsumptionSecondHour;
+            newItem.CruiseSpeed = original.CruiseSpeed;
+            newItem.MaxFuel = original.MaxFuel;
+            newItem.Model = original.Model;
+            newItem.Capacity = original.Capacity;
+
+            if (original.BaseAirport == null)
+                throw new Exception("This airplane does not have a base airport. Please, set this field before use the \"Clone()\" function ");
+
+            if (instance != null){
+                
+                var airport = Context.Airports.FirstOrDefault(x=>x.IATA.Equals(original.BaseAirport.IATA) && x.Instance.Id == instance.Id);
+
+                if (airport != null)
+                    newItem.BaseAirport = airport;
+                else{
+                    var controller = new AirportController();
+                    controller.setContext(Context);
+                    airport = controller.Clone(original.BaseAirport, instance);
+                    newItem.BaseAirport = airport; 
+                }
+                newItem.Instance = instance;
+            }else
+                newItem.BaseAirport = original.BaseAirport;
+
+            return newItem; 
+        }
     }
 }
