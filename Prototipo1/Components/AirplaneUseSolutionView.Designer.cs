@@ -33,11 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewRoutePassagers = new System.Windows.Forms.DataGridView();
-            this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StretchClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRoute = new System.Windows.Forms.DataGridView();
+            this.comboBoxAirplaneSolution = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.IdAirplaneResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RouteId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StretchOrigin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,8 +46,10 @@
             this.FuelOnArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WeightOnArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FlightArrivalTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBoxAirplaneSolution = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.StretchPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StretchClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoutePassagers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoute)).BeginInit();
             this.SuspendLayout();
@@ -94,31 +94,6 @@
             this.dataGridViewRoutePassagers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewRoutePassagers.Size = new System.Drawing.Size(1017, 162);
             this.dataGridViewRoutePassagers.TabIndex = 9;
-            
-            // 
-            // StretchPassenger
-            // 
-            this.StretchPassenger.HeaderText = "Passenger";
-            this.StretchPassenger.Name = "StretchPassenger";
-            this.StretchPassenger.Width = 360;
-            // 
-            // StretchPNR
-            // 
-            this.StretchPNR.HeaderText = "PNR";
-            this.StretchPNR.Name = "StretchPNR";
-            this.StretchPNR.Width = 150;
-            // 
-            // StretchSex
-            // 
-            this.StretchSex.HeaderText = "Sex";
-            this.StretchSex.Name = "StretchSex";
-            this.StretchSex.Width = 150;
-            // 
-            // StretchClass
-            // 
-            this.StretchClass.HeaderText = "Class";
-            this.StretchClass.Name = "StretchClass";
-            this.StretchClass.Width = 150;
             // 
             // dataGridViewRoute
             // 
@@ -148,68 +123,9 @@
             this.dataGridViewRoute.RowHeadersVisible = false;
             this.dataGridViewRoute.RowTemplate.Height = 24;
             this.dataGridViewRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoute.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoute_RowEnter);
             this.dataGridViewRoute.Size = new System.Drawing.Size(1017, 190);
             this.dataGridViewRoute.TabIndex = 8;
-            // 
-            // IdAirplaneResult
-            // 
-            this.IdAirplaneResult.HeaderText = "Id";
-            this.IdAirplaneResult.Name = "IdAirplaneResult";
-            this.IdAirplaneResult.ReadOnly = true;
-            this.IdAirplaneResult.Visible = false;
-            // 
-            // RouteId
-            // 
-            this.RouteId.HeaderText = "Route ID";
-            this.RouteId.Name = "RouteId";
-            this.RouteId.Visible = false;
-            this.RouteId.Width = 120;
-            // 
-            // StretchOrigin
-            // 
-            this.StretchOrigin.HeaderText = "Origin";
-            this.StretchOrigin.Name = "StretchOrigin";
-            this.StretchOrigin.Width = 200;
-            // 
-            // FuelOnDeparture
-            // 
-            this.FuelOnDeparture.HeaderText = "Fuel On Departure";
-            this.FuelOnDeparture.Name = "FuelOnDeparture";
-            // 
-            // WeightOnDeparture
-            // 
-            this.WeightOnDeparture.HeaderText = "Weight On Departure";
-            this.WeightOnDeparture.Name = "WeightOnDeparture";
-            this.WeightOnDeparture.Width = 150;
-            // 
-            // FlightDepartureTime
-            // 
-            this.FlightDepartureTime.HeaderText = "Departure Time";
-            this.FlightDepartureTime.Name = "FlightDepartureTime";
-            // 
-            // StretchDestination
-            // 
-            this.StretchDestination.HeaderText = "Destination";
-            this.StretchDestination.Name = "StretchDestination";
-            this.StretchDestination.Width = 200;
-            // 
-            // FuelOnArrival
-            // 
-            this.FuelOnArrival.HeaderText = "Fuel On Arrival";
-            this.FuelOnArrival.Name = "FuelOnArrival";
-            this.FuelOnArrival.Width = 120;
-            // 
-            // WeightOnArrival
-            // 
-            this.WeightOnArrival.HeaderText = "Weight On Arrival";
-            this.WeightOnArrival.Name = "WeightOnArrival";
-            this.WeightOnArrival.Width = 150;
-            // 
-            // FlightArrivalTime
-            // 
-            this.FlightArrivalTime.HeaderText = "Arrival Time";
-            this.FlightArrivalTime.Name = "FlightArrivalTime";
+            this.dataGridViewRoute.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoute_RowEnter);
             // 
             // comboBoxAirplaneSolution
             // 
@@ -231,6 +147,102 @@
             this.label18.TabIndex = 10;
             this.label18.Text = "Airplanes";
             // 
+            // IdAirplaneResult
+            // 
+            this.IdAirplaneResult.HeaderText = "Id";
+            this.IdAirplaneResult.Name = "IdAirplaneResult";
+            this.IdAirplaneResult.ReadOnly = true;
+            this.IdAirplaneResult.Visible = false;
+            // 
+            // RouteId
+            // 
+            this.RouteId.HeaderText = "Route ID";
+            this.RouteId.Name = "RouteId";
+            this.RouteId.ReadOnly = true;
+            this.RouteId.Visible = false;
+            this.RouteId.Width = 120;
+            // 
+            // StretchOrigin
+            // 
+            this.StretchOrigin.HeaderText = "Origin";
+            this.StretchOrigin.Name = "StretchOrigin";
+            this.StretchOrigin.ReadOnly = true;
+            this.StretchOrigin.Width = 200;
+            // 
+            // FuelOnDeparture
+            // 
+            this.FuelOnDeparture.HeaderText = "Fuel On Departure";
+            this.FuelOnDeparture.Name = "FuelOnDeparture";
+            this.FuelOnDeparture.ReadOnly = true;
+            // 
+            // WeightOnDeparture
+            // 
+            this.WeightOnDeparture.HeaderText = "Weight On Departure";
+            this.WeightOnDeparture.Name = "WeightOnDeparture";
+            this.WeightOnDeparture.ReadOnly = true;
+            this.WeightOnDeparture.Width = 150;
+            // 
+            // FlightDepartureTime
+            // 
+            this.FlightDepartureTime.HeaderText = "Departure Time";
+            this.FlightDepartureTime.Name = "FlightDepartureTime";
+            this.FlightDepartureTime.ReadOnly = true;
+            // 
+            // StretchDestination
+            // 
+            this.StretchDestination.HeaderText = "Destination";
+            this.StretchDestination.Name = "StretchDestination";
+            this.StretchDestination.ReadOnly = true;
+            this.StretchDestination.Width = 200;
+            // 
+            // FuelOnArrival
+            // 
+            this.FuelOnArrival.HeaderText = "Fuel On Arrival";
+            this.FuelOnArrival.Name = "FuelOnArrival";
+            this.FuelOnArrival.ReadOnly = true;
+            this.FuelOnArrival.Width = 120;
+            // 
+            // WeightOnArrival
+            // 
+            this.WeightOnArrival.HeaderText = "Weight On Arrival";
+            this.WeightOnArrival.Name = "WeightOnArrival";
+            this.WeightOnArrival.ReadOnly = true;
+            this.WeightOnArrival.Width = 150;
+            // 
+            // FlightArrivalTime
+            // 
+            this.FlightArrivalTime.HeaderText = "Arrival Time";
+            this.FlightArrivalTime.Name = "FlightArrivalTime";
+            this.FlightArrivalTime.ReadOnly = true;
+            // 
+            // StretchPassenger
+            // 
+            this.StretchPassenger.HeaderText = "Passenger";
+            this.StretchPassenger.Name = "StretchPassenger";
+            this.StretchPassenger.ReadOnly = true;
+            this.StretchPassenger.Width = 360;
+            // 
+            // StretchPNR
+            // 
+            this.StretchPNR.HeaderText = "PNR";
+            this.StretchPNR.Name = "StretchPNR";
+            this.StretchPNR.ReadOnly = true;
+            this.StretchPNR.Width = 150;
+            // 
+            // StretchSex
+            // 
+            this.StretchSex.HeaderText = "Sex";
+            this.StretchSex.Name = "StretchSex";
+            this.StretchSex.ReadOnly = true;
+            this.StretchSex.Width = 150;
+            // 
+            // StretchClass
+            // 
+            this.StretchClass.HeaderText = "Class";
+            this.StretchClass.Name = "StretchClass";
+            this.StretchClass.ReadOnly = true;
+            this.StretchClass.Width = 150;
+            // 
             // AirplaneUseSolutionView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -250,11 +262,13 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewRoutePassagers;
+        private System.Windows.Forms.DataGridView dataGridViewRoute;
+        private System.Windows.Forms.ComboBox comboBoxAirplaneSolution;
+        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretchPassenger;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretchPNR;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretchSex;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretchClass;
-        private System.Windows.Forms.DataGridView dataGridViewRoute;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdAirplaneResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn RouteId;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretchOrigin;
@@ -265,7 +279,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FuelOnArrival;
         private System.Windows.Forms.DataGridViewTextBoxColumn WeightOnArrival;
         private System.Windows.Forms.DataGridViewTextBoxColumn FlightArrivalTime;
-        private System.Windows.Forms.ComboBox comboBoxAirplaneSolution;
-        private System.Windows.Forms.Label label18;
     }
 }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dataGridViewSolutionRefuel = new System.Windows.Forms.DataGridView();
+            this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonAddFuel = new System.Windows.Forms.Button();
             this.AirplanePrefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirportRefuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefuelHour = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,9 +39,6 @@
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonDeleteFuelPrice = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.buttonAddFuel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSolutionRefuel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,41 +61,6 @@
             this.dataGridViewSolutionRefuel.RowTemplate.Height = 24;
             this.dataGridViewSolutionRefuel.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewSolutionRefuel.TabIndex = 1;
-            // 
-            // AirplanePrefix
-            // 
-            this.AirplanePrefix.HeaderText = "Airplanes";
-            this.AirplanePrefix.Name = "AirplanePrefix";
-            // 
-            // AirportRefuel
-            // 
-            this.AirportRefuel.HeaderText = "Airport";
-            this.AirportRefuel.Name = "AirportRefuel";
-            // 
-            // RefuelHour
-            // 
-            this.RefuelHour.HeaderText = "Hour";
-            this.RefuelHour.Name = "RefuelHour";
-            // 
-            // FuelType
-            // 
-            this.FuelType.HeaderText = "Fuel Type";
-            this.FuelType.Name = "FuelType";
-            // 
-            // Volume
-            // 
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            // 
-            // UnitPrice
-            // 
-            this.UnitPrice.HeaderText = "Price";
-            this.UnitPrice.Name = "UnitPrice";
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
             // 
             // buttonDeleteFuelPrice
             // 
@@ -127,6 +92,48 @@
             this.buttonAddFuel.UseVisualStyleBackColor = true;
             this.buttonAddFuel.Click += new System.EventHandler(this.buttonAddFuel_Click);
             // 
+            // AirplanePrefix
+            // 
+            this.AirplanePrefix.HeaderText = "Airplanes";
+            this.AirplanePrefix.Name = "AirplanePrefix";
+            this.AirplanePrefix.ReadOnly = true;
+            // 
+            // AirportRefuel
+            // 
+            this.AirportRefuel.HeaderText = "Airport";
+            this.AirportRefuel.Name = "AirportRefuel";
+            this.AirportRefuel.ReadOnly = true;
+            // 
+            // RefuelHour
+            // 
+            this.RefuelHour.HeaderText = "Hour";
+            this.RefuelHour.Name = "RefuelHour";
+            this.RefuelHour.ReadOnly = true;
+            // 
+            // FuelType
+            // 
+            this.FuelType.HeaderText = "Fuel Type";
+            this.FuelType.Name = "FuelType";
+            this.FuelType.ReadOnly = true;
+            // 
+            // Volume
+            // 
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.ReadOnly = true;
+            // 
+            // UnitPrice
+            // 
+            this.UnitPrice.HeaderText = "Price";
+            this.UnitPrice.Name = "UnitPrice";
+            this.UnitPrice.ReadOnly = true;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
             // RefuelSolutionView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -144,6 +151,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewSolutionRefuel;
+        private System.Windows.Forms.Button buttonDeleteFuelPrice;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonAddFuel;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirplanePrefix;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirportRefuel;
         private System.Windows.Forms.DataGridViewTextBoxColumn RefuelHour;
@@ -151,8 +161,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
-        private System.Windows.Forms.Button buttonDeleteFuelPrice;
-        private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Button buttonAddFuel;
     }
 }

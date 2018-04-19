@@ -98,16 +98,19 @@
             // 
             this.CurrencyName.HeaderText = "Currency";
             this.CurrencyName.Name = "CurrencyName";
+            this.CurrencyName.ReadOnly = true;
             // 
             // CurrencySymbol
             // 
             this.CurrencySymbol.HeaderText = "Symbol";
             this.CurrencySymbol.Name = "CurrencySymbol";
+            this.CurrencySymbol.ReadOnly = true;
             // 
             // Value
             // 
             this.Value.HeaderText = "Value (1 to US$)";
             this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
             // 
             // CurrencyView
             // 

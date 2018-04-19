@@ -100,21 +100,25 @@
             // 
             this.Airport.HeaderText = "Airport";
             this.Airport.Name = "Airport";
+            this.Airport.ReadOnly = true;
             // 
             // Fuel
             // 
             this.Fuel.HeaderText = "Fuel";
             this.Fuel.Name = "Fuel";
+            this.Fuel.ReadOnly = true;
             // 
             // Currency
             // 
             this.Currency.HeaderText = "Currency";
             this.Currency.Name = "Currency";
+            this.Currency.ReadOnly = true;
             // 
             // PricePerLitre
             // 
             this.PricePerLitre.HeaderText = "Price Per Litre";
             this.PricePerLitre.Name = "PricePerLitre";
+            this.PricePerLitre.ReadOnly = true;
             // 
             // FuelPriceView
             // 

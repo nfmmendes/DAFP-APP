@@ -31,11 +31,6 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridViewPassenger = new System.Windows.Forms.DataGridView();
-            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonClose = new System.Windows.Forms.Button();
             this.textBoxPassenger = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,6 +44,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.radioButtonMale = new System.Windows.Forms.RadioButton();
             this.radioButtonFemale = new System.Windows.Forms.RadioButton();
+            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -92,35 +92,6 @@
             this.dataGridViewPassenger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPassenger.Size = new System.Drawing.Size(831, 171);
             this.dataGridViewPassenger.TabIndex = 20;
-            // 
-            // IdPassenger
-            // 
-            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IdPassenger.HeaderText = "Id";
-            this.IdPassenger.Name = "IdPassenger";
-            this.IdPassenger.ReadOnly = true;
-            this.IdPassenger.Visible = false;
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            this.IsKid.ReadOnly = true;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
             // 
             // buttonClose
             // 
@@ -250,6 +221,38 @@
             this.radioButtonFemale.Text = "Female";
             this.radioButtonFemale.UseVisualStyleBackColor = true;
             // 
+            // IdPassenger
+            // 
+            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IdPassenger.HeaderText = "Id";
+            this.IdPassenger.Name = "IdPassenger";
+            this.IdPassenger.ReadOnly = true;
+            this.IdPassenger.Visible = false;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.ReadOnly = true;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.ReadOnly = true;
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.ReadOnly = true;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.ReadOnly = true;
+            // 
             // AddEditPassenger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -285,11 +288,6 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.DataGridView dataGridViewPassenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.TextBox textBoxPassenger;
         private System.Windows.Forms.Label label1;
@@ -303,5 +301,10 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton radioButtonMale;
         private System.Windows.Forms.RadioButton radioButtonFemale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
     }
 }

@@ -35,11 +35,6 @@
             this.buttonEditRequest = new System.Windows.Forms.Button();
             this.buttonAddRequest = new System.Windows.Forms.Button();
             this.dataGridViewPassenger = new System.Windows.Forms.DataGridView();
-            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRequest = new System.Windows.Forms.DataGridView();
             this.RequestId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +44,11 @@
             this.MaxDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).BeginInit();
             this.SuspendLayout();
@@ -132,35 +132,6 @@
             this.dataGridViewPassenger.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewPassenger.TabIndex = 15;
             // 
-            // IdPassenger
-            // 
-            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IdPassenger.HeaderText = "Id";
-            this.IdPassenger.Name = "IdPassenger";
-            this.IdPassenger.ReadOnly = true;
-            this.IdPassenger.Visible = false;
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            this.IsKid.ReadOnly = true;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
-            // 
             // dataGridViewRequest
             // 
             this.dataGridViewRequest.AllowUserToAddRows = false;
@@ -195,36 +166,75 @@
             // 
             this.BookingNumber.HeaderText = "PNR";
             this.BookingNumber.Name = "BookingNumber";
+            this.BookingNumber.ReadOnly = true;
             // 
             // Origin
             // 
             this.Origin.HeaderText = "Origin";
             this.Origin.Name = "Origin";
+            this.Origin.ReadOnly = true;
             // 
             // Destination
             // 
             this.Destination.HeaderText = "Destination";
             this.Destination.Name = "Destination";
+            this.Destination.ReadOnly = true;
             // 
             // MinDeparture
             // 
             this.MinDeparture.HeaderText = "Minimum Departure Time";
             this.MinDeparture.Name = "MinDeparture";
+            this.MinDeparture.ReadOnly = true;
             // 
             // MaxDeparture
             // 
             this.MaxDeparture.HeaderText = "Maximum Departure Time";
             this.MaxDeparture.Name = "MaxDeparture";
+            this.MaxDeparture.ReadOnly = true;
             // 
             // MinArrival
             // 
             this.MinArrival.HeaderText = "Minimum Arrival Time";
             this.MinArrival.Name = "MinArrival";
+            this.MinArrival.ReadOnly = true;
             // 
             // MaxArrival
             // 
             this.MaxArrival.HeaderText = "Maximum Arrival Time";
             this.MaxArrival.Name = "MaxArrival";
+            this.MaxArrival.ReadOnly = true;
+            // 
+            // IdPassenger
+            // 
+            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IdPassenger.HeaderText = "Id";
+            this.IdPassenger.Name = "IdPassenger";
+            this.IdPassenger.ReadOnly = true;
+            this.IdPassenger.Visible = false;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.ReadOnly = true;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.ReadOnly = true;
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.ReadOnly = true;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.ReadOnly = true;
             // 
             // RequestsView
             // 
@@ -255,6 +265,11 @@
         private System.Windows.Forms.Button buttonAddRequest;
         private System.Windows.Forms.DataGridView dataGridViewPassenger;
         private System.Windows.Forms.DataGridView dataGridViewRequest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
         private System.Windows.Forms.DataGridViewTextBoxColumn RequestId;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn Origin;
@@ -263,10 +278,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxDeparture;
         private System.Windows.Forms.DataGridViewTextBoxColumn MinArrival;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxArrival;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdPassenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Passenger;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsKid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
     }
 }

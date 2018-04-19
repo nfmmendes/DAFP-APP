@@ -35,11 +35,11 @@
             this.buttonPrevPageStretch = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.dataGridViewStretches = new System.Windows.Forms.DataGridView();
+            this.buttonDistances = new System.Windows.Forms.Button();
             this.StretcheId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DestinationStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DistanceStretche = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonDistances = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStretches)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,6 +119,16 @@
             this.dataGridViewStretches.Size = new System.Drawing.Size(1000, 400);
             this.dataGridViewStretches.TabIndex = 16;
             // 
+            // buttonDistances
+            // 
+            this.buttonDistances.Location = new System.Drawing.Point(1035, 55);
+            this.buttonDistances.Name = "buttonDistances";
+            this.buttonDistances.Size = new System.Drawing.Size(91, 49);
+            this.buttonDistances.TabIndex = 23;
+            this.buttonDistances.Text = "Calculate Distances";
+            this.buttonDistances.UseVisualStyleBackColor = true;
+            this.buttonDistances.Click += new System.EventHandler(this.buttonDistances_Click);
+            // 
             // StretcheId
             // 
             this.StretcheId.HeaderText = "Id";
@@ -129,26 +139,19 @@
             // 
             this.OriginStretche.HeaderText = "Origin";
             this.OriginStretche.Name = "OriginStretche";
+            this.OriginStretche.ReadOnly = true;
             // 
             // DestinationStretche
             // 
             this.DestinationStretche.HeaderText = "Destination";
             this.DestinationStretche.Name = "DestinationStretche";
+            this.DestinationStretche.ReadOnly = true;
             // 
             // DistanceStretche
             // 
             this.DistanceStretche.HeaderText = "Distance (Km)";
             this.DistanceStretche.Name = "DistanceStretche";
-            // 
-            // buttonDistances
-            // 
-            this.buttonDistances.Location = new System.Drawing.Point(1035, 55);
-            this.buttonDistances.Name = "buttonDistances";
-            this.buttonDistances.Size = new System.Drawing.Size(91, 49);
-            this.buttonDistances.TabIndex = 23;
-            this.buttonDistances.Text = "Calculate Distances";
-            this.buttonDistances.UseVisualStyleBackColor = true;
-            this.buttonDistances.Click += new System.EventHandler(this.buttonDistances_Click);
+            this.DistanceStretche.ReadOnly = true;
             // 
             // StretchView
             // 
@@ -178,10 +181,10 @@
         private System.Windows.Forms.Button buttonPrevPageStretch;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.DataGridView dataGridViewStretches;
+        private System.Windows.Forms.Button buttonDistances;
         private System.Windows.Forms.DataGridViewTextBoxColumn StretcheId;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginStretche;
         private System.Windows.Forms.DataGridViewTextBoxColumn DestinationStretche;
         private System.Windows.Forms.DataGridViewTextBoxColumn DistanceStretche;
-        private System.Windows.Forms.Button buttonDistances;
     }
 }

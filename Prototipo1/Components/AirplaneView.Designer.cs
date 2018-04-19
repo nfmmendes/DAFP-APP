@@ -37,6 +37,7 @@
             this.buttonAddAirplaneSeatType = new System.Windows.Forms.Button();
             this.dataGridViewSeatTypes = new System.Windows.Forms.DataGridView();
             this.dataGridViewAirplane = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.AirplaneId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirplaneModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +50,6 @@
             this.MaxFuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaseAirport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.SeatTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeatClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxLuggageWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -168,6 +168,16 @@
             this.dataGridViewAirplane.TabIndex = 8;
             this.dataGridViewAirplane.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAirplane_RowEnter);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label1.Location = new System.Drawing.Point(20, 268);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(156, 24);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Available Classes";
+            // 
             // AirplaneId
             // 
             this.AirplaneId.HeaderText = "Id";
@@ -179,73 +189,74 @@
             // 
             this.AirplaneModel.HeaderText = "Model";
             this.AirplaneModel.Name = "AirplaneModel";
+            this.AirplaneModel.ReadOnly = true;
             // 
             // Prefix
             // 
             this.Prefix.HeaderText = "Prefix";
             this.Prefix.Name = "Prefix";
+            this.Prefix.ReadOnly = true;
             // 
             // Range
             // 
             this.Range.HeaderText = "Range (Km)";
             this.Range.Name = "Range";
+            this.Range.ReadOnly = true;
             this.Range.Width = 120;
             // 
             // Weight
             // 
             this.Weight.HeaderText = "Weight (Kg)";
             this.Weight.Name = "Weight";
+            this.Weight.ReadOnly = true;
             this.Weight.Width = 120;
             // 
             // MaxWeightTakeOff
             // 
             this.MaxWeightTakeOff.HeaderText = "Max Weight Take Off (Kg)";
             this.MaxWeightTakeOff.Name = "MaxWeightTakeOff";
+            this.MaxWeightTakeOff.ReadOnly = true;
             this.MaxWeightTakeOff.Width = 180;
             // 
             // CruiseSpeed
             // 
             this.CruiseSpeed.HeaderText = "Cruise Speed (Knot)";
             this.CruiseSpeed.Name = "CruiseSpeed";
+            this.CruiseSpeed.ReadOnly = true;
             this.CruiseSpeed.Width = 150;
             // 
             // FirstHourConsumption
             // 
             this.FirstHourConsumption.HeaderText = "1º Hour Fuel Consumption";
             this.FirstHourConsumption.Name = "FirstHourConsumption";
+            this.FirstHourConsumption.ReadOnly = true;
             this.FirstHourConsumption.Width = 150;
             // 
             // SecondHourFuelConsumption
             // 
             this.SecondHourFuelConsumption.HeaderText = "2º Hour Fuel Consumption";
             this.SecondHourFuelConsumption.Name = "SecondHourFuelConsumption";
+            this.SecondHourFuelConsumption.ReadOnly = true;
             this.SecondHourFuelConsumption.Width = 150;
             // 
             // MaxFuel
             // 
             this.MaxFuel.HeaderText = "Max Fuel";
             this.MaxFuel.Name = "MaxFuel";
+            this.MaxFuel.ReadOnly = true;
             // 
             // Capacity
             // 
             this.Capacity.HeaderText = "Capacity";
             this.Capacity.Name = "Capacity";
+            this.Capacity.ReadOnly = true;
             this.Capacity.Width = 90;
             // 
             // BaseAirport
             // 
             this.BaseAirport.HeaderText = "Base Airport";
             this.BaseAirport.Name = "BaseAirport";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label1.Location = new System.Drawing.Point(20, 268);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 24);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Available Classes";
+            this.BaseAirport.ReadOnly = true;
             // 
             // SeatTypeId
             // 
@@ -258,11 +269,13 @@
             // 
             this.SeatClass.HeaderText = "Class";
             this.SeatClass.Name = "SeatClass";
+            this.SeatClass.ReadOnly = true;
             // 
             // MaxLuggageWeight
             // 
             this.MaxLuggageWeight.HeaderText = "Max Luggage Weight (Kg)";
             this.MaxLuggageWeight.Name = "MaxLuggageWeight";
+            this.MaxLuggageWeight.ReadOnly = true;
             // 
             // AirplaneView
             // 
@@ -296,6 +309,10 @@
         private System.Windows.Forms.Button buttonAddAirplaneSeatType;
         private System.Windows.Forms.DataGridView dataGridViewSeatTypes;
         private System.Windows.Forms.DataGridView dataGridViewAirplane;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeatTypeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeatClass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxLuggageWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirplaneId;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirplaneModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prefix;
@@ -308,9 +325,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxFuel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Capacity;
         private System.Windows.Forms.DataGridViewTextBoxColumn BaseAirport;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeatTypeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeatClass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxLuggageWeight;
     }
 }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dataGridViewAirport = new System.Windows.Forms.DataGridView();
+            this.buttonDeleteAirport = new System.Windows.Forms.Button();
+            this.buttonEditAirport = new System.Windows.Forms.Button();
+            this.buttonAddAirport = new System.Windows.Forms.Button();
             this.AiportAid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,9 +44,6 @@
             this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LandingCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GroundTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonDeleteAirport = new System.Windows.Forms.Button();
-            this.buttonEditAirport = new System.Windows.Forms.Button();
-            this.buttonAddAirport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,74 +71,6 @@
             this.dataGridViewAirport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAirport.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewAirport.TabIndex = 0;
-            // 
-            // AiportAid
-            // 
-            this.AiportAid.HeaderText = "Id";
-            this.AiportAid.Name = "AiportAid";
-            this.AiportAid.ReadOnly = true;
-            this.AiportAid.Visible = false;
-            // 
-            // AirportName
-            // 
-            this.AirportName.HeaderText = "Airport";
-            this.AirportName.Name = "AirportName";
-            // 
-            // ICAO
-            // 
-            this.ICAO.HeaderText = "IATA";
-            this.ICAO.Name = "ICAO";
-            this.ICAO.Width = 70;
-            // 
-            // Latitude
-            // 
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.Width = 80;
-            // 
-            // Longintude
-            // 
-            this.Longintude.HeaderText = "Longitude";
-            this.Longintude.Name = "Longintude";
-            this.Longintude.Width = 80;
-            // 
-            // Elevation
-            // 
-            this.Elevation.HeaderText = "Elevation  (m)";
-            this.Elevation.Name = "Elevation";
-            // 
-            // RunwayLength
-            // 
-            this.RunwayLength.HeaderText = "Runway Length (m)";
-            this.RunwayLength.Name = "RunwayLength";
-            // 
-            // Region
-            // 
-            this.Region.HeaderText = "Region";
-            this.Region.Name = "Region";
-            // 
-            // MTOW_APE3
-            // 
-            this.MTOW_APE3.HeaderText = "MTOW-APE3";
-            this.MTOW_APE3.Name = "MTOW_APE3";
-            this.MTOW_APE3.Width = 120;
-            // 
-            // MTOW_PC12
-            // 
-            this.MTOW_PC12.HeaderText = "MTOW-PC12";
-            this.MTOW_PC12.Name = "MTOW_PC12";
-            this.MTOW_PC12.Width = 120;
-            // 
-            // LandingCost
-            // 
-            this.LandingCost.HeaderText = "LandingCost (US$)";
-            this.LandingCost.Name = "LandingCost";
-            this.LandingCost.Width = 150;
-            // 
-            // GroundTime
-            // 
-            this.GroundTime.HeaderText = "Ground Time";
-            this.GroundTime.Name = "GroundTime";
             // 
             // buttonDeleteAirport
             // 
@@ -170,6 +102,85 @@
             this.buttonAddAirport.UseVisualStyleBackColor = true;
             this.buttonAddAirport.Click += new System.EventHandler(this.buttonAddAirport_Click);
             // 
+            // AiportAid
+            // 
+            this.AiportAid.HeaderText = "Id";
+            this.AiportAid.Name = "AiportAid";
+            this.AiportAid.ReadOnly = true;
+            this.AiportAid.Visible = false;
+            // 
+            // AirportName
+            // 
+            this.AirportName.HeaderText = "Airport";
+            this.AirportName.Name = "AirportName";
+            this.AirportName.ReadOnly = true;
+            // 
+            // ICAO
+            // 
+            this.ICAO.HeaderText = "IATA";
+            this.ICAO.Name = "ICAO";
+            this.ICAO.ReadOnly = true;
+            this.ICAO.Width = 70;
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.ReadOnly = true;
+            this.Latitude.Width = 80;
+            // 
+            // Longintude
+            // 
+            this.Longintude.HeaderText = "Longitude";
+            this.Longintude.Name = "Longintude";
+            this.Longintude.ReadOnly = true;
+            this.Longintude.Width = 80;
+            // 
+            // Elevation
+            // 
+            this.Elevation.HeaderText = "Elevation  (m)";
+            this.Elevation.Name = "Elevation";
+            this.Elevation.ReadOnly = true;
+            // 
+            // RunwayLength
+            // 
+            this.RunwayLength.HeaderText = "Runway Length (m)";
+            this.RunwayLength.Name = "RunwayLength";
+            this.RunwayLength.ReadOnly = true;
+            // 
+            // Region
+            // 
+            this.Region.HeaderText = "Region";
+            this.Region.Name = "Region";
+            this.Region.ReadOnly = true;
+            // 
+            // MTOW_APE3
+            // 
+            this.MTOW_APE3.HeaderText = "MTOW-APE3";
+            this.MTOW_APE3.Name = "MTOW_APE3";
+            this.MTOW_APE3.ReadOnly = true;
+            this.MTOW_APE3.Width = 120;
+            // 
+            // MTOW_PC12
+            // 
+            this.MTOW_PC12.HeaderText = "MTOW-PC12";
+            this.MTOW_PC12.Name = "MTOW_PC12";
+            this.MTOW_PC12.ReadOnly = true;
+            this.MTOW_PC12.Width = 120;
+            // 
+            // LandingCost
+            // 
+            this.LandingCost.HeaderText = "LandingCost (US$)";
+            this.LandingCost.Name = "LandingCost";
+            this.LandingCost.ReadOnly = true;
+            this.LandingCost.Width = 150;
+            // 
+            // GroundTime
+            // 
+            this.GroundTime.HeaderText = "Ground Time";
+            this.GroundTime.Name = "GroundTime";
+            this.GroundTime.ReadOnly = true;
+            // 
             // AirportView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -187,6 +198,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewAirport;
+        private System.Windows.Forms.Button buttonDeleteAirport;
+        private System.Windows.Forms.Button buttonEditAirport;
+        private System.Windows.Forms.Button buttonAddAirport;
         private System.Windows.Forms.DataGridViewTextBoxColumn AiportAid;
         private System.Windows.Forms.DataGridViewTextBoxColumn AirportName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ICAO;
@@ -199,8 +213,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MTOW_PC12;
         private System.Windows.Forms.DataGridViewTextBoxColumn LandingCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn GroundTime;
-        private System.Windows.Forms.Button buttonDeleteAirport;
-        private System.Windows.Forms.Button buttonEditAirport;
-        private System.Windows.Forms.Button buttonAddAirport;
     }
 }
