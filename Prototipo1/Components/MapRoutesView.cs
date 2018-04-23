@@ -140,7 +140,19 @@ namespace Prototipo1.Components
             GMapControl.Zoom = 5;
             GMapControl.DragButton = MouseButtons.Left;
 
-            radioButtonAllPoints.Checked = true; 
+            radioButtonAllPoints.Checked = true;
+
+            if (Instance == null)
+                return;
+
+            if (Instance.Optimized){
+                if (Context.FlightsReports.Any())
+                    this.comboBoxAirplane.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id)
+                        .Select(x => x.Airplanes.Prefix).Distinct().ToList();
+            }else{
+                if (Context.Airplanes.Any())
+                    this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
+            }
         }
 
 

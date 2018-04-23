@@ -109,12 +109,19 @@ namespace Prototipo1.Components
         private void buttonAddFuel_Click(object sender, EventArgs e){
             if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0){
                 var addFuel = new AddEditFuel(Context);
-                var index = dataGridViewFuel.SelectedRows[0].Index;
-
-                addFuel.OpenToAdd(Instance); //TODO: Get real id
+                addFuel.OpenToAdd(Instance); 
 
                 FillFuelTable();
             }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FuelPriceView_Load(object sender, EventArgs e){
+            FillFuelTable();
         }
     }
 }

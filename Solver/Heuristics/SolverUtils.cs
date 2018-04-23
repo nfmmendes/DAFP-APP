@@ -105,7 +105,6 @@ namespace Solver.Heuristics
             List<Flight> usefulFlights = new List<Flight>();
 
             foreach (var item in earlyFlights){
-                //TODO: Create a dictionary to stretch 
                 var exist = input.Stretches.ContainsKey(item.Destination);
                 exist = exist | input.Stretches[item.Destination].ContainsKey(request.Origin);
 

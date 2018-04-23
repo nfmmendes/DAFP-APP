@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridViewAirport = new System.Windows.Forms.DataGridView();
-            this.buttonDeleteAirport = new System.Windows.Forms.Button();
-            this.buttonEditAirport = new System.Windows.Forms.Button();
-            this.buttonAddAirport = new System.Windows.Forms.Button();
             this.AiportAid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AirportName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +41,9 @@
             this.MTOW_PC12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LandingCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GroundTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonDeleteAirport = new System.Windows.Forms.Button();
+            this.buttonEditAirport = new System.Windows.Forms.Button();
+            this.buttonAddAirport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,36 +71,6 @@
             this.dataGridViewAirport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAirport.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewAirport.TabIndex = 0;
-            // 
-            // buttonDeleteAirport
-            // 
-            this.buttonDeleteAirport.Location = new System.Drawing.Point(1035, 105);
-            this.buttonDeleteAirport.Name = "buttonDeleteAirport";
-            this.buttonDeleteAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonDeleteAirport.TabIndex = 7;
-            this.buttonDeleteAirport.Text = "Delete";
-            this.buttonDeleteAirport.UseVisualStyleBackColor = true;
-            this.buttonDeleteAirport.Click += new System.EventHandler(this.buttonDeleteAirport_Click);
-            // 
-            // buttonEditAirport
-            // 
-            this.buttonEditAirport.Location = new System.Drawing.Point(1035, 55);
-            this.buttonEditAirport.Name = "buttonEditAirport";
-            this.buttonEditAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonEditAirport.TabIndex = 6;
-            this.buttonEditAirport.Text = "Edit";
-            this.buttonEditAirport.UseVisualStyleBackColor = true;
-            this.buttonEditAirport.Click += new System.EventHandler(this.buttonEditAirport_Click);
-            // 
-            // buttonAddAirport
-            // 
-            this.buttonAddAirport.Location = new System.Drawing.Point(1035, 5);
-            this.buttonAddAirport.Name = "buttonAddAirport";
-            this.buttonAddAirport.Size = new System.Drawing.Size(91, 34);
-            this.buttonAddAirport.TabIndex = 5;
-            this.buttonAddAirport.Text = "Add";
-            this.buttonAddAirport.UseVisualStyleBackColor = true;
-            this.buttonAddAirport.Click += new System.EventHandler(this.buttonAddAirport_Click);
             // 
             // AiportAid
             // 
@@ -181,6 +151,36 @@
             this.GroundTime.Name = "GroundTime";
             this.GroundTime.ReadOnly = true;
             // 
+            // buttonDeleteAirport
+            // 
+            this.buttonDeleteAirport.Location = new System.Drawing.Point(1035, 105);
+            this.buttonDeleteAirport.Name = "buttonDeleteAirport";
+            this.buttonDeleteAirport.Size = new System.Drawing.Size(91, 34);
+            this.buttonDeleteAirport.TabIndex = 7;
+            this.buttonDeleteAirport.Text = "Delete";
+            this.buttonDeleteAirport.UseVisualStyleBackColor = true;
+            this.buttonDeleteAirport.Click += new System.EventHandler(this.buttonDeleteAirport_Click);
+            // 
+            // buttonEditAirport
+            // 
+            this.buttonEditAirport.Location = new System.Drawing.Point(1035, 55);
+            this.buttonEditAirport.Name = "buttonEditAirport";
+            this.buttonEditAirport.Size = new System.Drawing.Size(91, 34);
+            this.buttonEditAirport.TabIndex = 6;
+            this.buttonEditAirport.Text = "Edit";
+            this.buttonEditAirport.UseVisualStyleBackColor = true;
+            this.buttonEditAirport.Click += new System.EventHandler(this.buttonEditAirport_Click);
+            // 
+            // buttonAddAirport
+            // 
+            this.buttonAddAirport.Location = new System.Drawing.Point(1035, 5);
+            this.buttonAddAirport.Name = "buttonAddAirport";
+            this.buttonAddAirport.Size = new System.Drawing.Size(91, 34);
+            this.buttonAddAirport.TabIndex = 5;
+            this.buttonAddAirport.Text = "Add";
+            this.buttonAddAirport.UseVisualStyleBackColor = true;
+            this.buttonAddAirport.Click += new System.EventHandler(this.buttonAddAirport_Click);
+            // 
             // AirportView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -190,6 +190,7 @@
             this.Controls.Add(this.dataGridViewAirport);
             this.Name = "AirportView";
             this.Size = new System.Drawing.Size(1180, 530);
+            this.Load += new System.EventHandler(this.AirportView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirport)).EndInit();
             this.ResumeLayout(false);
 

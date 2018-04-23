@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridViewRequestSolutionDetails = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PassengerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlightAirplane = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRequestsResult = new System.Windows.Forms.DataGridView();
             this.SolutionRequestId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.solutionRequestPNR = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,13 +45,6 @@
             this.SolutionRequestMaxDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SolutionRequestMinArr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SolutionRequestMaxArr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PassengerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlightAirplane = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestSolutionDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestsResult)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +67,55 @@
             this.dataGridViewRequestSolutionDetails.RowTemplate.Height = 24;
             this.dataGridViewRequestSolutionDetails.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewRequestSolutionDetails.TabIndex = 8;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Route ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 120;
+            // 
+            // PassengerName
+            // 
+            this.PassengerName.HeaderText = "Passenger";
+            this.PassengerName.Name = "PassengerName";
+            this.PassengerName.ReadOnly = true;
+            this.PassengerName.Width = 150;
+            // 
+            // FlightAirplane
+            // 
+            this.FlightAirplane.HeaderText = "Airplanes";
+            this.FlightAirplane.Name = "FlightAirplane";
+            this.FlightAirplane.ReadOnly = true;
+            this.FlightAirplane.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Origin";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Departure";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Destination";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Arrival";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 140;
             // 
             // dataGridViewRequestsResult
             // 
@@ -140,55 +189,6 @@
             this.SolutionRequestMaxArr.Name = "SolutionRequestMaxArr";
             this.SolutionRequestMaxArr.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Route ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 120;
-            // 
-            // PassengerName
-            // 
-            this.PassengerName.HeaderText = "Passenger";
-            this.PassengerName.Name = "PassengerName";
-            this.PassengerName.ReadOnly = true;
-            this.PassengerName.Width = 150;
-            // 
-            // FlightAirplane
-            // 
-            this.FlightAirplane.HeaderText = "Airplanes";
-            this.FlightAirplane.Name = "FlightAirplane";
-            this.FlightAirplane.ReadOnly = true;
-            this.FlightAirplane.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Origin";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Departure";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Destination";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Arrival";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 140;
-            // 
             // RequestSolutionView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -196,6 +196,7 @@
             this.Controls.Add(this.dataGridViewRequestsResult);
             this.Name = "RequestSolutionView";
             this.Size = new System.Drawing.Size(1180, 530);
+            this.Load += new System.EventHandler(this.RequestSolutionView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestSolutionDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequestsResult)).EndInit();
             this.ResumeLayout(false);

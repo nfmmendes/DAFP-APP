@@ -475,6 +475,12 @@ namespace Prototipo1
         private void duplicateInstanceToolStripMenuItem_Click(object sender, EventArgs e){
             var duplicateWindow = new DuplicateInstance(Context);
             duplicateWindow.ShowDialog();
+            var instances = Context.Instances;
+            //Fill the list of instances on the main combo box
+            comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+            if (comboBoxInstancesInstanceTab.Items.Count > 0)
+                comboBoxInstancesInstanceTab.SelectedIndex = 0;
+            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
         }
         
         

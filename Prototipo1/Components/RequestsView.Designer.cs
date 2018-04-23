@@ -35,6 +35,11 @@
             this.buttonEditRequest = new System.Windows.Forms.Button();
             this.buttonAddRequest = new System.Windows.Forms.Button();
             this.dataGridViewPassenger = new System.Windows.Forms.DataGridView();
+            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewRequest = new System.Windows.Forms.DataGridView();
             this.RequestId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BookingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,11 +49,6 @@
             this.MaxDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdPassenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passenger = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsKid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).BeginInit();
             this.SuspendLayout();
@@ -132,6 +132,38 @@
             this.dataGridViewPassenger.Size = new System.Drawing.Size(1000, 215);
             this.dataGridViewPassenger.TabIndex = 15;
             // 
+            // IdPassenger
+            // 
+            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IdPassenger.HeaderText = "Id";
+            this.IdPassenger.Name = "IdPassenger";
+            this.IdPassenger.ReadOnly = true;
+            this.IdPassenger.Visible = false;
+            // 
+            // Passenger
+            // 
+            this.Passenger.HeaderText = "Passenger";
+            this.Passenger.Name = "Passenger";
+            this.Passenger.ReadOnly = true;
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.ReadOnly = true;
+            // 
+            // IsKid
+            // 
+            this.IsKid.HeaderText = "Is Children";
+            this.IsKid.Name = "IsKid";
+            this.IsKid.ReadOnly = true;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.ReadOnly = true;
+            // 
             // dataGridViewRequest
             // 
             this.dataGridViewRequest.AllowUserToAddRows = false;
@@ -204,38 +236,6 @@
             this.MaxArrival.Name = "MaxArrival";
             this.MaxArrival.ReadOnly = true;
             // 
-            // IdPassenger
-            // 
-            this.IdPassenger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IdPassenger.HeaderText = "Id";
-            this.IdPassenger.Name = "IdPassenger";
-            this.IdPassenger.ReadOnly = true;
-            this.IdPassenger.Visible = false;
-            // 
-            // Passenger
-            // 
-            this.Passenger.HeaderText = "Passenger";
-            this.Passenger.Name = "Passenger";
-            this.Passenger.ReadOnly = true;
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            this.Sex.ReadOnly = true;
-            // 
-            // IsKid
-            // 
-            this.IsKid.HeaderText = "Is Children";
-            this.IsKid.Name = "IsKid";
-            this.IsKid.ReadOnly = true;
-            // 
-            // Class
-            // 
-            this.Class.HeaderText = "Class";
-            this.Class.Name = "Class";
-            this.Class.ReadOnly = true;
-            // 
             // RequestsView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -249,6 +249,7 @@
             this.Controls.Add(this.dataGridViewRequest);
             this.Name = "RequestsView";
             this.Size = new System.Drawing.Size(1180, 530);
+            this.Load += new System.EventHandler(this.RequestsView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassenger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequest)).EndInit();
             this.ResumeLayout(false);

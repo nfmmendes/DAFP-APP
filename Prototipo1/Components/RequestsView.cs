@@ -192,5 +192,9 @@ namespace Prototipo1.Components
             else
                 MessageBox.Show("Select on request in the table");
         }
+
+        private void RequestsView_Load(object sender, EventArgs e){
+            FillRequestTables();
+        }
     }
 }

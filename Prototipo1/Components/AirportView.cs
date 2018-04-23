@@ -115,7 +115,7 @@ namespace Prototipo1.Components
                     var first = dataGridViewAirport.SelectedRows[0].Index;
                     var indexAirport = Convert.ToInt64(dataGridViewAirport.Rows[first].Cells[0].Value);
                     var addAirport = new AddEditAirport(Context);
-                    addAirport.OpenToEdit(Instance, indexAirport); //TODO: get real instance
+                    addAirport.OpenToEdit(Instance, indexAirport); 
                     FillAirportsTable();
                 }else
                     MessageBox.Show("Select one airport");
@@ -133,6 +133,10 @@ namespace Prototipo1.Components
                 addAirport.OpenToAdd(Instance);
                 FillAirportsTable();
             }
+        }
+
+        private void AirportView_Load(object sender, EventArgs e){
+            FillAirportsTable();
         }
     }
 }

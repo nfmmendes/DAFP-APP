@@ -121,6 +121,7 @@
             this.Controls.Add(this.dataGridViewCurrency);
             this.Name = "CurrencyView";
             this.Size = new System.Drawing.Size(1180, 530);
+            this.Load += new System.EventHandler(this.CurrencyView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCurrency)).EndInit();
             this.ResumeLayout(false);
 

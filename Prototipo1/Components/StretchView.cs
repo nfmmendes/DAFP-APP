@@ -23,11 +23,13 @@ namespace Prototipo1.Components
         public DbInstance Instance { get; set; }
         private int CountStretchesPage { get; set; }
         private int StretchePageSize { get; set; }
+        private List<Tuple<long, string, string, int>> RowsCache { get; set; }
 
         public StretchView(){
             InitializeComponent();
             CountStretchesPage = 1;
-            StretchePageSize = 5000;
+            StretchePageSize = 200;
+            RowsCache = new List<Tuple<long, string, string, int>>();
         }
 
 
@@ -37,6 +39,12 @@ namespace Prototipo1.Components
         /// <param name="instance"></param>
         public void setInstance(DbInstance instance){
             Instance = instance;
+
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
+            RowsCache.Clear();
+            foreach (var item in listOfStretches)
+                RowsCache.Add( new Tuple<long, string, string, int>( item.Id, item.Origin, item.Destination, item.Distance));
+
             FillStretchTable();
 
         }
@@ -46,21 +54,20 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonFirstPageStretch_Click(object sender, EventArgs e)
-        {
+        private void buttonFirstPageStretch_Click(object sender, EventArgs e) {
 
             dataGridViewStretches.Rows.Clear();
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
+            var totalSize = RowsCache.Count;
 
             var firstPageSize = Math.Min(StretchePageSize, totalSize);
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
+            //var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             for (int i = 0; i <= firstPageSize; i++)
-                dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
+                dataGridViewStretches.Rows.Add(RowsCache[i].Item1, RowsCache[i].Item2,RowsCache[i].Item3, RowsCache[i].Item4);
 
             CountStretchesPage = 1;
-            labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+            labelPageStretch.Text = $"{CountStretchesPage} of {(int)(RowsCache.Count/ StretchePageSize + 1)}";
 
         }
 
@@ -69,13 +76,11 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonPrevPageStretch_Click(object sender, EventArgs e)
-        {
+        private void buttonPrevPageStretch_Click(object sender, EventArgs e){
 
+            var totalSize = RowsCache.Count;
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
-
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
+            //var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
             if (CountStretchesPage > 1)
             {
@@ -86,9 +91,9 @@ namespace Prototipo1.Components
                 var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
 
                 for (int i = firstIndex; i <= lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(RowsCache[i].Item1, RowsCache[i].Item2, RowsCache[i].Item3, RowsCache[i].Item4);
 
-                labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+                labelPageStretch.Text = $"{CountStretchesPage} of {(int)(RowsCache.Count / StretchePageSize + 1)}";
             }
 
         }
@@ -100,25 +105,19 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonNextPageStretch_Click(object sender, EventArgs e)
         {
-            
-
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
-
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
-
-            if (CountStretchesPage <= (int)(listOfStretches.Count() / StretchePageSize))
+            if (CountStretchesPage <= (int)(RowsCache.Count() / StretchePageSize))
             {
                 dataGridViewStretches.Rows.Clear();
 
                 var firstIndex = StretchePageSize * CountStretchesPage;
-                var lastIndex = Math.Min(firstIndex + StretchePageSize, totalSize);
+                var lastIndex = Math.Min(firstIndex + StretchePageSize, RowsCache.Count);
 
                 CountStretchesPage++;
 
                 for (int i = firstIndex; i < lastIndex; i++)
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(RowsCache[i].Item1, RowsCache[i].Item2, RowsCache[i].Item3, RowsCache[i].Item4);
 
-                labelPageStretch.Text = $"{CountStretchesPage} of {(int)(listOfStretches.Count() / StretchePageSize + 1)}";
+                labelPageStretch.Text = $"{CountStretchesPage} of {(int)(RowsCache.Count / StretchePageSize + 1)}";
             }
 
         }
@@ -226,7 +225,12 @@ namespace Prototipo1.Components
 
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         private double calculateDistance(KeyValuePair<double, double> origin, KeyValuePair<double, double> destination)
         {
             var latOrigin = origin.Key;
@@ -240,6 +244,20 @@ namespace Prototipo1.Components
             return sCoord.GetDistanceTo(eCoord);
 
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StretchView_Load(object sender, EventArgs e){
+            FillStretchTable();
+        }
+
+        private void comboBoxPageSize_SelectedIndexChanged(object sender, EventArgs e){
+            StretchePageSize = Convert.ToInt32(comboBoxPageSize.SelectedItem.ToString());
+            FillStretchTable();
         }
     }
 }

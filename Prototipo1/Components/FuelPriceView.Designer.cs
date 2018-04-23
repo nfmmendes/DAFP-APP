@@ -129,6 +129,7 @@
             this.Controls.Add(this.dataGridViewFuel);
             this.Name = "FuelPriceView";
             this.Size = new System.Drawing.Size(1180, 530);
+            this.Load += new System.EventHandler(this.FuelPriceView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFuel)).EndInit();
             this.ResumeLayout(false);
 

@@ -98,5 +98,9 @@ namespace Prototipo1.Components
             }
             FillCurrencyTable();
         }
+
+        private void CurrencyView_Load(object sender, EventArgs e){
+            FillCurrencyTable();
+        }
     }
 }

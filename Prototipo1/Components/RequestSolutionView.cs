@@ -69,20 +69,21 @@ namespace Prototipo1.Components
 
                 dataGridViewRequestSolutionDetails.Rows.Clear();
 
-                foreach (var passenger in passengerList)
-                {
-                    //TODO: Discover why these fields are null 
-                    if (passenger.Flight.Origin != null && passenger.Flight.Destination != null)
-                        dataGridViewRequestSolutionDetails.Rows.Add("x", passenger.Passenger.Name,
-                            passenger.Flight.Airplanes.Prefix,
-                            passenger.Flight.Origin.AirportName,
-                            passenger.Flight.DepartureTime,
-                            passenger.Flight.Destination.AirportName,
-                            passenger.Flight.ArrivalTime);
+                foreach (var passenger in passengerList){
+                    dataGridViewRequestSolutionDetails.Rows.Add("x", passenger.Passenger.Name,
+                        passenger.Flight.Airplanes.Prefix,
+                        passenger.Flight.Origin.AirportName,
+                        passenger.Flight.DepartureTime,
+                        passenger.Flight.Destination.AirportName,
+                        passenger.Flight.ArrivalTime);
                 }
 
 
             }
+        }
+
+        private void RequestSolutionView_Load(object sender, EventArgs e){
+            FillRequestSolutionTable();
         }
     }
 }

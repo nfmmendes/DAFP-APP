@@ -112,7 +112,7 @@ namespace Prototipo1.Components
             {
                 var addSeat = new AddEditSeatType(Context);
                 var index = dataGridViewSeatTypes.SelectedRows[0].Index;
-                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value)); //TODO: replace by the real ID
+                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value)); 
             }
         }
 
@@ -223,8 +223,12 @@ namespace Prototipo1.Components
             if (Instance != null && dataGridViewSeatTypes.SelectedRows.Count > 0){
                 var addSeat = new AddEditSeatType(Context);
                 var index = dataGridViewSeatTypes.SelectedRows[0].Index;
-                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value)); //TODO: replace by the real ID
+                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value));
             }
+        }
+
+        private void AirplaneView_Load(object sender, EventArgs e){
+            FillAirplaneTables();
         }
     }
 }
