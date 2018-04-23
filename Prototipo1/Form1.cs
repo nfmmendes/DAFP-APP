@@ -29,12 +29,6 @@ namespace Prototipo1
         
 
             var instances = Context.Instances;
-            //Fill the list of instances on the main combo box
-            comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
-            if(comboBoxInstancesInstanceTab.Items.Count>0)
-                comboBoxInstancesInstanceTab.SelectedIndex = 0;
-            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
-
             //Initialize the context of all controllers 
             //WARNING: Everytime that a new controller is created it's necessary to initialize their context here to allow
             // its rigth use
@@ -46,6 +40,15 @@ namespace Prototipo1
             AirportController.Instance.setContext(Context);
             ExchangeRatesController.Instance.setContext(Context);
             FuelController.Instance.setContext(Context);
+
+
+            //Fill the list of instances on the main combo box
+            comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+            if(comboBoxInstancesInstanceTab.Items.Count>0)
+                comboBoxInstancesInstanceTab.SelectedIndex = 0;
+            comboBoxInstanceParamTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
+
+
         }
 
         /// <summary>
@@ -335,12 +338,16 @@ namespace Prototipo1
 
             DisableParametersEdition();
             //Change/Save the parameters of all instances
+
+            var sunrise = numUD_SunriseH.Value + ":" + numUD_SunriseM.Value;
+            var sunset = numUD_Sunset_H.Value + ":" + numUD_Sunset_M.Value;
+
             if (this.radioButtonGenSettingY.Checked){
                 ParametersController.Instance.UpdateAllInstances(radioButtonTimeWindowYes.Checked,
                                                                 radioButtonPickAllYes.Checked,radioButtonDeliverAllYes.Checked, 
                                                                 radioButtonStartDepotYes.Checked,radioButtonComeBackDepotYes.Checked, 
                                                                 Convert.ToInt32(numUD_ManWeight.Value),Convert.ToInt32(numUD_WomanWeight.Value), 
-                                                                Convert.ToInt32(numUD_ChildWeight.Value),Convert.ToInt32(numUD_TimeLimit.Value));
+                                                                Convert.ToInt32(numUD_ChildWeight.Value),Convert.ToInt32(numUD_TimeLimit.Value),sunrise,sunset);
             }
             //Change/Save the parameters of just one instance 
             else{
@@ -350,7 +357,7 @@ namespace Prototipo1
                                                                 radioButtonPickAllYes.Checked, radioButtonDeliverAllYes.Checked,
                                                                 radioButtonStartDepotYes.Checked, radioButtonComeBackDepotYes.Checked,
                                                                 Convert.ToInt32(numUD_ManWeight.Value), Convert.ToInt32(numUD_WomanWeight.Value),
-                                                                Convert.ToInt32(numUD_ChildWeight.Value), Convert.ToInt32(numUD_TimeLimit.Value));
+                                                                Convert.ToInt32(numUD_ChildWeight.Value), Convert.ToInt32(numUD_TimeLimit.Value),sunrise,sunset);
             }
 
         }
@@ -497,6 +504,119 @@ namespace Prototipo1
             
         }
 
-   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxInstanceParamTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var instanceName = getSelectedInstanceName(this.comboBoxInstanceParamTab.SelectedValue.ToString());
+            var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
+            if (instance != null){
+                var parameters = ParametersController.Instance.getParameters(instance);
+
+                var pickupAll = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.PICK_ALL.DbCode));
+                var deliverAll = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.DELIVER_ALL.DbCode));
+                var useTimeWindows = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.USE_TIME_WINDOWS.DbCode));
+                var startFromDepot = parameters.FirstOrDefault(x=>x.Code.Equals(ParametersEnum.START_FROM_DEPOT.DbCode));
+                var comeBackToDepot = parameters.FirstOrDefault(x=>x.Code.Equals(ParametersEnum.COME_BACK_TO_DEPOT.DbCode));
+                var menWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode));
+                var womenWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
+                var childrenWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
+                var timeLimit = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.TIME_LIMIT.DbCode));
+                var sunrise = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.SUNRISE_TIME.DbCode));
+                var sunset = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.SUNSET_TIME.DbCode));
+
+                //TODO: Pegar valores default do controller
+
+                //USE TIME WINDOWS
+                if (useTimeWindows == null)
+                    this.radioButtonTimeWindowYes.Checked = true;
+                else{
+                    if (useTimeWindows.Value.Equals("true"))
+                        this.radioButtonTimeWindowYes.Checked = true;
+                    else
+                        this.radioButtonTimeWindowNo.Checked = true;
+                }
+
+                //PICK UP ALL
+                if (pickupAll == null)
+                    this.radioButtonPickAllYes.Checked = true;
+                else{
+                    if (pickupAll.Value.Equals("true"))
+                        this.radioButtonPickAllYes.Checked = true;
+                    else
+                        this.radioButtonPickAllNo.Checked = true;
+                }
+
+                //DELIVER ALL
+                if (deliverAll == null)
+                    this.radioButtonDeliverAllYes.Checked = true;
+                else{
+                    if (deliverAll.Value.Equals("true"))
+                        this.radioButtonDeliverAllYes.Checked = true;
+                    else
+                        this.radioButtonDeliverAllNo.Checked = true;
+                }
+
+                //START FROM DEPOT 
+                if (startFromDepot == null)
+                    this.radioButtonStartDepotYes.Checked = true;
+                else{
+                    if (startFromDepot.Value.Equals("true"))
+                        this.radioButtonStartDepotYes.Checked = true;
+                    else
+                        this.radioButtonStartDepotNo.Checked = true;
+                }
+
+                //COME BACK TO DEPOT
+                if (comeBackToDepot == null)
+                    this.radioButtonComeBackDepotYes.Checked = true;
+                else{
+                    if (comeBackToDepot.Value.Equals("true"))
+                        this.radioButtonComeBackDepotYes.Checked = true;
+                    else
+                        this.radioButtonComeBackDepotNo.Checked = true;
+                }
+
+                //MEN WEIGHT 
+                this.numUD_ManWeight.Value = menWeight == null ? 70 : Convert.ToInt32(menWeight.Value);
+
+                //WOMEN WEIGHT 
+                this.numUD_WomanWeight.Value = womenWeight == null ? 70 : Convert.ToInt32(womenWeight.Value);
+
+                //CHILD WEIGHT
+                this.numUD_ChildWeight.Value = childrenWeight == null ? 70 : Convert.ToInt32(childrenWeight.Value);
+
+                //TIME LIMIT
+                this.numUD_TimeLimit.Value = timeLimit == null ? 45 : Convert.ToInt32(timeLimit.Value);
+
+                //SUNRISE
+                if (sunrise != null){
+                    var splited = sunrise.Value.Split(':');
+                    this.numUD_SunriseH.Value = Convert.ToInt32(splited[0]);
+                    this.numUD_SunriseM.Value = Convert.ToInt32(splited[1]);
+                }else{
+                    this.numUD_SunriseH.Value = 6;
+                    this.numUD_SunriseM.Value = 15;
+                }
+
+                //SUNSET 
+                if (sunset != null){
+                    var splited = sunset.Value.Split(':');
+                    this.numUD_Sunset_H.Value = Convert.ToInt32(splited[0]);
+                    this.numUD_Sunset_M.Value = Convert.ToInt32(splited[1]);
+                }else{
+                    this.numUD_Sunset_H.Value = 18;
+                    this.numUD_Sunset_M.Value = 15;
+                }
+
+            }
+
+        }
+
+       
     }
 }

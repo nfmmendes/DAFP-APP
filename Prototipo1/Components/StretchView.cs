@@ -255,6 +255,11 @@ namespace Prototipo1.Components
             FillStretchTable();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxPageSize_SelectedIndexChanged(object sender, EventArgs e){
             StretchePageSize = Convert.ToInt32(comboBoxPageSize.SelectedItem.ToString());
             FillStretchTable();

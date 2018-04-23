@@ -718,6 +718,7 @@ namespace Prototipo1
             this.comboBoxInstanceParamTab.Name = "comboBoxInstanceParamTab";
             this.comboBoxInstanceParamTab.Size = new System.Drawing.Size(762, 32);
             this.comboBoxInstanceParamTab.TabIndex = 16;
+            this.comboBoxInstanceParamTab.SelectedIndexChanged += new System.EventHandler(this.comboBoxInstanceParamTab_SelectedIndexChanged);
             // 
             // label13
             // 

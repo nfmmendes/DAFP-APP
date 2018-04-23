@@ -85,7 +85,7 @@ namespace Prototipo1.Controller
         /// <param name="timeLimit">Maximum time to the algorithm rum</param>
         public void UpdateInstanceParameters(DbInstance instance, bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
                                        bool startFromDepot = true, bool comebackToDepot = true, int averageWeightMan = 75,
-                                       int averageWeightWoman = 65, int averageChildWeight = 30, int timeLimit = 45)
+                                       int averageWeightWoman = 65, int averageChildWeight = 30, int timeLimit = 45, string sunrise = "6:15", string sunset = "18:15")
         {
             var insId = instance.Id;
             var Parameters = Instance.Context.Parameters;
@@ -112,6 +112,13 @@ namespace Prototipo1.Controller
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
             foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
+
+            parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNRISE_TIME.DbCode).ToList();
+            foreach (var param in parameters) {  param.Value = sunrise; UpdateAndSave(param);} 
+            
+            parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNSET_TIME.DbCode).ToList();
+            foreach (var param in parameters) {  param.Value = sunset; UpdateAndSave(param);} 
+
         }
 
         /// <summary>
@@ -126,34 +133,40 @@ namespace Prototipo1.Controller
         /// <param name="averageWeightWoman">The average weight of women</param>
         /// <param name="averageChildWeight">The average weight of Child</param>
         /// <param name="timeLimit">Maximum time to the algorithm rum</param>
-        public void UpdateAllInstances(bool useTimeWindows, bool pickAll = true, bool deliverAll = true,
-                                       bool startFromDepot = true,bool comebackToDepot = true, int averageWeightMan = 75, 
-                                       int averageWeightWoman = 65,int averageChildWeight = 30,int timeLimit = 45){
+        public void UpdateAllInstances(bool useTimeWindows, bool pickAll = true, bool deliverAll = true, bool startFromDepot = true,
+                                       bool comebackToDepot = true, int averageWeightMan = 75, int averageWeightWoman = 65,
+                                       int averageChildWeight = 30,int timeLimit = 45, string sunrise = "6:15", string sunset ="18:15"){
 
-            var parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
+            var parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode);
             foreach (var param in parameters){ param.Value= useTimeWindows?"true":"false";   UpdateAndSave(param);}
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.PICK_ALL.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.PICK_ALL.DbCode);
             foreach (var param in parameters) { param.Value = pickAll ? "true" : "false"; UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.DELIVER_ALL.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.DELIVER_ALL.DbCode);
             foreach (var param in parameters) { param.Value = deliverAll ? "true" : "false"; UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.START_FROM_DEPOT.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.START_FROM_DEPOT.DbCode);
             foreach (var param in parameters) { param.Value = startFromDepot ? "true" : "false"; UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode);
             foreach (var param in parameters) { param.Value = comebackToDepot ? "true" : "false"; UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode);
             foreach (var param in parameters) { param.Value = averageWeightMan.ToString(); UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode);
             foreach (var param in parameters) { param.Value = averageWeightWoman.ToString(); UpdateAndSave(param); }
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.TIME_LIMIT.DbCode);
             foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
-            
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.SUNRISE_TIME.DbCode);
+            foreach (var param in parameters) { param.Value = sunrise; UpdateAndSave(param); }
+
+            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.SUNSET_TIME.DbCode);
+            foreach (var param in parameters) { param.Value = sunset; UpdateAndSave(param); }
+
         }
 
         /// <summary>
@@ -161,8 +174,15 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="param">Parameter item</param>
         private void UpdateAndSave(DbParameters param){
-            Instance.Context.Parameters.AddOrUpdate(param);
-            Instance.Context.SaveChanges();
+
+            using (var context = new CustomSqlContext())
+            {
+                context.Parameters.AddOrUpdate(param);
+                context.SaveChanges();
+            }
+
+            //Instance.Context.Parameters.AddOrUpdate(param);
+            //Instance.Context.SaveChanges();
         }
 
         /// <summary>
@@ -183,6 +203,12 @@ namespace Prototipo1.Controller
             }
         }
 
+        /// <summary>
+        /// Clone a parameter of a instance
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="instance"></param>
+        /// <returns></returns>
         public DbParameters Clone(DbParameters original, DbInstance instance=null){
             DbParameters newItem = new DbParameters();
             newItem.Code = original.Code;
@@ -190,6 +216,15 @@ namespace Prototipo1.Controller
             newItem.Instance = original.Instance;
 
             return newItem;
+        }
+
+        /// <summary>
+        /// Get all the parameters of a given instance
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public ICollection<DbParameters> getParameters(DbInstance instance){
+            return Instance.Context.Parameters.Where(x => x.Instance.Id == instance.Id).ToList();
         }
     }
 }
