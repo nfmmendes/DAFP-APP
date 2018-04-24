@@ -172,9 +172,23 @@ namespace Prototipo1
         {
             var instanceName = getSelectedInstanceName(this.comboBoxInstancesInstanceTab.SelectedItem.ToString());
             var instance = Context.Instances.FirstOrDefault(x => x.Name.Equals(instanceName));
+
             if (instance != null){
                 //Create the input to the solver
                 var input =  SolverInput.BuildSolverInput(Context,instance);
+
+                PreCheckOptimizationController.Instance.setContext(Context);
+                PreCheckOptimizationController.Instance.ExecuteCheck(input);
+
+                if (Context.OptimizationAlerts.Any(x => x.Instance.Id == instance.Id)){
+                    MessageBox.Show("There are problems related with your instance.");
+
+                    var optimizationWarnings = new PreCheckOptimizationView(instance);
+                    optimizationWarnings.ShowDialog();
+                    if (!optimizationWarnings.ContinueOptimization)
+                        return; 
+                }
+                
 
                 //Instantiates and call the heuristic
                 var heuristic = new Solver.Heuristics.MainHeuristic(input, true);

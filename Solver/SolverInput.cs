@@ -32,6 +32,7 @@ namespace Solver
         public static SolverInput BuildSolverInput(CustomSqlContext context,DbInstance instance){
             var Instance = instance;
             var input = new SolverInput();
+            input.Instance = instance;
             input.Airplanes = context.Airplanes.Where(x=>x.Instance.Id == Instance.Id).ToList();
             input.Airports = context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Requests = context.Requests.Where(x => x.Instance.Id == Instance.Id).ToList();

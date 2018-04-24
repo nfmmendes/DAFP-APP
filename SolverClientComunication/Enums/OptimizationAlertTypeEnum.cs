@@ -16,5 +16,9 @@ namespace SolverClientComunication.Enums
         private OptimizationAlertTypeEnum(string label, string dbCode) : base(label, dbCode){
             EnumList.Add(this);
         }
+
+        public static string GetLabel(string dbCode){
+            return EnumList.Any(x => x.DbCode.Equals(dbCode)) ? EnumList.First(x => x.DbCode.Equals(dbCode)).Label : "##LABEL_NOT_FOUND";
+        }
     }
 }

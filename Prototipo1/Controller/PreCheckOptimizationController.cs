@@ -4,35 +4,124 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Solver;
 using SolverClientComunication;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
     class PreCheckOptimizationController : AbstractController<DbOptimizationAlerts,CustomSqlContext>{
-        public override void setContext(CustomSqlContext context)
-        {
-            throw new NotImplementedException();
+
+        private CustomSqlContext Context { get; set; }
+        public static readonly PreCheckOptimizationController Instance = new PreCheckOptimizationController();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        public override void setContext(CustomSqlContext context){
+            Instance.Context = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public override void Add(DbOptimizationAlerts item)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public List<DbOptimizationAlerts> GetWarnings(DbInstance instance){
+            return Context.OptimizationAlerts.Where(x=>x.Instance.Id == instance.Id).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="IdItem"></param>
         public override void Edit(DbOptimizationAlerts item, long IdItem)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public override void Delete(DbOptimizationAlerts item)
         {
             throw new NotImplementedException();
         }
 
-        protected override bool IsValidItem(DbOptimizationAlerts item)
-        {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected override bool IsValidItem(DbOptimizationAlerts item){
             throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        public void ExecuteCheck(SolverInput input){
+
+            if(Context.OptimizationAlerts.Any(x => x.Instance.Id == input.Instance.Id)) { 
+                Context.OptimizationAlerts.RemoveRange(Context.OptimizationAlerts.Where(x=>x.Instance.Id == input.Instance.Id));
+                Context.SaveChanges();
+            }
+            getTooLongFlights(input);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        private void getTooLongFlights(SolverInput input){
+            var requests = input.Requests;
+            var maxAirplaneSpeed = input.Airplanes.Max(x => x.CruiseSpeed);
+            var stretches = input.Stretches;
+            HashSet<string> alreadyVerifiedPNR = new HashSet<string>();
+
+            foreach (var item in requests){
+                var distance = 0.0;
+
+                if(alreadyVerifiedPNR.Contains(item.PNR))
+                    continue;
+
+                alreadyVerifiedPNR.Add(item.PNR);
+
+                if(stretches.ContainsKey(item.Origin))
+                    if (stretches[item.Origin].ContainsKey(item.Destination)){
+                        distance = stretches[item.Origin][item.Destination];
+                        var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
+                        if (time.TotalHours < distance / maxAirplaneSpeed){
+
+                            var alert = new DbOptimizationAlerts(){
+                                Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                                Table = "Requests",
+                                Message = $"The request with PNR {item.PNR} has origin and destination too far to the time windows defined",
+                                Instance = input.Instance
+                            };
+
+                            Context.OptimizationAlerts.Add(alert);
+                        }
+                            
+                    }
+            }
+            Context.SaveChanges();
         }
     }
 }
