@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Prototipo1.Components
@@ -76,25 +77,29 @@ namespace Prototipo1.Components
         /// <param name="flight"></param>
         /// <returns></returns>
         private double GetWeightOfPassengers(DbFlightsReport flight){
-            var itemList = Context.PassagersOnFlight.Where(x => x.Flight.Id == flight.Id);
-            var seatList = Context.SeatList.Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
+            var itemList = Context.PassagersOnFlight.ToList().Where(x => x.Flight.Id == flight.Id);
+            var seatList = Context.SeatList.ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
 
 
             var sum = 0.0;
             foreach (var item in itemList){
 
-                var seatClass = seatList.FirstOrDefault(x => x.seatClass.Equals(item.Passenger.Class));
+                var seatClass = seatList.ToList().FirstOrDefault(x => x.seatClass.Equals(item.Passenger.Class));
                 if (seatClass != null)
                     sum += seatClass.luggageWeightLimit;
 
+                
+                var menWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode));
+                var womenWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
+                var childrenWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
 
-                //TODO: Correct to get the values from database. THIS IS WRONG!!!!
-                /*
-                if (item.Passenger.Sex.Equals("M"))
-                    sum += item.Passenger.IsChildren ? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_ManWeight.Value);
-                else
-                    sum += item.Passenger.IsChildren ? Convert.ToDouble(numUD_ChildWeight.Value) : Convert.ToDouble(numUD_WomanWeight.Value);
-                    */
+                if (menWeight != null && womenWeight != null && childrenWeight != null){
+                    if (item.Passenger.Sex.Equals("M"))
+                        sum += item.Passenger.IsChildren ? Convert.ToDouble(childrenWeight.Value) : Convert.ToDouble(menWeight.Value);
+                    else
+                        sum += item.Passenger.IsChildren ? Convert.ToDouble(childrenWeight.Value) : Convert.ToDouble(womenWeight.Value);
+                }
+                
             }
             return sum;
         }
