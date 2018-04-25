@@ -83,6 +83,54 @@ namespace Prototipo1.Controller
                 Context.SaveChanges();
             }
             getTooLongFlights(input);
+            getNoGroundTimeAirports(input);
+            verifyStretchIntegrality(input);
+        }
+
+        private void verifyStretchIntegrality(SolverInput input)
+        {
+            var numAirports = input.Airports.Count;
+            var airports = input.Airports;
+
+            foreach (var item in airports){
+                if (!input.Stretches.ContainsKey(item)){
+                    var alert = new DbOptimizationAlerts(){
+                        Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                        Table = "Stretches",
+                        Message = $"There are no data of the distances from the airport with IATA code {item.IATA}",
+                        Instance = input.Instance
+                    };
+
+                    Context.OptimizationAlerts.Add(alert);
+                }else if (input.Stretches[item].Count < numAirports - 1){
+                    var alert = new DbOptimizationAlerts(){
+                        Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                        Table = "Stretches",
+                        Message = $"In this instance is missing data of the distances from the airport with IATA code {item.IATA}",
+                        Instance = input.Instance
+                    };
+
+                    Context.OptimizationAlerts.Add(alert);
+                }
+
+            }
+            Context.SaveChanges();
+        }
+
+        private void getNoGroundTimeAirports(SolverInput input){
+            var airports = input.Airports.Where(x=>x.GroundTime.TotalSeconds < 20);
+
+            foreach (var item in airports){
+                var alert = new DbOptimizationAlerts(){
+                    Type = OptimizationAlertTypeEnum.WARNING.DbCode,
+                    Table = "Airplanes",
+                    Message = $"The airport with IATA code {item.IATA} has a zero ground time",
+                    Instance = input.Instance
+                };
+
+                Context.OptimizationAlerts.Add(alert);
+            }
+            Context.SaveChanges();
         }
 
         /// <summary>
