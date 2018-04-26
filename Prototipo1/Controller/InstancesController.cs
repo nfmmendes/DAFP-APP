@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.SqlServer.Server;
+using NPOI.XSSF.UserModel;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 
@@ -230,5 +233,193 @@ namespace Prototipo1.Controller
             Context.Configuration.AutoDetectChangesEnabled = true;
             Context.SaveChanges();
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void ExportInstance(string fileName){
+            throw new NotImplementedException();
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void ExportInstanceSolution(string fileName,DbInstance instance) { 
+        
+            
+            XSSFWorkbook wb;
+            XSSFSheet sheetFlight;
+            XSSFSheet sheetRefuel;
+            XSSFSheet sheetPassengers; 
+
+            // create xls if not exists
+            if (!File.Exists(fileName))
+                File.Delete(fileName);
+          //  {
+                wb = new XSSFWorkbook();
+
+                // create sheet
+                sheetFlight = (XSSFSheet)wb.CreateSheet("Flights");
+
+                sheetFlight.CreateRow(0);
+                sheetFlight.GetRow(0).CreateCell(0);
+                sheetFlight.GetRow(0).CreateCell(1);
+                sheetFlight.GetRow(0).CreateCell(2);
+                sheetFlight.GetRow(0).CreateCell(3);
+                sheetFlight.GetRow(0).CreateCell(4);
+                sheetFlight.GetRow(0).CreateCell(5);
+                sheetFlight.GetRow(0).CreateCell(6);
+                sheetFlight.GetRow(0).GetCell(0).SetCellValue("Id");
+                sheetFlight.GetRow(0).GetCell(1).SetCellValue("Origin");
+                sheetFlight.GetRow(0).GetCell(2).SetCellValue("Destination");
+                sheetFlight.GetRow(0).GetCell(3).SetCellValue("Fuel On Departure");
+                sheetFlight.GetRow(0).GetCell(4).SetCellValue("Fuel On Arrival");
+                sheetFlight.GetRow(0).GetCell(5).SetCellValue("Arrial Time");
+                sheetFlight.GetRow(0).GetCell(6).SetCellValue("Airplanes");
+
+                //===========================================================================================
+                //                                          FLIGHTS 
+                //===========================================================================================
+                var flights = Context.FlightsReports.ToList().Where(x=>x.Instance.Id == instance.Id).ToList();
+
+                for (int i = 0; i < flights.Count; i++)
+                {
+                    if (sheetFlight.GetRow(i + 1) == null)
+                        sheetFlight.CreateRow(i + 1);
+
+                    int j = 0;
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].Id);
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].Origin.AirportName);
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].Destination.AirportName);
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].FuelOnDeparture.ToString());
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].ArrivalTime.ToString(@"hh\:mm"));
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].ArrivalTime.ToString(@"hh\:mm"));
+                    sheetFlight.GetRow(i + 1).CreateCell(j);
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].Airplanes.Prefix);
+                }
+
+
+                //===========================================================================================
+                //                                          FLIGHTS 
+                //===========================================================================================
+                sheetRefuel = (XSSFSheet)wb.CreateSheet("Refuel");
+
+
+                var refuels = Context.RefuelsReport.ToList().Where(x => x.Instance.Id == instance.Id).ToList();
+
+                sheetRefuel.CreateRow(0);
+                sheetRefuel.GetRow(0).CreateCell(0);
+                sheetRefuel.GetRow(0).CreateCell(1);
+                sheetRefuel.GetRow(0).CreateCell(2);
+                sheetRefuel.GetRow(0).CreateCell(3);
+                sheetRefuel.GetRow(0).CreateCell(4);
+                sheetRefuel.GetRow(0).GetCell(0).SetCellValue("Id");
+                sheetRefuel.GetRow(0).GetCell(0).SetCellValue("Airport");
+                sheetRefuel.GetRow(0).GetCell(1).SetCellValue("Airplane");
+                sheetRefuel.GetRow(0).GetCell(2).SetCellValue("Time");
+                sheetRefuel.GetRow(0).GetCell(3).SetCellValue("Amount");
+
+                for (int i =0;i<refuels.Count;i++){
+                    if (sheetFlight.GetRow(i + 1) == null)
+                        sheetFlight.CreateRow(i + 1);
+
+                    int j = 0;
+                    sheetRefuel.GetRow(i + 1).CreateCell(j);
+                    sheetRefuel.GetRow(i + 1).GetCell(j++).SetCellValue(i);
+                    sheetRefuel.GetRow(i + 1).CreateCell(j);
+                    sheetRefuel.GetRow(i + 1).GetCell(j++).SetCellValue(refuels[i].Airport.AirportName);
+                    sheetRefuel.GetRow(i + 1).CreateCell(j);
+                    sheetRefuel.GetRow(i + 1).GetCell(j++).SetCellValue(refuels[i].Airplanes.Prefix);
+                    sheetRefuel.GetRow(i + 1).CreateCell(j);
+                    sheetRefuel.GetRow(i + 1).GetCell(j++).SetCellValue(refuels[i].RefuelTime.ToString(@"hh\:mm"));
+                    sheetRefuel.GetRow(i + 1).CreateCell(j);
+                    sheetRefuel.GetRow(i + 1).GetCell(j++).SetCellValue(refuels[i].Amount.ToString());
+                }
+
+                //===========================================================================================
+                //                                          PASSENGERS 
+                //===========================================================================================
+
+                sheetPassengers = (XSSFSheet)wb.CreateSheet("Passengers");
+
+
+                var passengers = Context.PassagersOnFlight.ToList().Where(x => x.Flight.Instance.Id == instance.Id).ToList();
+                sheetPassengers.CreateRow(0);
+                sheetPassengers.GetRow(0).CreateCell(0);
+                sheetPassengers.GetRow(0).CreateCell(1);
+                sheetPassengers.GetRow(0).CreateCell(2);
+                sheetPassengers.GetRow(0).CreateCell(3);
+                sheetPassengers.GetRow(0).CreateCell(4);
+                sheetPassengers.GetRow(0).CreateCell(5);
+                sheetPassengers.GetRow(0).CreateCell(6);
+                sheetPassengers.GetRow(0).CreateCell(7);
+                sheetPassengers.GetRow(0).CreateCell(8);
+                sheetPassengers.GetRow(0).CreateCell(9);
+                sheetPassengers.GetRow(0).CreateCell(10);
+                sheetPassengers.GetRow(0).CreateCell(11);
+                sheetPassengers.GetRow(0).GetCell(0).SetCellValue("Flight Id");
+                sheetPassengers.GetRow(0).GetCell(1).SetCellValue("Name");
+                sheetPassengers.GetRow(0).GetCell(2).SetCellValue("PNR");
+                sheetPassengers.GetRow(0).GetCell(3).SetCellValue("Class");
+                sheetPassengers.GetRow(0).GetCell(4).SetCellValue("Sex");
+                sheetPassengers.GetRow(0).GetCell(5).SetCellValue("Is children");
+                sheetPassengers.GetRow(0).GetCell(6).SetCellValue("Departure Time Windows Begin");
+                sheetPassengers.GetRow(0).GetCell(7).SetCellValue("Departure Time Windows End");
+                sheetPassengers.GetRow(0).GetCell(8).SetCellValue("Arrival Time Windows Begin");
+                sheetPassengers.GetRow(0).GetCell(9).SetCellValue("Arrival Time Windows End");
+                sheetPassengers.GetRow(0).GetCell(10).SetCellValue("Origin");
+                sheetPassengers.GetRow(0).GetCell(11).SetCellValue("Destination");
+
+                for (int i = 0; i < passengers.Count; i++)
+                {
+                    if (sheetPassengers.GetRow(i + 1) == null)
+                        sheetPassengers.CreateRow(i + 1);
+
+                    int j = 0;
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Flight.Id);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.Name);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.PNR);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.Class);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.Sex);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.IsChildren);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.DepartureTimeWindowBegin.ToString(@"hh\:mm"));
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.DepartureTimeWindowEnd.ToString(@"hh\:mm"));
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.ArrivalTimeWindowBegin.ToString(@"hh\:mm"));
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.ArrivalTimeWindowEnd.ToString(@"hh\:mm"));
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.Origin.AirportName);
+                    sheetPassengers.GetRow(i + 1).CreateCell(j);
+                    sheetPassengers.GetRow(i + 1).GetCell(j++).SetCellValue(passengers[i].Passenger.Destination.AirportName);
+
+                }
+
+                using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) { wb.Write(fs);  }
+                        
+                
+                MessageBox.Show("Export finished");
+          //  }
+        }
+
     }
 }

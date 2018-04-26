@@ -437,6 +437,9 @@ namespace Prototipo1
             AirplaneUseSolutionView.setInstance(instance);
         }
 
+
+        
+        
         /// <summary>
         /// Return the name of a instance given the value selected in the main combo box
         /// </summary>
@@ -631,6 +634,14 @@ namespace Prototipo1
 
         }
 
-       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void solutionToolStripMenuItem_Click(object sender, EventArgs e){
+            var selectInstance = new SelectInstance(SelectInstance.SelectToEnum.EXPORT_INSTANCE_SOLUTION,Context);
+            selectInstance.Show();
+        }
     }
 }
