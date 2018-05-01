@@ -47,8 +47,8 @@ namespace Prototipo1.Components
                 foreach (var key in requests.Keys){
                     var value = requests[key].First();
                     dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AirportName,
-                        value.Destination.AirportName, value.DepartureTimeWindowBegin,
-                        value.DepartureTimeWindowEnd, value.ArrivalTimeWindowBegin, value.ArrivalTimeWindowEnd);
+                        value.Destination.AirportName, value.DepartureTimeWindowBegin.ToString(@"hh\:mm"),value.DepartureTimeWindowEnd.ToString(@"hh\:mm"),
+                        value.ArrivalTimeWindowBegin.ToString(@"hh\:mm"), value.ArrivalTimeWindowEnd.ToString(@"hh\:mm"));
                 }
             }
         }
@@ -73,9 +73,9 @@ namespace Prototipo1.Components
                     dataGridViewRequestSolutionDetails.Rows.Add("x", passenger.Passenger.Name,
                         passenger.Flight.Airplanes.Prefix,
                         passenger.Flight.Origin.AirportName,
-                        passenger.Flight.DepartureTime,
+                        passenger.Flight.DepartureTime.ToString(@"hh\:mm"),
                         passenger.Flight.Destination.AirportName,
-                        passenger.Flight.ArrivalTime);
+                        passenger.Flight.ArrivalTime.ToString(@"hh\:mm"));
                 }
 
 

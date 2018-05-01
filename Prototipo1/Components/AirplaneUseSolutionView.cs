@@ -57,11 +57,11 @@ namespace Prototipo1.Components
                         var weightOnArrival = item.Airplanes.Weight + GetWeightOfPassengers(item) + item.FuelOnArrival * 0.453592;
 
                         dataGridViewRoute.Rows.Add(item.Id, "X", item.Origin.AirportName,
-                                                                item.FuelOnDeparture, weightOnDeparture,
-                                                                item.DepartureTime.ToString("hh\\:mm"),
+                                                                item.FuelOnDeparture, Math.Round(weightOnDeparture,2),
+                                                                item.DepartureTime.ToString(@"hh\:mm"),
                                                                 item.Destination.AirportName,
-                                                                item.FuelOnArrival, weightOnArrival,
-                                                                item.ArrivalTime.ToString("hh\\:mm"));
+                                                                Math.Round(item.FuelOnArrival), Math.Round(weightOnArrival,2),
+                                                                item.ArrivalTime.ToString(@"hh\:mm"));
                     }
                 }
             }

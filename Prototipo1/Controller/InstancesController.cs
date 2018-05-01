@@ -240,7 +240,10 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="fileName"></param>
         public void ExportInstance(string fileName){
-            throw new NotImplementedException();
+            XSSFWorkbook wb;
+            XSSFSheet sheetAirplanes;
+            XSSFSheet sheetAirports;
+            XSSFSheet sheetRequests;
         }
 
 

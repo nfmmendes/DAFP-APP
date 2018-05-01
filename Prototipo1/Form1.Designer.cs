@@ -177,6 +177,7 @@ namespace Prototipo1
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importDataLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preOptimizationWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cplexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -194,7 +195,6 @@ namespace Prototipo1
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.preOptimizationWarningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabInstances.SuspendLayout();
             this.panelInstanceDetails.SuspendLayout();
@@ -1552,7 +1552,7 @@ namespace Prototipo1
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.instanceToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // instanceToolStripMenuItem
@@ -1569,26 +1569,26 @@ namespace Prototipo1
             this.instanceToolStripMenuItem2,
             this.solutionToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // instanceToolStripMenuItem2
             // 
             this.instanceToolStripMenuItem2.Name = "instanceToolStripMenuItem2";
-            this.instanceToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.instanceToolStripMenuItem2.Size = new System.Drawing.Size(139, 26);
             this.instanceToolStripMenuItem2.Text = "Instance";
             // 
             // solutionToolStripMenuItem
             // 
             this.solutionToolStripMenuItem.Name = "solutionToolStripMenuItem";
-            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.solutionToolStripMenuItem.Text = "Solution";
             this.solutionToolStripMenuItem.Click += new System.EventHandler(this.solutionToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // viewToolStripMenuItem
@@ -1608,11 +1608,19 @@ namespace Prototipo1
             this.importDataLogToolStripMenuItem.Text = "Import Data Log";
             this.importDataLogToolStripMenuItem.Click += new System.EventHandler(this.importDataLogToolStripMenuItem_Click);
             // 
+            // preOptimizationWarningsToolStripMenuItem
+            // 
+            this.preOptimizationWarningsToolStripMenuItem.Name = "preOptimizationWarningsToolStripMenuItem";
+            this.preOptimizationWarningsToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.preOptimizationWarningsToolStripMenuItem.Text = "Pre Optimization Alerts";
+            this.preOptimizationWarningsToolStripMenuItem.Click += new System.EventHandler(this.preOptimizationWarningsToolStripMenuItem_Click);
+            // 
             // configurationToolStripMenuItem
             // 
             this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.solverToolStripMenuItem,
             this.advancedOptionsToolStripMenuItem});
+            this.configurationToolStripMenuItem.Enabled = false;
             this.configurationToolStripMenuItem.ForeColor = System.Drawing.Color.DarkGray;
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             this.configurationToolStripMenuItem.Size = new System.Drawing.Size(112, 24);
@@ -1628,7 +1636,7 @@ namespace Prototipo1
             this.toolStripSeparator1,
             this.heuristicToolStripMenuItem});
             this.solverToolStripMenuItem.Name = "solverToolStripMenuItem";
-            this.solverToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.solverToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.solverToolStripMenuItem.Text = "Solver";
             // 
             // cplexToolStripMenuItem
@@ -1697,7 +1705,7 @@ namespace Prototipo1
             // advancedOptionsToolStripMenuItem
             // 
             this.advancedOptionsToolStripMenuItem.Name = "advancedOptionsToolStripMenuItem";
-            this.advancedOptionsToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.advancedOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.advancedOptionsToolStripMenuItem.Text = "Advanced options";
             this.advancedOptionsToolStripMenuItem.Click += new System.EventHandler(this.advancedOptionsToolStripMenuItem_Click);
             // 
@@ -1730,21 +1738,16 @@ namespace Prototipo1
             // 
             // tutorialToolStripMenuItem
             // 
+            this.tutorialToolStripMenuItem.Enabled = false;
             this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.tutorialToolStripMenuItem.Text = "Tutorial";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // preOptimizationWarningsToolStripMenuItem
-            // 
-            this.preOptimizationWarningsToolStripMenuItem.Name = "preOptimizationWarningsToolStripMenuItem";
-            this.preOptimizationWarningsToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.preOptimizationWarningsToolStripMenuItem.Text = "Pre Optimization Alerts";
             // 
             // MainForm
             // 

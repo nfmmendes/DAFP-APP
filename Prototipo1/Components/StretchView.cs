@@ -208,7 +208,7 @@ namespace Prototipo1.Components
                         var distance = calculateDistance(doubleCoordinatesByName[origin], doubleCoordinatesByName[destination]);
 
                         var item = new DbStretches(){
-                            Distance = (int)distance,
+                            Distance = (int)distance/1000,
                             Origin = origin,
                             Destination = destination,
                             InstanceId = Instance.Id

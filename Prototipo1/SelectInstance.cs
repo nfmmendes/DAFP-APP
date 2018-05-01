@@ -73,18 +73,22 @@ namespace Prototipo1
 
                 InstancesController.Instance.setContext(Context);
                 InstancesController.Instance.ExportInstance(saveFileDialog.FileName);
-
+                this.Close();
             }else if (Mode == SelectToEnum.EXPORT_INSTANCE_SOLUTION){
                 var saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Excel File | *.xlsx";
                 saveFileDialog.ShowDialog();
-                
-                
-                
 
                 InstancesController.Instance.setContext(Context);
                 InstancesController.Instance.ExportInstanceSolution(saveFileDialog.FileName, instance);
+                this.Close();
+            }else if (Mode == SelectToEnum.OPTIMIZATION_ALERTS){
+                var preCheckView = new PreCheckOptimizationView(instance,false);
+               
+                preCheckView.ShowDialog();
             }
+
+            
         }
 
         /// <summary>

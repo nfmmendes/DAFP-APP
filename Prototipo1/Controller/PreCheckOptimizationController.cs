@@ -155,7 +155,7 @@ namespace Prototipo1.Controller
                     if (stretches[item.Origin].ContainsKey(item.Destination)){
                         distance = stretches[item.Origin][item.Destination];
                         var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
-                        if (time.TotalHours < distance / maxAirplaneSpeed){
+                        if (time.TotalHours < distance / (maxAirplaneSpeed*1.852)){
 
                             var alert = new DbOptimizationAlerts(){
                                 Type = OptimizationAlertTypeEnum.ERROR.DbCode,

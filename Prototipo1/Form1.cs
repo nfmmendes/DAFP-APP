@@ -40,7 +40,7 @@ namespace Prototipo1
             AirportController.Instance.setContext(Context);
             ExchangeRatesController.Instance.setContext(Context);
             FuelController.Instance.setContext(Context);
-
+            PreCheckOptimizationController.Instance.setContext(Context);
 
             //Fill the list of instances on the main combo box
             comboBoxInstancesInstanceTab.DataSource = instances.ToList().Select(shortInstanceDescription).ToList();
@@ -208,7 +208,7 @@ namespace Prototipo1
                 //Save the modifications on the database
                 Context.Instances.AddOrUpdate(instance);
                 Context.SaveChanges();
-                BuildSolutionPanel(); 
+                BuildSolutionPanel(instance); 
 
             }else{
                 MessageBox.Show("A instance should be selected");
@@ -218,9 +218,12 @@ namespace Prototipo1
         /// <summary>
         /// Starts the process of showing the optimization results on the interface
         /// </summary>
-        private void BuildSolutionPanel(){
+        private void BuildSolutionPanel(DbInstance instance){
            // this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Select(x => x.Airplanes.Prefix).Distinct().ToList();
             this.tabControlInputSolution.SelectedIndex = 1;
+            this.AirplaneUseSolutionView.setInstance(instance);
+            this.RefuelSolutionView.setInstance(instance);
+            this.RequestSolutionView.setInstance(instance);
         }
 
 
@@ -642,6 +645,12 @@ namespace Prototipo1
         private void solutionToolStripMenuItem_Click(object sender, EventArgs e){
             var selectInstance = new SelectInstance(SelectInstance.SelectToEnum.EXPORT_INSTANCE_SOLUTION,Context);
             selectInstance.Show();
+        }
+
+        private void preOptimizationWarningsToolStripMenuItem_Click(object sender, EventArgs e){
+            var selectInstance = new SelectInstance(SelectInstance.SelectToEnum.OPTIMIZATION_ALERTS, Context);
+            
+            selectInstance.ShowDialog();
         }
     }
 }

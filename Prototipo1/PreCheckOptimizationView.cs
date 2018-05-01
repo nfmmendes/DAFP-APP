@@ -20,12 +20,12 @@ namespace Prototipo1
     {
         public bool ContinueOptimization { get; private set; }
         private DbInstance Instance { get; set; }
-        private int ViewChoosen { get; set; } /* 1: All - 2: Error - 3: Warnings */
 
-        public PreCheckOptimizationView(DbInstance instance){
+        public PreCheckOptimizationView(DbInstance instance, bool allowContinueOptimization= true){
             InitializeComponent();
             ContinueOptimization = false;
             Instance = instance;
+            this.buttonContinue.Visible = allowContinueOptimization;
             FillTable();
 
         }
