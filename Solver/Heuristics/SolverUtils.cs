@@ -141,7 +141,15 @@ namespace Solver.Heuristics
             return returnedValue;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="fuelOnTakeOff"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <param name="airplanes"></param>
+        /// <returns></returns>
         public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirports origin, DbAirports destination, DbAirplanes airplanes){
 
             double timeToGo = 0;
@@ -159,6 +167,15 @@ namespace Solver.Heuristics
             return Math.Abs(timeToGo) > 0.00001? fuelOnTakeOff - fuelSpent : -1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airplanes"></param>
+        /// <param name="departureTime"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public static TimeSpan GetArrivalTime(SolverInput input, DbAirplanes airplanes, TimeSpan departureTime, DbAirports origin, DbAirports destination){
             
             var returnedValue = TimeSpan.FromHours(1000000);
@@ -197,6 +214,13 @@ namespace Solver.Heuristics
                 return new List<DbAirports>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airplanes"></param>
+        /// <param name="requests"></param>
+        /// <returns></returns>
         public static double GetRequestWeight(SolverInput input, DbAirplanes airplanes, List<DbRequests> requests){
 
             var weightPerPassenger =  requests.Count(x => x.Sex.Equals("M") && !x.IsChildren) * input.OptimizationParameter.AverageManWeight
@@ -212,7 +236,16 @@ namespace Solver.Heuristics
 
             return weightPerClass + weightPerPassenger;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airplanes"></param>
+        /// <param name="fuelOnTank"></param>
+        /// <param name="origin"></param>
+        /// <param name="requests"></param>
+        /// <returns></returns>
         public static double MaxRefuelQuantity(SolverInput input, DbAirplanes airplanes, double fuelOnTank, DbAirports origin, List<DbRequests> requests)
         {
             //IF there was not enough fuel on the airplanes to do the trip without a stop, 
@@ -228,6 +261,12 @@ namespace Solver.Heuristics
             return maxRefuelQuantity;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airport"></param>
+        /// <returns></returns>
         public static List<DbAirplanes> GetAirplanesByProximity(SolverInput input ,DbAirports airport){
             List<KeyValuePair<TimeSpan, DbAirplanes>> airplanesDistances = new List<KeyValuePair<TimeSpan, DbAirplanes>>();
 
@@ -249,6 +288,14 @@ namespace Solver.Heuristics
             return returnedList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="airplane"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public static bool CanDoInOneDay(SolverInput input, DbAirplanes airplane, DbAirports origin, DbAirports destination)
         {
             double distStretch1 = 100000000;
@@ -267,5 +314,9 @@ namespace Solver.Heuristics
 
         }
 
+        public static bool CanDoInOne(TimeSpan lastDeparture, DbAirports lastOrigin, DbAirports earliestDestination, DbAirplanes airplane)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -115,11 +115,7 @@ namespace Solver.Heuristics
                 numberOfPassengersByAirport[key] = requestsByOrigin[key].Count;
             }
 
-            var orderedNumberOfPassagersByAirport = numberOfPassengersByAirport.OrderBy(x => x.Key).Reverse();
             var sunriseTime = Input.Parameters.First(x => x.Code.Equals(ParametersEnum.SUNRISE_TIME.DbCode)).Value;
-            var splitedSunrise = sunriseTime.Split(':');
-            var firstTakeOff = splitedSunrise.Length > 1? TimeSpan.FromHours(Convert.ToInt32(splitedSunrise[0])+Convert.ToDouble(splitedSunrise[1])/100): TimeSpan.MinValue; 
-           
 
             HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
 
@@ -129,7 +125,7 @@ namespace Solver.Heuristics
                 var airplanesByClosests = SolverUtils.GetAirplanesByProximity(Input, airportCountPair.Key); //Get the airplanes ordered by proximity
                     
                 foreach (var destination in sameStretchRequest.Keys){
-                    var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd);
+                    var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
                     var firstDeparture = sameStretchRequest[destination].First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x))
                                                                         .DepartureTimeWindowEnd;
 
@@ -143,20 +139,29 @@ namespace Solver.Heuristics
                         Dictionary<string, int> classBooking = new Dictionary<string, int>();
 
                         var someoneInserted = false;
-                        foreach (var request in requestsOrdered){
-                            
-                            if(requestsAlreadyBoardedOnOrigin.Contains(request))
-                                continue;
+                        if (requestsOrdered.Any(x => !requestsAlreadyBoardedOnOrigin.Contains(x))){
+                            var lastDeparture = requestsOrdered.First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x)).DepartureTimeWindowEnd;
 
-                            if (!Input.SeatList.Any(x=>x.Airplanes.Id == airplane.Id && x.seatClass.Equals(request.Class)))
-                                continue;
-                            if (!classBooking.ContainsKey(request.Class))
-                                classBooking[request.Class] = 0;
+                            foreach (var request in requestsOrdered)
+                            {
 
-                            passengersList.Add(request);
-                            if (passengersList.Count > airplane.Capacity)
-                                break;
-                            someoneInserted = true; 
+                                if (requestsAlreadyBoardedOnOrigin.Contains(request))
+                                    continue;
+
+                                if (lastDeparture < request.DepartureTimeWindowBegin)
+                                    continue;
+
+                                if (!Input.SeatList.Any(x => x.Airplanes.Id == airplane.Id && x.seatClass.Equals(request.Class)))
+                                    continue;
+                                if (!classBooking.ContainsKey(request.Class))
+                                    classBooking[request.Class] = 0;
+
+                                passengersList.Add(request);
+                                if (passengersList.Count > airplane.Capacity)
+                                    break;
+                                someoneInserted = true;
+
+                            }
 
                         }
 
@@ -232,7 +237,9 @@ namespace Solver.Heuristics
                     };
                     solution.Flights.Add(newFlight);
 
-                    CreateRegularRoute(origin, destination, fuelOnLanding, airplane,arrivalTime + origin.GroundTime, solution, passengers);
+                    var minTakeOffTime = arrivalTime + origin.GroundTime;
+                    var minDeparture = minTakeOffTime > passengers.Max(x => x.DepartureTimeWindowBegin)? minTakeOffTime: passengers.Max(x => x.DepartureTimeWindowBegin);
+                    CreateRegularRoute(origin, destination, fuelOnLanding, airplane,minDeparture, solution, passengers);
                 }
                 return true;
                 
@@ -241,10 +248,11 @@ namespace Solver.Heuristics
                     airplane, TimeSpan.FromHours(6.25), solution, new List<DbRequests>());
 
                 if (!sucess)
-                    return false; 
+                    return false;
 
-                sucess = CreateRegularRoute(origin,destination, CurrentFuelAmount,airplane,
-                                            CurrentAirplaneArrivalTime+CurrentAirplaneLocation.GroundTime,solution,passengers);
+                var minTakeOffTime = CurrentAirplaneArrivalTime + CurrentAirplaneLocation.GroundTime;
+                var minDeparture = minTakeOffTime > passengers.Max(x => x.DepartureTimeWindowBegin) ? minTakeOffTime : passengers.Max(x => x.DepartureTimeWindowBegin);
+                sucess = CreateRegularRoute(origin,destination, CurrentFuelAmount,airplane,minDeparture,solution,passengers);
             }
             return false;
         }
@@ -377,6 +385,7 @@ namespace Solver.Heuristics
 
                     solution.Flights.Add(flight1);
                     solution.Flights.Add(flight2);
+                    solution.Refuels.Add(refuel);
                     requestsAlreadyBoardedOnOrigin.AddRange(requests);
                 }
                 else{
@@ -386,11 +395,23 @@ namespace Solver.Heuristics
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="airplanes"></param>
+        /// <param name="fuelOnTank"></param>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <param name="solution"></param>
+        /// <param name="departureTime"></param>
+        /// <param name="requests"></param>
+        /// <returns></returns>
         private bool RefuelAndGo(DbAirplanes airplanes, double fuelOnTank, DbAirports origin, DbAirports destination, 
                               GeneralSolution solution, TimeSpan departureTime,List<DbRequests> requests){
 
             var arrivalTime = SolverUtils.GetArrivalTime(Input, airplanes, departureTime, origin, destination);
 
+            //TODO: Change by parameters 
             if (arrivalTime > TimeSpan.FromHours(18.25))
                 return false;
 
@@ -425,7 +446,5 @@ namespace Solver.Heuristics
             }
             return false; 
         }
-
-
     }
 }
