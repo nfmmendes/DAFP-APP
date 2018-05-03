@@ -16,15 +16,24 @@ namespace Prototipo1
     {
         private bool IsAdd { get; set; }
         public DbSeats CurrentElement { get; set; }
+        private DbAirplanes Airplane { get; set; }
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public AddEditSeatType(CustomSqlContext context)
         {
             InitializeComponent();
             Context = context; 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         public void OpenToAdd(DbInstance instance){
             Instance = instance;
             IsAdd = true;
@@ -32,6 +41,19 @@ namespace Prototipo1
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="airplane"></param>
+        public void SetAirplane(DbAirplanes airplane){
+            Airplane = airplane;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="idSeat"></param>
         public void OpenToEdit(DbInstance instance, long idSeat)
         {
             Instance = instance;
@@ -48,13 +70,46 @@ namespace Prototipo1
             
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSave_Click(object sender, EventArgs e){
 
+            if (string.IsNullOrEmpty(this.textBoxClass.Text)) { 
+                MessageBox.Show("You need enter the seat class!");
+                return; 
+            }
+
+            if (IsAdd){
+                if(Context.SeatList.Any(x =>x.seatClass.Equals(this.textBoxClass.Text) && x.Airplanes.Id == Airplane.Id))
+                    return;
+
+                var item = new DbSeats(){
+                    seatClass = this.textBoxClass.Text,
+                    Airplanes = this.Airplane,
+                    luggageWeightLimit = Convert.ToDouble(this.numUDLuggageWeight.Value),
+                };
+
+                Context.SeatList.Add(item);
+                Context.SaveChanges();
+
+            }else{
+                var seatClass = Context.SeatList.FirstOrDefault(x => x.seatClass.Equals(this.textBoxClass.Text) && x.Airplanes.Id == Airplane.Id);
+            }
+            
+
+            
+            this.Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCancel_Click(object sender, EventArgs e){
             this.Close();
         }
     }

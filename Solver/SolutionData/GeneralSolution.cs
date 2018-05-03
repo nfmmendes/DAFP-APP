@@ -14,7 +14,7 @@ namespace Solver.SolutionData
 
         public GeneralSolution(List<Flight> flights, List<Refuel> refuels){
             this.Flights = flights;
-            this.Refuels = Refuels; 
+            this.Refuels = refuels; 
         }
 
         public GeneralSolution(){

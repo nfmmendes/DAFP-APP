@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolutionData;
+using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Solver.Heuristics
@@ -230,9 +231,17 @@ namespace Solver.Heuristics
             var requestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList());
 
             double weightPerClass = 0;
-            foreach (var classItem in requestsByClass)
-               weightPerClass +=  input.SeatList.First(x=>x.Airplanes.Id == airplanes.Id && x.seatClass.Equals(classItem.Key)).luggageWeightLimit
-                                 * classItem.Value.Count;
+            foreach (var classItem in requestsByClass){
+                var seatClass = input.SeatList.FirstOrDefault(x => x.Airplanes.Id == airplanes.Id && x.seatClass.Equals(classItem.Key));
+                if(seatClass != null)
+                    weightPerClass += input.SeatList.First(x => x.Airplanes.Id == airplanes.Id && x.seatClass.Equals(classItem.Key)).luggageWeightLimit
+                                      * classItem.Value.Count;
+                else
+                    weightPerClass += 100000; //TODO : The code should not arrive here 
+            }
+               
+
+               
 
             return weightPerClass + weightPerPassenger;
         }
@@ -314,9 +323,19 @@ namespace Solver.Heuristics
 
         }
 
-        public static bool CanDoInOne(TimeSpan lastDeparture, DbAirports lastOrigin, DbAirports earliestDestination, DbAirplanes airplane)
-        {
-            throw new NotImplementedException();
+        public static bool CanDoInOne(SolverInput input , TimeSpan lastDeparture, DbAirports lastOrigin,DbAirports requestOrigin,
+                                     DbAirports requestDestination, DbAirplanes airplane){
+            
+            var arrival1 = GetArrivalTime(input, airplane,lastDeparture,lastOrigin,requestOrigin);
+            var arrival2 = GetArrivalTime(input, airplane, arrival1+requestOrigin.GroundTime, requestOrigin, requestDestination);
+            var arrival3 = GetArrivalTime(input, airplane, arrival2+requestDestination.GroundTime,requestDestination, airplane.BaseAirport);
+
+            var timeInString = input.Parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.SUNSET_TIME.DbCode)).Value;
+            var hour = Convert.ToInt32(timeInString.Split(':')[0]);
+            var minute = Convert.ToInt32(timeInString.Split(':')[1]);
+
+            return arrival3 <= TimeSpan.FromHours(hour) + TimeSpan.FromMinutes(minute);
+
         }
     }
 }

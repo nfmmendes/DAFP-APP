@@ -48,7 +48,7 @@ namespace Solver.Heuristics
             var constructHeur1 = new ConstructiveHeuristic(Input, true, GreedyStrategy.MostRequestedOrigin);
             constructHeur1.Execute();
             BestSolution = constructHeur1.BestSolution;
-          //  BestSolution = DeterministicLocalSearch(BestSolution);
+            BestSolution = DeterministicLocalSearch(BestSolution);
         }
 
         /// <summary>
@@ -65,10 +65,11 @@ namespace Solver.Heuristics
             sw.Start();
 
             var requests = new HashSet<DbRequests>();
+            var currentSolution = solution.Clone();
 
             while (sw.Elapsed.TotalSeconds < 240){
 
-                var currentSolution = solution.Clone();
+                    
                 var flightsByAirplane =currentSolution.Flights.GroupBy(x=>x.Airplanes).ToDictionary(x=>x.Key, x=>x.ToList());
                 
 
@@ -86,27 +87,49 @@ namespace Solver.Heuristics
                         var lastFlight = orderedFlights.Last();
                         var lastOrigin = lastFlight.Origin;
                         var lastDeparture = lastFlight.DepartureTime;
-                        var lastFuel = lastFlight.FuelOnTakeOff;                         
+                        var lastFuel = lastFlight.FuelOnTakeOff;
 
                         //TODO: Insert logic of "USE_TIME_WINDOWS" parameter here 
                         var possibleNewRequests = nonSatisfiedRequests.Where(x => x.DepartureTimeWindowBegin >GetArrivalTime(lastDeparture,lastOrigin,x.Origin, airplane) );
 
+                        //PROCEED A CHANGE IN THE ROUTE. INSTEAD OF GOING TO THE DEPOT, THE AIRPLANE WILL DO ANOTHER TRAVEL TO PICK UP PEOPLE IN AN ORIGIN AND DELIVER 
+                        //THEM IN A DESTINATION AND JUST AFTER THAT GO TO DEPOT. IN THIS SENSE, ONE FLIGHT WILL BECOME THREE (OR MORE IF IT'S NEEDED TO PROCEED STOPS). 
                         if (possibleNewRequests.Any()){
                             var orderedRequests = possibleNewRequests.OrderBy(x => x.DepartureTimeWindowBegin);
                             var earliest = orderedRequests.First();
 
-                            if (SolverUtils.CanDoInOne(lastDeparture, lastOrigin, earliest.Destination, airplane)){
-                                CreateRegularRoute(lastOrigin, earliest.Origin, lastFuel, airplane, lastDeparture, currentSolution, new List<DbRequests>());
-                                var arrivalTime = GetArrivalTime(lastDeparture, lastOrigin, earliest.Origin, airplane);
+                            if (SolverUtils.CanDoInOne(Input,lastDeparture, lastOrigin, earliest.Origin,earliest.Destination, airplane)){
 
-                                var passengers = new List<DbRequests>();
-                                CreateRegularRoute(earliest.Origin, earliest.Destination, lastFuel, airplane, lastDeparture, currentSolution, passengers);
+                                currentSolution.Flights.Remove(lastFlight);
+
+                                //PROCEED THE FIRST FLIGHT, BASED ON THE CURRENT STATE OF AIRPLANE IN THE LAST ORIGIN
+                                CreateRegularRoute(lastOrigin, earliest.Origin, lastFuel, airplane, lastDeparture, currentSolution, new List<DbRequests>());
+
+
+                                //PROCEED THE SECOND FLIGHT, AFTER THE AIRPLANE ARRIVES IN THE ORIGIN OF THE REQUEST 
+                                var arrivalTime = GetArrivalTime(lastDeparture, lastOrigin, earliest.Origin, airplane);
+                                var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, lastFuel, lastOrigin, earliest.Origin, airplane);
+
+                                var minTakeOffTime = arrivalTime + earliest.Origin.GroundTime;
+                                var minDeparture = minTakeOffTime > earliest.DepartureTimeWindowBegin ? minTakeOffTime : earliest.DepartureTimeWindowBegin;
+
+                                var passengers = nonSatisfiedRequests.Where(x => x.PNR.Equals(earliest.PNR)).ToList();
+
+                                if(passengers.Count > airplane.Capacity)
+                                    passengers.RemoveRange((int)airplane.Capacity, passengers.Count- (int)airplane.Capacity);
+
+                                CreateRegularRoute(earliest.Origin, earliest.Destination, fuelOnLanding, airplane, minDeparture, currentSolution, passengers);
 
                                 foreach (var passenger in passengers)
                                     requests.Add(passenger);
-                            }
-                            
 
+                                //PROCEED THE LAST FLIGHT, GOING BACK TO DEPOT 
+                                arrivalTime = GetArrivalTime(minDeparture, earliest.Origin, earliest.Destination, airplane);
+                                fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnLanding, earliest.Origin, earliest.Destination, airplane);
+
+                                minTakeOffTime = arrivalTime + earliest.Destination.GroundTime;
+                                CreateRegularRoute(earliest.Destination, airplane.BaseAirport,fuelOnLanding, airplane, minTakeOffTime, currentSolution, new List<DbRequests>());
+                            }
                         }
                     }
                         
@@ -114,7 +137,7 @@ namespace Solver.Heuristics
 
             }
 
-
+            returnedSolution = currentSolution.Clone();
             return returnedSolution; 
         }
 

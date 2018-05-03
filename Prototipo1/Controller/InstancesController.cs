@@ -305,7 +305,7 @@ namespace Prototipo1.Controller
                     sheetFlight.GetRow(i + 1).CreateCell(j);
                     sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].FuelOnDeparture.ToString());
                     sheetFlight.GetRow(i + 1).CreateCell(j);
-                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].ArrivalTime.ToString(@"hh\:mm"));
+                    sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].DepartureTime.ToString(@"hh\:mm"));
                     sheetFlight.GetRow(i + 1).CreateCell(j);
                     sheetFlight.GetRow(i + 1).GetCell(j++).SetCellValue(flights[i].ArrivalTime.ToString(@"hh\:mm"));
                     sheetFlight.GetRow(i + 1).CreateCell(j);

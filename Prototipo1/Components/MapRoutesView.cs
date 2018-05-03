@@ -293,16 +293,19 @@ namespace Prototipo1.Components
         /// 
         /// </summary>
         void DrawAirportsOnAirplaneRoute(){
-            var airplane = Context.Airplanes.FirstOrDefault(x => x.Prefix.Equals(comboBoxAirplane.SelectedItem.ToString()) &&
-                                                                 x.Instance.Id == Instance.Id);
+            if (comboBoxAirplane.SelectedItem != null){
 
-            if (airplane != null){
-                var airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id)
-                    .Select(x => x.Origin).Distinct().ToList();
-                airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id).Select(x => x.Destination).Distinct().ToList();
+                var airplane = Context.Airplanes.FirstOrDefault(x => x.Prefix.Equals(comboBoxAirplane.SelectedItem.ToString()) &&
+                                                                     x.Instance.Id == Instance.Id);
 
-                airports = airports.Distinct().ToList();
-                setOverlayMarker(airports);
+                if (airplane != null){
+                    var airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id)
+                        .Select(x => x.Origin).Distinct().ToList();
+                    airports = Context.FlightsReports.Where(x => x.Airplanes.Id == airplane.Id).Select(x => x.Destination).Distinct().ToList();
+
+                    airports = airports.Distinct().ToList();
+                    setOverlayMarker(airports);
+                }
             }
         }
     }

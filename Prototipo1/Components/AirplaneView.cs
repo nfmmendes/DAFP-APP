@@ -106,14 +106,20 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonEditAirplaneSeatType_Click(object sender, EventArgs e)
-        {
-            if (Instance != null && dataGridViewSeatTypes.SelectedRows.Count > 0)
-            {
-                var addSeat = new AddEditSeatType(Context);
-                var index = dataGridViewSeatTypes.SelectedRows[0].Index;
-                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value)); 
+        private void buttonEditAirplaneSeatType_Click(object sender, EventArgs e){
+
+            if (this.dataGridViewAirplane.SelectedRows.Count > 0){
+                var idAirplane = Convert.ToInt64(this.dataGridViewAirplane.SelectedRows[0].Cells[0].Value);
+                var airplane = Context.Airplanes.FirstOrDefault(x => x.Id == idAirplane);
+
+                if (Instance != null && dataGridViewSeatTypes.SelectedRows.Count > 0 && airplane != null){
+                    var editSeatType = new AddEditSeatType(Context);
+                    var index = dataGridViewSeatTypes.SelectedRows[0].Index;
+                    editSeatType.SetAirplane(airplane);
+                    editSeatType.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value));
+                }
             }
+
         }
 
 
@@ -163,8 +169,7 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonDeleteAirplane_Click(object sender, EventArgs e)
         {
-            if (dataGridViewAirplane.SelectedRows.Count > 0)
-            {
+            if (dataGridViewAirplane.SelectedRows.Count > 0){
                 var message = "All information related with these airplanes will be deleted. Do you want continue?";
                 var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo);
 
@@ -184,8 +189,7 @@ namespace Prototipo1.Components
                     
                     FillAirplaneTables();
                 }
-            }
-            else
+            }else
                 MessageBox.Show("There are no selected airplanes");
         }
 
@@ -207,9 +211,16 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonAddAirplaneSeatType_Click(object sender, EventArgs e){
 
-            if (Instance != null){
-                var addSeat = new AddEditSeatType(Context);
-                addSeat.OpenToAdd(Instance);
+            if (this.dataGridViewAirplane.SelectedRows.Count > 0){
+                var idAirplane = Convert.ToInt64(this.dataGridViewAirplane.SelectedRows[0].Cells[0].Value);
+                var airplane = Context.Airplanes.FirstOrDefault(x=>x.Id == idAirplane);
+
+                if (Instance != null && airplane != null){
+                    var addSeat = new AddEditSeatType(Context);
+                    addSeat.SetAirplane(airplane);
+                    addSeat.OpenToAdd(Instance);
+                }
+                FillSeatTypeList(idAirplane);
             }
         }
 
