@@ -181,13 +181,17 @@ namespace Prototipo1.Components
         /// <param name="e"></param>
         private void buttonRemoveRequest_Click(object sender, EventArgs e){
             if (dataGridViewRequest.SelectedRows.Count > 0){
-                var index = dataGridViewRequest.SelectedRows[0].Index;
 
-                var PNR = dataGridViewRequest.Rows[index].Cells[0].Value.ToString();
-                Context.Requests.Remove(Context.Requests.First(x => x.PNR.Equals(PNR) && x.Instance.Id == Instance.Id));
+                for (int i = 0; i < dataGridViewRequest.SelectedRows.Count; i++){
+                    var index = dataGridViewRequest.SelectedRows[i].Index;
+
+                    var PNR = dataGridViewRequest.Rows[index].Cells[0].Value.ToString();
+                    Context.Requests.Remove(Context.Requests.First(x => x.PNR.Equals(PNR) && x.Instance.Id == Instance.Id));
+                }
+                
                 Context.SaveChanges();
                 FillRequestTables();
-                FillPassengerList(PNR);
+                FillPassengerList("");
             }
             else
                 MessageBox.Show("Select on request in the table");
