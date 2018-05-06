@@ -82,6 +82,8 @@ namespace Prototipo1
             this.StretchView = new Prototipo1.Components.StretchView();
             this.tabSolution = new System.Windows.Forms.TabPage();
             this.tabControlInstanceSolution = new System.Windows.Forms.TabControl();
+            this.tabPageSolutionResume = new System.Windows.Forms.TabPage();
+            this.SolutionSummaryView = new Prototipo1.Components.SolutionSummaryView();
             this.tabPageRouteVisualization = new System.Windows.Forms.TabPage();
             this.MapRoutView = new Prototipo1.Components.MapRoutesView();
             this.tabPageAirplaneUsage = new System.Windows.Forms.TabPage();
@@ -209,6 +211,7 @@ namespace Prototipo1
             this.tabStretches.SuspendLayout();
             this.tabSolution.SuspendLayout();
             this.tabControlInstanceSolution.SuspendLayout();
+            this.tabPageSolutionResume.SuspendLayout();
             this.tabPageRouteVisualization.SuspendLayout();
             this.tabPageAirplaneUsage.SuspendLayout();
             this.tabPageRefuels.SuspendLayout();
@@ -550,6 +553,7 @@ namespace Prototipo1
             // tabControlInstanceSolution
             // 
             this.tabControlInstanceSolution.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlInstanceSolution.Controls.Add(this.tabPageSolutionResume);
             this.tabControlInstanceSolution.Controls.Add(this.tabPageRouteVisualization);
             this.tabControlInstanceSolution.Controls.Add(this.tabPageAirplaneUsage);
             this.tabControlInstanceSolution.Controls.Add(this.tabPageRefuels);
@@ -565,6 +569,26 @@ namespace Prototipo1
             this.tabControlInstanceSolution.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlInstanceSolution.TabIndex = 1;
             this.tabControlInstanceSolution.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlOtherTables_DrawItem);
+            // 
+            // tabPageSolutionResume
+            // 
+            this.tabPageSolutionResume.Controls.Add(this.SolutionSummaryView);
+            this.tabPageSolutionResume.Location = new System.Drawing.Point(104, 4);
+            this.tabPageSolutionResume.Name = "tabPageSolutionResume";
+            this.tabPageSolutionResume.Size = new System.Drawing.Size(1208, 546);
+            this.tabPageSolutionResume.TabIndex = 4;
+            this.tabPageSolutionResume.Text = "Solution resume";
+            this.tabPageSolutionResume.UseVisualStyleBackColor = true;
+            // 
+            // SolutionSummaryView
+            // 
+            this.SolutionSummaryView.Context = Context;
+            this.SolutionSummaryView.Location = new System.Drawing.Point(4, 4);
+            this.SolutionSummaryView.Margin = new System.Windows.Forms.Padding(4);
+            this.SolutionSummaryView.Name = "SolutionSummaryView";
+            this.SolutionSummaryView.Size = new System.Drawing.Size(1180, 530);
+            this.SolutionSummaryView.TabIndex = 0;
+            
             // 
             // tabPageRouteVisualization
             // 
@@ -1636,7 +1660,7 @@ namespace Prototipo1
             this.toolStripSeparator1,
             this.heuristicToolStripMenuItem});
             this.solverToolStripMenuItem.Name = "solverToolStripMenuItem";
-            this.solverToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.solverToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
             this.solverToolStripMenuItem.Text = "Solver";
             // 
             // cplexToolStripMenuItem
@@ -1705,7 +1729,7 @@ namespace Prototipo1
             // advancedOptionsToolStripMenuItem
             // 
             this.advancedOptionsToolStripMenuItem.Name = "advancedOptionsToolStripMenuItem";
-            this.advancedOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.advancedOptionsToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
             this.advancedOptionsToolStripMenuItem.Text = "Advanced options";
             this.advancedOptionsToolStripMenuItem.Click += new System.EventHandler(this.advancedOptionsToolStripMenuItem_Click);
             // 
@@ -1740,13 +1764,13 @@ namespace Prototipo1
             // 
             this.tutorialToolStripMenuItem.Enabled = false;
             this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.tutorialToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.tutorialToolStripMenuItem.Text = "Tutorial";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // MainForm
@@ -1780,6 +1804,7 @@ namespace Prototipo1
             this.tabStretches.ResumeLayout(false);
             this.tabSolution.ResumeLayout(false);
             this.tabControlInstanceSolution.ResumeLayout(false);
+            this.tabPageSolutionResume.ResumeLayout(false);
             this.tabPageRouteVisualization.ResumeLayout(false);
             this.tabPageAirplaneUsage.ResumeLayout(false);
             this.tabPageRefuels.ResumeLayout(false);
@@ -1968,6 +1993,9 @@ namespace Prototipo1
         private Label label20;
         private NumericUpDown numUD_SunriseH;
         private ToolStripMenuItem preOptimizationWarningsToolStripMenuItem;
+        private TabPage tabPageSolutionResume;
+        private SolutionSummaryView SolutionSummaryView;
+
     }
 }
 

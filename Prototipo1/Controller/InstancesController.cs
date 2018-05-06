@@ -281,8 +281,8 @@ namespace Prototipo1.Controller
                 sheetFlight.GetRow(0).GetCell(1).SetCellValue("Origin");
                 sheetFlight.GetRow(0).GetCell(2).SetCellValue("Destination");
                 sheetFlight.GetRow(0).GetCell(3).SetCellValue("Fuel On Departure");
-                sheetFlight.GetRow(0).GetCell(4).SetCellValue("Fuel On Arrival");
-                sheetFlight.GetRow(0).GetCell(5).SetCellValue("Arrial Time");
+                sheetFlight.GetRow(0).GetCell(4).SetCellValue("Departure Time");
+                sheetFlight.GetRow(0).GetCell(5).SetCellValue("Arrival Time");
                 sheetFlight.GetRow(0).GetCell(6).SetCellValue("Airplanes");
 
                 //===========================================================================================

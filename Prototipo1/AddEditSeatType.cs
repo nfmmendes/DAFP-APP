@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -95,8 +96,16 @@ namespace Prototipo1
                 Context.SeatList.Add(item);
                 Context.SaveChanges();
 
-            }else{
-                var seatClass = Context.SeatList.FirstOrDefault(x => x.seatClass.Equals(this.textBoxClass.Text) && x.Airplanes.Id == Airplane.Id);
+            }else
+            {
+                var idSeats = CurrentElement.Id;
+                var seat = Context.SeatList.FirstOrDefault(x => x.Id == idSeats);
+
+                seat.luggageWeightLimit = Convert.ToDouble(numUDLuggageWeight.Value);
+                seat.seatClass = textBoxClass.Text;
+
+                Context.SeatList.AddOrUpdate(seat);
+                Context.SaveChanges();
             }
             
 

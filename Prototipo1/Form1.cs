@@ -223,6 +223,7 @@ namespace Prototipo1
             this.tabControlInputSolution.SelectedIndex = 1;
             this.AirplaneUseSolutionView.setInstance(instance);
             this.RefuelSolutionView.setInstance(instance);
+            this.SolutionSummaryView.setInstance(instance);
             this.RequestSolutionView.setInstance(instance);
         }
 
@@ -438,6 +439,7 @@ namespace Prototipo1
             RequestSolutionView.setInstance(instance);
             MapRoutView.setInstance(instance);
             AirplaneUseSolutionView.setInstance(instance);
+            SolutionSummaryView.setInstance(instance);
         }
 
 

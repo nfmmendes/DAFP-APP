@@ -67,7 +67,7 @@ namespace Solver.Heuristics
             var requests = new HashSet<DbRequests>();
             var currentSolution = solution.Clone();
 
-            while (sw.Elapsed.TotalSeconds < 240){
+            while (sw.Elapsed.TotalSeconds < 80){
 
                     
                 var flightsByAirplane =currentSolution.Flights.GroupBy(x=>x.Airplanes).ToDictionary(x=>x.Key, x=>x.ToList());
