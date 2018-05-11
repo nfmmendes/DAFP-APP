@@ -216,7 +216,8 @@ namespace Solver.Heuristics
         }
 
         /// <summary>
-        /// 
+        /// Return the weight of a passengers group based on their sex and class. 
+        /// WARNING: The class weight depends on airplane
         /// </summary>
         /// <param name="input"></param>
         /// <param name="airplanes"></param>
@@ -266,7 +267,7 @@ namespace Solver.Heuristics
                 ? origin.MTOW_PC12 * SolverUtils.PoundsToKg
                 : origin.MTOW_APE3 * SolverUtils.PoundsToKg;
 
-            double maxRefuelQuantity = Math.Min(MTOW - weight, airplanes.Capacity - fuelOnTank);
+            double maxRefuelQuantity = Math.Min(MTOW - weight, airplanes.MaxFuel - fuelOnTank);
             return maxRefuelQuantity;
         }
 
@@ -279,9 +280,13 @@ namespace Solver.Heuristics
         public static List<DbAirplanes> GetAirplanesByProximity(SolverInput input ,DbAirports airport){
             List<KeyValuePair<TimeSpan, DbAirplanes>> airplanesDistances = new List<KeyValuePair<TimeSpan, DbAirplanes>>();
 
+            
             foreach (var airplane in input.Airplanes){
                 var timeToGo = TimeSpan.FromHours(100000);
-                if(input.Stretches.ContainsKey(airplane.BaseAirport))
+                if(airport.Id == airplane.BaseAirport.Id)
+                    airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplanes>(TimeSpan.FromSeconds(0.1), airplane));
+
+                if (input.Stretches.ContainsKey(airplane.BaseAirport))
                     if (input.Stretches[airplane.BaseAirport].ContainsKey(airport))
                         timeToGo = TimeSpan.FromHours(input.Stretches[airplane.BaseAirport][airport]/(airplane.CruiseSpeed*KnotsToKmH) );
                 airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplanes>(timeToGo,airplane));
@@ -323,6 +328,16 @@ namespace Solver.Heuristics
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="lastDeparture"></param>
+        /// <param name="lastOrigin"></param>
+        /// <param name="requestOrigin"></param>
+        /// <param name="requestDestination"></param>
+        /// <param name="airplane"></param>
+        /// <returns></returns>
         public static bool CanDoInOne(SolverInput input , TimeSpan lastDeparture, DbAirports lastOrigin,DbAirports requestOrigin,
                                      DbAirports requestDestination, DbAirplanes airplane){
             
@@ -336,6 +351,22 @@ namespace Solver.Heuristics
 
             return arrival3 <= TimeSpan.FromHours(hour) + TimeSpan.FromMinutes(minute);
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="airport"></param>
+        /// <param name="airplane"></param>
+        /// <returns></returns>
+        public static double GetMaxWeight(DbAirports airport, DbAirplanes airplane){
+            //TODO: This is not the right way 
+            if (airplane.Model.Contains("PC"))
+                return Math.Min(airport.MTOW_PC12, airplane.MaxWeight);
+            if (airplane.Model.Contains("Cessna"))
+                return Math.Min(airport.MTOW_APE3, airplane.MaxWeight);
+            else
+                return 0;
         }
     }
 }

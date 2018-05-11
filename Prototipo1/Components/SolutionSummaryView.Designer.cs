@@ -275,7 +275,7 @@
             this.panel2.Controls.Add(this.chartAirplaneKilometers);
             this.panel2.Location = new System.Drawing.Point(16, 154);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1108, 346);
+            this.panel2.Size = new System.Drawing.Size(1117, 346);
             this.panel2.TabIndex = 9;
             // 
             // chartAirplaneKilometers
@@ -299,7 +299,7 @@
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.chartAirplaneKilometers.Legends.Add(legend1);
-            this.chartAirplaneKilometers.Location = new System.Drawing.Point(13, 13);
+            this.chartAirplaneKilometers.Location = new System.Drawing.Point(12, 13);
             this.chartAirplaneKilometers.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.chartAirplaneKilometers.Name = "chartAirplaneKilometers";
             series1.ChartArea = "ChartArea1";
@@ -312,7 +312,7 @@
             series1.Name = "Km";
             series1.ToolTip = "#LABEL  #VAL";
             this.chartAirplaneKilometers.Series.Add(series1);
-            this.chartAirplaneKilometers.Size = new System.Drawing.Size(1074, 320);
+            this.chartAirplaneKilometers.Size = new System.Drawing.Size(1091, 320);
             this.chartAirplaneKilometers.TabIndex = 0;
             this.chartAirplaneKilometers.Text = "Kilometers flight";
             title1.ForeColor = System.Drawing.Color.White;

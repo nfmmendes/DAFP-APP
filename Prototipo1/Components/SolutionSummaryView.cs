@@ -36,6 +36,8 @@ namespace Prototipo1.Components
 
                 var totalDistance = 0;
                 var flightTime = new TimeSpan(0);
+                var takenOnOrigin = 0;
+                var leftOnDestination = 0;
                 var emptyFlights = 0;
                 var emptyKilometers = 0; 
 
@@ -59,8 +61,12 @@ namespace Prototipo1.Components
                                 AirplaneDistance[flight.Airplanes.Prefix] = 0;
 
                             AirplaneDistance[flight.Airplanes.Prefix] += distance;
+                            
                         }
                     flightTime += flight.ArrivalTime - flight.DepartureTime;
+
+                    takenOnOrigin += Context.PassagersOnFlight.Count(x => x.Passenger.Origin.Id == flight.Origin.Id && x.Flight.Id == flight.Id);
+                    leftOnDestination += Context.PassagersOnFlight.Count(x => x.Passenger.Destination.Id == flight.Destination.Id && x.Flight.Id == flight.Id);
 
                     if (isEmptyFlight)
                         emptyFlights++;
@@ -82,6 +88,8 @@ namespace Prototipo1.Components
                 labelKmFlight.Text = totalDistance.ToString();
                 labelEmptyFlights.Text = emptyFlights.ToString();
                 labelEmptyKilometers.Text = emptyKilometers.ToString();
+                labelPassengersTaken.Text = takenOnOrigin.ToString();
+                labelPassengersDeliverd.Text = leftOnDestination.ToString();
                 labelHourFlight.Text =  (flightTime - new TimeSpan(0)).ToString(@"hh\:mm");
                 labelStoppedHours.Text = (totalTime - flightTime - new TimeSpan(0)).ToString(@"hh\:mm");
                 labelTotalPassengers.Text = Context.PassagersOnFlight.Count(x=>x.Flight.Instance.Id == Instance.Id).ToString();

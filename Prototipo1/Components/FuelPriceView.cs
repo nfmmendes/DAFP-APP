@@ -107,7 +107,7 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonAddFuel_Click(object sender, EventArgs e){
-            if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0){
+            if (Instance != null){
                 var addFuel = new AddEditFuel(Context);
                 addFuel.OpenToAdd(Instance); 
 

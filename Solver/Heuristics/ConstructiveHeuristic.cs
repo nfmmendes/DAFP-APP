@@ -138,8 +138,7 @@ namespace Solver.Heuristics
                         if (requestsOrdered.Any(x => !requestsAlreadyBoardedOnOrigin.Contains(x))){
                             var lastDeparture = requestsOrdered.First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x)).DepartureTimeWindowEnd;
 
-                            foreach (var request in requestsOrdered)
-                            {
+                            foreach (var request in requestsOrdered){
 
                                 if (requestsAlreadyBoardedOnOrigin.Contains(request))
                                     continue;
@@ -166,7 +165,7 @@ namespace Solver.Heuristics
                             if (airplane.BaseAirport.Id != airportCountPair.Key.Id)
                                 CreatedRouteFromDepot(solution, passengersList, airplane, airportCountPair.Key,destination);
                             else{
-                                var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airportCountPair.Key, requests);
+                                var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airportCountPair.Key, passengersList);
                                 CreateRegularRoute(airportCountPair.Key, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
                             }
                                 
