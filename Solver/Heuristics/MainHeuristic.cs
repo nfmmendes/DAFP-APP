@@ -49,6 +49,11 @@ namespace Solver.Heuristics
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <returns></returns>
         private GeneralSolution StartLateTripLocalSearch(GeneralSolution solution){
 
             var remainingRequests = new List<DbRequests>();
@@ -60,7 +65,7 @@ namespace Solver.Heuristics
 
             allPassengers = allPassengers.Distinct().ToList();
 
-            remainingRequests = Input.Requests.Where(x => allPassengers.All(y => y.Id != x.Id)).ToList();
+            remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
 
             foreach (var request in remainingRequests){
                 //Late departure upper bound

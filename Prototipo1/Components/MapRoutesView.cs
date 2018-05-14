@@ -33,6 +33,10 @@ namespace Prototipo1.Components
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
         public void setInstance(DbInstance instance){
             Instance = instance;
             GMapControl.Overlays.Clear();
@@ -49,10 +53,14 @@ namespace Prototipo1.Components
                 if(Context.Airplanes.Any())
                     this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
             }
-             
 
+            setOverlayMarker(Context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="airportsList"></param>
         private void setOverlayMarker(List<DbAirports> airportsList){
             GMapOverlay markers = new GMapOverlay("markers");
             GMapControl.Overlays.Clear();
@@ -153,6 +161,7 @@ namespace Prototipo1.Components
                 if (Context.Airplanes.Any())
                     this.comboBoxAirplane.DataSource = Context.Airplanes.Where(x => x.Instance.Id == Instance.Id).Select(x => x.Prefix).ToList();
             }
+            setOverlayMarker(Context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList());
         }
 
 
@@ -173,11 +182,7 @@ namespace Prototipo1.Components
             
             // Now parse using the regex parser
             Match match = Parser.Match(coordinate);
-            if (!match.Success)
-            {
-
-               // throw new ArgumentException(string.Format(CultureInfo.CurrentUICulture,
-               //     "Lat/long value of '{0}' is not recognised", coordinate));
+            if (!match.Success){
                Debug.Write("\t0\n");
                 return 0;
             }else{
@@ -257,8 +262,7 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void radioButtonAllPoints_CheckedChanged(object sender, EventArgs e){
-            if (radioButtonAllPoints.Checked && Context.Airports.Any())
-            {
+            if (radioButtonAllPoints.Checked && Context.Airports.Any()){
                 setOverlayMarker(Context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList());
             }
         }
