@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
@@ -262,6 +263,12 @@ namespace Prototipo1.Controller
                     //If some of the airports are not found a error log is generated
                     if (airportOrigin == null || airportDestination == null){
                         CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
+                        continue;
+                    }
+
+                    //TODO: Verify if this is right
+                    if(row.Cells.Count < 10) { 
+                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Some data is missing in your database row");
                         continue;
                     }
 

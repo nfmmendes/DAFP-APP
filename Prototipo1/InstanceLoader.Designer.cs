@@ -46,7 +46,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.networkFileChoosenLabel = new System.Windows.Forms.Label();
+            this.choosenNetworkFileLabel = new System.Windows.Forms.Label();
             this.buttonChooseFileNetwork = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -84,7 +84,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(359, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(634, 455);
+            this.panel1.Size = new System.Drawing.Size(806, 455);
             this.panel1.TabIndex = 0;
             // 
             // panel4
@@ -98,31 +98,31 @@
             this.panel4.Controls.Add(this.label3);
             this.panel4.Location = new System.Drawing.Point(23, 59);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(589, 365);
+            this.panel4.Size = new System.Drawing.Size(764, 365);
             this.panel4.TabIndex = 18;
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.networkFileChoosenLabel);
+            this.panel7.Controls.Add(this.choosenNetworkFileLabel);
             this.panel7.Controls.Add(this.buttonChooseFileNetwork);
             this.panel7.Location = new System.Drawing.Point(114, 25);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(458, 43);
+            this.panel7.Size = new System.Drawing.Size(631, 43);
             this.panel7.TabIndex = 7;
             // 
-            // networkFileChoosenLabel
+            // choosenNetworkFileLabel
             // 
-            this.networkFileChoosenLabel.AutoSize = true;
-            this.networkFileChoosenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.networkFileChoosenLabel.Location = new System.Drawing.Point(10, 9);
-            this.networkFileChoosenLabel.Name = "networkFileChoosenLabel";
-            this.networkFileChoosenLabel.Size = new System.Drawing.Size(0, 24);
-            this.networkFileChoosenLabel.TabIndex = 2;
+            this.choosenNetworkFileLabel.AutoSize = true;
+            this.choosenNetworkFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.8F);
+            this.choosenNetworkFileLabel.Location = new System.Drawing.Point(10, 12);
+            this.choosenNetworkFileLabel.Name = "choosenNetworkFileLabel";
+            this.choosenNetworkFileLabel.Size = new System.Drawing.Size(0, 18);
+            this.choosenNetworkFileLabel.TabIndex = 2;
             // 
             // buttonChooseFileNetwork
             // 
             this.buttonChooseFileNetwork.Enabled = false;
-            this.buttonChooseFileNetwork.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseFileNetwork.Location = new System.Drawing.Point(480, 0);
             this.buttonChooseFileNetwork.Name = "buttonChooseFileNetwork";
             this.buttonChooseFileNetwork.Size = new System.Drawing.Size(148, 41);
             this.buttonChooseFileNetwork.TabIndex = 0;
@@ -146,22 +146,22 @@
             this.panel6.Controls.Add(this.buttonChooseRequestFile);
             this.panel6.Location = new System.Drawing.Point(115, 179);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(458, 43);
+            this.panel6.Size = new System.Drawing.Size(630, 43);
             this.panel6.TabIndex = 5;
             // 
             // choosenRequestFileLabel
             // 
             this.choosenRequestFileLabel.AutoSize = true;
-            this.choosenRequestFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.choosenRequestFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.choosenRequestFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.8F);
+            this.choosenRequestFileLabel.Location = new System.Drawing.Point(10, 12);
             this.choosenRequestFileLabel.Name = "choosenRequestFileLabel";
-            this.choosenRequestFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.choosenRequestFileLabel.Size = new System.Drawing.Size(0, 18);
             this.choosenRequestFileLabel.TabIndex = 2;
             // 
             // buttonChooseRequestFile
             // 
             this.buttonChooseRequestFile.Enabled = false;
-            this.buttonChooseRequestFile.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseRequestFile.Location = new System.Drawing.Point(479, 0);
             this.buttonChooseRequestFile.Name = "buttonChooseRequestFile";
             this.buttonChooseRequestFile.Size = new System.Drawing.Size(148, 41);
             this.buttonChooseRequestFile.TabIndex = 0;
@@ -185,22 +185,22 @@
             this.panel5.Controls.Add(this.buttonChooseAirplaneFile);
             this.panel5.Location = new System.Drawing.Point(115, 100);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(458, 43);
+            this.panel5.Size = new System.Drawing.Size(630, 43);
             this.panel5.TabIndex = 3;
             // 
             // choosenAirplaneFileLabel
             // 
             this.choosenAirplaneFileLabel.AutoSize = true;
-            this.choosenAirplaneFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.choosenAirplaneFileLabel.Location = new System.Drawing.Point(10, 9);
+            this.choosenAirplaneFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.8F);
+            this.choosenAirplaneFileLabel.Location = new System.Drawing.Point(10, 12);
             this.choosenAirplaneFileLabel.Name = "choosenAirplaneFileLabel";
-            this.choosenAirplaneFileLabel.Size = new System.Drawing.Size(0, 24);
+            this.choosenAirplaneFileLabel.Size = new System.Drawing.Size(0, 18);
             this.choosenAirplaneFileLabel.TabIndex = 2;
             // 
             // buttonChooseAirplaneFile
             // 
             this.buttonChooseAirplaneFile.Enabled = false;
-            this.buttonChooseAirplaneFile.Location = new System.Drawing.Point(309, 0);
+            this.buttonChooseAirplaneFile.Location = new System.Drawing.Point(479, 2);
             this.buttonChooseAirplaneFile.Name = "buttonChooseAirplaneFile";
             this.buttonChooseAirplaneFile.Size = new System.Drawing.Size(148, 41);
             this.buttonChooseAirplaneFile.TabIndex = 0;
@@ -366,7 +366,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 606);
+            this.ClientSize = new System.Drawing.Size(1189, 606);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.buttonLoadFiles);
@@ -415,7 +415,7 @@
         private System.Windows.Forms.Button buttonChooseAirplaneFile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label networkFileChoosenLabel;
+        private System.Windows.Forms.Label choosenNetworkFileLabel;
         private System.Windows.Forms.Button buttonChooseFileNetwork;
         private System.Windows.Forms.Label label5;
     }

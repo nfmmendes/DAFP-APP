@@ -29,6 +29,9 @@ namespace Prototipo1
         public InstanceLoader(CustomSqlContext context)
         {
             InitializeComponent();
+            choosenAirplaneFileLabel.SendToBack();
+            choosenRequestFileLabel.SendToBack();
+            choosenNetworkFileLabel.SendToBack();
             Context = context;
             var instances = Context.Instances;
             comboBoxInstances.DataSource = instances.ToList().Select(x=>x.Name).ToList();
@@ -114,8 +117,8 @@ namespace Prototipo1
             this.Enabled = false;
             var now = DateTime.Now;
             if (instance != null){
-               if (!string.IsNullOrEmpty(this.networkFileChoosenLabel.Text))
-                  ImportDataController.Instance.importNetworkData(now, networkFileChoosenLabel.Text,instance,loadAirports,loadStretches,loadFuel);
+               if (!string.IsNullOrEmpty(this.choosenNetworkFileLabel.Text))
+                  ImportDataController.Instance.importNetworkData(now, choosenNetworkFileLabel.Text,instance,loadAirports,loadStretches,loadFuel);
                if (!string.IsNullOrEmpty(choosenAirplaneFileLabel.Text))
                   ImportDataController.Instance.importAirplanesData(now, this.choosenAirplaneFileLabel.Text, instance,loadAirplane, loadSeat);
                if (!string.IsNullOrEmpty(choosenRequestFileLabel.Text))
@@ -282,7 +285,7 @@ namespace Prototipo1
                     MessageBox.Show("Your input file must be called Network.xlsx");
                 else
                 {
-                    networkFileChoosenLabel.Text = fileDialogue.FileName;
+                    choosenNetworkFileLabel.Text = fileDialogue.FileName;
                     buttonLoadFiles.Enabled = true;
                 }
             }
