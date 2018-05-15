@@ -11,8 +11,10 @@ using Passenger = SolverClientComunication.Models.DbRequests;
 
 namespace SolutionData
 {
-    public class Flight
-    {
+    public class Flight{
+
+        public long Id { get; private set; }
+        private static long LastId = 0;
         public DbAirplanes Airplanes { get; set; }
         public Aiport Origin { get; set; }
         public Aiport Destination { get; set; }
@@ -22,9 +24,11 @@ namespace SolutionData
         public double FuelOnLanding { get; set; }
         public List<Passenger> Passengers { get; set;  }
 
-
-
-
+        public Flight(){
+            Id = LastId;
+            LastId++; 
+        }
+        
     }
 
     

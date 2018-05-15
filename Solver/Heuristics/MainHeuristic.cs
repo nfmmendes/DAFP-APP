@@ -44,7 +44,7 @@ namespace Solver.Heuristics
                   grouped = BestSolution.Flights.GroupBy(x => x.Airplanes).ToDictionary(x => x.Key, x => x.ToList());
                   BestSolution = StartLateTripLocalSearch(BestSolution);
                   grouped = BestSolution.Flights.GroupBy(x => x.Airplanes).ToDictionary(x => x.Key, x => x.ToList());
-                // BestSolution = LateComeBackLocalSearch(BestSolution);
+                  BestSolution = LateComeBackLocalSearch(BestSolution);
             }
             
         }
@@ -106,7 +106,39 @@ namespace Solver.Heuristics
 
             allPassengers = allPassengers.Distinct().ToList();
 
-            remainingRequests = Input.Requests.Where(x => allPassengers.All(y => y.Id != x.Id)).ToList();
+            remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
+
+            var flightsByAirplane = currentSolution.Flights.GroupBy(x=>x.Airplanes).ToDictionary(x=>x.Key, x=>x.ToList());
+
+            foreach (var item in flightsByAirplane) { 
+                var lastFlight = item.Value.OrderBy(x=>x.ArrivalTime).Last();
+
+                if (!lastFlight.Passengers.Any()){
+                    var requestCandidates = remainingRequests.Where(x => x.ArrivalTimeWindowEnd > lastFlight.DepartureTime && //Just to don't generate long delays
+                                                                         x.Origin.Id == lastFlight.Origin.Id &&
+                                                                         x.Destination.Id == lastFlight.Destination.Id);
+                    if (requestCandidates.Any()){ 
+                        var firstRequest = requestCandidates.OrderBy(x=>x.ArrivalTimeWindowBegin).FirstOrDefault();
+                        var finalRequests = requestCandidates.Where(x=>x.DepartureTimeWindowBegin < firstRequest.DepartureTimeWindowEnd).ToList();
+
+                        var oldDeparture = lastFlight.DepartureTime;
+                        var newDeparture = firstRequest.DepartureTimeWindowBegin;
+
+                        currentSolution.Flights.First(x => x.Id == lastFlight.Id).DepartureTime = newDeparture;
+                        currentSolution.Flights.First(x => x.Id == lastFlight.Id).ArrivalTime += (newDeparture - oldDeparture);
+
+                        if (finalRequests.Count() < lastFlight.Airplanes.Capacity) { 
+                            currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(finalRequests);
+                            
+                        }else{
+                            var inserted= new List<DbRequests>();
+                            for(int i=0; i < lastFlight.Airplanes.Capacity;i++)
+                                inserted.Add(finalRequests[i]);
+                            currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(inserted);
+                        }
+                    }
+                }
+;            }
 
             return currentSolution.Clone();
         }
