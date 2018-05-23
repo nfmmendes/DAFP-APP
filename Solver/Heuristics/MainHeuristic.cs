@@ -69,7 +69,7 @@ namespace Solver.Heuristics
 
             foreach (var request in remainingRequests){
                 //Late departure upper bound
-                var maxLateness = TimeSpan.FromHours(1);
+                var maxLateness = TimeSpan.FromHours(2);
                 var candidateFlights = currentSolution.Flights.Where(x=>x.Origin.Id == request.Origin.Id && 
                                                                         request.Destination.Id == x.Destination.Id && 
                                                                         x.DepartureTime > request.DepartureTimeWindowBegin && 

@@ -527,7 +527,7 @@ namespace Prototipo1
             this.tabStretches.Padding = new System.Windows.Forms.Padding(3);
             this.tabStretches.Size = new System.Drawing.Size(1220, 546);
             this.tabStretches.TabIndex = 5;
-            this.tabStretches.Text = "Stretches";
+            this.tabStretches.Text = "Segments";
             this.tabStretches.UseVisualStyleBackColor = true;
             // 
             // StretchView
@@ -588,7 +588,6 @@ namespace Prototipo1
             this.SolutionSummaryView.Name = "SolutionSummaryView";
             this.SolutionSummaryView.Size = new System.Drawing.Size(1180, 530);
             this.SolutionSummaryView.TabIndex = 0;
-            
             // 
             // tabPageRouteVisualization
             // 

@@ -81,6 +81,11 @@
             // 
             this.numUpDownDist.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.numUpDownDist.Location = new System.Drawing.Point(142, 192);
+            this.numUpDownDist.Maximum = new decimal(new int[] {
+            40000,
+            0,
+            0,
+            0});
             this.numUpDownDist.Name = "numUpDownDist";
             this.numUpDownDist.Size = new System.Drawing.Size(120, 28);
             this.numUpDownDist.TabIndex = 3;
@@ -103,6 +108,7 @@
             this.buttonCancel.TabIndex = 45013;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonSave
             // 
@@ -112,8 +118,9 @@
             this.buttonSave.TabIndex = 45012;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // EditStretch
+            // AddEditStretch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +135,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EditStretch";
+            this.Name = "AddEditStretch";
             this.ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownDist)).EndInit();
             this.ResumeLayout(false);

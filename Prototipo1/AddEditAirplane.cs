@@ -31,6 +31,7 @@ namespace Prototipo1
         public void OpenToAdd(DbInstance instance){
             Instance = instance;
             IsAdd = true;
+            comboBoxAirport.DataSource = Context.Airports.Where(x => x.Instance.Id == Instance.Id).Select(x => x.AirportName).Distinct().ToList();
             this.ShowDialog();
         }
 
@@ -45,7 +46,7 @@ namespace Prototipo1
             IdItem = idAIrplane; 
 
             CurrentElement = Context.Airplanes.FirstOrDefault(x => x.Id == idAIrplane);
-            comboBoxAirport.DataSource = Context.Airports.Select(x => x.AirportName).ToList();
+            comboBoxAirport.DataSource = Context.Airports.Where(x=>x.Instance.Id == Instance.Id).Select(x => x.AirportName).Distinct().ToList();
 
 
             if (CurrentElement != null){

@@ -231,10 +231,9 @@ namespace Prototipo1.Components
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonAddAirplane_Click(object sender, EventArgs e){
-            if (Instance != null && dataGridViewSeatTypes.SelectedRows.Count > 0){
-                var addSeat = new AddEditSeatType(Context);
-                var index = dataGridViewSeatTypes.SelectedRows[0].Index;
-                addSeat.OpenToEdit(Instance, Convert.ToInt64(dataGridViewSeatTypes.Rows[index].Cells[0].Value));
+            if (Instance != null && dataGridViewAirplane.SelectedRows.Count > 0){
+                var addAirplane = new AddEditAirplane(Context);
+                addAirplane.OpenToAdd(Instance);
             }
         }
 

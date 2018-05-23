@@ -264,5 +264,22 @@ namespace Prototipo1.Components
             StretchePageSize = Convert.ToInt32(comboBoxPageSize.SelectedItem.ToString());
             FillStretchTable();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEdit_Click(object sender, EventArgs e){
+
+            if (dataGridViewStretches.SelectedRows.Count > 0){
+                var id = Convert.ToInt64(dataGridViewStretches.SelectedRows[0].Cells[0].Value);
+                var editStretch = new AddEditStretch(Context);
+                editStretch.OpenToEdit(Instance, id);
+                FillStretchTable();
+            }else
+                MessageBox.Show("Select a segment on the table!!");
+            
+        }
     }
 }

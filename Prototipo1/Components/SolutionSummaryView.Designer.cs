@@ -107,6 +107,7 @@
             this.labelEmptyKilometers.Size = new System.Drawing.Size(20, 24);
             this.labelEmptyKilometers.TabIndex = 25;
             this.labelEmptyKilometers.Text = "0";
+            this.labelEmptyKilometers.Visible = false;
             // 
             // label13
             // 
@@ -117,6 +118,7 @@
             this.label13.Size = new System.Drawing.Size(161, 24);
             this.label13.TabIndex = 24;
             this.label13.Text = "Empty Kilometers:";
+            this.label13.Visible = false;
             // 
             // labelEmptyFlights
             // 
@@ -128,6 +130,7 @@
             this.labelEmptyFlights.Size = new System.Drawing.Size(20, 24);
             this.labelEmptyFlights.TabIndex = 23;
             this.labelEmptyFlights.Text = "0";
+            this.labelEmptyFlights.Visible = false;
             // 
             // label12
             // 
@@ -138,6 +141,7 @@
             this.label12.Size = new System.Drawing.Size(128, 24);
             this.label12.TabIndex = 22;
             this.label12.Text = "Empty Flights:";
+            this.label12.Visible = false;
             // 
             // labelTotalStops
             // 
@@ -149,6 +153,7 @@
             this.labelTotalStops.Size = new System.Drawing.Size(20, 24);
             this.labelTotalStops.TabIndex = 21;
             this.labelTotalStops.Text = "0";
+            this.labelTotalStops.Visible = false;
             // 
             // labelTotalPassengers
             // 
@@ -170,6 +175,7 @@
             this.label10.Size = new System.Drawing.Size(62, 24);
             this.label10.TabIndex = 19;
             this.label10.Text = "Stops:";
+            this.label10.Visible = false;
             // 
             // label9
             // 
