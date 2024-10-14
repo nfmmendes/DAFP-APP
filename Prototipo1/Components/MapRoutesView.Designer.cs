@@ -38,7 +38,7 @@ namespace Prototipo1.Components
             this.GMapControl.EmptyTileColor = System.Drawing.Color.Navy;
             this.GMapControl.GrayScaleMode = false;
             this.GMapControl.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.GMapControl.LevelsKeepInMemmory = 5;
+            this.GMapControl.LevelsKeepInMemory = 5;
             this.GMapControl.Location = new System.Drawing.Point(29, 67);
             this.GMapControl.MarkersEnabled = true;
             this.GMapControl.MaxZoom = 15;

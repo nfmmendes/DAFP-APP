@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
 using Prototipo1.Controller;
 using Solver;
 using SolverClientComunication.Enums;
@@ -97,14 +97,14 @@ namespace Prototipo1
             
                 
 
-            XSSFWorkbook wb;
-            XSSFSheet sh;
+            HSSFWorkbook wb;
+            HSSFSheet sh;
             // create xls if not exists
             if (!File.Exists(saveFile.FileName)){
-                wb = new XSSFWorkbook();
+                wb = new HSSFWorkbook();
 
                 // create sheet
-                sh = (XSSFSheet) wb.CreateSheet("Optimization alerts");
+                sh = (HSSFSheet) wb.CreateSheet("Optimization alerts");
 
                 sh.CreateRow(0);
                 sh.GetRow(0).CreateCell(0);

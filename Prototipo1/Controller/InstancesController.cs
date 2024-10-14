@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Server;
-using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 
@@ -240,10 +240,10 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="fileName"></param>
         public void ExportInstance(string fileName){
-            XSSFWorkbook wb;
-            XSSFSheet sheetAirplanes;
-            XSSFSheet sheetAirports;
-            XSSFSheet sheetRequests;
+            HSSFWorkbook wb;
+            HSSFSheet sheetAirplanes;
+            HSSFSheet sheetAirports;
+            HSSFSheet sheetRequests;
         }
 
 
@@ -255,19 +255,19 @@ namespace Prototipo1.Controller
         public void ExportInstanceSolution(string fileName,DbInstance instance) { 
         
             
-            XSSFWorkbook wb;
-            XSSFSheet sheetFlight;
-            XSSFSheet sheetRefuel;
-            XSSFSheet sheetPassengers; 
+            HSSFWorkbook wb;
+            HSSFSheet sheetFlight;
+            HSSFSheet sheetRefuel;
+            HSSFSheet sheetPassengers; 
 
             // create xls if not exists
             if (!File.Exists(fileName))
                 File.Delete(fileName);
           //  {
-                wb = new XSSFWorkbook();
+                wb = new HSSFWorkbook();
 
                 // create sheet
-                sheetFlight = (XSSFSheet)wb.CreateSheet("Flights");
+                sheetFlight = (HSSFSheet)wb.CreateSheet("Flights");
 
                 sheetFlight.CreateRow(0);
                 sheetFlight.GetRow(0).CreateCell(0);
@@ -316,7 +316,7 @@ namespace Prototipo1.Controller
                 //===========================================================================================
                 //                                          FLIGHTS 
                 //===========================================================================================
-                sheetRefuel = (XSSFSheet)wb.CreateSheet("Refuel");
+                sheetRefuel = (HSSFSheet)wb.CreateSheet("Refuel");
 
 
                 var refuels = Context.RefuelsReport.ToList().Where(x => x.Instance.Id == instance.Id).ToList();
@@ -354,7 +354,7 @@ namespace Prototipo1.Controller
                 //                                          PASSENGERS 
                 //===========================================================================================
 
-                sheetPassengers = (XSSFSheet)wb.CreateSheet("Passengers");
+                sheetPassengers = (HSSFSheet)wb.CreateSheet("Passengers");
 
 
                 var passengers = Context.PassagersOnFlight.ToList().Where(x => x.Flight.Instance.Id == instance.Id).ToList();

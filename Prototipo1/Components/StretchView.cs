@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 using System.Threading;
+using System.Device.Location;
 
 namespace Prototipo1.Components
 {

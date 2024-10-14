@@ -11,7 +11,6 @@ using SolverClientComunication.Models;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 
 namespace Prototipo1.Controller
 {
@@ -42,7 +41,7 @@ namespace Prototipo1.Controller
             //Default procedure to open a excel file using the library NPOI
             var stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             stream.Position = 0;
-            XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            HSSFWorkbook hssfwb = new HSSFWorkbook(stream);
 
             Instance.Context.Configuration.AutoDetectChangesEnabled = false;
 
@@ -70,7 +69,7 @@ namespace Prototipo1.Controller
                     {
                         AirportName = row.GetCell(0).StringCellValue,
                         GroundTime =row.GetCell(9).CellType != CellType.String? 
-                                                               row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
+                                                               row.GetCell(9).DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
                         IATA = row.GetCell(1).StringCellValue,
                         Latitude = row.GetCell(2).StringCellValue,
                         Longitude = row.GetCell(3).StringCellValue, 
@@ -230,7 +229,7 @@ namespace Prototipo1.Controller
             var importHour = now;
             Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
                                                                                 //It need to be set to true in the end of procedure
-            XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            HSSFWorkbook hssfwb = new HSSFWorkbook(stream);
 
             //Open the sheet called "Request"
             var sheet = hssfwb.GetSheet("Request");
@@ -282,10 +281,10 @@ namespace Prototipo1.Controller
                         IsChildren = row.GetCell(4).BooleanCellValue,
                         Origin = airportOrigin,
                         Destination = airportDestination,
-                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.TimeOfDay,
-                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.TimeOfDay,
-                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.TimeOfDay,
-                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.TimeOfDay,
+                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.Value.TimeOfDay,
+                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.Value.TimeOfDay,
+                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.Value.TimeOfDay,
+                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.Value.TimeOfDay,
                         Instance = instance
                     };
 
@@ -339,7 +338,7 @@ namespace Prototipo1.Controller
             var importHour = now;
 
             Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker. This field must be set to true in the end
-            XSSFWorkbook hssfwb = new XSSFWorkbook(stream);
+            HSSFWorkbook hssfwb = new HSSFWorkbook(stream);
 
             //Get the sheet called "Airplanes" if it exist
             var sheet = hssfwb.GetSheet("Airplanes");
