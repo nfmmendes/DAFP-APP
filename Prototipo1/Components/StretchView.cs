@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Models;
-using System.Device.Location;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Prototipo1.Components
