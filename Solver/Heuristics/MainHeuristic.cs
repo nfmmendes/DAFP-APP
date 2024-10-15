@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SolutionData;
 using Solver.SolutionData;
-using SolverClientComunication;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 using GreedyStrategy = Solver.Heuristics.ConstructiveHeuristic.GreedyStrategie;

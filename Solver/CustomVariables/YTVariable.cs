@@ -1,5 +1,4 @@
-﻿using Solver.Enum;
-using Solver.Enum.Commons;
+﻿using Solver.Enum.Commons;
 using Solver.SolverInterface;
 
 namespace Solver.CustomVariables

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Solver.CustomVariables;
 using Solver.Enum.Commons;
 using Solver.SolverInterface;
