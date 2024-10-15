@@ -28,11 +28,14 @@ namespace Solver.Heuristics
             constructHeur1.Execute();
             BestSolution = constructHeur1.BestSolution;
 
+            if (!BestSolution.Flights.Any())
+                return;
+
             var timeLimitCode = ParametersEnum.TIME_LIMIT.DbCode;
             var maxTime = Input.Parameters.Any(x=>x.Code.Equals(timeLimitCode)) ? Convert.ToInt32(Input.Parameters.First(x => x.Code.Equals(timeLimitCode)).Value):5;
             maxTime *= 60;
             var grouped = BestSolution.Flights.GroupBy(x => x.Airplanes).ToDictionary(x => x.Key, x => x.ToList());
-
+            
             while (sw.Elapsed.TotalSeconds < maxTime ){
                   BestSolution = NewFlightOnEndLocalSearch(BestSolution);
                   grouped = BestSolution.Flights.GroupBy(x => x.Airplanes).ToDictionary(x => x.Key, x => x.ToList());
@@ -42,7 +45,6 @@ namespace Solver.Heuristics
                   grouped = BestSolution.Flights.GroupBy(x => x.Airplanes).ToDictionary(x => x.Key, x => x.ToList());
                   BestSolution = LateComeBackLocalSearch(BestSolution);
             }
-            
         }
 
         /// <summary>
