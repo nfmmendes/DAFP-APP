@@ -53,15 +53,18 @@ namespace Solver.Heuristics
             
             requestsWithMandatorySplit = Input.Requests.Where(x => numRequestsByPNR[x.PNR] > maxTotalCapacity).ToList();
 
-            if (Strategie == GreedyStrategie.MostRequestedOrigin){
+            if (Strategie == GreedyStrategie.MostRequestedOrigin)
+            {
                 BestSolution = DoMostRequestedOriginStrategy();
-            }else if (Strategie == GreedyStrategie.EarlierRequests){
-                BestSolution = DoEarlierRequests();
-            }else if (Strategie == GreedyStrategie.MostRequestedDestination){
-                BestSolution = DoMostRequestedDestinatio();
             }
-            
-            
+            else if (Strategie == GreedyStrategie.EarlierRequests)
+            {
+                BestSolution = DoEarlierRequests();
+            }
+            else if (Strategie == GreedyStrategie.MostRequestedDestination)
+            {
+                BestSolution = DoMostRequestedDestinatio();
+            }  
         }
 
         /// <summary>
