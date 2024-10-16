@@ -58,11 +58,7 @@ namespace Solver.Heuristics
             var remainingRequests = new List<DbRequests>();
             var currentSolution = solution.Clone();
 
-            var allPassengers = new List<DbRequests>();
-            foreach (var flight in solution.Flights)
-                allPassengers.AddRange(flight.Passengers);
-
-            allPassengers = allPassengers.Distinct().ToList();
+            var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
 
             remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
 
@@ -100,11 +96,7 @@ namespace Solver.Heuristics
             var remainingRequests = new List<DbRequests>();
             var currentSolution = solution.Clone();
 
-            var allPassengers = new List<DbRequests>();
-            foreach (var flight in solution.Flights)
-                allPassengers.AddRange(flight.Passengers);
-
-            allPassengers = allPassengers.Distinct().ToList();
+            var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
 
             remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
 
@@ -159,11 +151,7 @@ namespace Solver.Heuristics
             var remainingRequests = new List<DbRequests>();
             var currentSolution = solution.Clone();
 
-            var allPassengers = new List<DbRequests>();
-            foreach (var flight in solution.Flights)
-                allPassengers.AddRange(flight.Passengers);
-
-            allPassengers = allPassengers.Distinct().ToList();
+            var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
 
             remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
             var insertedRequets = new List<DbRequests>();
@@ -238,18 +226,10 @@ namespace Solver.Heuristics
         /// <returns></returns>
         public GeneralSolution NewFlightOnEndLocalSearch(GeneralSolution solution){
             var returnedSolution = new GeneralSolution();
-
-            
-            var requests = new HashSet<DbRequests>();
             var currentSolution = solution.Clone();
-            
                     
             var flightsByAirplane =currentSolution.Flights.GroupBy(x=>x.Airplanes).ToDictionary(x=>x.Key, x=>x.ToList());
-                
-
-            foreach (var flight in currentSolution.Flights)
-                foreach (var passenger in flight.Passengers)
-                    requests.Add(passenger);
+            var requests = currentSolution.Flights.SelectMany(x => x.Passengers).Distinct().ToHashSet();
 
             var nonSatisfiedRequests = Input.Requests.Where(x => requests.Count(y => y.Id == x.Id) == 0).ToList();
 
