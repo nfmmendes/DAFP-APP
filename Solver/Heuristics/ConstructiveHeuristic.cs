@@ -117,9 +117,9 @@ namespace Solver.Heuristics
                 var airplanesByClosests = SolverUtils.GetAirplanesByProximity(Input, airport); //Get the airplanes ordered by proximity
                     
                 foreach (var destination in sameStretchRequest.Keys){
-                    var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
-                    var firstDeparture = sameStretchRequest[destination].First(x=>!requestsBoardedInOrigin.Contains(x))
-                                                                        .DepartureTimeWindowEnd;
+                    var requestsToDestination = sameStretchRequest[destination];
+                    var requestsOrdered = requestsToDestination.OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
+                    var firstDeparture = requestsToDestination.First(x=>!requestsBoardedInOrigin.Contains(x)).DepartureTimeWindowEnd;
 
                     var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
                                                         !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x,airport,destination));
