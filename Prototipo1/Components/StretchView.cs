@@ -33,7 +33,7 @@ namespace Prototipo1.Components
         public void setInstance(DbInstance instance){
             Instance = instance;
 
-            var listOfStretches = Context.Stretches.ToList().Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
+            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
             RowsCache.Clear();
             foreach (var item in listOfStretches)
                 RowsCache.Add( new Tuple<long, string, string, int>( item.Id, item.Origin, item.Destination, item.Distance));

@@ -42,9 +42,9 @@ namespace Prototipo1.Components
                 var leftOnDestination = 0;
                 var emptyFlights = 0;
                 var emptyKilometers = 0;
-                var numStops = 0; 
-
-                var stretches = Context.Stretches.ToList().Where(x => x.InstanceId == Instance.Id).GroupBy(x=>x.Origin).ToDictionary(x=>x.Key, x=>x.ToList());
+                var numStops = 0;
+                
+                var stretches = Context.Stretches.Where(x => x.InstanceId == Instance.Id).GroupBy(x=>x.Origin).ToDictionary(x=>x.Key, x=>x.ToList());
                 this.chartAirplaneKilometers.Series["Km"].Points.Clear();
 
                 Dictionary<string, double> AirplaneDistance = new Dictionary<string, double>();
