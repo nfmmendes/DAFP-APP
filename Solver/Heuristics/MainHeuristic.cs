@@ -78,7 +78,7 @@ namespace Solver.Heuristics
                 
                 var orderedFlights = candidateFlights.OrderBy(x=>x.DepartureTime);
                     
-                var first = orderedFlights.FirstOrDefault(x => x.Passengers.Count() <= x.Airplanes.Capacity - 1 && 
+                var first = orderedFlights.FirstOrDefault(x => !x.IsFull && 
                                                                 SolverUtils.GetRequestWeight(Input, x.Airplanes,new List<DbRequests>(){request}) < x.Airplanes.MaxWeight);
 
                 if(first!= null)
