@@ -15,7 +15,7 @@ namespace Solver.Heuristics
         public GreedyStrategie Strategie { get; set; }
 
         //============== "Global fields" to make the information interchange between the functions easier =============================
-        private List<DbRequests> requestsAlreadyBoardedOnOrigin { get; set; }
+        private List<DbRequests> requestsBoardedInOrigin { get; set; }
         private List<DbRequests> requestsAlreadyFinished { get; set; }
         private List<DbRequests> requestsWithMandatoryStop { get; set; }
         private List<DbRequests> requestsWithMandatorySplit { get; set; }
@@ -39,7 +39,7 @@ namespace Solver.Heuristics
         /// </summary>
         public override void Execute()
         {
-            requestsAlreadyBoardedOnOrigin = new List<DbRequests>();
+            requestsBoardedInOrigin = new List<DbRequests>();
             requestsAlreadyFinished = new List<DbRequests>();
 
             var maxRange = Input.Airplanes.Max(x => x.Range);
@@ -118,7 +118,7 @@ namespace Solver.Heuristics
                     
                 foreach (var destination in sameStretchRequest.Keys){
                     var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
-                    var firstDeparture = sameStretchRequest[destination].First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x))
+                    var firstDeparture = sameStretchRequest[destination].First(x=>!requestsBoardedInOrigin.Contains(x))
                                                                         .DepartureTimeWindowEnd;
 
                     var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
@@ -129,12 +129,12 @@ namespace Solver.Heuristics
                         Dictionary<string, int> classBooking = new Dictionary<string, int>();
 
                         var nobodyInserted = true;
-                        if (requestsOrdered.Any(x => !requestsAlreadyBoardedOnOrigin.Contains(x))){
-                            var lastDeparture = requestsOrdered.First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x)).DepartureTimeWindowEnd;
+                        if (requestsOrdered.Any(x => !requestsBoardedInOrigin.Contains(x))){
+                            var lastDeparture = requestsOrdered.First(x=>!requestsBoardedInOrigin.Contains(x)).DepartureTimeWindowEnd;
 
                             foreach (var request in requestsOrdered){
 
-                                if (requestsAlreadyBoardedOnOrigin.Contains(request))
+                                if (requestsBoardedInOrigin.Contains(request))
                                     continue;
 
                                 if (lastDeparture < request.DepartureTimeWindowBegin)
@@ -297,8 +297,8 @@ namespace Solver.Heuristics
                         FuelOnTakeOff = fuel,
                         Passengers = passengers
                     };
-                    requestsAlreadyBoardedOnOrigin.AddRange(passengers);
-                    requestsAlreadyBoardedOnOrigin.AddRange(passengers);
+                    requestsBoardedInOrigin.AddRange(passengers);
+                    requestsBoardedInOrigin.AddRange(passengers);
                     var someoneInserted = true;
                     solution.Flights.Add(newFlight);
 
@@ -386,7 +386,7 @@ namespace Solver.Heuristics
                     solution.Flights.Add(flight1);
                     solution.Flights.Add(flight2);
                     solution.Refuels.Add(refuel);
-                    requestsAlreadyBoardedOnOrigin.AddRange(requests);
+                    requestsBoardedInOrigin.AddRange(requests);
                 }
                 else{
                     return RefuelAndGo(airplane, firstStep, airport, destination, solution,firstStepArrival + airport.GroundTime, requests);
@@ -438,7 +438,7 @@ namespace Solver.Heuristics
                 };
 
                 solution.Flights.Add(newFlight);
-                requestsAlreadyBoardedOnOrigin.AddRange(requests);
+                requestsBoardedInOrigin.AddRange(requests);
                 return true;
 
             }else{
