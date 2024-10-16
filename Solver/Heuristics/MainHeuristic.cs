@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Common;
 using SolutionData;
 using Solver.SolutionData;
 using SolverClientComunication.Enums;
@@ -28,7 +29,7 @@ namespace Solver.Heuristics
             constructHeur1.Execute();
             BestSolution = constructHeur1.BestSolution;
 
-            if (!BestSolution.Flights.Any())
+            if (BestSolution.Flights.None())
                 return;
 
             var timeLimitCode = ParametersEnum.TIME_LIMIT.DbCode;
@@ -72,7 +73,7 @@ namespace Solver.Heuristics
                                                                         request.Destination.Id == x.Destination.Id && 
                                                                         x.DepartureTime > request.DepartureTimeWindowBegin && 
                                                                         request.DepartureTimeWindowEnd + maxLateness > x.DepartureTime );
-                if (candidateFlights.Count() == 0)
+                if (candidateFlights.None())
                     continue;
 
                 
@@ -120,7 +121,7 @@ namespace Solver.Heuristics
                                                                         x.Origin.Id == lastFlight.Origin.Id &&
                                                                         x.Destination.Id == lastFlight.Destination.Id);
 
-                if(!requestCandidates.Any())
+                if(requestCandidates.None())
                     continue;
 
                 var firstRequest = requestCandidates.OrderBy(x=>x.ArrivalTimeWindowBegin).FirstOrDefault();
