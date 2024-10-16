@@ -112,32 +112,36 @@ namespace Solver.Heuristics
             foreach (var item in flightsByAirplane) { 
                 var lastFlight = item.Value.OrderBy(x=>x.ArrivalTime).Last();
 
-                if (!lastFlight.Passengers.Any()){
-                    var requestCandidates = remainingRequests.Where(x => x.ArrivalTimeWindowEnd > lastFlight.DepartureTime && //Just to don't generate long delays
-                                                                         x.Origin.Id == lastFlight.Origin.Id &&
-                                                                         x.Destination.Id == lastFlight.Destination.Id);
-                    if (requestCandidates.Any()){ 
-                        var firstRequest = requestCandidates.OrderBy(x=>x.ArrivalTimeWindowBegin).FirstOrDefault();
-                        var finalRequests = requestCandidates.Where(x=>x.DepartureTimeWindowBegin < firstRequest.DepartureTimeWindowEnd).ToList();
+                if (lastFlight.Passengers.Any())
+                    continue;
 
-                        var oldDeparture = lastFlight.DepartureTime;
-                        var newDeparture = firstRequest.DepartureTimeWindowBegin;
+                
+                var requestCandidates = remainingRequests.Where(x => x.ArrivalTimeWindowEnd > lastFlight.DepartureTime && //Just to don't generate long delays
+                                                                        x.Origin.Id == lastFlight.Origin.Id &&
+                                                                        x.Destination.Id == lastFlight.Destination.Id);
 
-                        currentSolution.Flights.First(x => x.Id == lastFlight.Id).DepartureTime = newDeparture;
-                        currentSolution.Flights.First(x => x.Id == lastFlight.Id).ArrivalTime += (newDeparture - oldDeparture);
+                if(!requestCandidates.Any())
+                    continue;
 
-                        if (finalRequests.Count() < lastFlight.Airplanes.Capacity) { 
-                            currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(finalRequests);
+                var firstRequest = requestCandidates.OrderBy(x=>x.ArrivalTimeWindowBegin).FirstOrDefault();
+                var finalRequests = requestCandidates.Where(x=>x.DepartureTimeWindowBegin < firstRequest.DepartureTimeWindowEnd).ToList();
+
+                var oldDeparture = lastFlight.DepartureTime;
+                var newDeparture = firstRequest.DepartureTimeWindowBegin;
+
+                currentSolution.Flights.First(x => x.Id == lastFlight.Id).DepartureTime = newDeparture;
+                currentSolution.Flights.First(x => x.Id == lastFlight.Id).ArrivalTime += (newDeparture - oldDeparture);
+
+                if (finalRequests.Count() < lastFlight.Airplanes.Capacity) { 
+                    currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(finalRequests);
                             
-                        }else{
-                            var inserted= new List<DbRequests>();
-                            for(int i=0; i < lastFlight.Airplanes.Capacity;i++)
-                                inserted.Add(finalRequests[i]);
-                            currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(inserted);
-                        }
-                    }
+                }else{
+                    var inserted= new List<DbRequests>();
+                    for(int i=0; i < lastFlight.Airplanes.Capacity;i++)
+                        inserted.Add(finalRequests[i]);
+                    currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(inserted);
                 }
-;            }
+;           }
 
             return currentSolution.Clone();
         }
