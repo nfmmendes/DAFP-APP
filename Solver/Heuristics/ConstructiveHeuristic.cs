@@ -128,7 +128,7 @@ namespace Solver.Heuristics
                         List<DbRequests> passengersList = new List<DbRequests>();
                         Dictionary<string, int> classBooking = new Dictionary<string, int>();
 
-                        var someoneInserted = false;
+                        var nobodyInserted = true;
                         if (requestsOrdered.Any(x => !requestsAlreadyBoardedOnOrigin.Contains(x))){
                             var lastDeparture = requestsOrdered.First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x)).DepartureTimeWindowEnd;
 
@@ -148,25 +148,23 @@ namespace Solver.Heuristics
                                 passengersList.Add(request);
                                 if (passengersList.Count > airplane.Capacity)
                                     break;
-                                someoneInserted = true;
+                                nobodyInserted = false;
 
                             }
 
                         }
 
-                        if (someoneInserted){
-                            ExitedFromDepot.Add(airplane);
-                            if (airplane.BaseAirport.Id != airport.Id)
-                                CreatedRouteFromDepot(solution, passengersList, airplane, airport,destination);
-                            else{
-                                var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airport, passengersList);
-                                CreateRegularRoute(airport, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
-                            }
-                                
-                        }else
+                        if (nobodyInserted)
                             break;
-
-
+                        
+                        ExitedFromDepot.Add(airplane);
+                        if (airplane.BaseAirport.Id != airport.Id)
+                            CreatedRouteFromDepot(solution, passengersList, airplane, airport,destination);
+                        else{
+                            var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airport, passengersList);
+                            CreateRegularRoute(airport, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
+                        }
+                                
                         airplane = airplanesByClosests.FirstOrDefault(x =>SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
                                                                      !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x, airport, destination));
                     }
