@@ -5,5 +5,5 @@
 /SolverClientComunication/obj/Debug/*.dll
 *.dll
 Debug
-/Common
+/Common/obj
 Release
