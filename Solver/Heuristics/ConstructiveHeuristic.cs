@@ -112,18 +112,17 @@ namespace Solver.Heuristics
 
             HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
 
-            foreach (var airportCountPair in numberOfPassengersByAirport){
-
-                var sameStretchRequest = requestsByOrigin[airportCountPair.Key].GroupBy(x=>x.Destination).ToDictionary(x=>x.Key, x=>x.ToList());
-                var airplanesByClosests = SolverUtils.GetAirplanesByProximity(Input, airportCountPair.Key); //Get the airplanes ordered by proximity
+            foreach (var airport in numberOfPassengersByAirport.Keys){
+                var sameStretchRequest = requestsByOrigin[airport].GroupBy(x=>x.Destination).ToDictionary(x=>x.Key, x=>x.ToList());
+                var airplanesByClosests = SolverUtils.GetAirplanesByProximity(Input, airport); //Get the airplanes ordered by proximity
                     
                 foreach (var destination in sameStretchRequest.Keys){
                     var requestsOrdered = sameStretchRequest[destination].OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
                     var firstDeparture = sameStretchRequest[destination].First(x=>!requestsAlreadyBoardedOnOrigin.Contains(x))
                                                                         .DepartureTimeWindowEnd;
 
-                    var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airportCountPair.Key) < firstDeparture &&
-                                                        !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x,airportCountPair.Key,destination));
+                    var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
+                                                        !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x,airport,destination));
 
                     while (airplane != null){
                         List<DbRequests> passengersList = new List<DbRequests>();
@@ -157,19 +156,19 @@ namespace Solver.Heuristics
 
                         if (someoneInserted){
                             ExitedFromDepot.Add(airplane);
-                            if (airplane.BaseAirport.Id != airportCountPair.Key.Id)
-                                CreatedRouteFromDepot(solution, passengersList, airplane, airportCountPair.Key,destination);
+                            if (airplane.BaseAirport.Id != airport.Id)
+                                CreatedRouteFromDepot(solution, passengersList, airplane, airport,destination);
                             else{
-                                var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airportCountPair.Key, passengersList);
-                                CreateRegularRoute(airportCountPair.Key, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
+                                var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airport, passengersList);
+                                CreateRegularRoute(airport, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
                             }
                                 
                         }else
                             break;
 
 
-                        airplane = airplanesByClosests.FirstOrDefault(x =>SolverUtils.ArrivallFromDepot(Input, x, airportCountPair.Key) < firstDeparture &&
-                                                                     !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x, airportCountPair.Key, destination));
+                        airplane = airplanesByClosests.FirstOrDefault(x =>SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
+                                                                     !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x, airport, destination));
                     }
    
                 }
