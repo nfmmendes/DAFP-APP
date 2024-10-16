@@ -162,7 +162,7 @@ namespace Solver.Heuristics
                             CreatedRouteFromDepot(solution, passengersList, airplane, airport,destination);
                         else{
                             var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airport, passengersList);
-                            CreateRegularRoute(airport, destination, fuel, airplane, passengersList.Max(x=>x.ArrivalTimeWindowBegin),solution,passengersList);
+                            CreateRegularRoute(solution, airport, destination, passengersList.Max(x => x.ArrivalTimeWindowBegin), airplane, fuel,passengersList);
                         }
                                 
                         airplane = airplanesByClosests.FirstOrDefault(x =>SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
@@ -177,8 +177,9 @@ namespace Solver.Heuristics
                 var airplaneFlights = solution.Flights.Where(x => x.Airplanes.Id == airplane.Id);
 
                 var lastFlight = airplaneFlights.OrderBy(x => x.ArrivalTime).Last();
-                CreateRegularRoute(lastFlight.Destination, airplane.BaseAirport, lastFlight.FuelOnLanding, airplane,
-                    lastFlight.ArrivalTime + lastFlight.Destination.GroundTime, solution, new List<DbRequests>());
+                var departureTime = lastFlight.ArrivalTime + lastFlight.Destination.GroundTime;
+                CreateRegularRoute(solution, lastFlight.Destination, airplane.BaseAirport, departureTime, airplane, lastFlight.FuelOnLanding,
+                     new List<DbRequests>());
             }
 
 
@@ -239,7 +240,7 @@ namespace Solver.Heuristics
 
                     var minTakeOffTime = arrivalTime + origin.GroundTime;
                     var minDeparture = minTakeOffTime > passengers.Max(x => x.DepartureTimeWindowBegin)? minTakeOffTime: passengers.Max(x => x.DepartureTimeWindowBegin);
-                    CreateRegularRoute(origin, destination, fuelOnLanding, airplane,minDeparture, solution, passengers);
+                    CreateRegularRoute(solution, origin, destination, minDeparture, airplane, fuelOnLanding, passengers);
                 }
                 return true;
                 
@@ -251,7 +252,7 @@ namespace Solver.Heuristics
 
                 var minTakeOffTime = CurrentAirplaneArrivalTime + CurrentAirplaneLocation.GroundTime;
                 var minDeparture = minTakeOffTime > passengers.Max(x => x.DepartureTimeWindowBegin) ? minTakeOffTime : passengers.Max(x => x.DepartureTimeWindowBegin);
-                sucess = CreateRegularRoute(origin,destination, CurrentFuelAmount,airplane,minDeparture,solution,passengers);
+                sucess = CreateRegularRoute(solution, origin, destination, minDeparture, airplane, CurrentFuelAmount,passengers);
             }
             return false;
         }
@@ -268,8 +269,8 @@ namespace Solver.Heuristics
         /// <param name="solution"></param>
         /// <param name="passengers"></param>
         /// <returns></returns>
-        private bool CreateRegularRoute(DbAirports origin, DbAirports destination, double fuel, DbAirplanes airplane, TimeSpan departure, 
-                                        GeneralSolution solution, List<DbRequests> passengers)
+        private bool CreateRegularRoute(GeneralSolution solution, DbAirports origin, DbAirports destination, TimeSpan departure, DbAirplanes airplane,
+                                        double fuel, List<DbRequests> passengers)
         {
             
             var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
