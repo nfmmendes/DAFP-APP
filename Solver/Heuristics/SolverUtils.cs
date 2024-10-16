@@ -236,9 +236,6 @@ namespace Solver.Heuristics
                 else
                     weightPerClass += 100000; //TODO : The code should not arrive here 
             }
-               
-
-               
 
             return weightPerClass + weightPerPassenger;
         }
