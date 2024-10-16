@@ -18,13 +18,13 @@ namespace SolutionData
         public double FuelOnTakeOff { get; set; }
         public double FuelOnLanding { get; set; }
         public List<Passenger> Passengers { get; set;  }
+        public bool IsFull => Passengers.Count >= Airplanes.Capacity;
+
+        public bool IsEmpty => Passengers.Count == 0;
 
         public Flight(){
             Id = LastId;
             LastId++; 
         }
-        
     }
-
-    
 }
