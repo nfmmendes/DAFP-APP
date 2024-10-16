@@ -72,16 +72,17 @@ namespace Solver.Heuristics
                                                                         request.Destination.Id == x.Destination.Id && 
                                                                         x.DepartureTime > request.DepartureTimeWindowBegin && 
                                                                         request.DepartureTimeWindowEnd + maxLateness > x.DepartureTime );
-                if (candidateFlights.Any()){
-                    var orderedFlights = candidateFlights.OrderBy(x=>x.DepartureTime);
-                    
-                    var first = orderedFlights.FirstOrDefault(x => x.Passengers.Count() <= x.Airplanes.Capacity - 1 && 
-                                                                  SolverUtils.GetRequestWeight(Input, x.Airplanes,new List<DbRequests>(){request}) < x.Airplanes.MaxWeight);
+                if (candidateFlights.Count() == 0)
+                    continue;
 
-                    if(first!= null)
-                        currentSolution.Flights.First(x=>x.Equals(first)).Passengers.Add(request);
-                }
                 
+                var orderedFlights = candidateFlights.OrderBy(x=>x.DepartureTime);
+                    
+                var first = orderedFlights.FirstOrDefault(x => x.Passengers.Count() <= x.Airplanes.Capacity - 1 && 
+                                                                SolverUtils.GetRequestWeight(Input, x.Airplanes,new List<DbRequests>(){request}) < x.Airplanes.MaxWeight);
+
+                if(first!= null)
+                    currentSolution.Flights.First(x=>x.Equals(first)).Passengers.Add(request);
             }
 
 
