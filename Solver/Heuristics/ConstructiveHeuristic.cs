@@ -107,12 +107,8 @@ namespace Solver.Heuristics
 
             var requests = Input.Requests;
             var requestsByOrigin = requests.GroupBy(x => x.Origin).ToDictionary(x => x.Key, x => x.ToList());
-            
-
-            var numberOfPassengersByAirport = new Dictionary<DbAirports, int>(); 
-            foreach (var key in requestsByOrigin.Keys){
-                numberOfPassengersByAirport[key] = requestsByOrigin[key].Count;
-            }
+            var numberOfPassengersByAirport = requestsByOrigin.ToDictionary(x => x.Key, x => x.Value.Count());
+       
 
             HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
 
