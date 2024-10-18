@@ -10,4 +10,57 @@
     <FallbackCulture>it-IT</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="AddEditAirplane.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditAirport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditCurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditFuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditPassenger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditSeatType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEditStretch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CreateInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DuplicateScenario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormAdvancedOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ImportDataLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InstanceLoader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PreCheckOptimizationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SelectInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@ using SolverClientComunication.Models;
 
 namespace SolverClientComunication
 {
-    using System;
+    using MathNet.Numerics;
     using System.Data.Entity;
     using System.Linq;
 
@@ -32,9 +32,8 @@ namespace SolverClientComunication
         // If you wish to target a different database and/or database provider, modify the 'CustomSqlContext' 
         // connection string in the application configuration file.
         public CustomSqlContext()
-            : base("name=CustomSqlContext")
+            : base("CustomSqlContext")
         {
-            
         }
 
 

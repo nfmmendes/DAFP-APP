@@ -1,21 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SixLabors.ImageSharp.3.1.5\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.3.1.5\build\SixLabors.ImageSharp.props')" />
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67F321DA-3077-4B01-9A56-B6A7E40C7A79}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Prototipo1</RootNamespace>
-    <AssemblyName>Prototipo1</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,447 +17,55 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
     <GenerateResourceNeverLockTypeAssemblies>true</GenerateResourceNeverLockTypeAssemblies>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Enums.NET, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
-      <HintPath>..\packages\Enums.NET.5.0.0\lib\net461\Enums.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="ExtendedNumerics.BigDecimal, Version=3000.0.0.280, Culture=neutral, PublicKeyToken=65f1315a45ad8949, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExtendedNumerics.BigDecimal.3000.0.0.280\lib\net48\ExtendedNumerics.BigDecimal.dll</HintPath>
-    </Reference>
-    <Reference Include="GMap.NET.Core, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
-      <HintPath>..\packages\GMap.NET.Core.2.1.7\lib\net48\GMap.NET.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="GMap.NET.WindowsForms, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
-      <HintPath>..\packages\GMap.NET.WinForms.2.1.7\lib\net48\GMap.NET.WindowsForms.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.Signed.5.0.0\lib\net48\MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetCore.NPOI.Core.1.2.3\lib\net461\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetCore.NPOI.1.2.3\lib\net461\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetCore.NPOI.OpenXml4Net.1.2.3\lib\net461\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetCore.NPOI.OpenXmlFormats.1.2.3\lib\net461\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
-      <HintPath>..\packages\SixLabors.Fonts.1.0.1\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.119.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.119.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Device" />
-    <Reference Include="System.Device.Portable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3f6d3f5f65b761a0, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Device.Location.Portable.1.0.0\lib\System.Device.Portable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.8.0.10\lib\net462\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Pkcs.8.0.1\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Xml.8.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encoding.CodePages, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encoding.CodePages.8.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AddEditAirplane.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditAirplane.Designer.cs">
-      <DependentUpon>AddEditAirplane.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditAirport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditAirport.Designer.cs">
-      <DependentUpon>AddEditAirport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditCurrency.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditCurrency.Designer.cs">
-      <DependentUpon>AddEditCurrency.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditFuel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditFuel.Designer.cs">
-      <DependentUpon>AddEditFuel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditPassenger.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditPassenger.Designer.cs">
-      <DependentUpon>AddEditPassenger.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditRequest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditRequest.Designer.cs">
-      <DependentUpon>AddEditRequest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditSeatType.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditSeatType.Designer.cs">
-      <DependentUpon>AddEditSeatType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\AirplaneUseSolutionView.cs">
+    <Compile Update="Components\AirplaneUseSolutionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\AirplaneUseSolutionView.Designer.cs">
-      <DependentUpon>AirplaneUseSolutionView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\AirplaneView.cs">
+    <Compile Update="Components\AirplaneView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\AirplaneView.Designer.cs">
-      <DependentUpon>AirplaneView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\AirportView.cs">
+    <Compile Update="Components\AirportView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\AirportView.Designer.cs">
-      <DependentUpon>AirportView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\CurrencyView.cs">
+    <Compile Update="Components\CurrencyView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\CurrencyView.Designer.cs">
-      <DependentUpon>CurrencyView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\FuelPriceView.cs">
+    <Compile Update="Components\FuelPriceView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\FuelPriceView.Designer.cs">
-      <DependentUpon>FuelPriceView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\MapRoutesView.cs">
+    <Compile Update="Components\MapRoutesView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\MapRoutesView.Designer.cs">
-      <DependentUpon>MapRoutesView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\RefuelSolutionView.cs">
+    <Compile Update="Components\RefuelSolutionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\RefuelSolutionView.Designer.cs">
-      <DependentUpon>RefuelSolutionView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\RequestSolutionView.cs">
+    <Compile Update="Components\RequestSolutionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\RequestSolutionView.Designer.cs">
-      <DependentUpon>RequestSolutionView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\RequestsView.cs">
+    <Compile Update="Components\RequestsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\RequestsView.Designer.cs">
-      <DependentUpon>RequestsView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\SolutionSummaryView.cs">
+    <Compile Update="Components\SolutionSummaryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\SolutionSummaryView.Designer.cs">
-      <DependentUpon>SolutionSummaryView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\StretchView.cs">
+    <Compile Update="Components\StretchView.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\StretchView.Designer.cs">
-      <DependentUpon>StretchView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controller\AbstractController.cs" />
-    <Compile Include="Controller\AirplaneController.cs" />
-    <Compile Include="Controller\AirportController.cs" />
-    <Compile Include="Controller\ExchangeRatesController.cs" />
-    <Compile Include="Controller\FuelController.cs" />
-    <Compile Include="Controller\HeuristicSolutionController.cs" />
-    <Compile Include="Controller\ImportDataController.cs" />
-    <Compile Include="Controller\InstancesController.cs" />
-    <Compile Include="Controller\ParametersController.cs" />
-    <Compile Include="Controller\PreCheckOptimizationController.cs" />
-    <Compile Include="Controller\StretchController.cs" />
-    <Compile Include="CreateInstance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CreateInstance.Designer.cs">
-      <DependentUpon>CreateInstance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DuplicateScenario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DuplicateScenario.Designer.cs">
-      <DependentUpon>DuplicateScenario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditStretch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEditStretch.Designer.cs">
-      <DependentUpon>AddEditStretch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EditInstance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditInstance.Designer.cs">
-      <DependentUpon>EditInstance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormAdvancedOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAdvancedOptions.Designer.cs">
-      <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ImportDataLog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportDataLog.Designer.cs">
-      <DependentUpon>ImportDataLog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InstanceLoader.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InstanceLoader.Designer.cs">
-      <DependentUpon>InstanceLoader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PreCheckOptimizationView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PreCheckOptimizationView.Designer.cs">
-      <DependentUpon>PreCheckOptimizationView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectInstance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SelectInstance.Designer.cs">
-      <DependentUpon>SelectInstance.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="AddEditAirplane.resx">
-      <DependentUpon>AddEditAirplane.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditAirport.resx">
-      <DependentUpon>AddEditAirport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditCurrency.resx">
-      <DependentUpon>AddEditCurrency.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditFuel.resx">
-      <DependentUpon>AddEditFuel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditPassenger.resx">
-      <DependentUpon>AddEditPassenger.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditRequest.resx">
-      <DependentUpon>AddEditRequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditSeatType.resx">
-      <DependentUpon>AddEditSeatType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\AirplaneUseSolutionView.resx">
-      <DependentUpon>AirplaneUseSolutionView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\AirplaneView.resx">
-      <DependentUpon>AirplaneView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\AirportView.resx">
-      <DependentUpon>AirportView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\CurrencyView.resx">
-      <DependentUpon>CurrencyView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\FuelPriceView.resx">
-      <DependentUpon>FuelPriceView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\MapRoutesView.resx">
-      <DependentUpon>MapRoutesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\RefuelSolutionView.resx">
-      <DependentUpon>RefuelSolutionView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\RequestSolutionView.resx">
-      <DependentUpon>RequestSolutionView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\RequestsView.resx">
-      <DependentUpon>RequestsView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\SolutionSummaryView.resx">
-      <DependentUpon>SolutionSummaryView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\StretchView.resx">
-      <DependentUpon>StretchView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CreateInstance.resx">
-      <DependentUpon>CreateInstance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DuplicateScenario.resx">
-      <DependentUpon>DuplicateScenario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddEditStretch.resx">
-      <DependentUpon>AddEditStretch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditInstance.resx">
-      <DependentUpon>EditInstance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAdvancedOptions.resx">
-      <DependentUpon>FormAdvancedOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportDataLog.resx">
-      <DependentUpon>ImportDataLog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InstanceLoader.resx">
-      <DependentUpon>InstanceLoader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PreCheckOptimizationView.resx">
-      <DependentUpon>PreCheckOptimizationView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="SelectInstance.resx">
-      <DependentUpon>SelectInstance.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="content\net40\App.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <ProjectReference Include="..\Common\Commons.csproj" />
+    <ProjectReference Include="..\SolverClientComunication\SolverClientCommunication.csproj" />
+    <ProjectReference Include="..\Solver\Solver.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Commons.csproj">
-      <Project>{39e8506b-4492-4fdb-8174-b406395c1c75}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SolverClientComunication\SolverClientCommunication.csproj">
-      <Project>{6f471c3f-acbc-46e1-bf49-4c823d4f3491}</Project>
-      <Name>SolverClientCommunication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Solver\Solver.csproj">
-      <Project>{ab3ddd75-ecbd-4cb9-8d61-6ec8fbb1faf2}</Project>
-      <Name>Solver</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="content\" />
     <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
@@ -489,16 +83,25 @@
   <ItemGroup>
     <Content Include="NOTICE.TXT" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Questo progetto fa riferimento a uno o più pacchetti NuGet che non sono presenti in questo computer. Usare lo strumento di ripristino dei pacchetti NuGet per scaricarli. Per altre informazioni, vedere http://go.microsoft.com/fwlink/?LinkID=322105. Il file mancante è {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.3.1.5\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.3.1.5\build\SixLabors.ImageSharp.props'))" />
-    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+    <PackageReference Include="Enums.NET" Version="5.0.0" />
+    <PackageReference Include="ExtendedNumerics.BigDecimal" Version="3000.0.0.280" />
+    <PackageReference Include="GMap.NET.Core" Version="2.1.7" />
+    <PackageReference Include="GMap.NET.WinForms" Version="2.1.7" />
+    <PackageReference Include="MathNet.Numerics.Signed" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.1" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.119.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119.0" />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119.0" />
+    <PackageReference Include="System.Device.Location.Portable" Version="1.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
+  </ItemGroup>
 </Project>
