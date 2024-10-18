@@ -12,11 +12,10 @@ namespace Solver
         public List<DbAirports> Airports { get; set; }
         public List<DbRequests> Requests { get; set; }
         public List<DbParameters> Parameters { get; set; }
-        public Dictionary<DbAirports,Dictionary<DbAirports,double>>  Stretches { get; set; } //< Origin, destination, distance
-        //public List<DbReportList> ReportList { get; set; }
+        public Dictionary<DbAirports,Dictionary<DbAirports,double>>  Stretches { get; set; } 
         public List<DbGeneralParametersDefault> DefaultParameters { get; set; }
         public OptimizationParameters OptimizationParameter { get; set;  }
-        //public List<DbImportErrors> ImportErrors { get; set; }
+        
         public List<DbSeats> SeatList { get; set; }
         public List<DbFuelPrice> FuelPrice { get; set; }
         public List<DbExchangeRates> Exchange { get; set; }
@@ -65,7 +64,6 @@ namespace Solver
 
             input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
             var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id).ToList();
-            int i = 0; 
 
             var airportByName = context.Airports.Where(x=>x.Instance.Id == Instance.Id).ToDictionary(x=>x.AirportName, x=>x);
 
@@ -73,16 +71,14 @@ namespace Solver
             foreach (var stretch in stretchesOfInstance){
                 var origin = airportByName.ContainsKey(stretch.Origin)?airportByName[stretch.Origin]: null;
                 var destination = airportByName.ContainsKey(stretch.Destination) ? airportByName[stretch.Destination] : null;
-                i++;
+                
                 if (origin == null || destination == null)
                     continue;
 
-                // if (stretch.Origin != null && stretch.Destination != null){
                 if (!input.Stretches.ContainsKey(origin))
                         input.Stretches[origin] = new Dictionary<DbAirports, double>();
 
                     input.Stretches[origin][destination] = stretch.Distance;
-               // }
             }
 
             return input;
