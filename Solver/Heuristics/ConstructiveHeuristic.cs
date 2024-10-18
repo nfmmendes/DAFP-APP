@@ -118,7 +118,7 @@ namespace Solver.Heuristics
                     
                 foreach (var destination in sameStretchRequest.Keys){
                     var requestsToDestination = sameStretchRequest[destination];
-                    var requestsOrdered = requestsToDestination.OrderBy(x=>x.PNR).OrderBy(x=>x.DepartureTimeWindowEnd).ToList();
+                    var requestsOrdered = requestsToDestination.OrderBy(x =>x.DepartureTimeWindowEnd).ThenBy(x=>x.PNR).ToList();
                     var firstDeparture = requestsToDestination.First(x=>!requestsBoardedInOrigin.Contains(x)).DepartureTimeWindowEnd;
 
                     var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
