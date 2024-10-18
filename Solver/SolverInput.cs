@@ -64,7 +64,7 @@ namespace Solver
             input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30;
 
             input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
-            var stretchesOfInstance = context.Stretches.ToList().Where(x => x.InstanceId == Instance.Id);
+            var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id).ToList();
             int i = 0; 
 
             var airportByName = context.Airports.Where(x=>x.Instance.Id == Instance.Id).ToDictionary(x=>x.AirportName, x=>x);
