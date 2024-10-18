@@ -2,8 +2,10 @@
 *.pdb
 *.exe
 *.cache
-/SolverClientComunication/obj/Debug/*.dll
+/SolverClientComunication/obj
 *.dll
 Debug
 /Common/obj
+/Prototipo1/obj
+/Solver/obj
 Release
