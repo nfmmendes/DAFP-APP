@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 using NPOI.XSSF.UserModel;
@@ -68,7 +65,7 @@ namespace Prototipo1.Controller
                     {
                         AirportName = row.GetCell(0).StringCellValue,
                         GroundTime =row.GetCell(9).CellType != CellType.String? 
-                                                               row.GetCell(9).DateCellValue.TimeOfDay: (new DateTime(0)).TimeOfDay,
+                                                               row.GetCell(9).DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
                         IATA = row.GetCell(1).StringCellValue,
                         Latitude = row.GetCell(2).StringCellValue,
                         Longitude = row.GetCell(3).StringCellValue, 
@@ -280,10 +277,10 @@ namespace Prototipo1.Controller
                         IsChildren = row.GetCell(4).BooleanCellValue,
                         Origin = airportOrigin,
                         Destination = airportDestination,
-                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.TimeOfDay,
-                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.TimeOfDay,
-                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.TimeOfDay,
-                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.TimeOfDay,
+                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.Value.TimeOfDay,
+                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.Value.TimeOfDay,
+                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.Value.TimeOfDay,
+                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.Value.TimeOfDay,
                         Instance = instance
                     };
 
