@@ -2,13 +2,13 @@
 
 namespace SolverClientComunication.Models
 {
-    public class DbSeats
+    public class DbSeat
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
-        public virtual DbAirplanes Airplanes { get; set; }
+        public virtual DbAirplane Airplanes { get; set; }
 
         [Required]
         public string seatClass { get; set; }

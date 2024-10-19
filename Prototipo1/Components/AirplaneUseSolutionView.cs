@@ -74,8 +74,8 @@ namespace Prototipo1.Components
         /// <param name="flight"></param>
         /// <returns></returns>
         private double GetWeightOfPassengers(DbFlightsReport flight){
-            var itemList = Context.PassagersOnFlight.Include(x => x.Flight).Where(x => x.Flight.Id == flight.Id);
-            var seatList = Context.SeatList.ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
+            var itemList = Context.PassengersOnFlight.Include(x => x.Flight).Where(x => x.Flight.Id == flight.Id);
+            var seatList = Context.Seats.ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
 
 
             var sum = 0.0;
@@ -112,7 +112,7 @@ namespace Prototipo1.Components
                 var indexRow = dataGridViewRoute.SelectedRows[0].Index;
                 var index = Convert.ToInt64(dataGridViewRoute.Rows[indexRow].Cells[0].Value.ToString());
 
-                var reports = Context.PassagersOnFlight.Where(x => x.Flight.Id.Equals(index)).ToList();
+                var reports = Context.PassengersOnFlight.Where(x => x.Flight.Id.Equals(index)).ToList();
 
                 dataGridViewRoutePassagers.Rows.Clear();
                 foreach (var item in reports)

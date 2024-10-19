@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolverClientComunication;
 
@@ -11,9 +12,11 @@ using SolverClientComunication;
 namespace SolverClientComunication.Migrations
 {
     [DbContext(typeof(CustomSqlContext))]
-    partial class CustomSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20241019204251_Rename-Tables")]
+    partial class RenameTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

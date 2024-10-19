@@ -8,7 +8,7 @@ namespace SolverClientComunication.Models
         public long Id { get; set; }
 
         [Required]
-        public virtual DbAirports Airport { get; set; }
+        public virtual DbAirport Airport { get; set; }
 
         [Required]
         public string Currency { get; set; }

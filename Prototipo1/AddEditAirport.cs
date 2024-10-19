@@ -13,7 +13,7 @@ namespace Prototipo1
         public DbInstance Instance { get; set; }
         private long IdItem { get; set; }
         private CustomSqlContext Context { get; set; }
-        private DbAirports CurrentElement { get; set; }
+        private DbAirport CurrentElement { get; set; }
 
         public AddEditAirport(CustomSqlContext context){
             InitializeComponent();
@@ -86,7 +86,7 @@ namespace Prototipo1
         }
 
         private void buttonSave_Click(object sender, EventArgs e){
-            var airport = new DbAirports(){
+            var airport = new DbAirport(){
                 AirportName = textBoxName.Text,
                 IATA = textBoxIATA.Text,
                 Region = textBoxRegion.Text,

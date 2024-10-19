@@ -11,7 +11,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class PreCheckOptimizationController : AbstractController<DbOptimizationAlerts,CustomSqlContext>{
+    class PreCheckOptimizationController : AbstractController<DbOptimizationAlert,CustomSqlContext>{
 
         private CustomSqlContext Context { get; set; }
         public static readonly PreCheckOptimizationController Instance = new PreCheckOptimizationController();
@@ -28,7 +28,7 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="item"></param>
-        public override void Add(DbOptimizationAlerts item)
+        public override void Add(DbOptimizationAlert item)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public List<DbOptimizationAlerts> GetWarnings(DbInstance instance){
+        public List<DbOptimizationAlert> GetWarnings(DbInstance instance){
             return Context.OptimizationAlerts.Where(x=>x.Instance.Id == instance.Id).ToList();
         }
 
@@ -47,7 +47,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item"></param>
         /// <param name="IdItem"></param>
-        public override void Edit(DbOptimizationAlerts item, long IdItem)
+        public override void Edit(DbOptimizationAlert item, long IdItem)
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="item"></param>
-        public override void Delete(DbOptimizationAlerts item)
+        public override void Delete(DbOptimizationAlert item)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +67,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected override bool IsValidItem(DbOptimizationAlerts item){
+        protected override bool IsValidItem(DbOptimizationAlert item){
             throw new NotImplementedException();
         }
 
@@ -94,7 +94,7 @@ namespace Prototipo1.Controller
 
             foreach (var item in airports){
                 if (!input.Stretches.ContainsKey(item)){
-                    var alert = new DbOptimizationAlerts(){
+                    var alert = new DbOptimizationAlert(){
                         Type = OptimizationAlertTypeEnum.ERROR.DbCode,
                         Table = "Stretches",
                         Message = $"There are no data of the distances from the airport with IATA code {item.IATA}",
@@ -103,7 +103,7 @@ namespace Prototipo1.Controller
 
                     Context.OptimizationAlerts.Add(alert);
                 }else if (input.Stretches[item].Count < numAirports - 1){
-                    var alert = new DbOptimizationAlerts(){
+                    var alert = new DbOptimizationAlert(){
                         Type = OptimizationAlertTypeEnum.ERROR.DbCode,
                         Table = "Stretches",
                         Message = $"In this instance is missing data of the distances from the airport with IATA code {item.IATA}",
@@ -121,7 +121,7 @@ namespace Prototipo1.Controller
             var airports = input.Airports.Where(x=>x.GroundTime.TotalSeconds < 20);
 
             foreach (var item in airports){
-                var alert = new DbOptimizationAlerts(){
+                var alert = new DbOptimizationAlert(){
                     Type = OptimizationAlertTypeEnum.WARNING.DbCode,
                     Table = "Airplanes",
                     Message = $"The airport with IATA code {item.IATA} has a zero ground time",
@@ -157,7 +157,7 @@ namespace Prototipo1.Controller
                         var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
                         if (time.TotalHours < distance / (maxAirplaneSpeed*1.852)){
 
-                            var alert = new DbOptimizationAlerts(){
+                            var alert = new DbOptimizationAlert(){
                                 Type = OptimizationAlertTypeEnum.ERROR.DbCode,
                                 Table = "Requests",
                                 Message = $"The request with PNR {item.PNR} has origin and destination too far to the time windows defined",

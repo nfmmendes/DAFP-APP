@@ -65,7 +65,7 @@ namespace Prototipo1.Components
                 var index = dataGridViewRequestsResult.SelectedRows[0].Index;
                 var PNR = dataGridViewRequestsResult.Rows[index].Cells[0].Value.ToString();
 
-                var passengerList = Context.PassagersOnFlight.ToList().Where(x => x.Passenger.PNR.Equals(PNR)  && x.Flight.Instance.Id == Instance.Id);
+                var passengerList = Context.PassengersOnFlight.ToList().Where(x => x.Passenger.PNR.Equals(PNR)  && x.Flight.Instance.Id == Instance.Id);
 
                 dataGridViewRequestSolutionDetails.Rows.Clear();
 

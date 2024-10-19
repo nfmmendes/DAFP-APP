@@ -33,7 +33,7 @@ namespace Prototipo1
         /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e){
 
-            var item = new DbExchangeRates(){
+            var item = new DbExchangeRate(){
                 CurrencyName = textBoxCurrencyName.Text,
                 CurrencySymbol = textBoxSymbol.Text,
                 ValueInDolar = Convert.ToDouble(textBoxValue.Text),
@@ -62,7 +62,7 @@ namespace Prototipo1
         /// </summary>
         /// <param name="item"></param>
         /// <param name="itemId"></param>
-        public void OpenToEdit(DbExchangeRates item, long itemId){
+        public void OpenToEdit(DbExchangeRate item, long itemId){
 
             isAdd = false;
             IdItem = itemId;

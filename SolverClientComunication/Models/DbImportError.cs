@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SolverClientComunication.Models
 {
-    public class DbImportErrors
+    public class DbImportError
     {
         [Key]
         public long Id { get; set; }

@@ -18,9 +18,9 @@ namespace Solver.Heuristics
         /// <param name="input"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public static List<DbAirplanes> GetCompatibleAirplanes(SolverInput input, List<DbRequests> requests)
+        public static List<DbAirplane> GetCompatibleAirplanes(SolverInput input, List<DbRequest> requests)
         {
-            var returnedList = new List<DbAirplanes>();
+            var returnedList = new List<DbAirplane>();
 
             var countRequestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList().Count);
             returnedList = input.Airplanes.ToList();
@@ -42,9 +42,9 @@ namespace Solver.Heuristics
         /// <param name="input"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public List<DbAirplanes> GetPartiallyCompatibleAirplanes(SolverInput input, List<DbRequests> requests)
+        public List<DbAirplane> GetPartiallyCompatibleAirplanes(SolverInput input, List<DbRequest> requests)
         {
-            var returnedList = new List<DbAirplanes>();
+            var returnedList = new List<DbAirplane>();
 
             var countRequestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList().Count);
             returnedList = input.Airplanes.ToList();
@@ -65,9 +65,9 @@ namespace Solver.Heuristics
         /// <param name="flights"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public List<DbAirplanes> AvailableAirplanes(SolverInput input, List<Flight> flights, List<DbRequests> requests)
+        public List<DbAirplane> AvailableAirplanes(SolverInput input, List<Flight> flights, List<DbRequest> requests)
         {
-            var returnedList = new List<DbAirplanes>();
+            var returnedList = new List<DbAirplane>();
 
             var countRequestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList().Count);
             var airplanesUsed = flights.Select(x => x.Airplanes).Distinct();
@@ -94,7 +94,7 @@ namespace Solver.Heuristics
         /// <param name="flights"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        private bool IsFreeAndClose(SolverInput input, DbAirplanes airplanes, List<Flight> flights, DbRequests request)
+        private bool IsFreeAndClose(SolverInput input, DbAirplane airplanes, List<Flight> flights, DbRequest request)
         {
             
             var earlyFlights = flights.Where(x =>x.ArrivalTime <= request.DepartureTimeWindowEnd - x.Destination.GroundTime - request.Origin.GroundTime);
@@ -126,7 +126,7 @@ namespace Solver.Heuristics
         /// <param name="airplanes"></param>
         /// <param name="originRequest"></param>
         /// <returns></returns>
-        public static TimeSpan ArrivallFromDepot(SolverInput input,DbAirplanes airplanes, DbAirports originRequest){
+        public static TimeSpan ArrivallFromDepot(SolverInput input,DbAirplane airplanes, DbAirport originRequest){
             var baseAirport = airplanes.BaseAirport;
             var returnedValue = TimeSpan.FromHours(1000000); 
             if(originRequest.Id == airplanes.BaseAirport.Id)
@@ -147,7 +147,7 @@ namespace Solver.Heuristics
         /// <param name="destination"></param>
         /// <param name="airplanes"></param>
         /// <returns></returns>
-        public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirports origin, DbAirports destination, DbAirplanes airplanes){
+        public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirport origin, DbAirport destination, DbAirplane airplanes){
 
             double timeToGo = 0;
             if(input.Stretches.ContainsKey(origin))
@@ -173,7 +173,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplanes airplanes, TimeSpan departureTime, DbAirports origin, DbAirports destination){
+        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplane airplanes, TimeSpan departureTime, DbAirport origin, DbAirport destination){
             
             var returnedValue = TimeSpan.FromHours(1000000);
             //TODO: Maybe replace this calculus (time to go) with a input
@@ -190,7 +190,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static List<DbAirports> findStopToFuelAirport(SolverInput input, DbAirplanes airplane, DbAirports origin, DbAirports destination){
+        public static List<DbAirport> findStopToFuelAirport(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination){
             const double absurdValue = 100000;
             double distanceOrigDest = absurdValue;
             if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
@@ -208,7 +208,7 @@ namespace Solver.Heuristics
                 return finalResult; 
 
             }else
-                return new List<DbAirports>();
+                return new List<DbAirport>();
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Solver.Heuristics
         /// <param name="airplanes"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public static double GetRequestWeight(SolverInput input, DbAirplanes airplanes, List<DbRequests> requests){
+        public static double GetRequestWeight(SolverInput input, DbAirplane airplanes, List<DbRequest> requests){
 
             var weightPerPassenger =  requests.Count(x => x.Sex.Equals("M") && !x.IsChildren) * input.OptimizationParameter.AverageManWeight
                                     + requests.Count(x => x.Sex.Equals("F") && !x.IsChildren) * input.OptimizationParameter.AverageWomanWeight
@@ -249,7 +249,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public static double MaxRefuelQuantity(SolverInput input, DbAirplanes airplanes, double fuelOnTank, DbAirports origin, List<DbRequests> requests)
+        public static double MaxRefuelQuantity(SolverInput input, DbAirplane airplanes, double fuelOnTank, DbAirport origin, List<DbRequest> requests)
         {
             //IF there was not enough fuel on the airplanes to do the trip without a stop, 
             //it is searched an airport to refueling on the track (or refueled on origin airport)
@@ -270,24 +270,24 @@ namespace Solver.Heuristics
         /// <param name="input"></param>
         /// <param name="airport"></param>
         /// <returns></returns>
-        public static List<DbAirplanes> GetAirplanesByProximity(SolverInput input ,DbAirports airport){
-            List<KeyValuePair<TimeSpan, DbAirplanes>> airplanesDistances = new List<KeyValuePair<TimeSpan, DbAirplanes>>();
+        public static List<DbAirplane> GetAirplanesByProximity(SolverInput input ,DbAirport airport){
+            List<KeyValuePair<TimeSpan, DbAirplane>> airplanesDistances = new List<KeyValuePair<TimeSpan, DbAirplane>>();
 
             
             foreach (var airplane in input.Airplanes){
                 var timeToGo = TimeSpan.FromHours(100000);
                 if(airport.Id == airplane.BaseAirport.Id)
-                    airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplanes>(TimeSpan.FromSeconds(0.1), airplane));
+                    airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplane>(TimeSpan.FromSeconds(0.1), airplane));
 
                 if (input.Stretches.ContainsKey(airplane.BaseAirport))
                     if (input.Stretches[airplane.BaseAirport].ContainsKey(airport))
                         timeToGo = TimeSpan.FromHours(input.Stretches[airplane.BaseAirport][airport]/(airplane.CruiseSpeed*KnotsToKmH) );
-                airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplanes>(timeToGo,airplane));
+                airplanesDistances.Add(new KeyValuePair<TimeSpan, DbAirplane>(timeToGo,airplane));
             }
 
             airplanesDistances.OrderBy(x=>x.Key );
 
-            List<DbAirplanes> returnedList = new List<DbAirplanes>();
+            List<DbAirplane> returnedList = new List<DbAirplane>();
 
             foreach (var airplanes in airplanesDistances)
                 returnedList.Add(airplanes.Value);
@@ -303,7 +303,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static bool CanDoInOneDay(SolverInput input, DbAirplanes airplane, DbAirports origin, DbAirports destination)
+        public static bool CanDoInOneDay(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination)
         {
             double distStretch1 = 100000000;
             double distStretch2 = 100000000;
@@ -331,8 +331,8 @@ namespace Solver.Heuristics
         /// <param name="requestDestination"></param>
         /// <param name="airplane"></param>
         /// <returns></returns>
-        public static bool CanDoInOne(SolverInput input , TimeSpan lastDeparture, DbAirports lastOrigin,DbAirports requestOrigin,
-                                     DbAirports requestDestination, DbAirplanes airplane){
+        public static bool CanDoInOne(SolverInput input , TimeSpan lastDeparture, DbAirport lastOrigin,DbAirport requestOrigin,
+                                     DbAirport requestDestination, DbAirplane airplane){
             
             var arrival1 = GetArrivalTime(input, airplane,lastDeparture,lastOrigin,requestOrigin);
             var arrival2 = GetArrivalTime(input, airplane, arrival1+requestOrigin.GroundTime, requestOrigin, requestDestination);
@@ -352,7 +352,7 @@ namespace Solver.Heuristics
         /// <param name="airport"></param>
         /// <param name="airplane"></param>
         /// <returns></returns>
-        public static double GetMaxWeight(DbAirports airport, DbAirplanes airplane){
+        public static double GetMaxWeight(DbAirport airport, DbAirplane airplane){
             //TODO: This is not the right way 
             if (airplane.Model.Contains("PC"))
                 return Math.Min(airport.MTOW_PC12, airplane.MaxWeight);

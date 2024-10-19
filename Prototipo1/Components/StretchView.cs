@@ -219,7 +219,7 @@ namespace Prototipo1.Components
                             continue;
                         var distance = calculateDistance(doubleCoordinatesByName[origin], doubleCoordinatesByName[destination]);
 
-                        var item = new DbStretches(){
+                        var item = new DbStretch(){
                             Distance = (int)distance/1000,
                             Origin = origin,
                             Destination = destination,

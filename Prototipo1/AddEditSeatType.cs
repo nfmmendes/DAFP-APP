@@ -16,8 +16,8 @@ namespace Prototipo1
     public partial class AddEditSeatType : Form
     {
         private bool IsAdd { get; set; }
-        public DbSeats CurrentElement { get; set; }
-        private DbAirplanes Airplane { get; set; }
+        public DbSeat CurrentElement { get; set; }
+        private DbAirplane Airplane { get; set; }
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
@@ -46,7 +46,7 @@ namespace Prototipo1
         /// 
         /// </summary>
         /// <param name="airplane"></param>
-        public void SetAirplane(DbAirplanes airplane){
+        public void SetAirplane(DbAirplane airplane){
             Airplane = airplane;
         }
 
@@ -60,7 +60,7 @@ namespace Prototipo1
             Instance = instance;
             IsAdd = false;
 
-            CurrentElement = Context.SeatList.FirstOrDefault(x => x.Id == idSeat);
+            CurrentElement = Context.Seats.FirstOrDefault(x => x.Id == idSeat);
 
             if (CurrentElement != null){
                 this.textBoxClass.Text = CurrentElement.seatClass;
@@ -84,27 +84,27 @@ namespace Prototipo1
             }
 
             if (IsAdd){
-                if(Context.SeatList.Any(x =>x.seatClass.Equals(this.textBoxClass.Text) && x.Airplanes.Id == Airplane.Id))
+                if(Context.Seats.Any(x =>x.seatClass.Equals(this.textBoxClass.Text) && x.Airplanes.Id == Airplane.Id))
                     return;
 
-                var item = new DbSeats(){
+                var item = new DbSeat(){
                     seatClass = this.textBoxClass.Text,
                     Airplanes = this.Airplane,
                     luggageWeightLimit = Convert.ToDouble(this.numUDLuggageWeight.Value),
                 };
 
-                Context.SeatList.Add(item);
+                Context.Seats.Add(item);
                 Context.SaveChanges();
 
             }else
             {
                 var idSeats = CurrentElement.Id;
-                var seat = Context.SeatList.FirstOrDefault(x => x.Id == idSeats);
+                var seat = Context.Seats.FirstOrDefault(x => x.Id == idSeats);
 
                 seat.luggageWeightLimit = Convert.ToDouble(numUDLuggageWeight.Value);
                 seat.seatClass = textBoxClass.Text;
 
-                Context.SeatList.Update(seat);
+                Context.Seats.Update(seat);
                 Context.SaveChanges();
             }
             

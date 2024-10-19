@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SolverClientComunication.Models
 {
-    public class DbExchangeRates
+    public class DbExchangeRate
     {
         [Key]
         public long Id { get; set; }

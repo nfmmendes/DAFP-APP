@@ -56,10 +56,10 @@ namespace Prototipo1.Controller
         /// <param name="solverInstance"></param>
         public void setDefaultParameters(DbInstance solverInstance)
         {
-            var newParameters = new List<DbParameters>();
+            var newParameters = new List<DbParameter>();
             long id = Instance.Context.Parameters.Any() ? Instance.Context.Parameters.Max(x => x.Id) + 1 : 0;
             foreach (var key in DefaultParameters.Keys)
-                newParameters.Add(new DbParameters(){Id=id++, Code = key.DbCode, Instance = solverInstance, Value = DefaultParameters[key]});
+                newParameters.Add(new DbParameter(){Id=id++, Code = key.DbCode, Instance = solverInstance, Value = DefaultParameters[key]});
 
             Instance.Context.Parameters.AddRange(newParameters);
 
@@ -174,7 +174,7 @@ namespace Prototipo1.Controller
         /// Update the value of a parameter and save it on the database 
         /// </summary>
         /// <param name="param">Parameter item</param>
-        private void UpdateAndSave(DbParameters param){
+        private void UpdateAndSave(DbParameter param){
 
             using (var context = new CustomSqlContext())
             {
@@ -210,8 +210,8 @@ namespace Prototipo1.Controller
         /// <param name="original"></param>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public DbParameters Clone(DbParameters original, DbInstance instance=null){
-            DbParameters newItem = new DbParameters();
+        public DbParameter Clone(DbParameter original, DbInstance instance=null){
+            DbParameter newItem = new DbParameter();
             newItem.Code = original.Code;
             newItem.Value = original.Value;
             newItem.Instance = original.Instance;
@@ -224,7 +224,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public ICollection<DbParameters> getParameters(DbInstance instance){
+        public ICollection<DbParameter> getParameters(DbInstance instance){
             return Instance.Context.Parameters.Where(x => x.Instance.Id == instance.Id).ToList();
         }
     }

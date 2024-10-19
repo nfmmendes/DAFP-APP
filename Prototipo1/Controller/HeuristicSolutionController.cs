@@ -32,7 +32,7 @@ namespace Prototipo1.Controller
         {
 
             //Remove the previous soltuion
-            Instance.Context.PassagersOnFlight.RemoveRange(Instance.Context.PassagersOnFlight.Where(x=>x.Flight.Instance.Id == instance.Id));
+            Instance.Context.PassengersOnFlight.RemoveRange(Instance.Context.PassengersOnFlight.Where(x=>x.Flight.Instance.Id == instance.Id));
             Instance.Context.SaveChanges();
             Instance.Context.FlightsReports.RemoveRange(Instance.Context.FlightsReports.Where(x => x.Instance.Id == instance.Id));
             Instance.Context.SaveChanges();
@@ -55,11 +55,11 @@ namespace Prototipo1.Controller
 
                 //Fills the list of passengers of each flight
                 foreach (var passenger in flight.Passengers){
-                    var dbPassenger = new DbPassagensOnFlightReport(){
+                    var dbPassenger = new DbPassengersOnFlightReport(){
                         Flight = report,
                         Passenger = passenger
                     };
-                    Instance.Context.PassagersOnFlight.Add(dbPassenger);
+                    Instance.Context.PassengersOnFlight.Add(dbPassenger);
                 
                 }
                 Instance.Context.SaveChanges();

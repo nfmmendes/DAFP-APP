@@ -47,10 +47,10 @@ namespace Prototipo1.Components
                         if (!dataGridViewFuel.Rows[i].Selected) continue;
 
                         var index = Convert.ToInt64(dataGridViewFuel.Rows[i].Cells[0].Value);
-                        var deleted = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
+                        var deleted = Context.FuelPrices.FirstOrDefault(x => x.Id == index);
 
                         if (deleted != null)
-                            Context.FuelPrice.Remove(deleted);
+                            Context.FuelPrices.Remove(deleted);
                     }
 
                     Context.SaveChanges();
@@ -73,7 +73,7 @@ namespace Prototipo1.Components
             if (Instance != null && dataGridViewFuel.SelectedRows.Count > 0){
                 var addFuel = new AddEditFuel(Context);
                 var index = dataGridViewFuel.SelectedRows[0].Index;
-                var fuel = Context.FuelPrice.FirstOrDefault(x => x.Id == index);
+                var fuel = Context.FuelPrices.FirstOrDefault(x => x.Id == index);
 
                 if(fuel!= null)
                     addFuel.OpenToEdit(fuel, index); 
@@ -89,7 +89,7 @@ namespace Prototipo1.Components
         /// <param name="instance"></param>
         private void FillFuelTable(){
             this.dataGridViewFuel.Rows.Clear();
-            var fuels = Context.FuelPrice.ToList().Where(x => x.Instance.Id == Instance.Id);
+            var fuels = Context.FuelPrices.ToList().Where(x => x.Instance.Id == Instance.Id);
 
             foreach (var item in fuels)
                 dataGridViewFuel.Rows.Add(item.Id, item.Airport.AirportName, "F", item.Currency, item.Value); //TODO: Change This F

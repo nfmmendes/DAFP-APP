@@ -19,7 +19,7 @@ namespace Prototipo1
         private bool IsAdd { get; set; }
         private long IdItem { get; set; }
         public DbInstance Instance { get; set; }
-        public DbAirplanes CurrentElement { get; set;  }
+        public DbAirplane CurrentElement { get; set;  }
         public CustomSqlContext Context { get; set; }
 
         public AddEditAirplane(CustomSqlContext context){
@@ -77,7 +77,7 @@ namespace Prototipo1
         {
             var airport = Context.Airports.FirstOrDefault(x=>x.AirportName.Equals(comboBoxAirport.SelectedItem.ToString()));
 
-            var airplane = new DbAirplanes()
+            var airplane = new DbAirplane()
             {
                 Model = comboBoxModel.SelectedItem.ToString(),
                 Prefix = textBoxPrefix.Text,

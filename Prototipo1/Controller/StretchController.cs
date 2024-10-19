@@ -9,7 +9,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class StretchController: AbstractController<DbStretches, CustomSqlContext>
+    class StretchController: AbstractController<DbStretch, CustomSqlContext>
     {
         /// <summary>
         /// 
@@ -23,7 +23,7 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="item"></param>
-        public override void Add(DbStretches item){
+        public override void Add(DbStretch item){
             throw new NotImplementedException();
         }
 
@@ -32,7 +32,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item"></param>
         /// <param name="IdItem"></param>
-        public override void Edit(DbStretches item, long IdItem)
+        public override void Edit(DbStretch item, long IdItem)
         {
             throw new NotImplementedException();
         }
@@ -41,7 +41,7 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="item"></param>
-        public override void Delete(DbStretches item)
+        public override void Delete(DbStretch item)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +51,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected override bool IsValidItem(DbStretches item)
+        protected override bool IsValidItem(DbStretch item)
         {
             throw new NotImplementedException();
         }

@@ -8,17 +8,17 @@ using SolverClientComunication.Models;
 namespace Solver
 {
     public class SolverInput{
-        public List<DbAirplanes> Airplanes { get; set; }
-        public List<DbAirports> Airports { get; set; }
-        public List<DbRequests> Requests { get; set; }
-        public List<DbParameters> Parameters { get; set; }
-        public Dictionary<DbAirports,Dictionary<DbAirports,double>>  Stretches { get; set; } 
+        public List<DbAirplane> Airplanes { get; set; }
+        public List<DbAirport> Airports { get; set; }
+        public List<DbRequest> Requests { get; set; }
+        public List<DbParameter> Parameters { get; set; }
+        public Dictionary<DbAirport,Dictionary<DbAirport,double>>  Stretches { get; set; } 
         public List<DbGeneralParametersDefault> DefaultParameters { get; set; }
         public OptimizationParameters OptimizationParameter { get; set;  }
         
-        public List<DbSeats> SeatList { get; set; }
+        public List<DbSeat> SeatList { get; set; }
         public List<DbFuelPrice> FuelPrice { get; set; }
-        public List<DbExchangeRates> Exchange { get; set; }
+        public List<DbExchangeRate> Exchange { get; set; }
 
         public DbInstance Instance { get; set; }
 
@@ -32,9 +32,9 @@ namespace Solver
             input.Airports = context.Airports.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Requests = context.Requests.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.Parameters = context.Parameters.Where(x => x.Instance.Id == Instance.Id).ToList();
-            input.SeatList = context.SeatList.Where(x => x.Airplanes.Instance.Id == Instance.Id).ToList();
-            input.FuelPrice = context.FuelPrice.Where(x => x.Instance.Id == Instance.Id).ToList();
-            input.Exchange = context.Exchange.Where(x => x.Instance.Id == Instance.Id).ToList();
+            input.SeatList = context.Seats.Where(x => x.Airplanes.Instance.Id == Instance.Id).ToList();
+            input.FuelPrice = context.FuelPrices.Where(x => x.Instance.Id == Instance.Id).ToList();
+            input.Exchange = context.ExchangeRates.Where(x => x.Instance.Id == Instance.Id).ToList();
             input.DefaultParameters = context.DefaultParameters.ToList();
            
            
@@ -62,7 +62,7 @@ namespace Solver
             input.OptimizationParameter.AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight.Value) : 75;
             input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30;
 
-            input.Stretches = new Dictionary<DbAirports, Dictionary<DbAirports, double>>();
+            input.Stretches = new Dictionary<DbAirport, Dictionary<DbAirport, double>>();
             var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id).ToList();
 
             var airportByName = context.Airports.Where(x=>x.Instance.Id == Instance.Id).ToDictionary(x=>x.AirportName, x=>x);
@@ -76,7 +76,7 @@ namespace Solver
                     continue;
 
                 if (!input.Stretches.ContainsKey(origin))
-                        input.Stretches[origin] = new Dictionary<DbAirports, double>();
+                        input.Stretches[origin] = new Dictionary<DbAirport, double>();
 
                     input.Stretches[origin][destination] = stretch.Distance;
             }

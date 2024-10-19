@@ -61,7 +61,7 @@ namespace Prototipo1.Components
         /// 
         /// </summary>
         /// <param name="airportsList"></param>
-        private void setOverlayMarker(List<DbAirports> airportsList){
+        private void setOverlayMarker(List<DbAirport> airportsList){
             GMapOverlay markers = new GMapOverlay("markers");
             GMapControl.Overlays.Clear();
 

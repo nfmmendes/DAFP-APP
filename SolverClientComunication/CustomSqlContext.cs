@@ -7,22 +7,22 @@ namespace SolverClientComunication
 
     public class CustomSqlContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbSet<DbAirplanes> Airplanes { get; set; }
-        public DbSet<DbAirports> Airports { get; set; }
-        public DbSet<DbRequests> Requests { get; set; }
-        public DbSet<DbParameters> Parameters { get; set; }
-        public DbSet<DbStretches> Stretches { get; set; }
+        public DbSet<DbAirplane> Airplanes { get; set; }
+        public DbSet<DbAirport> Airports { get; set; }
+        public DbSet<DbRequest> Requests { get; set; }
+        public DbSet<DbParameter> Parameters { get; set; }
+        public DbSet<DbStretch> Stretches { get; set; }
         public DbSet<DbReportList> ReportList { get; set; }
         public DbSet<DbInstance> Instances { get; set; }
         public DbSet<DbGeneralParametersDefault> DefaultParameters { get; set; }
-        public DbSet<DbImportErrors> ImportErrors { get; set; }
-        public DbSet<DbSeats> SeatList { get; set; }
-        public DbSet<DbFuelPrice> FuelPrice { get; set; }
-        public DbSet<DbExchangeRates> Exchange { get; set; }
+        public DbSet<DbImportError> ImportErrors { get; set; }
+        public DbSet<DbSeat> Seats { get; set; }
+        public DbSet<DbFuelPrice> FuelPrices { get; set; }
+        public DbSet<DbExchangeRate> ExchangeRates { get; set; }
         public DbSet<DbRefuelsReport> RefuelsReport { get; set; }
         public DbSet<DbFlightsReport> FlightsReports { get; set; }
-        public DbSet<DbPassagensOnFlightReport> PassagersOnFlight { get; set; }
-        public DbSet<DbOptimizationAlerts> OptimizationAlerts { get; set; }
+        public DbSet<DbPassengersOnFlightReport> PassengersOnFlight { get; set; }
+        public DbSet<DbOptimizationAlert> OptimizationAlerts { get; set; }
 
         // Your context has been configured to use a 'CustomSqlContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -45,10 +45,9 @@ namespace SolverClientComunication
             // TableNameConvention
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
-                entity.SetTableName(entity.ClrType.Name);
+               entity.SetTableName("Db" + entity.GetTableName());
             }
         }
-
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 

@@ -2,7 +2,7 @@
 
 namespace SolverClientComunication.Models
 {
-    public class DbStretches
+    public class DbStretch
     {
         [Key]
         public long Id { get; set; }

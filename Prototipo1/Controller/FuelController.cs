@@ -27,7 +27,7 @@ namespace Prototipo1.Controller
         /// <param name="item"></param>
         public override void Add(DbFuelPrice item){
             if (IsValidItem(item)){
-                Instance.Context.FuelPrice.Add(item);
+                Instance.Context.FuelPrices.Add(item);
                 Instance.Context.SaveChanges();
             }
         }
@@ -38,14 +38,14 @@ namespace Prototipo1.Controller
         /// <param name="item"></param>
         /// <param name="IdItem"></param>
         public override void Edit(DbFuelPrice item, long IdItem){
-            var element = Instance.Context.FuelPrice.FirstOrDefault(x => x.Id == IdItem);
+            var element = Instance.Context.FuelPrices.FirstOrDefault(x => x.Id == IdItem);
 
             if (element != null){
                 element.Airport = item.Airport;
                 element.Currency = item.Currency;
                 element.Value = item.Value;
 
-                Instance.Context.FuelPrice.Update(element);
+                Instance.Context.FuelPrices.Update(element);
                 Instance.Context.SaveChanges();
             }
         }
@@ -55,8 +55,8 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item">Item to the deleted</param>
         public override void Delete(DbFuelPrice item){
-            if (Instance.Context.FuelPrice.Contains(item)) { 
-                Instance.Context.FuelPrice.Remove(item);
+            if (Instance.Context.FuelPrices.Contains(item)) { 
+                Instance.Context.FuelPrices.Remove(item);
                 Instance.Context.SaveChanges();
             }
         }

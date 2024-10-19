@@ -116,8 +116,8 @@ namespace Prototipo1.Controller
                 Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
 
                 //TODO: Remove it. It's wrong 
-                Instance.Context.PassagersOnFlight.RemoveRange(
-                    Instance.Context.PassagersOnFlight.Where(x => x.Flight.Instance.Id == deleted.Id).ToList());
+                Instance.Context.PassengersOnFlight.RemoveRange(
+                    Instance.Context.PassengersOnFlight.Where(x => x.Flight.Instance.Id == deleted.Id).ToList());
                 Instance.Context.FlightsReports.RemoveRange(Instance.Context.FlightsReports.Where(x=>x.Instance.Id == deleted.Id).ToList());
                 
 
@@ -138,11 +138,11 @@ namespace Prototipo1.Controller
             
             var airplanes = Context.Airplanes.ToList().Where(x=>x.Instance.Id == previousInstance.Id);
             var airports = Context.Airports.ToList().Where(x => x.Instance.Id == previousInstance.Id);
-            var exchange = Context.Exchange.ToList().Where(x => x.Instance.Id == previousInstance.Id);
-            var fuelPrice = Context.FuelPrice.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var exchange = Context.ExchangeRates.ToList().Where(x => x.Instance.Id == previousInstance.Id);
+            var fuelPrice = Context.FuelPrices.ToList().Where(x => x.Instance.Id == previousInstance.Id);
             var parameters = Context.Parameters.ToList().Where(x => x.Instance.Id == previousInstance.Id);
             var requests = Context.Requests.ToList().Where(x => x.Instance.Id == previousInstance.Id);
-            var seats = Context.SeatList.ToList().Where(x => x.Airplanes.Instance.Id == previousInstance.Id);
+            var seats = Context.Seats.ToList().Where(x => x.Airplanes.Instance.Id == previousInstance.Id);
             var stretches = Context.Stretches.ToList().Where(x => x.InstanceId == previousInstance.Id);
 
             //Clone and save the airport data
@@ -158,13 +158,13 @@ namespace Prototipo1.Controller
 
             //Clone and save the exchange rate data
             foreach (var item in exchange){
-                Context.Exchange.Add(ExchangeRatesController.Instance.Clone(item, newInstance));
+                Context.ExchangeRates.Add(ExchangeRatesController.Instance.Clone(item, newInstance));
             }
             Context.SaveChanges();
 
             //Clone and save the fuel price data
             foreach (var item in fuelPrice){
-                Context.FuelPrice.Add(FuelController.Instance.Clone(item, newInstance));
+                Context.FuelPrices.Add(FuelController.Instance.Clone(item, newInstance));
             }
             Context.SaveChanges();
 
@@ -182,7 +182,7 @@ namespace Prototipo1.Controller
                 var destination = Context.Airports.ToList().FirstOrDefault(x => x.IATA.Equals(item.Destination.IATA) && x.Instance.Id == newInstance.Id);
 
                 if (origin != null && destination != null){
-                    var newItem = new DbRequests();
+                    var newItem = new DbRequest();
                     newItem.Origin = origin;
                     newItem.Destination = destination;
                     newItem.Name = item.Name;
@@ -209,7 +209,7 @@ namespace Prototipo1.Controller
 
                 if (airplane != null)
                     
-                    Context.SeatList.Add(new DbSeats(){
+                    Context.Seats.Add(new DbSeat(){
                         Airplanes = airplane,
                         luggageWeightLimit = item.luggageWeightLimit,
                         seatClass = item.seatClass
@@ -222,7 +222,7 @@ namespace Prototipo1.Controller
             Context.ChangeTracker.AutoDetectChangesEnabled = false;
             foreach (var item in stretches)
             {
-                Context.Stretches.Add(new DbStretches()
+                Context.Stretches.Add(new DbStretch()
                 {
                     Origin = item.Origin,
                     Destination = item.Destination,
@@ -356,7 +356,7 @@ namespace Prototipo1.Controller
                 sheetPassengers = (HSSFSheet)wb.CreateSheet("Passengers");
 
 
-                var passengers = Context.PassagersOnFlight.ToList().Where(x => x.Flight.Instance.Id == instance.Id).ToList();
+                var passengers = Context.PassengersOnFlight.ToList().Where(x => x.Flight.Instance.Id == instance.Id).ToList();
                 sheetPassengers.CreateRow(0);
                 sheetPassengers.GetRow(0).CreateCell(0);
                 sheetPassengers.GetRow(0).CreateCell(1);

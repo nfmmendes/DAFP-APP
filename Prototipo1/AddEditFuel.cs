@@ -32,7 +32,7 @@ namespace Prototipo1
 
             comboBoxAirport.DataSource = Context.Airports.ToList().Where(x => x.Instance.Id == instance.Id)
                 .Select(x => x.AirportName).ToList();
-            comboBoxCurrency.DataSource = Context.Exchange.ToList().Where(x => x.Instance.Id == instance.Id)
+            comboBoxCurrency.DataSource = Context.ExchangeRates.ToList().Where(x => x.Instance.Id == instance.Id)
                 .Select(x => x.CurrencySymbol).ToList();
             
             
@@ -52,7 +52,7 @@ namespace Prototipo1
                     .Select(x => x.AirportName).ToList();
                 comboBoxAirport.Text = CurrentElement.Airport.AirportName;
                 comboBoxFuel.Text = "F";
-                comboBoxCurrency.DataSource = Context.Exchange.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
+                comboBoxCurrency.DataSource = Context.ExchangeRates.ToList().Where(x => x.Instance.Id == CurrentElement.Instance.Id)
                     .Select(x => x.CurrencySymbol).ToList();
                 comboBoxCurrency.SelectedText = CurrentElement.Currency;
                 textBoxPrice.Text = CurrentElement.Value;

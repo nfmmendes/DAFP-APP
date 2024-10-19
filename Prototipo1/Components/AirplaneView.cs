@@ -39,7 +39,7 @@ namespace Prototipo1.Components
         {
             this.dataGridViewSeatTypes.Rows.Clear();
 
-            var seatTypes = Context.SeatList.Where(x => x.Airplanes.Id == idAirplane).ToList();
+            var seatTypes = Context.Seats.Where(x => x.Airplanes.Id == idAirplane).ToList();
 
             //if(seatTypes.Any())
             foreach (var item in seatTypes)
@@ -142,10 +142,10 @@ namespace Prototipo1.Components
                         if (!dataGridViewSeatTypes.Rows[i].Selected) continue;
 
                         var index = Convert.ToInt64(dataGridViewSeatTypes.Rows[i].Cells[0].Value);
-                        var deleted = Context.SeatList.FirstOrDefault(x => x.Id == index);
+                        var deleted = Context.Seats.FirstOrDefault(x => x.Id == index);
                         idAirplane = deleted.Airplanes.Id;
                         if (deleted != null)
-                            Context.SeatList.Remove(deleted);
+                            Context.Seats.Remove(deleted);
                     }
 
                     Context.SaveChanges();

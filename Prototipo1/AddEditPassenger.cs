@@ -19,8 +19,8 @@ namespace Prototipo1
         private DbInstance Instance { get; set; }
         private bool IsAdd { get; set; }
 
-        private DbAirports Origin { get; set; }
-        private DbAirports Destination { get; set; }
+        private DbAirport Origin { get; set; }
+        private DbAirport Destination { get; set; }
         private TimeSpan MinDepartureTime { get; set; }
         private TimeSpan MaxDepartureTime { get; set; }
         private TimeSpan MinArrivalTime { get; set; }
@@ -58,7 +58,7 @@ namespace Prototipo1
         /// <param name="maxDeparture"></param>
         /// <param name="minArrival"></param>
         /// <param name="maxArrival"></param>
-        public void OpenToAdd(DbInstance instance, string pnr, DbAirports origin, DbAirports destination, TimeSpan minDeparture, TimeSpan maxDeparture, 
+        public void OpenToAdd(DbInstance instance, string pnr, DbAirport origin, DbAirport destination, TimeSpan minDeparture, TimeSpan maxDeparture, 
                               TimeSpan minArrival, TimeSpan maxArrival){
             Instance = instance;
             IsAdd = true;
@@ -133,7 +133,7 @@ namespace Prototipo1
             var sex = this.radioButtonFemale.Checked ? "F" : "M";
 
             if (Origin != null && Destination != null && !string.IsNullOrEmpty(PNR) && !string.IsNullOrEmpty(passenger) && !string.IsNullOrEmpty(seatClass)){
-                var item = new DbRequests()
+                var item = new DbRequest()
                 {
                     PNR = PNR,
                     Origin = Origin,

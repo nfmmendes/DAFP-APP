@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using SolverClientComunication.Models;
-using Aiport = SolverClientComunication.Models.DbAirports;
-using Passenger = SolverClientComunication.Models.DbRequests;
+using Aiport = SolverClientComunication.Models.DbAirport;
+using Passenger = SolverClientComunication.Models.DbRequest;
 
 namespace SolutionData
 {
@@ -10,7 +10,7 @@ namespace SolutionData
 
         public long Id { get; private set; }
         private static long LastId = 0;
-        public DbAirplanes Airplanes { get; set; }
+        public DbAirplane Airplanes { get; set; }
         public Aiport Origin { get; set; }
         public Aiport Destination { get; set; }
         public TimeSpan DepartureTime { get; set; }

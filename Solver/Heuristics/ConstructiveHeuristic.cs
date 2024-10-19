@@ -15,14 +15,14 @@ namespace Solver.Heuristics
         public GreedyStrategie Strategie { get; set; }
 
         //============== "Global fields" to make the information interchange between the functions easier =============================
-        private List<DbRequests> requestsBoardedInOrigin { get; set; }
-        private List<DbRequests> requestsAlreadyFinished { get; set; }
-        private List<DbRequests> requestsWithMandatoryStop { get; set; }
-        private List<DbRequests> requestsWithMandatorySplit { get; set; }
+        private List<DbRequest> requestsBoardedInOrigin { get; set; }
+        private List<DbRequest> requestsAlreadyFinished { get; set; }
+        private List<DbRequest> requestsWithMandatoryStop { get; set; }
+        private List<DbRequest> requestsWithMandatorySplit { get; set; }
 
         
         private TimeSpan CurrentAirplaneArrivalTime { get; set; }
-        private DbAirports CurrentAirplaneLocation { get; set; }
+        private DbAirport CurrentAirplaneLocation { get; set; }
         private double CurrentFuelAmount { get; set; }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace Solver.Heuristics
         /// </summary>
         public override void Execute()
         {
-            requestsBoardedInOrigin = new List<DbRequests>();
-            requestsAlreadyFinished = new List<DbRequests>();
+            requestsBoardedInOrigin = new List<DbRequest>();
+            requestsAlreadyFinished = new List<DbRequest>();
 
             var maxRange = Input.Airplanes.Max(x => x.Range);
             requestsWithMandatoryStop = Input.Requests.Where(x=> !Input.Stretches.ContainsKey(x.Origin) || !
@@ -110,7 +110,7 @@ namespace Solver.Heuristics
             var numberOfPassengersByAirport = requestsByOrigin.ToDictionary(x => x.Key, x => x.Value.Count());
        
 
-            HashSet<DbAirplanes> ExitedFromDepot = new HashSet<DbAirplanes>();
+            HashSet<DbAirplane> ExitedFromDepot = new HashSet<DbAirplane>();
 
             foreach (var airport in numberOfPassengersByAirport.Keys){
                 var sameStretchRequest = requestsByOrigin[airport].GroupBy(x=>x.Destination).ToDictionary(x=>x.Key, x=>x.ToList());
@@ -125,7 +125,7 @@ namespace Solver.Heuristics
                                                         !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x,airport,destination));
 
                     while (airplane != null){
-                        List<DbRequests> passengersList = new List<DbRequests>();
+                        List<DbRequest> passengersList = new List<DbRequest>();
                         Dictionary<string, int> classBooking = new Dictionary<string, int>();
 
                         var nobodyInserted = true;
@@ -179,7 +179,7 @@ namespace Solver.Heuristics
                 var lastFlight = airplaneFlights.OrderBy(x => x.ArrivalTime).Last();
                 var departureTime = lastFlight.ArrivalTime + lastFlight.Destination.GroundTime;
                 CreateRegularRoute(solution, lastFlight.Destination, airplane.BaseAirport, departureTime, airplane, lastFlight.FuelOnLanding,
-                     new List<DbRequests>());
+                     new List<DbRequest>());
             }
 
 
@@ -196,7 +196,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        private bool CreatedRouteFromDepot(GeneralSolution solution, List<DbRequests> passengers, DbAirplanes airplane, DbAirports origin, DbAirports destination){
+        private bool CreatedRouteFromDepot(GeneralSolution solution, List<DbRequest> passengers, DbAirplane airplane, DbAirport origin, DbAirport destination){
 
             //Fills with the data about the flight from depot to the first origin
             double fuelOnTakeOff = airplane.Model.Contains("PC") ? airplane.BaseAirport.MTOW_PC12 : airplane.BaseAirport.MTOW_APE3;
@@ -234,7 +234,7 @@ namespace Solver.Heuristics
                         Destination = origin,
                         FuelOnLanding = fuelOnLanding,
                         FuelOnTakeOff = fuelOnTakeOff,
-                        Passengers = new List<DbRequests>()
+                        Passengers = new List<DbRequest>()
                     };
                     solution.Flights.Add(newFlight);
 
@@ -245,7 +245,7 @@ namespace Solver.Heuristics
                 return true;
                 
             }else{
-                var sucess= GoRefuelAndGo(airplane.BaseAirport, origin, fuelOnTakeOff, airplane, TimeSpan.FromHours(6.25), solution, new List<DbRequests>());
+                var sucess= GoRefuelAndGo(airplane.BaseAirport, origin, fuelOnTakeOff, airplane, TimeSpan.FromHours(6.25), solution, new List<DbRequest>());
 
                 if (!sucess)
                     return false;
@@ -269,8 +269,8 @@ namespace Solver.Heuristics
         /// <param name="solution"></param>
         /// <param name="passengers"></param>
         /// <returns></returns>
-        private bool CreateRegularRoute(GeneralSolution solution, DbAirports origin, DbAirports destination, TimeSpan departure, DbAirplanes airplane,
-                                        double fuel, List<DbRequests> passengers)
+        private bool CreateRegularRoute(GeneralSolution solution, DbAirport origin, DbAirport destination, TimeSpan departure, DbAirplane airplane,
+                                        double fuel, List<DbRequest> passengers)
         {
             
             var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
@@ -332,8 +332,8 @@ namespace Solver.Heuristics
         /// <param name="solution"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        private bool GoRefuelAndGo(DbAirports origin, DbAirports destination, double fuelOnTakeOff, DbAirplanes airplane,
-            TimeSpan departureTime, GeneralSolution solution, List<DbRequests> requests){
+        private bool GoRefuelAndGo(DbAirport origin, DbAirport destination, double fuelOnTakeOff, DbAirplane airplane,
+            TimeSpan departureTime, GeneralSolution solution, List<DbRequest> requests){
             var alternativeRoute = SolverUtils.findStopToFuelAirport(Input,airplane, origin, destination);
             foreach (var airport in alternativeRoute)
             {
@@ -406,8 +406,8 @@ namespace Solver.Heuristics
         /// <param name="departureTime"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        private bool RefuelAndGo(DbAirplanes airplanes, double fuelOnTank, DbAirports origin, DbAirports destination, GeneralSolution solution,
-                                 TimeSpan departureTime,List<DbRequests> requests){
+        private bool RefuelAndGo(DbAirplane airplanes, double fuelOnTank, DbAirport origin, DbAirport destination, GeneralSolution solution,
+                                 TimeSpan departureTime,List<DbRequest> requests){
 
             var arrivalTime = SolverUtils.GetArrivalTime(Input, airplanes, departureTime, origin, destination);
 

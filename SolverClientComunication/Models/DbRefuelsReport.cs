@@ -12,10 +12,10 @@ namespace SolverClientComunication.Models
         public DbInstance Instance { get; set; }
 
         [Required]
-        public DbAirports Airport { get; set; }
+        public DbAirport Airport { get; set; }
 
         [Required]
-        public DbAirplanes Airplanes { get; set; }
+        public DbAirplane Airplanes { get; set; }
 
         [Required]
         public TimeSpan RefuelTime { get; set; }

@@ -38,8 +38,8 @@ namespace Prototipo1.Components
         private void FillCurrencyTable(){
 
             this.dataGridViewCurrency.Rows.Clear();
-            if (Context.Exchange.Any()){
-                var exchanges = Context.Exchange.Where(x => x.Instance.Id == Instance.Id);
+            if (Context.ExchangeRates.Any()){
+                var exchanges = Context.ExchangeRates.Where(x => x.Instance.Id == Instance.Id);
 
                 foreach (var item in exchanges)
                     this.dataGridViewCurrency.Rows.Add(item.Id, item.CurrencyName, item.CurrencySymbol, item.ValueInDolar);
@@ -68,7 +68,7 @@ namespace Prototipo1.Components
                 var first = dataGridViewCurrency.SelectedRows[0].Index;
                 var index = Convert.ToInt64(dataGridViewCurrency.Rows[first].Cells[0].Value);
                 
-                var element = Context.Exchange.FirstOrDefault(x => x.Id == index);
+                var element = Context.ExchangeRates.FirstOrDefault(x => x.Id == index);
                 if (element != null){
                     var edit = new AddEditCurrency();
                     edit.OpenToEdit(element,index);
@@ -87,7 +87,7 @@ namespace Prototipo1.Components
                 var first = dataGridViewCurrency.SelectedRows[0].Index;
                 var index = Convert.ToInt64(dataGridViewCurrency.Rows[first].Cells[0].Value);
 
-                Context.Exchange.Remove(Context.Exchange.First(x => x.Id == index));
+                Context.ExchangeRates.Remove(Context.ExchangeRates.First(x => x.Id == index));
                 Context.SaveChanges();
             }
             FillCurrencyTable();

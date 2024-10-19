@@ -2,7 +2,7 @@
 
 namespace SolverClientComunication.Models
 {
-    public class DbOptimizationAlerts
+    public class DbOptimizationAlert
     {
         [Key]
         public long Id { get; set; }

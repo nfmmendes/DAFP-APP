@@ -55,7 +55,7 @@ namespace Solver.Heuristics
         /// <returns></returns>
         private GeneralSolution StartLateTripLocalSearch(GeneralSolution solution){
 
-            var remainingRequests = new List<DbRequests>();
+            var remainingRequests = new List<DbRequest>();
             var currentSolution = solution.Clone();
 
             var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
@@ -76,7 +76,7 @@ namespace Solver.Heuristics
                 var orderedFlights = candidateFlights.OrderBy(x=>x.DepartureTime);
                     
                 var first = orderedFlights.FirstOrDefault(x => !x.IsFull && 
-                                                                SolverUtils.GetRequestWeight(Input, x.Airplanes,new List<DbRequests>(){request}) < x.Airplanes.MaxWeight);
+                                                                SolverUtils.GetRequestWeight(Input, x.Airplanes,new List<DbRequest>(){request}) < x.Airplanes.MaxWeight);
 
                 if(first!= null)
                     currentSolution.Flights.First(x=>x.Equals(first)).Passengers.Add(request);
@@ -93,7 +93,7 @@ namespace Solver.Heuristics
         /// <returns></returns>
         private GeneralSolution LateComeBackLocalSearch(GeneralSolution solution)
         {
-            var remainingRequests = new List<DbRequests>();
+            var remainingRequests = new List<DbRequest>();
             var currentSolution = solution.Clone();
 
             var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
@@ -129,7 +129,7 @@ namespace Solver.Heuristics
                     currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(finalRequests);
                             
                 }else{
-                    var inserted= new List<DbRequests>();
+                    var inserted= new List<DbRequest>();
                     for(int i=0; i < lastFlight.Airplanes.Capacity;i++)
                         inserted.Add(finalRequests[i]);
                     currentSolution.Flights.First(x => x.Id == lastFlight.Id).Passengers.AddRange(inserted);
@@ -148,13 +148,13 @@ namespace Solver.Heuristics
             var returnedSolution = new GeneralSolution();
 
 
-            var remainingRequests = new List<DbRequests>();
+            var remainingRequests = new List<DbRequest>();
             var currentSolution = solution.Clone();
 
             var allPassengers = solution.Flights.SelectMany(x => x.Passengers).Distinct().ToList();
 
             remainingRequests = Input.Requests.Where(x => allPassengers.Count(y => y.Id == x.Id) == 0).ToList();
-            var insertedRequets = new List<DbRequests>();
+            var insertedRequets = new List<DbRequest>();
 
             var maxLateness = TimeSpan.FromHours(1);
             foreach (var request in remainingRequests){
@@ -197,7 +197,7 @@ namespace Solver.Heuristics
                         var amountOfFuel = currentFlight.FuelOnTakeOff*SolverUtils.PoundsToKg;
                         var passengersWeight = SolverUtils.GetRequestWeight(Input, airplane, currentFlight.Passengers);
 
-                        var weightOfNewPassenger = SolverUtils.GetRequestWeight(Input, airplane, new List<DbRequests>(){request});
+                        var weightOfNewPassenger = SolverUtils.GetRequestWeight(Input, airplane, new List<DbRequest>(){request});
                         var totalWeight = weightOfNewPassenger + passengersWeight + amountOfFuel + airplane.Weight;
 
                         if (totalWeight > SolverUtils.GetMaxWeight(currentFlight.Origin, airplane))
@@ -270,7 +270,7 @@ namespace Solver.Heuristics
                     nonSatisfiedRequests.Remove(nonSatisfiedRequests.First(x => x.Id == earliest.Id));
 
                 //PROCEED THE FIRST FLIGHT, BASED ON THE CURRENT STATE OF AIRPLANE IN THE LAST ORIGIN
-                CreateRegularRoute(lastOrigin, earliest.Origin, lastFuel, airplane, lastDeparture, currentSolution, new List<DbRequests>());
+                CreateRegularRoute(lastOrigin, earliest.Origin, lastFuel, airplane, lastDeparture, currentSolution, new List<DbRequest>());
 
 
                 //PROCEED THE SECOND FLIGHT, AFTER THE AIRPLANE ARRIVES IN THE ORIGIN OF THE REQUEST 
@@ -296,7 +296,7 @@ namespace Solver.Heuristics
                 fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnLanding, earliest.Origin, earliest.Destination, airplane);
 
                 minTakeOffTime = arrivalTime + earliest.Destination.GroundTime;
-                CreateRegularRoute(earliest.Destination, airplane.BaseAirport, fuelOnLanding, airplane, minTakeOffTime, currentSolution, new List<DbRequests>());
+                CreateRegularRoute(earliest.Destination, airplane.BaseAirport, fuelOnLanding, airplane, minTakeOffTime, currentSolution, new List<DbRequest>());
 
             }
 
@@ -312,7 +312,7 @@ namespace Solver.Heuristics
         /// <param name="destination"></param>
         /// <param name="airplane"></param>
         /// <returns></returns>
-        private TimeSpan GetArrivalTime(TimeSpan departure, DbAirports origin, DbAirports destination, DbAirplanes airplane){
+        private TimeSpan GetArrivalTime(TimeSpan departure, DbAirport origin, DbAirport destination, DbAirplane airplane){
 
             if(Input.Stretches.ContainsKey(origin))
                 if (Input.Stretches[origin].ContainsKey(destination))
@@ -347,8 +347,8 @@ namespace Solver.Heuristics
         /// <param name="solution"></param>
         /// <param name="passengers"></param>
         /// <returns></returns>
-        private bool CreateRegularRoute(DbAirports origin, DbAirports destination, double fuel, DbAirplanes airplane, TimeSpan departure,
-                                        GeneralSolution solution, List<DbRequests> passengers)
+        private bool CreateRegularRoute(DbAirport origin, DbAirport destination, double fuel, DbAirplane airplane, TimeSpan departure,
+                                        GeneralSolution solution, List<DbRequest> passengers)
         {
 
             var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
@@ -406,8 +406,8 @@ namespace Solver.Heuristics
         /// <param name="solution"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        private bool GoRefuelAndGo(DbAirports origin, DbAirports destination, double fuelOnTakeOff, DbAirplanes airplane,
-            TimeSpan departureTime, GeneralSolution solution, List<DbRequests> requests)
+        private bool GoRefuelAndGo(DbAirport origin, DbAirport destination, double fuelOnTakeOff, DbAirplane airplane,
+            TimeSpan departureTime, GeneralSolution solution, List<DbRequest> requests)
         {
             var alternativeRoute = SolverUtils.findStopToFuelAirport(Input, airplane, origin, destination);
             foreach (var airport in alternativeRoute)
@@ -480,8 +480,8 @@ namespace Solver.Heuristics
         /// <param name="departureTime"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        private bool RefuelAndGo(DbAirplanes airplanes, double fuelOnTank, DbAirports origin, DbAirports destination,
-                              GeneralSolution solution, TimeSpan departureTime, List<DbRequests> requests)
+        private bool RefuelAndGo(DbAirplane airplanes, double fuelOnTank, DbAirport origin, DbAirport destination,
+                              GeneralSolution solution, TimeSpan departureTime, List<DbRequest> requests)
         {
 
             var arrivalTime = SolverUtils.GetArrivalTime(Input, airplanes, departureTime, origin, destination);

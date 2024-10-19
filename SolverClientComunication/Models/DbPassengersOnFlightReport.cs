@@ -2,18 +2,16 @@
 
 namespace SolverClientComunication.Models
 {
-    public class DbParameters
+    public class DbPassengersOnFlightReport
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
-        public string Code { get; set; }
+        public virtual DbFlightsReport Flight { get; set; }
 
         [Required]
-        public string Value { get; set; }
+        public virtual DbRequest Passenger { get; set; }
 
-        [Required]
-        public DbInstance Instance { get; set; }
     }
 }

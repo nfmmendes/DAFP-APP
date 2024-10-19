@@ -46,15 +46,15 @@ namespace Prototipo1.Components
                 var stretches = Context.Stretches.Where(x => usedAirports.Contains(x.Origin) && x.InstanceId == Instance.Id);
 
                 Dictionary<string, double> AirplaneDistance = new Dictionary<string, double>();
-                Dictionary<DbRequests, List<DbFlightsReport>> FlightsPerRequest = new Dictionary<DbRequests, List<DbFlightsReport>>();
+                Dictionary<DbRequest, List<DbFlightsReport>> FlightsPerRequest = new Dictionary<DbRequest, List<DbFlightsReport>>();
 
-                FlightsPerRequest = Context.PassagersOnFlight.Where(x=>x.Flight.Instance.Id == Instance.Id).ToList()
+                FlightsPerRequest = Context.PassengersOnFlight.Where(x=>x.Flight.Instance.Id == Instance.Id).ToList()
                                                              .GroupBy(x => x.Passenger).ToDictionary(x => x.Key, x => x.Select(y => y.Flight).ToList());
 
 
                 foreach (var flight in flights)
                 {
-                    var isEmptyFlight = !Context.PassagersOnFlight.Any(x => x.Flight.Id == flight.Id);
+                    var isEmptyFlight = !Context.PassengersOnFlight.Any(x => x.Flight.Id == flight.Id);
                     var stretchesOnOrigin = stretches.Where(x => x.Origin == flight.Origin.AirportName);
 
                     if (stretchesOnOrigin.Any(x => x.Destination.Equals(flight.Destination.AirportName)))
@@ -73,8 +73,8 @@ namespace Prototipo1.Components
                     }
                     flightTime += flight.ArrivalTime - flight.DepartureTime;
 
-                    takenOnOrigin += Context.PassagersOnFlight.Count(x => x.Passenger.Origin.Id == flight.Origin.Id && x.Flight.Id == flight.Id);
-                    leftOnDestination += Context.PassagersOnFlight.Count(x => x.Passenger.Destination.Id == flight.Destination.Id && x.Flight.Id == flight.Id);
+                    takenOnOrigin += Context.PassengersOnFlight.Count(x => x.Passenger.Origin.Id == flight.Origin.Id && x.Flight.Id == flight.Id);
+                    leftOnDestination += Context.PassengersOnFlight.Count(x => x.Passenger.Destination.Id == flight.Destination.Id && x.Flight.Id == flight.Id);
 
                     if (isEmptyFlight)
                         emptyFlights++;
@@ -110,7 +110,7 @@ namespace Prototipo1.Components
                 labelStoppedHours.Text = Math.Round((totalTime - flightTime - new TimeSpan(0)).TotalHours,2).ToString();
                 labelLateArrivalsHours.Text = Math.Round((totalLateness - new TimeSpan(0)).TotalHours,2).ToString();
                 labelLateArrivals.Text = lateArrivals.ToString();
-                labelTotalPassengers.Text = Context.PassagersOnFlight.Count(x=>x.Flight.Instance.Id == Instance.Id).ToString();
+                labelTotalPassengers.Text = Context.PassengersOnFlight.Count(x=>x.Flight.Instance.Id == Instance.Id).ToString();
 
             }
             

@@ -16,7 +16,7 @@ namespace Prototipo1
     public partial class AddEditStretch : Form
     {
         private bool IsAdd { get; set; }
-        public DbStretches CurrentElement { get; set; }
+        public DbStretch CurrentElement { get; set; }
         public CustomSqlContext Context { get; set; }
         public DbInstance Instance { get; set; }
 
@@ -40,7 +40,7 @@ namespace Prototipo1
         /// 
         /// </summary>
         /// <param name="airplane"></param>
-        public void SetStretch(DbStretches airplane)
+        public void SetStretch(DbStretch airplane)
         {
             CurrentElement = airplane;
         }

@@ -10,7 +10,7 @@ using SolverClientComunication.Models;
 
 namespace Prototipo1.Controller
 {
-    class AirportController :  AbstractController<DbAirports, CustomSqlContext> {
+    class AirportController :  AbstractController<DbAirport, CustomSqlContext> {
         private CustomSqlContext Context { get; set; }
         public static readonly AirportController Instance = new AirportController();
 
@@ -27,7 +27,7 @@ namespace Prototipo1.Controller
         /// Add a new airplane in the database
         /// </summary>
         /// <param name="airport">Airplane that will be added</param>
-        public override void Add(DbAirports airport){
+        public override void Add(DbAirport airport){
             if (IsValidItem(airport)){
                 Instance.Context.Airports.Update(airport);
                 Instance.Context.SaveChanges();
@@ -39,7 +39,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="airport">New data</param>
         /// <param name="IdAirport">Id of the airport that will be edited</param>
-        public override void Edit(DbAirports airport, long IdAirport)
+        public override void Edit(DbAirport airport, long IdAirport)
         {
 
             var item = Instance.Context.Airports.First(x => x.Id == IdAirport);
@@ -68,7 +68,7 @@ namespace Prototipo1.Controller
         /// Remove a airport on database
         /// </summary>
         /// <param name="item">airport to be deleted</param>
-        public override void Delete(DbAirports item){
+        public override void Delete(DbAirport item){
             throw new NotImplementedException();
         }
 
@@ -78,8 +78,8 @@ namespace Prototipo1.Controller
         /// <param name="original"></param>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public DbAirports Clone(DbAirports original, DbInstance instance){
-            var newItem = new DbAirports();
+        public DbAirport Clone(DbAirport original, DbInstance instance){
+            var newItem = new DbAirport();
 
             newItem.AirportName = original.AirportName;
             newItem.Latitude = original.Latitude;
@@ -104,7 +104,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item">Object verified</param>
         /// <returns></returns>
-        protected override bool IsValidItem(DbAirports item){
+        protected override bool IsValidItem(DbAirport item){
 
             if (item != null){
                 return !string.IsNullOrEmpty(item.AirportName) && item.Latitude != null && item.Longitude != null;

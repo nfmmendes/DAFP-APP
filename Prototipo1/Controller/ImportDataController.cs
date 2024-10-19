@@ -61,7 +61,7 @@ namespace Prototipo1.Controller
                         continue;
                     
                     //Create DbAirport object to add it on the database
-                    var item = new DbAirports()
+                    var item = new DbAirport()
                     {
                         AirportName = row.GetCell(0).StringCellValue,
                         GroundTime =row.GetCell(9).CellType != CellType.String? 
@@ -105,7 +105,7 @@ namespace Prototipo1.Controller
                 //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
                 //stretch will be not added to the instance
                 var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AirportName, x=>x);
-                List<DbStretches> newItems = new List<DbStretches>();
+                List<DbStretch> newItems = new List<DbStretch>();
                 //The first row is reserved to the hearders
                 for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
                     IRow row = sheet2.GetRow(i);
@@ -135,7 +135,7 @@ namespace Prototipo1.Controller
                         }
 
                         //Create a stretch object to be added to the database
-                        var item = new DbStretches(){
+                        var item = new DbStretch(){
                             Origin = airportOriginName,
                             Destination = airportDestinationName,
                             Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue),
@@ -184,7 +184,7 @@ namespace Prototipo1.Controller
                             Currency = row.GetCell(1).StringCellValue,
                             Value = row.GetCell(2).NumericCellValue.ToString()
                         };
-                        Instance.Context.FuelPrice.Add(item);
+                        Instance.Context.FuelPrices.Add(item);
                     }
                 }
                 Instance.Context.SaveChanges();
@@ -266,7 +266,7 @@ namespace Prototipo1.Controller
                     }
 
                     //Generated a DbRequest object to the added on the database 
-                    var item = new DbRequests()
+                    var item = new DbRequest()
                     {
                         Name = row.GetCell(0).StringCellValue,
                         PNR = row.GetCell(1).CellType == CellType.String? row.GetCell(1).StringCellValue: row.GetCell(1).NumericCellValue.ToString(),
@@ -305,7 +305,7 @@ namespace Prototipo1.Controller
         /// <param name="msg">Error message</param>
         private void CreateImportErrorLog(DbInstance instance,string fileName,string sheet,  DateTime importHour, int i,string msg)
         {
-            Instance.Context.ImportErrors.Add(new DbImportErrors()
+            Instance.Context.ImportErrors.Add(new DbImportError()
             {
                 ImportationHour = importHour,
                 File = fileName,
@@ -351,7 +351,7 @@ namespace Prototipo1.Controller
 
                     if (baseAirport != null){
                         //Generate the DbAirplane object to be added on the database
-                        var item = new DbAirplanes()
+                        var item = new DbAirplane()
                         {
                             Model = row.GetCell(0).StringCellValue,
                             Prefix = row.GetCell(1).StringCellValue,
@@ -371,7 +371,7 @@ namespace Prototipo1.Controller
                     }
                     else
                     {
-                        Instance.Context.ImportErrors.Add(new DbImportErrors(){
+                        Instance.Context.ImportErrors.Add(new DbImportError(){
                             ImportationHour = importHour,
                             File = "Airplanes",
                             Instance = instance,
@@ -420,13 +420,13 @@ namespace Prototipo1.Controller
                     //Generate the airplane object that will be added to the database
                     if (airplane != null){
 
-                        var item = new DbSeats(){
+                        var item = new DbSeat(){
                             Airplanes = airplane,
                             seatClass = row.GetCell(1).StringCellValue,
                             luggageWeightLimit = row.GetCell(2).NumericCellValue
                         };
 
-                        Instance.Context.SeatList.Add(item);
+                        Instance.Context.Seats.Add(item);
                         
                     }else{
                         CreateImportErrorLog(instance,"Airplanes", "Seat List",importHour, i, "Airplanes not found");

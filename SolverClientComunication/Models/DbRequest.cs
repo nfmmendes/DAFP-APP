@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SolverClientComunication.Models
 {
-    public class DbRequests
+    public class DbRequest
     {
         [Key]
         public long Id { get; set; }
@@ -35,10 +35,10 @@ namespace SolverClientComunication.Models
         public TimeSpan ArrivalTimeWindowEnd { get; set; }
 
         [Required]
-        public virtual DbAirports Origin { get; set; }
+        public virtual DbAirport Origin { get; set; }
 
         [Required]
-        public virtual DbAirports Destination { get; set; }
+        public virtual DbAirport Destination { get; set; }
 
         [Required]
         public DbInstance Instance { get; set; }

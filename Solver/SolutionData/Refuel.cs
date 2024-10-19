@@ -4,8 +4,8 @@ using SolverClientComunication.Models;
 namespace SolutionData
 {
     public class Refuel{
-        public DbAirports Airport { get; set; }
-        public DbAirplanes Airplanes { get; set; }
+        public DbAirport Airport { get; set; }
+        public DbAirplane Airplanes { get; set; }
         public TimeSpan RefuelTime { get; set;  }
         public double Amount { get; set; }
         public string FuelCode { get; set; }
@@ -18,7 +18,7 @@ namespace SolutionData
         /// /// <param name="airplanes"></param>
         /// <param name="amount"></param>
         /// <param name="price"></param>
-        public Refuel(DbAirports airport, DbAirplanes airplanes, TimeSpan refuelTime, double amount, double price){
+        public Refuel(DbAirport airport, DbAirplane airplanes, TimeSpan refuelTime, double amount, double price){
             this.Airport = airport;
             this.Airplanes = airplanes;
             this.RefuelTime = refuelTime; 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SolverClientComunication.Models
 {
     [Serializable]
-    public class DbAirplanes
+    public class DbAirplane
     {
         [Key]
         public long Id { get; set; }
@@ -38,7 +38,7 @@ namespace SolverClientComunication.Models
         [Required, Range(0, Double.PositiveInfinity)]
         public double Capacity { get; set; }
 
-        public DbAirports BaseAirport { get; set; }
+        public DbAirport BaseAirport { get; set; }
 
         [Required]
         public DbInstance Instance { get; set; }

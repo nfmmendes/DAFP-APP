@@ -73,10 +73,10 @@ namespace Prototipo1.Components
                         var deleted = Context.Airports.FirstOrDefault(x => x.Id == index);
                         var stretchDelete = Context.Stretches.Where(x=> x.InstanceId == deleted.Instance.Id && (x.Origin.Equals(deleted.AirportName) || x.Destination.Equals(deleted.AirportName)));
                         var requestsDelete = Context.Requests.Where(x=>x.Origin.Id == deleted.Id || x.Destination.Id == deleted.Id);
-                        var fuelDelete = Context.FuelPrice.Where(x => x.Airport.Id == deleted.Id);
+                        var fuelDelete = Context.FuelPrices.Where(x => x.Airport.Id == deleted.Id);
 
                         if (fuelDelete.Any())
-                            Context.FuelPrice.RemoveRange(fuelDelete.ToList());
+                            Context.FuelPrices.RemoveRange(fuelDelete.ToList());
 
                         if (requestsDelete.Any())
                             Context.Requests.RemoveRange(requestsDelete.ToList());

@@ -12,7 +12,7 @@ namespace Prototipo1.Controller
     /// <summary>
     /// Class to control the manipulation of the data about the airports
     /// </summary>
-    public class AirplaneController : AbstractController<DbAirplanes, CustomSqlContext>
+    public class AirplaneController : AbstractController<DbAirplane, CustomSqlContext>
     {
 
         public static readonly AirplaneController Instance = new AirplaneController();
@@ -30,7 +30,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="airplane">Airplane with new values</param>
         /// <param name="Id">Airplane Id</param>
-        public override void Edit(DbAirplanes airplane, long Id){
+        public override void Edit(DbAirplane airplane, long Id){
             var item = Instance.Context.Airplanes.FirstOrDefault(x=>x.Id == Id);
 
             if (item != null){
@@ -57,7 +57,7 @@ namespace Prototipo1.Controller
         /// Remove an airplane on database
         /// </summary>
         /// <param name="item">Airplane to be deleted</param>
-        public override void Delete(DbAirplanes item){
+        public override void Delete(DbAirplane item){
             throw new NotImplementedException();
         }
 
@@ -65,7 +65,7 @@ namespace Prototipo1.Controller
         ///  Add an airplane on database
         /// </summary>
         /// <param name="airplane">Item that will be added</param>
-        public override void Add(DbAirplanes airplane){
+        public override void Add(DbAirplane airplane){
             if(IsValidItem(airplane))
             Instance.Context.Airplanes.Update(airplane);
             Instance.Context.SaveChanges();
@@ -76,7 +76,7 @@ namespace Prototipo1.Controller
         /// </summary>
         /// <param name="item">Airplane object to be verified</param>
         /// <returns></returns>
-        protected override bool IsValidItem(DbAirplanes item){
+        protected override bool IsValidItem(DbAirplane item){
             if (item != null)
                 return true;
             else
@@ -89,9 +89,9 @@ namespace Prototipo1.Controller
         /// <param name="original"></param>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public DbAirplanes Clone(DbAirplanes original, DbInstance instance = null) { 
+        public DbAirplane Clone(DbAirplane original, DbInstance instance = null) { 
 
-            var newItem = new DbAirplanes();
+            var newItem = new DbAirplane();
             newItem.Prefix = original.Prefix;
             newItem.Range = original.Range;
             newItem.Weight = original.Weight;

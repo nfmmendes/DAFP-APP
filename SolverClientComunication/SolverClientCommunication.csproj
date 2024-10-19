@@ -16,6 +16,7 @@
     <PackageReference Include="Azure.Core" Version="1.38.0" />
     <PackageReference Include="Azure.Identity" Version="1.11.4" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="Enums.NET" Version="5.0.0" />
     <PackageReference Include="ExtendedNumerics.BigDecimal" Version="3000.0.0.280" />
     <PackageReference Include="MathNet.Numerics.Signed" Version="5.0.0" />
