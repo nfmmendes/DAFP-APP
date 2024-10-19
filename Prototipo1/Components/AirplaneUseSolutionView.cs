@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
@@ -77,7 +74,7 @@ namespace Prototipo1.Components
         /// <param name="flight"></param>
         /// <returns></returns>
         private double GetWeightOfPassengers(DbFlightsReport flight){
-            var itemList = Context.PassagersOnFlight.ToList().Where(x => x.Flight.Id == flight.Id);
+            var itemList = Context.PassagersOnFlight.Include(x => x.Flight).Where(x => x.Flight.Id == flight.Id);
             var seatList = Context.SeatList.ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
 
 
