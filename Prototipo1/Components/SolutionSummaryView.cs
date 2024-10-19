@@ -43,7 +43,6 @@ namespace Prototipo1.Components
                 chartAirplaneKilometers.Series["Km"].Points.Clear();
 
                 var stretches = Context.Stretches.Where(x => usedAirports.Contains(x.Origin) && x.InstanceId == Instance.Id);
-                var strechesByOrigin = stretches.GroupBy(x=>x.Origin).ToDictionary(x=>x.Key, x=>x.ToList());
 
                 Dictionary<string, double> AirplaneDistance = new Dictionary<string, double>();
                 Dictionary<DbRequests, List<DbFlightsReport>> FlightsPerRequest = new Dictionary<DbRequests, List<DbFlightsReport>>();
@@ -52,12 +51,14 @@ namespace Prototipo1.Components
                                                              .GroupBy(x => x.Passenger).ToDictionary(x => x.Key, x => x.Select(y => y.Flight).ToList());
 
 
-                foreach (var flight in flights){
-
+                foreach (var flight in flights)
+                {
                     var isEmptyFlight = !Context.PassagersOnFlight.Any(x => x.Flight.Id == flight.Id);
-                    if (strechesByOrigin.ContainsKey(flight.Origin.AirportName))
-                        if(strechesByOrigin[flight.Origin.AirportName].Any(x => x.Destination.Equals(flight.Destination.AirportName))) { 
-                            var distance = strechesByOrigin[flight.Origin.AirportName].First(x => x.Destination.Equals(flight.Destination.AirportName)).Distance;
+                    var stretchesOnOrigin = stretches.Where(x => x.Origin == flight.Origin.AirportName);
+
+                    if (stretchesOnOrigin.Any(x => x.Destination.Equals(flight.Destination.AirportName)))
+                    {
+                        var distance = stretchesOnOrigin.First(x => x.Destination.Equals(flight.Destination.AirportName)).Distance;
                             totalDistance += distance;
 
                             if (isEmptyFlight)
