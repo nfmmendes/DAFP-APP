@@ -9,6 +9,7 @@ using System.Threading;
 using System.Device.Location;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Prototipo1.Components
 {
@@ -37,11 +38,13 @@ namespace Prototipo1.Components
 
             var querySize = 5000;
             int superPageIndex = 0;
-            RowsCache.Clear();
+            var currentTimeout = Context.Database.GetCommandTimeout();
 
+            RowsCache.Clear();
+            Context.Database.SetCommandTimeout(TimeSpan.FromMinutes(2));
             while (true)
             {
-                var listOfStretches = Context.Stretches.Skip(superPageIndex * querySize).Where(x => x.Origin != null && x.InstanceId == Instance.Id)
+                var listOfStretches = Context.Stretches.Skip(superPageIndex * querySize).ToList().Where(x => x.Origin != null && x.InstanceId == Instance.Id)
                                             .Take(querySize).ToList();
 
                 superPageIndex++;
@@ -51,7 +54,8 @@ namespace Prototipo1.Components
                 foreach (var item in listOfStretches)
                     RowsCache.Add(new Tuple<long, string, string, int>(item.Id, item.Origin, item.Destination, item.Distance));
             }
-            
+
+            Context.Database.SetCommandTimeout(TimeSpan.FromSeconds(currentTimeout.Value));
             FillStretchTable();
 
         }
