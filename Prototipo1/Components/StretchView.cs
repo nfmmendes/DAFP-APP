@@ -7,6 +7,8 @@ using SolverClientComunication;
 using SolverClientComunication.Models;
 using System.Threading;
 using System.Device.Location;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Prototipo1.Components
 {
@@ -33,11 +35,23 @@ namespace Prototipo1.Components
         public void setInstance(DbInstance instance){
             Instance = instance;
 
-            var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
+            var querySize = 5000;
+            int superPageIndex = 0;
             RowsCache.Clear();
-            foreach (var item in listOfStretches)
-                RowsCache.Add( new Tuple<long, string, string, int>( item.Id, item.Origin, item.Destination, item.Distance));
 
+            while (true)
+            {
+                var listOfStretches = Context.Stretches.Skip(superPageIndex * querySize).Where(x => x.Origin != null && x.InstanceId == Instance.Id)
+                                            .Take(querySize).ToList();
+
+                superPageIndex++;
+                if (listOfStretches.Count == 0)
+                    break;
+
+                foreach (var item in listOfStretches)
+                    RowsCache.Add(new Tuple<long, string, string, int>(item.Id, item.Origin, item.Destination, item.Distance));
+            }
+            
             FillStretchTable();
 
         }
@@ -123,7 +137,7 @@ namespace Prototipo1.Components
         private void buttonLastPageStretch_Click(object sender, EventArgs e)
         {
 
-            var totalSize = Context.Stretches.Count(x => x.Origin != null && x.InstanceId == Instance.Id);
+            var totalSize = RowsCache.Count;
             var firstLastPageIndex = totalSize - (totalSize % StretchePageSize);
             var listOfStretches = Context.Stretches.Where(x => x.Origin != null && x.InstanceId == Instance.Id).ToList();
 
@@ -134,7 +148,7 @@ namespace Prototipo1.Components
             for (int i = firstLastPageIndex; i < totalSize; i++)
                 try
                 {
-                    dataGridViewStretches.Rows.Add(listOfStretches[i].Id, listOfStretches[i].Origin,listOfStretches[i].Destination, listOfStretches[i].Distance);
+                    dataGridViewStretches.Rows.Add(RowsCache[i].Item1, RowsCache[i].Item2, RowsCache[i].Item3, RowsCache[i].Item4);
                 }
                 catch (Exception ex) { }
 
@@ -152,13 +166,14 @@ namespace Prototipo1.Components
         private void FillStretchTable()
         {
             this.dataGridViewStretches.Rows.Clear();
-            var stretches = Context.Stretches.ToList().Where(x => x.InstanceId == Instance.Id);
+      
             int cont = 0;
             CountStretchesPage = 1;
-            labelPageStretch.Text = $"{CountStretchesPage} of {(int)(stretches.Count() / StretchePageSize + 1)}";
-            foreach (var item in stretches)
+            labelPageStretch.Text = $"{CountStretchesPage} of {(int)(RowsCache.Count() / StretchePageSize + 1)}";
+      
+            foreach (var item in RowsCache)
             {
-                dataGridViewStretches.Rows.Add(item.Id, item.Origin, item.Destination, item.Distance);
+                dataGridViewStretches.Rows.Add(item.Item1, item.Item2, item.Item3, item.Item4);
                 cont++;
                 if (cont == StretchePageSize)
                     break;
