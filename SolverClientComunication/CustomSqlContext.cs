@@ -37,7 +37,7 @@ namespace SolverClientComunication
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=Prototipo1;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=Prototipo1;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true", sqlServerOptions => sqlServerOptions.CommandTimeout(60));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
