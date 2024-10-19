@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Models;
@@ -28,7 +23,7 @@ namespace Prototipo1.Components
         }
 
         public void FillData(){
-
+            
             if (Instance != null){
                 var flights = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id).ToList();
                 var airplanes = flights.Select(x => x.Airplanes).Distinct();
@@ -38,14 +33,17 @@ namespace Prototipo1.Components
                 var flightTime = new TimeSpan(0);
                 var totalLateness = new TimeSpan(0);
                 var lateArrivals = 0;
-                 var takenOnOrigin = 0;
+                var takenOnOrigin = 0;
                 var leftOnDestination = 0;
                 var emptyFlights = 0;
                 var emptyKilometers = 0;
                 var numStops = 0;
-                
-                var stretches = Context.Stretches.Where(x => x.InstanceId == Instance.Id).GroupBy(x=>x.Origin).ToDictionary(x=>x.Key, x=>x.ToList());
-                this.chartAirplaneKilometers.Series["Km"].Points.Clear();
+
+                var usedAirports = flights.Select(x=>x.Origin).Concat(flights.Select(x=>x.Destination)).Select(x=> x.AirportName).Distinct();
+                chartAirplaneKilometers.Series["Km"].Points.Clear();
+
+                var stretches = Context.Stretches.Where(x => usedAirports.Contains(x.Origin) && x.InstanceId == Instance.Id);
+                var strechesByOrigin = stretches.GroupBy(x=>x.Origin).ToDictionary(x=>x.Key, x=>x.ToList());
 
                 Dictionary<string, double> AirplaneDistance = new Dictionary<string, double>();
                 Dictionary<DbRequests, List<DbFlightsReport>> FlightsPerRequest = new Dictionary<DbRequests, List<DbFlightsReport>>();
@@ -57,9 +55,9 @@ namespace Prototipo1.Components
                 foreach (var flight in flights){
 
                     var isEmptyFlight = !Context.PassagersOnFlight.Any(x => x.Flight.Id == flight.Id);
-                    if (stretches.ContainsKey(flight.Origin.AirportName))
-                        if(stretches[flight.Origin.AirportName].Any(x => x.Destination.Equals(flight.Destination.AirportName))) { 
-                            var distance =  stretches[flight.Origin.AirportName].First(x => x.Destination.Equals(flight.Destination.AirportName)).Distance;
+                    if (strechesByOrigin.ContainsKey(flight.Origin.AirportName))
+                        if(strechesByOrigin[flight.Origin.AirportName].Any(x => x.Destination.Equals(flight.Destination.AirportName))) { 
+                            var distance = strechesByOrigin[flight.Origin.AirportName].First(x => x.Destination.Equals(flight.Destination.AirportName)).Distance;
                             totalDistance += distance;
 
                             if (isEmptyFlight)
@@ -112,6 +110,7 @@ namespace Prototipo1.Components
                 labelTotalPassengers.Text = Context.PassagersOnFlight.Count(x=>x.Flight.Instance.Id == Instance.Id).ToString();
 
             }
+            
         }
 
         private void SolutionSummaryView_Load(object sender, EventArgs e){
