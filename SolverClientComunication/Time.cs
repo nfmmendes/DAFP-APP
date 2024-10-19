@@ -13,7 +13,7 @@ namespace SolverClientComunication
             set
             {
                 if (value < 0 || value > 23) throw new Exception("Out of limit hour");
-                DateTime = new DateTime(DateTime.Year, DateTime.Month, DateTime.Day,value,Minute,Second,Millisecond);
+                DateTime = new DateTime(DateTime.Year, DateTime.Month, DateTime.Day, value, Minute, Second, Millisecond);
 
             }
         }
@@ -23,8 +23,8 @@ namespace SolverClientComunication
             get => DateTime.Minute;
             set
             {
-                if(value > 59 || value <0) throw new Exception("Out of limit minute");
-                DateTime = new DateTime(DateTime.Year, DateTime.Month, DateTime.Day, Hour, value, Second,Millisecond);
+                if (value > 59 || value < 0) throw new Exception("Out of limit minute");
+                DateTime = new DateTime(DateTime.Year, DateTime.Month, DateTime.Day, Hour, value, Second, Millisecond);
             }
 
         }
@@ -50,17 +50,18 @@ namespace SolverClientComunication
         }
 
 
-        public Time(int hours, int minutes=0, int seconds=0, int milliseconds=0){
-            if(hours > 23 || hours <0 || minutes > 59 || minutes < 0 || 
+        public Time(int hours, int minutes = 0, int seconds = 0, int milliseconds = 0)
+        {
+            if (hours > 23 || hours < 0 || minutes > 59 || minutes < 0 ||
                seconds > 59 || seconds < 0 || milliseconds > 999 || minutes < 0)
                 throw new Exception("Invalid time");
 
-            DateTime = new DateTime(2000,1,1,hours,minutes,seconds,milliseconds);
+            DateTime = new DateTime(2000, 1, 1, hours, minutes, seconds, milliseconds);
         }
 
         public Time(Time outro)
         {
-            DateTime = new DateTime(2000,1,1,outro.Hour, outro.Minute, outro.Second, outro.Millisecond);
+            DateTime = new DateTime(2000, 1, 1, outro.Hour, outro.Minute, outro.Second, outro.Millisecond);
         }
 
         public override string ToString()
