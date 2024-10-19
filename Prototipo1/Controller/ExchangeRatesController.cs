@@ -47,7 +47,7 @@ namespace Prototipo1.Controller
                 element.CurrencySymbol = item.CurrencySymbol;
                 element.ValueInDolar = item.ValueInDolar;
 
-                Instance.Context.Exchange.AddOrUpdate(element);
+                Instance.Context.Exchange.Update(element);
                 Instance.Context.SaveChanges();
             }
             

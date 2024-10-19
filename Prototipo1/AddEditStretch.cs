@@ -82,7 +82,7 @@ namespace Prototipo1
             }else{
                 if (CurrentElement != null){
                     CurrentElement.Distance = Convert.ToInt32(numUpDownDist.Value); 
-                    Context.Stretches.AddOrUpdate(CurrentElement);
+                    Context.Stretches.Update(CurrentElement);
                 }
                 Context.SaveChanges();
             }

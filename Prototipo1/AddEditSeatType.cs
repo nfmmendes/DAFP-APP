@@ -104,7 +104,7 @@ namespace Prototipo1
                 seat.luggageWeightLimit = Convert.ToDouble(numUDLuggageWeight.Value);
                 seat.seatClass = textBoxClass.Text;
 
-                Context.SeatList.AddOrUpdate(seat);
+                Context.SeatList.Update(seat);
                 Context.SaveChanges();
             }
             

@@ -45,7 +45,7 @@ namespace Prototipo1.Controller
                 element.Currency = item.Currency;
                 element.Value = item.Value;
 
-                Instance.Context.FuelPrice.AddOrUpdate(element);
+                Instance.Context.FuelPrice.Update(element);
                 Instance.Context.SaveChanges();
             }
         }

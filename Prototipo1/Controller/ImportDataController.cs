@@ -39,7 +39,7 @@ namespace Prototipo1.Controller
             stream.Position = 0;
             XSSFWorkbook XSSFwb = new XSSFWorkbook(stream);
 
-            Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = false;
 
             //Try to get the sheet caled "Airport"
             var sheet = XSSFwb.GetSheet("Airport");
@@ -100,8 +100,7 @@ namespace Prototipo1.Controller
             var sheet2 = XSSFwb.GetSheet("Stretches");
             
             if (sheet2 != null && loadStretches){
-                Context.Configuration.ValidateOnSaveEnabled = false;
-
+                
                 //Get the name of all airports already registered
                 //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
                 //stretch will be not added to the instance
@@ -153,7 +152,6 @@ namespace Prototipo1.Controller
 
                 }
                 Instance.Context.SaveChanges();
-                Context.Configuration.ValidateOnSaveEnabled = false;
             }
 
             // Get the sheed called "Fuel Prices"
@@ -191,7 +189,7 @@ namespace Prototipo1.Controller
                 }
                 Instance.Context.SaveChanges();
             }
-            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
         }
 
         /// <summary>
@@ -223,7 +221,7 @@ namespace Prototipo1.Controller
             stream.Position = 0;
 
             var importHour = now;
-            Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
                                                                                 //It need to be set to true in the end of procedure
             XSSFWorkbook XSSFwb = new XSSFWorkbook(stream);
 
@@ -293,7 +291,7 @@ namespace Prototipo1.Controller
                     ShowErros(e);
                 }
             }
-            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
         }
 
         /// <summary>
@@ -333,7 +331,7 @@ namespace Prototipo1.Controller
 
             var importHour = now;
 
-            Instance.Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker. This field must be set to true in the end
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker. This field must be set to true in the end
             XSSFWorkbook XSSFwb = new XSSFWorkbook(stream);
 
             //Get the sheet called "Airplanes" if it exist
@@ -436,7 +434,7 @@ namespace Prototipo1.Controller
                 }
                 Instance.Context.SaveChanges();
             }
-            Instance.Context.Configuration.AutoDetectChangesEnabled = true;
+            Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
         }
     }
 }

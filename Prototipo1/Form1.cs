@@ -3,6 +3,7 @@ using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
 using Prototipo1.Controller;
 using Solver;
 using SolverClientComunication.Enums;
@@ -26,9 +27,8 @@ namespace Prototipo1
         public MainForm()
         {
             InitializeComponent();
-        
 
-            var instances = Context.Instances;
+            var instances = Context.Instances.ToList();
             //Initialize the context of all controllers 
             //WARNING: Everytime that a new controller is created it's necessary to initialize their context here to allow
             // its rigth use
@@ -206,7 +206,7 @@ namespace Prototipo1
                 labelLastOptimization.Text = instance.LastOptimization.Value.ToString("G");
 
                 //Save the modifications on the database
-                Context.Instances.AddOrUpdate(instance);
+                Context.Instances.Update(instance);
                 Context.SaveChanges();
                 BuildSolutionPanel(instance); 
 

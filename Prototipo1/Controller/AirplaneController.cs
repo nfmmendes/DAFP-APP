@@ -49,7 +49,7 @@ namespace Prototipo1.Controller
             }
                 
             
-            Instance.Context.Airplanes.AddOrUpdate(item);
+            Instance.Context.Airplanes.Update(item);
             Instance.Context.SaveChanges();
         }
 
@@ -67,7 +67,7 @@ namespace Prototipo1.Controller
         /// <param name="airplane">Item that will be added</param>
         public override void Add(DbAirplanes airplane){
             if(IsValidItem(airplane))
-            Instance.Context.Airplanes.AddOrUpdate(airplane);
+            Instance.Context.Airplanes.Update(airplane);
             Instance.Context.SaveChanges();
         }
 

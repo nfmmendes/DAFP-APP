@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
 
 namespace SolverClientComunication.Enums
 {
@@ -17,7 +13,7 @@ namespace SolverClientComunication.Enums
         public static readonly ParametersEnum START_FROM_DEPOT = new ParametersEnum("Start from depot", "START_FROM_DEPOT");
         public static readonly ParametersEnum COME_BACK_TO_DEPOT = new ParametersEnum("Come back to depot", "COME_BACK_TO_DEPOT");
         public static readonly ParametersEnum AVERAGE_MEN_WEIGHT = new ParametersEnum("Average men weight", "AVERAGE_MEN_WEIGHT");
-        public static readonly ParametersEnum AVERAGE_WOMEN_WEIGHT  = new ParametersEnum("Average women weight", "AVERAGE_WOMEN_WEIGHT");
+        public static readonly ParametersEnum AVERAGE_WOMEN_WEIGHT = new ParametersEnum("Average women weight", "AVERAGE_WOMEN_WEIGHT");
         public static readonly ParametersEnum AVERAGE_CHILDREN_WEIGHT = new ParametersEnum("Average childrem weight", "AVERAGE_CHILDREN_WEIGHT");
         public static readonly ParametersEnum TIME_LIMIT = new ParametersEnum("Time limit", "TIME_LIMIT");
         public static readonly ParametersEnum SUNSET_TIME = new ParametersEnum("Sunset Time", "SUNSET_TIME");

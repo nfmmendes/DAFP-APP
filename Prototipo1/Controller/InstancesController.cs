@@ -97,7 +97,7 @@ namespace Prototipo1.Controller
                 entity.Name = name;
                 entity.Description = description;
             }
-            Instance.Context.Instances.AddOrUpdate(entity);
+            Instance.Context.Instances.Update(entity);
             Instance.Context.SaveChanges();
         }
 
@@ -110,10 +110,10 @@ namespace Prototipo1.Controller
             var deleted = Instance.Context.Instances.FirstOrDefault(x => x.Name.Equals(name));
             if (deleted != null){
 
-                Instance.Context.Configuration.AutoDetectChangesEnabled = false;
+                Instance.Context.ChangeTracker.AutoDetectChangesEnabled = false;
                 Instance.Context.Stretches.RemoveRange(Instance.Context.Stretches.ToList().Where(x => x.InstanceId == deleted.Id));
                 Instance.Context.SaveChanges();
-                Instance.Context.Configuration.AutoDetectChangesEnabled = true;
+                Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
 
                 //TODO: Remove it. It's wrong 
                 Instance.Context.PassagersOnFlight.RemoveRange(
@@ -219,7 +219,7 @@ namespace Prototipo1.Controller
 
 
             //Clone and save the stretches list
-            Context.Configuration.AutoDetectChangesEnabled = false;
+            Context.ChangeTracker.AutoDetectChangesEnabled = false;
             foreach (var item in stretches)
             {
                 Context.Stretches.Add(new DbStretches()
@@ -230,7 +230,6 @@ namespace Prototipo1.Controller
                     Distance = item.Distance
                 });
             }
-            Context.Configuration.AutoDetectChangesEnabled = true;
             Context.SaveChanges();
         }
 

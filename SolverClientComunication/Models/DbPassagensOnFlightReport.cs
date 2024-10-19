@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SolverClientComunication.Models
 {
-    public class DbPassagensOnFlightReport : DbContext
+    public class DbPassagensOnFlightReport
     {
         [Key]
         public long Id { get; set; }

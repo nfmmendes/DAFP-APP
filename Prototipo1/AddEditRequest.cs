@@ -147,7 +147,7 @@ namespace Prototipo1
                         item.ArrivalTimeWindowBegin = new TimeSpan(Convert.ToInt32(numUD_Hr_MinArr.Value), Convert.ToInt32(numUD_Min_MinArr.Value), 0);
                         item.ArrivalTimeWindowEnd = new TimeSpan(Convert.ToInt32(numUD_Hr_MaxArr.Value), Convert.ToInt32(numUD_Min_MaxArr.Value), 0);
 
-                        Context.Requests.AddOrUpdate(item);
+                        Context.Requests.Update(item);
                     }
                     else
                     {

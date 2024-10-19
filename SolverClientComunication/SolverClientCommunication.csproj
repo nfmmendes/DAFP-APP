@@ -7,6 +7,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Commons.csproj" />
@@ -15,7 +16,6 @@
     <PackageReference Include="Azure.Core" Version="1.38.0" />
     <PackageReference Include="Azure.Identity" Version="1.11.4" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Enums.NET" Version="5.0.0" />
     <PackageReference Include="ExtendedNumerics.BigDecimal" Version="3000.0.0.280" />
     <PackageReference Include="MathNet.Numerics.Signed" Version="5.0.0" />
@@ -23,7 +23,15 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <PrivateAssets>none</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>none</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Identity.Client" Version="4.61.3" />
     <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.61.3" />
     <PackageReference Include="Microsoft.IdentityModel.Abstractions" Version="6.35.0" />
@@ -48,5 +56,8 @@
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

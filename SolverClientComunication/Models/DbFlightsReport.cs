@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SolverClientComunication.Models
 {
-    public class DbFlightsReport : DbContext{
-        
+    public class DbFlightsReport
+    {
+
         [Key]
         public long Id { get; set; }
 
@@ -30,10 +26,10 @@ namespace SolverClientComunication.Models
         public TimeSpan DepartureTime { get; set; }
 
         [Required]
-        public  TimeSpan ArrivalTime { get; set; }
+        public TimeSpan ArrivalTime { get; set; }
 
         [Required]
-        public virtual DbAirplanes Airplanes { get; set;}
+        public virtual DbAirplanes Airplanes { get; set; }
 
         [Required]
         public DbInstance Instance { get; set; }

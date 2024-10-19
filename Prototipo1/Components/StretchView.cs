@@ -191,7 +191,7 @@ namespace Prototipo1.Components
 
                     doubleCoordinatesByName[item.Key] = new KeyValuePair<double, double>(latitude, longitude);
                 }
-                Context.Configuration.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
+                Context.ChangeTracker.AutoDetectChangesEnabled = false;    //This is done to make the procedure quicker
                 //It need to be set to true in the end of procedure
                 foreach (var origin in doubleCoordinatesByName.Keys){
                     foreach (var destination in doubleCoordinatesByName.Keys){
@@ -211,7 +211,7 @@ namespace Prototipo1.Components
                     }
                     Context.SaveChanges();
                 }
-                Context.Configuration.AutoDetectChangesEnabled = true;    //This is done to make the procedure quicker
+                Context.ChangeTracker.AutoDetectChangesEnabled = true;    //This is done to make the procedure quicker
                                                                           //It need to be set to true in the end of procedure
                 FillStretchTable();
             }

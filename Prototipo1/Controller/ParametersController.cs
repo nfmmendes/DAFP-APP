@@ -178,7 +178,7 @@ namespace Prototipo1.Controller
 
             using (var context = new CustomSqlContext())
             {
-                context.Parameters.AddOrUpdate(param);
+                context.Parameters.Update(param);
                 context.SaveChanges();
             }
 

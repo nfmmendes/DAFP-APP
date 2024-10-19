@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 
 namespace SolverClientComunication.Models
 {
-    public class DbSeats : DbContext
+    public class DbSeats
     {
         [Key]
         public long Id { get; set; }
