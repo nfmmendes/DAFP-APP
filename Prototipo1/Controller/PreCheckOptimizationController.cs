@@ -17,24 +17,24 @@ namespace Prototipo1.Controller
         public static readonly PreCheckOptimizationController Instance = new PreCheckOptimizationController();
 
         /// <summary>
-        /// 
+        /// Set the controller context.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context"> The controler context. </param>
         public override void setContext(CustomSqlContext context){
             Instance.Context = context;
         }
 
         /// <summary>
-        /// 
+        /// Add an optimization alert to the pre-optimization warning list.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The new alert.</param>
         public override void Add(DbOptimizationAlert item)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 
+        /// Get all the pre-optimization alerts. 
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
@@ -43,19 +43,19 @@ namespace Prototipo1.Controller
         }
 
         /// <summary>
-        /// 
+        /// Edit an pre-optimization alert.
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="IdItem"></param>
+        /// <param name="item">The new item value</param>
+        /// <param name="IdItem">The id of the item to be edited</param>
         public override void Edit(DbOptimizationAlert item, long IdItem)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 
+        /// Delete an optimization alert. 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The item to be deleted. </param>
         public override void Delete(DbOptimizationAlert item)
         {
             throw new NotImplementedException();
