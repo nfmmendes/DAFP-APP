@@ -9,6 +9,8 @@ using Solver;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 using SolverClientComunication.Enums;
+using System.Windows.Forms;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Prototipo1.Controller
 {
@@ -90,35 +92,38 @@ namespace Prototipo1.Controller
         {
             var insId = instance.Id;
             var Parameters = Instance.Context.Parameters;
-            var parameters = Parameters.Where(x =>insId == x.Instance.Id && x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = useTimeWindows ? "true" : "false"; UpdateAndSave(param); }
+            var boolToString = (bool value) => value ? "true" : "false";
+            var setValueAndSave = (DbParameter param, string value) => { param.Value = value; UpdateAndSave(param); };
+
+            var parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
+            foreach (var param in parameters) { setValueAndSave(param, boolToString(useTimeWindows)); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.PICK_ALL.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = pickAll ? "true" : "false"; UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, boolToString(pickAll));  }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.DELIVER_ALL.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = deliverAll ? "true" : "false"; UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, boolToString(deliverAll)); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.START_FROM_DEPOT.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = startFromDepot ? "true" : "false"; UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, boolToString(startFromDepot)); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = comebackToDepot ? "true" : "false"; UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, boolToString(comebackToDepot)); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = averageWeightMan.ToString(); UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, averageWeightMan.ToString()); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = averageWeightWoman.ToString(); UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, averageWeightWoman.ToString()); }
 
             parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
-            foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
+            foreach (var param in parameters) { setValueAndSave(param, timeLimit.ToString()); }
 
             parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNRISE_TIME.DbCode).ToList();
-            foreach (var param in parameters) {  param.Value = sunrise; UpdateAndSave(param);} 
+            foreach (var param in parameters) {  setValueAndSave(param, sunrise); } 
             
             parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNSET_TIME.DbCode).ToList();
-            foreach (var param in parameters) {  param.Value = sunset; UpdateAndSave(param);} 
+            foreach (var param in parameters) {  setValueAndSave(param, sunset); } 
 
         }
 
