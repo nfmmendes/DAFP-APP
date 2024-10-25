@@ -11,6 +11,7 @@ using SolverClientComunication.Models;
 using SolverClientComunication.Enums;
 using System.Windows.Forms;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Prototipo1.Controller
 {
@@ -93,37 +94,41 @@ namespace Prototipo1.Controller
             var insId = instance.Id;
             var Parameters = Instance.Context.Parameters;
             var boolToString = (bool value) => value ? "true" : "false";
-            var setValueAndSave = (DbParameter param, string value) => { param.Value = value; UpdateAndSave(param); };
+            var setValueAndSave = (DbParameter param, string value) => { 
+                param.Value = value; 
+                return UpdateAndSave(param); 
+            };
 
-            var parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, boolToString(useTimeWindows)); }
+            var parameters = Parameters.Where(x => insId == x.Instance.Id).ToList();
 
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.PICK_ALL.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, boolToString(pickAll));  }
+            foreach (var param in parameters)
+            {
+                var _ = param.Code switch
+                {
+                    _ when param.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode =>
+                        setValueAndSave(param, boolToString(useTimeWindows)),
+                    _ when param.Code == ParametersEnum.PICK_ALL.DbCode =>
+                        setValueAndSave(param, boolToString(pickAll)),
+                    _ when param.Code == ParametersEnum.DELIVER_ALL.DbCode =>
+                        setValueAndSave(param, boolToString(deliverAll)),
+                    _ when param.Code == ParametersEnum.START_FROM_DEPOT.DbCode =>
+                        setValueAndSave(param, boolToString(startFromDepot)),
+                    _ when param.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode =>
+                        setValueAndSave(param, boolToString(comebackToDepot)),
+                    _ when param.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode =>
+                        setValueAndSave(param, averageWeightMan.ToString()),
+                    _ when param.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode =>
+                        setValueAndSave(param, averageWeightWoman.ToString()),
+                    _ when param.Code == ParametersEnum.TIME_LIMIT.DbCode =>
+                        setValueAndSave(param, timeLimit.ToString()),
+                    _ when param.Code == ParametersEnum.SUNRISE_TIME.DbCode =>
+                        setValueAndSave(param, sunrise),
+                    _ when param.Code == ParametersEnum.SUNSET_TIME.DbCode =>
+                        setValueAndSave(param, sunset),
+                    _ => 0
+                };
 
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.DELIVER_ALL.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, boolToString(deliverAll)); }
-
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.START_FROM_DEPOT.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, boolToString(startFromDepot)); }
-
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, boolToString(comebackToDepot)); }
-
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, averageWeightMan.ToString()); }
-
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, averageWeightWoman.ToString()); }
-
-            parameters = Parameters.Where(x => insId == x.Instance.Id && x.Code == ParametersEnum.TIME_LIMIT.DbCode).ToList();
-            foreach (var param in parameters) { setValueAndSave(param, timeLimit.ToString()); }
-
-            parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNRISE_TIME.DbCode).ToList();
-            foreach (var param in parameters) {  setValueAndSave(param, sunrise); } 
-            
-            parameters = Parameters.Where(x=> insId == x.Instance.Id && x.Code == ParametersEnum.SUNSET_TIME.DbCode).ToList();
-            foreach (var param in parameters) {  setValueAndSave(param, sunset); } 
+            }
 
         }
 
@@ -179,16 +184,13 @@ namespace Prototipo1.Controller
         /// Update the value of a parameter and save it on the database 
         /// </summary>
         /// <param name="param">Parameter item</param>
-        private void UpdateAndSave(DbParameter param){
+        private int UpdateAndSave(DbParameter param){
 
             using (var context = new CustomSqlContext())
             {
                 context.Parameters.Update(param);
-                context.SaveChanges();
+                return context.SaveChanges();
             }
-
-            //Instance.Context.Parameters.AddOrUpdate(param);
-            //Instance.Context.SaveChanges();
         }
 
         /// <summary>
