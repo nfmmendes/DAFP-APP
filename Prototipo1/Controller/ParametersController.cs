@@ -12,6 +12,7 @@ using SolverClientComunication.Enums;
 using System.Windows.Forms;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using WinRT.Interop;
 
 namespace Prototipo1.Controller
 {
@@ -146,38 +147,44 @@ namespace Prototipo1.Controller
         /// <param name="timeLimit">Maximum time to the algorithm rum</param>
         public void UpdateAllInstances(bool useTimeWindows, bool pickAll = true, bool deliverAll = true, bool startFromDepot = true,
                                        bool comebackToDepot = true, int averageWeightMan = 75, int averageWeightWoman = 65,
-                                       int averageChildWeight = 30,int timeLimit = 45, string sunrise = "6:15", string sunset ="18:15"){
+                                       int averageChildWeight = 30, int timeLimit = 45, string sunrise = "6:15", string sunset = "18:15")
+        {
 
-            var parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode);
-            foreach (var param in parameters){ param.Value= useTimeWindows?"true":"false";   UpdateAndSave(param);}
+            var parameters = Context.Parameters.ToList();
+            var boolToString = (bool value) => value ? "true" : "false";
+            var setValueAndSave = (DbParameter param, string value) =>
+            {
+                param.Value = value;
+                return UpdateAndSave(param);
+            };
 
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.PICK_ALL.DbCode);
-            foreach (var param in parameters) { param.Value = pickAll ? "true" : "false"; UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.DELIVER_ALL.DbCode);
-            foreach (var param in parameters) { param.Value = deliverAll ? "true" : "false"; UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.START_FROM_DEPOT.DbCode);
-            foreach (var param in parameters) { param.Value = startFromDepot ? "true" : "false"; UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode);
-            foreach (var param in parameters) { param.Value = comebackToDepot ? "true" : "false"; UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode);
-            foreach (var param in parameters) { param.Value = averageWeightMan.ToString(); UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode);
-            foreach (var param in parameters) { param.Value = averageWeightWoman.ToString(); UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.TIME_LIMIT.DbCode);
-            foreach (var param in parameters) { param.Value = timeLimit.ToString(); UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.SUNRISE_TIME.DbCode);
-            foreach (var param in parameters) { param.Value = sunrise; UpdateAndSave(param); }
-
-            parameters = Instance.Context.Parameters.Where(x => x.Code == ParametersEnum.SUNSET_TIME.DbCode);
-            foreach (var param in parameters) { param.Value = sunset; UpdateAndSave(param); }
-
+            foreach (var param in parameters)
+            {
+                var _ = param.Code switch
+                {
+                    _ when param.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode =>
+                        setValueAndSave(param, boolToString(useTimeWindows)),
+                    _ when param.Code == ParametersEnum.PICK_ALL.DbCode =>
+                        setValueAndSave(param, boolToString(pickAll)),
+                    _ when param.Code == ParametersEnum.DELIVER_ALL.DbCode =>
+                        setValueAndSave(param, boolToString(deliverAll)),
+                    _ when param.Code == ParametersEnum.START_FROM_DEPOT.DbCode =>
+                        setValueAndSave(param, boolToString(startFromDepot)),
+                    _ when param.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode =>
+                        setValueAndSave(param, boolToString(comebackToDepot)),
+                    _ when param.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode =>
+                        setValueAndSave(param, averageWeightMan.ToString()),
+                    _ when param.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode =>
+                        setValueAndSave(param, averageWeightWoman.ToString()),
+                    _ when param.Code == ParametersEnum.TIME_LIMIT.DbCode =>
+                        setValueAndSave(param, timeLimit.ToString()),
+                    _ when param.Code == ParametersEnum.SUNRISE_TIME.DbCode =>
+                        setValueAndSave(param, sunrise),
+                    _ when param.Code == ParametersEnum.SUNSET_TIME.DbCode =>
+                        setValueAndSave(param, sunset),
+                    _ => 0
+                };
+            }
         }
 
         /// <summary>
