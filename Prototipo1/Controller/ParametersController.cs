@@ -95,40 +95,30 @@ namespace Prototipo1.Controller
             var insId = instance.Id;
             var Parameters = Instance.Context.Parameters;
             var boolToString = (bool value) => value ? "true" : "false";
-            var setValueAndSave = (DbParameter param, string value) => { 
-                param.Value = value; 
-                return UpdateAndSave(param); 
+            var setValueAndSave = (DbParameter param, string value) => {
+                param.Value = value;
+                return UpdateAndSave(param);
             };
 
             var parameters = Parameters.Where(x => insId == x.Instance.Id).ToList();
 
+            var newValueByType = new Dictionary<string, string>()
+            {
+                { ParametersEnum.USE_TIME_WINDOWS.DbCode, boolToString(useTimeWindows)},
+                { ParametersEnum.PICK_ALL.DbCode, boolToString(pickAll)},
+                { ParametersEnum.DELIVER_ALL.DbCode, boolToString(deliverAll) },
+                { ParametersEnum.START_FROM_DEPOT.DbCode, boolToString(startFromDepot) },
+                { ParametersEnum.COME_BACK_TO_DEPOT.DbCode, boolToString(comebackToDepot) },
+                { ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode, averageWeightMan.ToString() },
+                { ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode, averageWeightWoman.ToString() },
+                { ParametersEnum.TIME_LIMIT.DbCode, timeLimit.ToString() },
+                { ParametersEnum.SUNRISE_TIME.DbCode, sunrise },
+                { ParametersEnum.SUNSET_TIME.DbCode, sunset },
+            };
+
             foreach (var param in parameters)
             {
-                var _ = param.Code switch
-                {
-                    _ when param.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode =>
-                        setValueAndSave(param, boolToString(useTimeWindows)),
-                    _ when param.Code == ParametersEnum.PICK_ALL.DbCode =>
-                        setValueAndSave(param, boolToString(pickAll)),
-                    _ when param.Code == ParametersEnum.DELIVER_ALL.DbCode =>
-                        setValueAndSave(param, boolToString(deliverAll)),
-                    _ when param.Code == ParametersEnum.START_FROM_DEPOT.DbCode =>
-                        setValueAndSave(param, boolToString(startFromDepot)),
-                    _ when param.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode =>
-                        setValueAndSave(param, boolToString(comebackToDepot)),
-                    _ when param.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode =>
-                        setValueAndSave(param, averageWeightMan.ToString()),
-                    _ when param.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode =>
-                        setValueAndSave(param, averageWeightWoman.ToString()),
-                    _ when param.Code == ParametersEnum.TIME_LIMIT.DbCode =>
-                        setValueAndSave(param, timeLimit.ToString()),
-                    _ when param.Code == ParametersEnum.SUNRISE_TIME.DbCode =>
-                        setValueAndSave(param, sunrise),
-                    _ when param.Code == ParametersEnum.SUNSET_TIME.DbCode =>
-                        setValueAndSave(param, sunset),
-                    _ => 0
-                };
-
+                setValueAndSave(param, newValueByType[param.Code]);
             }
 
         }
@@ -158,32 +148,23 @@ namespace Prototipo1.Controller
                 return UpdateAndSave(param);
             };
 
+            var newValueByType = new Dictionary<string, string>()
+            {
+                { ParametersEnum.USE_TIME_WINDOWS.DbCode, boolToString(useTimeWindows)},
+                { ParametersEnum.PICK_ALL.DbCode, boolToString(pickAll)},
+                { ParametersEnum.DELIVER_ALL.DbCode, boolToString(deliverAll) },
+                { ParametersEnum.START_FROM_DEPOT.DbCode, boolToString(startFromDepot) },
+                { ParametersEnum.COME_BACK_TO_DEPOT.DbCode, boolToString(comebackToDepot) },
+                { ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode, averageWeightMan.ToString() },
+                { ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode, averageWeightWoman.ToString() },
+                { ParametersEnum.TIME_LIMIT.DbCode, timeLimit.ToString() },
+                { ParametersEnum.SUNRISE_TIME.DbCode, sunrise },
+                { ParametersEnum.SUNSET_TIME.DbCode, sunset },
+            };
+
             foreach (var param in parameters)
             {
-                var _ = param.Code switch
-                {
-                    _ when param.Code == ParametersEnum.USE_TIME_WINDOWS.DbCode =>
-                        setValueAndSave(param, boolToString(useTimeWindows)),
-                    _ when param.Code == ParametersEnum.PICK_ALL.DbCode =>
-                        setValueAndSave(param, boolToString(pickAll)),
-                    _ when param.Code == ParametersEnum.DELIVER_ALL.DbCode =>
-                        setValueAndSave(param, boolToString(deliverAll)),
-                    _ when param.Code == ParametersEnum.START_FROM_DEPOT.DbCode =>
-                        setValueAndSave(param, boolToString(startFromDepot)),
-                    _ when param.Code == ParametersEnum.COME_BACK_TO_DEPOT.DbCode =>
-                        setValueAndSave(param, boolToString(comebackToDepot)),
-                    _ when param.Code == ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode =>
-                        setValueAndSave(param, averageWeightMan.ToString()),
-                    _ when param.Code == ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode =>
-                        setValueAndSave(param, averageWeightWoman.ToString()),
-                    _ when param.Code == ParametersEnum.TIME_LIMIT.DbCode =>
-                        setValueAndSave(param, timeLimit.ToString()),
-                    _ when param.Code == ParametersEnum.SUNRISE_TIME.DbCode =>
-                        setValueAndSave(param, sunrise),
-                    _ when param.Code == ParametersEnum.SUNSET_TIME.DbCode =>
-                        setValueAndSave(param, sunset),
-                    _ => 0
-                };
+                setValueAndSave(param, newValueByType[param.Code]);
             }
         }
 
