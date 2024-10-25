@@ -95,11 +95,7 @@ namespace Prototipo1.Controller
             var insId = instance.Id;
             var Parameters = Instance.Context.Parameters;
             var boolToString = (bool value) => value ? "true" : "false";
-            var setValueAndSave = (DbParameter param, string value) => {
-                param.Value = value;
-                return UpdateAndSave(param);
-            };
-
+            
             var parameters = Parameters.Where(x => insId == x.Instance.Id).ToList();
 
             var newValueByType = new Dictionary<string, string>()
@@ -118,7 +114,7 @@ namespace Prototipo1.Controller
 
             foreach (var param in parameters)
             {
-                setValueAndSave(param, newValueByType[param.Code]);
+                UpdateAndSave(param, newValueByType[param.Code]);
             }
 
         }
@@ -142,11 +138,7 @@ namespace Prototipo1.Controller
 
             var parameters = Context.Parameters.ToList();
             var boolToString = (bool value) => value ? "true" : "false";
-            var setValueAndSave = (DbParameter param, string value) =>
-            {
-                param.Value = value;
-                return UpdateAndSave(param);
-            };
+            
 
             var newValueByType = new Dictionary<string, string>()
             {
@@ -164,7 +156,7 @@ namespace Prototipo1.Controller
 
             foreach (var param in parameters)
             {
-                setValueAndSave(param, newValueByType[param.Code]);
+                UpdateAndSave(param, newValueByType[param.Code]);
             }
         }
 
@@ -172,8 +164,9 @@ namespace Prototipo1.Controller
         /// Update the value of a parameter and save it on the database 
         /// </summary>
         /// <param name="param">Parameter item</param>
-        private int UpdateAndSave(DbParameter param){
+        private int UpdateAndSave(DbParameter param, string value){
 
+            param.Value = value;
             using (var context = new CustomSqlContext())
             {
                 context.Parameters.Update(param);
