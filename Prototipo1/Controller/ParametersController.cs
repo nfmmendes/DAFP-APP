@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Solver;
 using SolverClientComunication;
 using SolverClientComunication.Models;
 using SolverClientComunication.Enums;
-using System.Windows.Forms;
-using System.Reflection.Metadata.Ecma335;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using WinRT.Interop;
 
 namespace Prototipo1.Controller
 {
