@@ -151,23 +151,25 @@ namespace Prototipo1.Controller
 
                 alreadyVerifiedPNR.Add(item.PNR);
 
-                if(stretches.ContainsKey(item.Origin))
-                    if (stretches[item.Origin].ContainsKey(item.Destination)){
-                        distance = stretches[item.Origin][item.Destination];
-                        var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
-                        if (time.TotalHours < distance / (maxAirplaneSpeed*1.852)){
+                if (!stretches.ContainsKey(item.Origin))
+                    continue;
 
-                            var alert = new DbOptimizationAlert(){
-                                Type = OptimizationAlertTypeEnum.ERROR.DbCode,
-                                Table = "Requests",
-                                Message = $"The request with PNR {item.PNR} has origin and destination too far to the time windows defined",
-                                Instance = input.Instance
-                            };
+                if (!stretches[item.Origin].ContainsKey(item.Destination))
+                    continue;
 
-                            Context.OptimizationAlerts.Add(alert);
-                        }
-                            
-                    }
+                distance = stretches[item.Origin][item.Destination];
+                var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
+                if (time.TotalHours < distance / (maxAirplaneSpeed*1.852)){
+
+                    var alert = new DbOptimizationAlert(){
+                        Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                        Table = "Requests",
+                        Message = $"The request with PNR {item.PNR} has origin and destination too far to the time windows defined",
+                        Instance = input.Instance
+                    };
+
+                    Context.OptimizationAlerts.Add(alert);
+                }                    
             }
             Context.SaveChanges();
         }
