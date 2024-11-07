@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SolverClientComunication;
-
-namespace Prototipo1.Controller
+﻿namespace Prototipo1.Controller
 {
     /// <summary>
     /// Class that defines a general structure of a control in this project

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.SqlServer.Server;
 using NPOI.HSSF.UserModel;
 using SolverClientComunication;
 using SolverClientComunication.Models;

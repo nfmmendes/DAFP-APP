@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Solver;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
@@ -14,6 +11,8 @@ namespace Prototipo1.Controller
     class PreCheckOptimizationController : AbstractController<DbOptimizationAlert,CustomSqlContext>{
 
         private CustomSqlContext Context { get; set; }
+
+        private const double KNOT_TO_KMH_CONSTANT = 1.852;
         public static readonly PreCheckOptimizationController Instance = new PreCheckOptimizationController();
 
         /// <summary>
@@ -159,7 +158,7 @@ namespace Prototipo1.Controller
 
                 distance = stretches[item.Origin][item.Destination];
                 var time = item.ArrivalTimeWindowEnd - item.DepartureTimeWindowBegin;
-                if (time.TotalHours < distance / (maxAirplaneSpeed*1.852)){
+                if (time.TotalHours < distance / (maxAirplaneSpeed* KNOT_TO_KMH_CONSTANT)){
 
                     var alert = new DbOptimizationAlert(){
                         Type = OptimizationAlertTypeEnum.ERROR.DbCode,
