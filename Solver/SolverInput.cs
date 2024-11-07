@@ -64,7 +64,8 @@ namespace Solver
             };
 
             input.Stretches = new Dictionary<DbAirport, Dictionary<DbAirport, double>>();
-            var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id).ToList();
+            var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id && 
+                                                                   x.Origin != null && x.Destination != null).ToList();
 
             var airportByName = context.Airports.Where(x=>x.Instance.Id == Instance.Id).ToDictionary(x=>x.AirportName, x=>x);
 
@@ -72,9 +73,6 @@ namespace Solver
             foreach (var stretch in stretchesOfInstance){
                 var origin = airportByName.ContainsKey(stretch.Origin)?airportByName[stretch.Origin]: null;
                 var destination = airportByName.ContainsKey(stretch.Destination) ? airportByName[stretch.Destination] : null;
-                
-                if (origin == null || destination == null)
-                    continue;
 
                 if (!input.Stretches.ContainsKey(origin))
                         input.Stretches[origin] = new Dictionary<DbAirport, double>();
