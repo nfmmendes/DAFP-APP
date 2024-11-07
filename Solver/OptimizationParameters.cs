@@ -1,6 +1,6 @@
 ﻿namespace Solver
 {
-    public class OptimizationParameters
+    public record struct OptimizationParameters
     {
         public  bool UseTimeWindows {  get;  set; }
         public  bool PickUpAll { get; set; }

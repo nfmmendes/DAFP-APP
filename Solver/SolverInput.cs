@@ -50,17 +50,18 @@ namespace Solver
             var womenAverageWeight = instanceOptimizationParameters.FirstOrDefault(x=> x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
             var kidsAverageWeight = instanceOptimizationParameters.FirstOrDefault(x =>x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
 
-            input.OptimizationParameter = new OptimizationParameters();
-            input.OptimizationParameter.ComeBackToDepot = comeBackToDepot == null || (comeBackToDepot.Value == "true"? true : false); 
-               
-            input.OptimizationParameter.DeliverAll = deliveryAll == null || (deliveryAll.Value == "true"? true: false);
-            input.OptimizationParameter.PickUpAll = pickAll == null || (pickAll.Value == "true" ? true : false);
-            input.OptimizationParameter.StartFromDepot = startFromDepot == null || (startFromDepot.Value == "true" ? true : false);
-            input.OptimizationParameter.UseTimeWindows = useTimeWindows == null || (useTimeWindows.Value == "true" ? true : false);
-            input.OptimizationParameter.TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value): 500; 
-            input.OptimizationParameter.AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight.Value) : 30;
-            input.OptimizationParameter.AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight.Value) : 75;
-            input.OptimizationParameter.AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30;
+            input.OptimizationParameter = new OptimizationParameters()
+            {
+                ComeBackToDepot = comeBackToDepot == null || (comeBackToDepot.Value == "true" ? true : false),
+                DeliverAll = deliveryAll == null || (deliveryAll.Value == "true" ? true : false),
+                PickUpAll = pickAll == null || (pickAll.Value == "true" ? true : false),
+                StartFromDepot = startFromDepot == null || (startFromDepot.Value == "true" ? true : false),
+                UseTimeWindows = useTimeWindows == null || (useTimeWindows.Value == "true" ? true : false),
+                TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value) : 500,
+                AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight.Value) : 30,
+                AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight.Value) : 75,
+                AverageWomanWeight = womenAverageWeight != null ? Convert.ToInt32(womenAverageWeight.Value) : 30
+            };
 
             input.Stretches = new Dictionary<DbAirport, Dictionary<DbAirport, double>>();
             var stretchesOfInstance = context.Stretches.Where(x => x.InstanceId == Instance.Id).ToList();
