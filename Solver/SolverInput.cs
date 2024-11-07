@@ -52,11 +52,11 @@ namespace Solver
 
             input.OptimizationParameter = new OptimizationParameters()
             {
-                ComeBackToDepot = comeBackToDepot == null || (comeBackToDepot.Value == "true" ? true : false),
-                DeliverAll = deliveryAll == null || (deliveryAll.Value == "true" ? true : false),
-                PickUpAll = pickAll == null || (pickAll.Value == "true" ? true : false),
-                StartFromDepot = startFromDepot == null || (startFromDepot.Value == "true" ? true : false),
-                UseTimeWindows = useTimeWindows == null || (useTimeWindows.Value == "true" ? true : false),
+                ComeBackToDepot = comeBackToDepot == null || comeBackToDepot.Value == "true",
+                DeliverAll = deliveryAll == null || deliveryAll.Value == "true",
+                PickUpAll = pickAll == null || pickAll.Value == "true",
+                StartFromDepot = startFromDepot == null || startFromDepot.Value == "true",
+                UseTimeWindows = useTimeWindows == null || useTimeWindows.Value == "true",
                 TimeLimit = timeLimit != null ? Convert.ToInt32(timeLimit.Value) : 500,
                 AverageChildWeight = kidsAverageWeight != null ? Convert.ToInt32(kidsAverageWeight.Value) : 30,
                 AverageManWeight = menAverageWeight != null ? Convert.ToInt32(menAverageWeight.Value) : 75,
