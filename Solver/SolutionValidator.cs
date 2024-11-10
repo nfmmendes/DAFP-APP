@@ -1,7 +1,9 @@
 ﻿using Common;
 using Solver.SolutionData;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using SolverClientComunication.Models;
 
 namespace Solver
 {
@@ -16,7 +18,7 @@ namespace Solver
 
         public bool Validate(GeneralSolution solution, SolverInput input)
         {
-            return ValidateArrivalAfterDeparture(solution);
+            return ValidateArrivalAfterDeparture(solution) && ValidateWeight(solution, input);
         }
 
         private bool ValidateArrivalAfterDeparture(GeneralSolution solution) { 
@@ -25,10 +27,33 @@ namespace Solver
             if (invalidFlights.None())
                 return true;
 
-            Errors.AddRange(invalidFlights.Select(x => new string($"The flight with id {x.Id}, from {x.Origin} to {x.Destination} arrives" +
-                $"before the departure time")).ToList());
+            Errors.AddRange(invalidFlights.Select(x => 
+                new string($"The flight with id {x.Id}, from {x.Origin} to {x.Destination} arrives" +
+                           $"before the departure time")).ToList());
 
             return false;
+        }
+
+        private bool ValidateWeight(GeneralSolution solution, SolverInput input) {
+            var invalidFlights = solution.Flights
+                                         .Where(x => x.Airplanes.Weight + 
+                                                     x.FuelOnTakeOff + 
+                                                     PassengersWeight(x.Passengers, input.OptimizationParameter) > x.Airplanes.MaxWeight);
+
+            if(invalidFlights.None()) 
+                return true;
+
+            Errors.AddRange(invalidFlights.Select(x => 
+                new string($"In the flight with id {x.Id}, from {x.Origin} to {x.Destination}, the" +
+                           $"airplane departed over its max takeoff weight")).ToList());
+
+            return false;
+        }
+
+        private double PassengersWeight(List<DbRequest> passengers, OptimizationParameters parameters) {
+            return passengers.Where(y => y.Sex == "M").Count() * parameters.AverageManWeight + 
+                   passengers.Where(x => x.Sex == "F").Count() * parameters.AverageWomanWeight + 
+                   passengers.Where(x => x.Sex == "C").Count() * parameters.AverageChildWeight;
         }
     }
 }
