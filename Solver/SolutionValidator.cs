@@ -36,6 +36,7 @@ namespace Solver
         /// <returns> True if the solution is valid. False otherwise. </returns>
         public bool Validate(GeneralSolution solution, SolverInput input)
         {
+           Errors.Clear();
            return solution.Flights.Where(x => !ValidateArrivalAfterDeparture(x)).None();
         }
 
