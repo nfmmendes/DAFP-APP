@@ -1,10 +1,10 @@
 ﻿using Common;
 using Solver.SolutionData;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using SolverClientComunication.Models;
-using Org.BouncyCastle.Tls;
+using SolutionData;
+
 
 namespace Solver
 {
@@ -19,35 +19,32 @@ namespace Solver
 
         public bool Validate(GeneralSolution solution, SolverInput input)
         {
-            return ValidateArrivalAfterDeparture(solution) && ValidateWeight(solution, input) &&
-                   ValidateCapacity(solution);
+           return solution.Flights.Where(x => !ValidateArrivalAfterDeparture(x)).None();
         }
 
-        private bool ValidateArrivalAfterDeparture(GeneralSolution solution) { 
-            var invalidFlights = solution.Flights.Where(x => x.DepartureTime > x.ArrivalTime).ToList();
+        public bool ValidateFlight(Flight flight, SolverInput input) {
+            return ValidateArrivalAfterDeparture(flight) && ValidateWeight(flight, input) &&
+                            ValidateCapacity(flight);
+        }
 
-            if (invalidFlights.None())
+        private bool ValidateArrivalAfterDeparture(Flight flight) { 
+
+            if (flight.DepartureTime > flight.ArrivalTime)
                 return true;
 
-            Errors.AddRange(invalidFlights.Select(x => 
-                new string($"The flight with id {x.Id}, from {x.Origin} to {x.Destination} arrives" +
-                           $"before the departure time")).ToList());
+            Errors.Add($"The flight with id {flight.Id}, from {flight.Origin} to {flight.Destination} arrives" +
+                           $"before the departure time");
 
             return false;
         }
 
-        private bool ValidateWeight(GeneralSolution solution, SolverInput input) {
-            var invalidFlights = solution.Flights
-                                         .Where(x => x.Airplanes.Weight + 
-                                                     x.FuelOnTakeOff + 
-                                                     PassengersWeight(x.Passengers, input.OptimizationParameter) > x.Airplanes.MaxWeight);
-
-            if(invalidFlights.None()) 
+        private bool ValidateWeight(Flight flight, SolverInput input) {
+            var passengersWeight = PassengersWeight(flight.Passengers, input.OptimizationParameter);
+            if (flight.Airplanes.Weight + flight.FuelOnTakeOff + passengersWeight > flight.Airplanes.MaxWeight) 
                 return true;
 
-            Errors.AddRange(invalidFlights.Select(x => 
-                new string($"In the flight with id {x.Id}, from {x.Origin} to {x.Destination}, the" +
-                           $"airplane departed over its max takeoff weight")).ToList());
+            Errors.Add($"In the flight with id {flight.Id}, from {flight.Origin} to {flight.Destination}, the" +
+                           $"airplane departed over its max takeoff weight");
 
             return false;
         }
@@ -58,16 +55,13 @@ namespace Solver
                    passengers.Where(x => x.Sex == "C").Count() * parameters.AverageChildWeight;
         }
 
-        private bool ValidateCapacity(GeneralSolution solution)
+        private bool ValidateCapacity(Flight flight)
         {
-            var invalidFlights = solution.Flights.Where(x => x.Airplanes.Capacity < x.Passengers.Count());
-
-            if(invalidFlights.None()) 
+            if (flight.Airplanes.Capacity < flight.Passengers.Count()) 
                 return true;
 
-            Errors.AddRange(invalidFlights.Select(x =>
-                new string($"In the flight with id {x.Id}, from {x.Origin} to {x.Destination}, the" +
-                           $"airplane departed over its capacity")).ToList());
+            Errors.Add($"In the flight with id {flight.Id}, from {flight.Origin} to {flight.Destination}, the" +
+                           $"airplane departed over its capacity");
 
             return false;
         }
