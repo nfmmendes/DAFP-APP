@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using SolverClientComunication.Models;
+using Org.BouncyCastle.Tls;
 
 namespace Solver
 {
@@ -18,7 +19,8 @@ namespace Solver
 
         public bool Validate(GeneralSolution solution, SolverInput input)
         {
-            return ValidateArrivalAfterDeparture(solution) && ValidateWeight(solution, input);
+            return ValidateArrivalAfterDeparture(solution) && ValidateWeight(solution, input) &&
+                   ValidateCapacity(solution);
         }
 
         private bool ValidateArrivalAfterDeparture(GeneralSolution solution) { 
@@ -54,6 +56,20 @@ namespace Solver
             return passengers.Where(y => y.Sex == "M").Count() * parameters.AverageManWeight + 
                    passengers.Where(x => x.Sex == "F").Count() * parameters.AverageWomanWeight + 
                    passengers.Where(x => x.Sex == "C").Count() * parameters.AverageChildWeight;
+        }
+
+        private bool ValidateCapacity(GeneralSolution solution)
+        {
+            var invalidFlights = solution.Flights.Where(x => x.Airplanes.Capacity < x.Passengers.Count());
+
+            if(invalidFlights.None()) 
+                return true;
+
+            Errors.AddRange(invalidFlights.Select(x =>
+                new string($"In the flight with id {x.Id}, from {x.Origin} to {x.Destination}, the" +
+                           $"airplane departed over its capacity")).ToList());
+
+            return false;
         }
     }
 }
