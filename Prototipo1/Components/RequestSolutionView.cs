@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Models;
+using System.Runtime.Versioning;
 
 namespace Prototipo1.Components
 {
@@ -25,6 +26,7 @@ namespace Prototipo1.Components
         /// 
         /// </summary>
         /// <param name="instance"></param>
+        [SupportedOSPlatform("windows7.0")]
         public void setInstance(DbInstance instance)
         {
             Instance = instance;
@@ -35,6 +37,7 @@ namespace Prototipo1.Components
         /// <summary>
         /// 
         /// </summary>
+        [SupportedOSPlatform("windows7.0")]
         private void FillRequestSolutionTable()
         {
 
@@ -63,6 +66,7 @@ namespace Prototipo1.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [SupportedOSPlatform("windows7.0")]
         private void dataGridViewRequestsResult_RowEnter(object sender, DataGridViewCellEventArgs e){
 
             if (dataGridViewRequestsResult.SelectedRows.Count > 0)
@@ -87,6 +91,7 @@ namespace Prototipo1.Components
             }
         }
 
+        [SupportedOSPlatform("windows7.0")]
         private void RequestSolutionView_Load(object sender, EventArgs e){
             FillRequestSolutionTable();
         }
