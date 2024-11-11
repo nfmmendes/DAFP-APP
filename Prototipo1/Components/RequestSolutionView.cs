@@ -38,17 +38,22 @@ namespace Prototipo1.Components
         private void FillRequestSolutionTable()
         {
 
-            this.dataGridViewRequestsResult.Rows.Clear();
+            dataGridViewRequestsResult.Rows.Clear();
             if (Context.Requests.Any()){
                 var requests = Context.Requests.Where(x => x.Instance.Id == Instance.Id).GroupBy(x => x.PNR).ToDictionary(x => x.Key, x => x.ToList());
 
                 //var flightList = Context.FlightsReports.Where(x => x.Instance.Id == Instance.Id);
-
+                var toShortData = (TimeSpan t) => t.ToString(@"hh\:mm");
                 foreach (var key in requests.Keys){
                     var value = requests[key].First();
-                    dataGridViewRequestsResult.Rows.Add(key, key, value.Origin.AirportName,
-                        value.Destination.AirportName, value.DepartureTimeWindowBegin.ToString(@"hh\:mm"),value.DepartureTimeWindowEnd.ToString(@"hh\:mm"),
-                        value.ArrivalTimeWindowBegin.ToString(@"hh\:mm"), value.ArrivalTimeWindowEnd.ToString(@"hh\:mm"));
+                    _ = dataGridViewRequestsResult.Rows.Add(key,
+                                                            key,
+                                                            value.Origin.AirportName,
+                                                            value.Destination.AirportName,
+                                                            toShortData(value.DepartureTimeWindowBegin),
+                                                            toShortData(value.DepartureTimeWindowEnd),
+                                                            toShortData(value.ArrivalTimeWindowBegin),
+                                                            toShortData(value.ArrivalTimeWindowEnd));
                 }
             }
         }
