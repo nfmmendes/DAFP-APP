@@ -38,7 +38,8 @@ namespace Solver
         public bool Validate(GeneralSolution solution, SolverInput input)
         {
            Errors.Clear();
-           return solution.Flights.Where(x => !ValidateArrivalAfterDeparture(x)).None();
+           return solution.Flights.Where(x => !ValidateArrivalAfterDeparture(x)).None() && 
+                  ValidateRequests(solution, input);
         }
 
         /// <summary>
@@ -114,6 +115,11 @@ namespace Solver
             return false;
         }
 
+        private bool ValidateRequests(GeneralSolution solution, SolverInput input)
+        {
+            return ValidateFirstDepartureOnRequestOrigin(solution, input) && 
+                 ValidateLastArrivalOnRequestDestination(solution, input);
+        }
         private bool ValidateFirstDepartureOnRequestOrigin(GeneralSolution solution, SolverInput input)
         {
            var departureErrors = new List<string>();
