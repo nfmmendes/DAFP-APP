@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common;
 using Solver;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
@@ -75,15 +76,52 @@ namespace Prototipo1.Controller
         /// 
         /// </summary>
         /// <param name="input"></param>
-        public void ExecuteCheck(SolverInput input){
+        public void ExecuteCheck(SolverInput input)
+        {
 
-            if(Context.OptimizationAlerts.Any(x => x.Instance.Id == input.Instance.Id)) { 
-                Context.OptimizationAlerts.RemoveRange(Context.OptimizationAlerts.Where(x=>x.Instance.Id == input.Instance.Id));
+            if (Context.OptimizationAlerts.Any(x => x.Instance.Id == input.Instance.Id))
+            {
+                Context.OptimizationAlerts.RemoveRange(Context.OptimizationAlerts.Where(x => x.Instance.Id == input.Instance.Id));
                 Context.SaveChanges();
             }
+
+            if(CriticalErrorsHaveBeenFound(input))
+                return;
+
             getTooLongFlights(input);
             getNoGroundTimeAirports(input);
             verifyStretchIntegrality(input);
+        }
+
+        private bool CriticalErrorsHaveBeenFound(SolverInput input)
+        {
+            if (input.Airports.None())
+            {
+                var alert = new DbOptimizationAlert()
+                {
+                    Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                    Table = "Airports",
+                    Message = $"There is no airports data. ",
+                    Instance = input.Instance
+                };
+                Context.OptimizationAlerts.Add(alert);
+                return true;
+            }
+
+            if (input.Airplanes.None())
+            {
+                var alert = new DbOptimizationAlert()
+                {
+                    Type = OptimizationAlertTypeEnum.ERROR.DbCode,
+                    Table = "Airplanes",
+                    Message = $"There is no airplanes data. ",
+                    Instance = input.Instance
+                };
+                Context.OptimizationAlerts.Add(alert);
+                return true;
+            }
+
+            return false;
         }
 
         private void verifyStretchIntegrality(SolverInput input)
