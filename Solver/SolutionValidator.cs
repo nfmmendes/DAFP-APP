@@ -115,11 +115,25 @@ namespace Solver
             return false;
         }
 
+        /// <summary>
+        /// Validate the solution based on requests satisfaction, considering origin, destination, departure and 
+        /// arrival times.
+        /// </summary>
+        /// <param name="solution"> The solution to be validated. </param>
+        /// <param name="input"> The optimization input data. </param>
+        /// <returns>True if all the requests are correctly satisfied. False otherwise. </returns>
         private bool ValidateRequests(GeneralSolution solution, SolverInput input)
         {
             return ValidateFirstDepartureOnRequestOrigin(solution, input) && 
                  ValidateLastArrivalOnRequestDestination(solution, input);
         }
+
+        /// <summary>
+        /// Validate a solution based on the correctness of the passenger first flight origins.
+        /// </summary>
+        /// <param name="solution"> The solution to be validated. </param>
+        /// <param name="input"> The optimization input data. </param>
+        /// <returns> True if the first origin of all passengers are correct. False otherwise. </returns>
         private bool ValidateFirstDepartureOnRequestOrigin(GeneralSolution solution, SolverInput input)
         {
            var departureErrors = new List<string>();
@@ -152,6 +166,12 @@ namespace Solver
             return departureErrors.None();
         }
 
+        /// <summary>
+        /// Validate a solution based on the correctness of the passenger last flight destinations. 
+        /// </summary>
+        /// <param name="solution"> The solution to be validated. </param>
+        /// <param name="input"> The optimization input data. </param>
+        /// <returns> True if all passenger last destinations are correct. False otherwise. </returns>
         private bool ValidateLastArrivalOnRequestDestination(GeneralSolution solution, SolverInput input) {
 
             var arrivalErrors = new List<string>();
