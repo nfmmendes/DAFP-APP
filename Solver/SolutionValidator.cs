@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SolverClientComunication.Models;
 using SolutionData;
+using System.Reflection.Metadata.Ecma335;
 
 
 namespace Solver
@@ -111,6 +112,38 @@ namespace Solver
                            $"airplane departed over its capacity");
 
             return false;
+        }
+
+        private bool ValidateFirstDepartureOnRequestOrigin(GeneralSolution solution, SolverInput input)
+        {
+           var departureErrors = new List<string>();
+
+            var requestsByOrigin = input.Requests.GroupBy(x => x.Origin).ToDictionary(x => x.Key, x => x.ToList());
+            
+            var flights = solution.Flights.Where(x => x.Passengers.Any()).OrderBy(x => x.DepartureTime).ToList();
+
+            // This will be optimized later.
+            foreach (var item in  requestsByOrigin)
+            {
+                var origin = item.Key;
+                var passengers = item.Value;
+
+                foreach (var passenger in passengers)
+                {
+                    var firstFlight = flights.FirstOrDefault(x => x.Passengers.Contains(passenger));
+
+                    // This case will be considered later. 
+                    if (firstFlight == null)
+                        continue;
+
+
+                    if (firstFlight.Origin != origin)
+                        Errors.Add($"The passenger with PNR {passenger.PNR} did not depart from the desired origin.");
+                }
+            }
+
+            Errors.AddRange(departureErrors);
+            return departureErrors.None();
         }
     }
 }
