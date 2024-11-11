@@ -138,12 +138,43 @@ namespace Solver
 
 
                     if (firstFlight.Origin != origin)
-                        Errors.Add($"The passenger with PNR {passenger.PNR} did not depart from the desired origin.");
+                        Errors.Add($"The passenger with PNR {passenger.PNR} did not depart from the requested origin.");
                 }
             }
 
             Errors.AddRange(departureErrors);
             return departureErrors.None();
+        }
+
+        private bool ValidateLastArrivalOnRequestDestination(GeneralSolution solution, SolverInput input) {
+
+            var arrivalErrors = new List<string>();
+
+            var requestsByDestination = input.Requests.GroupBy(x => x.Destination).ToDictionary(x => x.Key, x => x.ToList());
+            var flights = solution.Flights.Where(x => x.Passengers.Any()).OrderBy(x => x.DepartureTime).Reverse().ToList();
+
+            // This will be optimized later.
+            foreach (var item in requestsByDestination)
+            {
+                var destination = item.Key;
+                var passengers = item.Value;
+
+                foreach (var passenger in passengers)
+                {
+                    var lastFlight = flights.FirstOrDefault(x => x.Passengers.Contains(passenger));
+
+                    // This case will be considered later. 
+                    if (lastFlight == null)
+                        continue;
+
+
+                    if (lastFlight.Destination != destination)
+                        Errors.Add($"The passenger with PNR {passenger.PNR} did not arrive in the requested destination.");
+                }
+            }
+
+            Errors.AddRange(arrivalErrors);
+            return arrivalErrors.None();
         }
     }
 }
