@@ -85,10 +85,11 @@ namespace Prototipo1.Components
                 if (seatClass != null)
                     sum += seatClass.luggageWeightLimit;
 
-                
-                var menWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode));
-                var womenWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
-                var childrenWeight = Context.Parameters.ToList().FirstOrDefault(x => x.Instance.Id == flight.Instance.Id && x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
+                var parameters = Context.Parameters.Where(x => x.Instance.Id == flight.Instance.Id).ToList();
+
+                var menWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_MEN_WEIGHT.DbCode));
+                var womenWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_WOMEN_WEIGHT.DbCode));
+                var childrenWeight = parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.AVERAGE_CHILDREN_WEIGHT.DbCode));
 
                 if (menWeight != null && womenWeight != null && childrenWeight != null){
                     if (item.Passenger.Sex.Equals("M"))
