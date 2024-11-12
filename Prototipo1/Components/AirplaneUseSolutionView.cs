@@ -75,7 +75,7 @@ namespace Prototipo1.Components
         /// <returns></returns>
         private double GetWeightOfPassengers(DbFlightsReport flight){
             var itemList = Context.PassengersOnFlight.Include(x => x.Flight).Where(x => x.Flight.Id == flight.Id);
-            var seatList = Context.Seats.ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
+            var seatList = Context.Seats.Include(x => x.Airplanes).ToList().Where(x => x.Airplanes.Id == flight.Airplanes.Id).ToList();
 
 
             var sum = 0.0;
