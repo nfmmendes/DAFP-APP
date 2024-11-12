@@ -55,7 +55,7 @@ namespace Prototipo1.Controller
             var newParameters = new List<DbParameter>();
             long id = Instance.Context.Parameters.Any() ? Instance.Context.Parameters.Max(x => x.Id) + 1 : 0;
             foreach (var key in DefaultParameters.Keys)
-                newParameters.Add(new DbParameter(){Id=id++, Code = key.DbCode, Instance = solverInstance, Value = DefaultParameters[key]});
+                newParameters.Add(new DbParameter(){ Code = key.DbCode, Instance = solverInstance, Value = DefaultParameters[key]});
 
             Instance.Context.Parameters.AddRange(newParameters);
 
