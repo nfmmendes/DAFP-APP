@@ -60,11 +60,15 @@ namespace Prototipo1.Controller
                     if (iatas.Contains(row.GetCell(1).StringCellValue))
                         continue;
                     
+                    // Discards airports without IATA code. 
+                    if(row.GetCell(1).CellType == CellType.Blank)
+                        continue;
+
                     //Create DbAirport object to add it on the database
                     var item = new DbAirport()
                     {
                         AirportName = row.GetCell(0).StringCellValue,
-                        GroundTime =row.GetCell(9).CellType != CellType.String? 
+                        GroundTime = row.GetCell(9).CellType != CellType.String && row.GetCell(9).CellType != CellType.Blank ? 
                                                                row.GetCell(9).DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
                         IATA = row.GetCell(1).StringCellValue,
                         Latitude = row.GetCell(2).StringCellValue,
