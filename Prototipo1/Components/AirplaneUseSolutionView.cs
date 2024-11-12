@@ -7,9 +7,11 @@ using System.Windows.Forms;
 using SolverClientComunication;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
+using System.Runtime.Versioning;
 
 namespace Prototipo1.Components
 {
+    [SupportedOSPlatform("windows7.0")]
     public partial class AirplaneUseSolutionView : UserControl
     {
         public CustomSqlContext Context { get; set; }
@@ -129,13 +131,13 @@ namespace Prototipo1.Components
         /// <param name="instance"></param>
         public void setInstance(DbInstance instance){
             Instance = instance;
-            this.comboBoxAirplaneSolution.DataSource = null; 
+            comboBoxAirplaneSolution.DataSource = null; 
 
             if(Context.FlightsReports.Any())
-                this.comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
+                comboBoxAirplaneSolution.DataSource = Context.FlightsReports.Where(x => x.Instance.Id == instance.Id)
                                                                   .Select(x => x.Airplanes.Prefix).Distinct().ToList();
-            if (this.comboBoxAirplaneSolution.Items.Count > 0)
-                this.comboBoxAirplaneSolution.SelectedIndex = 0;
+            if (comboBoxAirplaneSolution.Items.Count > 0)
+                comboBoxAirplaneSolution.SelectedIndex = 0;
 
         }
     }
