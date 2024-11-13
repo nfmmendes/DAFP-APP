@@ -46,159 +46,181 @@ namespace Prototipo1.Controller
             //Try to get the sheet caled "Airport"
             var sheet = XSSFwb.GetSheet("Airport");
             var iatas = new HashSet<string>();
-            if (sheet != null && loadAirports){
-                //The first line is reserved to headers
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
-                {
-                    //Get the i-esim row
-                    IRow row = sheet.GetRow(i);     
-                    if (row == null) break;
-
-                    //If all lines are blank the reading procedure stops
-                    //TODO: Create a error log
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
-
-                    //Check if the first cell (airport name) is present. If it's not, it's impossible to identify the airport
-                    if (iatas.Contains(row.GetCell((int)AirportColumnsEnum.IataCode).StringCellValue))
-                        continue;
-                    
-                    // Discards airports without IATA code. 
-                    if(row.GetCell((int) AirportColumnsEnum.IataCode).CellType == CellType.Blank)
-                        continue;
-
-                    var groundTimeCell = row.GetCell((int)AirportColumnsEnum.GroundTime);
-                    //Create DbAirport object to add it on the database
-                    var item = new DbAirport()
-                    {
-                        AirportName = row.GetCell((int) AirportColumnsEnum.AiportName).StringCellValue,
-                        GroundTime = groundTimeCell.CellType != CellType.String && groundTimeCell.CellType != CellType.Blank ? 
-                                                               groundTimeCell.DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
-                        IATA = row.GetCell((int) AirportColumnsEnum.IataCode).StringCellValue,
-                        Latitude = row.GetCell((int) AirportColumnsEnum.Latitude).StringCellValue,
-                        Longitude = row.GetCell((int) AirportColumnsEnum.Longitude).StringCellValue, 
-                        Region = row.GetCell((int) AirportColumnsEnum.Region).StringCellValue,
-                        MTOW_APE3 = Convert.ToInt32( row.GetCell((int) AirportColumnsEnum.Mtow_Ape3).NumericCellValue),
-                        MTOW_PC12 = Convert.ToInt32( row.GetCell((int) AirportColumnsEnum.Mtow_pc12).NumericCellValue),
-                        Instance = instance
-                    };
-
-                    //Solve some problems related with the data format and lack of information
-                    if (row.GetCell((int) AirportColumnsEnum.Elevation) == null)
-                        item.Elevation = -1; 
-                    else if (row.GetCell((int) AirportColumnsEnum.Elevation).CellType == CellType.Numeric )
-                        item.Elevation = Convert.ToInt32(row.GetCell((int) AirportColumnsEnum.Elevation).NumericCellValue);
-                    if (row.GetCell((int) AirportColumnsEnum.LandingCost).CellType == CellType.Numeric )
-                        item.LandingCost = Convert.ToInt32(row.GetCell((int) AirportColumnsEnum.LandingCost).NumericCellValue);
-                    if (row.GetCell((int) AirportColumnsEnum.RunwayLength).CellType == CellType.Numeric )
-                        item.RunwayLength = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.RunwayLength).NumericCellValue);
-
-                    try{
-                     Instance.Context.Airports.Add(item);
-                     //    
-                    }catch (DbEntityValidationException e){
-                        ShowErros(e);
-                    }
-                    
-                }
-                Instance.Context.SaveChanges();
-            }
+            if (sheet != null && loadAirports)
+                readAirportWorksheetData(instance, sheet, iatas);
 
             //Select the sheet called "Stretches"
             var sheet2 = XSSFwb.GetSheet("Stretches");
-            
-            if (sheet2 != null && loadStretches){
-                
-                //Get the name of all airports already registered
-                //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
-                //stretch will be not added to the instance
-                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x=>x.AirportName, x=>x);
-                List<DbStretch> newItems = new List<DbStretch>();
-                //The first row is reserved to the hearders
-                for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++) {
-                    IRow row = sheet2.GetRow(i);
-                    if (row == null) break;
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
-
-                    //If the field "Origin" or the field "Destination" is empty, there is nothing to add
-                    if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
-                    if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)) continue; //TODO: Error
-
-
-                    var airportOriginName = row.GetCell(0).StringCellValue;
-                    var airportDestinationName = row.GetCell(1).StringCellValue;
-                    
-                    //Get the airports based on their names
-                    var airportOrigin = instanceAirports.ContainsKey(airportOriginName) ? instanceAirports[airportOriginName] : null;
-                    var airportDestination = instanceAirports.ContainsKey(airportDestinationName) ? instanceAirports[airportDestinationName] : null;
-
-                    if (airportOrigin != null && airportDestination != null){
-
-                        //Try to make the insert procedure quicker 
-                        if (i % 50 == 0){
-                            Instance.Context.Stretches.AddRange(newItems);
-                            Instance.Context.SaveChanges();
-                            newItems.Clear();
-                           
-                        }
-
-                        //Create a stretch object to be added to the database
-                        var item = new DbStretch(){
-                            Origin = airportOriginName,
-                            Destination = airportDestinationName,
-                            Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue),
-                            InstanceId = instance.Id
-                        };
-
-                        try{
-                            newItems.Add(item);
-                        }
-                        catch (DbEntityValidationException e){
-                            ShowErros(e);
-                        }
-                    }
-
-                }
-                Instance.Context.SaveChanges();
-            }
+            if (sheet2 != null && loadStretches)
+                readStretchesWorkSheetData(instance, sheet2);
 
             // Get the sheed called "Fuel Prices"
             var sheet3 = XSSFwb.GetSheet("Fuel Prices");
-
-            if (loadFuelInformation && sheet3 != null){
-                //Get the name of all aiports
-                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
-                
-                //The first row is reserved to the headers
-                for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
-                {
-                    //Get the information of the row i
-                    IRow row = sheet3.GetRow(i);
-                    if (row == null) break;
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
-
-                    //If the airport field is empty the row will be not added to the database
-                    if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
-                    var airportName = row.GetCell(0).StringCellValue;
-                    
-                    //Get the airport by its name
-                    var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id &&  x.AirportName.Equals(airportName));
-
-                    //Generate the fuel price object to be added to the database 
-                    if (airport != null){
-                        var item = new DbFuelPrice(){
-                            Instance = instance,
-                            Airport = airport,
-                            Currency = row.GetCell(1).StringCellValue,
-                            Value = row.GetCell(2).NumericCellValue.ToString()
-                        };
-                        Instance.Context.FuelPrices.Add(item);
-                    }
-                }
-                Instance.Context.SaveChanges();
-            }
+            if (loadFuelInformation && sheet3 != null)
+                readFuelPricesWorkSheetData(instance, sheet3);
+           
             Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
         }
 
+        private static void readFuelPricesWorkSheetData(DbInstance instance, ISheet sheet3)
+        {
+            //Get the name of all aiports
+            var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
+
+            //The first row is reserved to the headers
+            for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
+            {
+                //Get the information of the row i
+                IRow row = sheet3.GetRow(i);
+                if (row == null) break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                //If the airport field is empty the row will be not added to the database
+                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
+                var airportName = row.GetCell(0).StringCellValue;
+
+                //Get the airport by its name
+                var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
+
+                //Generate the fuel price object to be added to the database 
+                if (airport != null)
+                {
+                    var item = new DbFuelPrice()
+                    {
+                        Instance = instance,
+                        Airport = airport,
+                        Currency = row.GetCell(1).StringCellValue,
+                        Value = row.GetCell(2).NumericCellValue.ToString()
+                    };
+                    Instance.Context.FuelPrices.Add(item);
+                }
+            }
+            Instance.Context.SaveChanges();
+        }
+
+        private void readStretchesWorkSheetData(DbInstance instance, ISheet sheet2)
+        {
+            //Get the name of all airports already registered
+            //If there is no airports registered that corrresponds to the values on fields "Origin" or "Destination" of the stretch this 
+            //stretch will be not added to the instance
+            var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id).ToDictionary(x => x.AirportName, x => x);
+            List<DbStretch> newItems = new List<DbStretch>();
+            //The first row is reserved to the hearders
+            for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++)
+            {
+                IRow row = sheet2.GetRow(i);
+                if (row == null) break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                //If the field "Origin" or the field "Destination" is empty, there is nothing to add
+                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
+                if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)) continue; //TODO: Error
+
+
+                var airportOriginName = row.GetCell(0).StringCellValue;
+                var airportDestinationName = row.GetCell(1).StringCellValue;
+
+                //Get the airports based on their names
+                var airportOrigin = instanceAirports.ContainsKey(airportOriginName) ? instanceAirports[airportOriginName] : null;
+                var airportDestination = instanceAirports.ContainsKey(airportDestinationName) ? instanceAirports[airportDestinationName] : null;
+
+                if (airportOrigin != null && airportDestination != null)
+                {
+
+                    //Try to make the insert procedure quicker 
+                    if (i % 50 == 0)
+                    {
+                        Instance.Context.Stretches.AddRange(newItems);
+                        Instance.Context.SaveChanges();
+                        newItems.Clear();
+
+                    }
+
+                    //Create a stretch object to be added to the database
+                    var item = new DbStretch()
+                    {
+                        Origin = airportOriginName,
+                        Destination = airportDestinationName,
+                        Distance = Convert.ToInt32(row.GetCell(2).NumericCellValue),
+                        InstanceId = instance.Id
+                    };
+
+                    try
+                    {
+                        newItems.Add(item);
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        ShowErros(e);
+                    }
+                }
+
+            }
+            Instance.Context.SaveChanges();
+        }
+
+        private void readAirportWorksheetData(DbInstance instance, ISheet sheet, HashSet<string> iatas)
+        {
+           
+            //The first line is reserved to headers
+            for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+            {
+                //Get the i-esim row
+                IRow row = sheet.GetRow(i);
+                if (row == null) break;
+
+                //If all lines are blank the reading procedure stops
+                //TODO: Create a error log
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                //Check if the first cell (airport name) is present. If it's not, it's impossible to identify the airport
+                if (iatas.Contains(row.GetCell((int)AirportColumnsEnum.IataCode).StringCellValue))
+                    continue;
+
+                // Discards airports without IATA code. 
+                if (row.GetCell((int)AirportColumnsEnum.IataCode).CellType == CellType.Blank)
+                    continue;
+
+                var groundTimeCell = row.GetCell((int)AirportColumnsEnum.GroundTime);
+                //Create DbAirport object to add it on the database
+                var item = new DbAirport()
+                {
+                    AirportName = row.GetCell((int)AirportColumnsEnum.AiportName).StringCellValue,
+                    GroundTime = groundTimeCell.CellType != CellType.String && groundTimeCell.CellType != CellType.Blank ?
+                                                            groundTimeCell.DateCellValue.Value.TimeOfDay : (new DateTime(0)).TimeOfDay,
+                    IATA = row.GetCell((int)AirportColumnsEnum.IataCode).StringCellValue,
+                    Latitude = row.GetCell((int)AirportColumnsEnum.Latitude).StringCellValue,
+                    Longitude = row.GetCell((int)AirportColumnsEnum.Longitude).StringCellValue,
+                    Region = row.GetCell((int)AirportColumnsEnum.Region).StringCellValue,
+                    MTOW_APE3 = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.Mtow_Ape3).NumericCellValue),
+                    MTOW_PC12 = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.Mtow_pc12).NumericCellValue),
+                    Instance = instance
+                };
+
+                //Solve some problems related with the data format and lack of information
+                if (row.GetCell((int)AirportColumnsEnum.Elevation) == null)
+                    item.Elevation = -1;
+                else if (row.GetCell((int)AirportColumnsEnum.Elevation).CellType == CellType.Numeric)
+                    item.Elevation = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.Elevation).NumericCellValue);
+                if (row.GetCell((int)AirportColumnsEnum.LandingCost).CellType == CellType.Numeric)
+                    item.LandingCost = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.LandingCost).NumericCellValue);
+                if (row.GetCell((int)AirportColumnsEnum.RunwayLength).CellType == CellType.Numeric)
+                    item.RunwayLength = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.RunwayLength).NumericCellValue);
+
+                try
+                {
+                    Instance.Context.Airports.Add(item);
+                    //    
+                }
+                catch (DbEntityValidationException e)
+                {
+                    ShowErros(e);
+                }
+
+            }
+            Instance.Context.SaveChanges();
+        }
+        
         /// <summary>
         /// Function to show the errors in the database procedures. It's is used mainly to debug purposes 
         /// </summary>
