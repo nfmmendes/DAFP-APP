@@ -258,73 +258,85 @@ namespace Prototipo1.Controller
             //Open the sheet called "Request"
             var sheet = XSSFwb.GetSheet("Request");
 
-            if (sheet != null){
-                //Create a dictionary that links a aiport IATA code to the airport. Airports without a IATA code registered are not mapped
-                var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id && !string.IsNullOrEmpty(x.IATA)).ToDictionary(x => x.IATA, x => x);
-                //The first line is reserved to the headers
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
-                {
-                    //Get the data of the row i
-                    IRow row = sheet.GetRow(i);
-                    if (row == null) break;
-                    //If all the fields of that row are empty, finish the procedure
-                    //TODO: Create a error log to this case
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
-
-                    var originIATA = row.GetCell((int) RequestColumnsEnum.Origin).StringCellValue;
-                    var destinationIATA = row.GetCell((int) RequestColumnsEnum.Destination).StringCellValue;
-                    //Verify if the IATA codes fields have non null or empty values. If it is false, it's generated a log error
-                    if (string.IsNullOrEmpty(originIATA) || string.IsNullOrEmpty(destinationIATA)){
-                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Null origin or destination airport name");
-                        continue;
-                    }
-
-                    //Get the airport given the IATA
-                    var airportOrigin = instanceAirports.ContainsKey(originIATA) ? instanceAirports[originIATA] : null;
-                    var airportDestination = instanceAirports.ContainsKey(destinationIATA) ? instanceAirports[destinationIATA] : null;
-
-                    //If some of the airports are not found a error log is generated
-                    if (airportOrigin == null || airportDestination == null){
-                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
-                        continue;
-                    }
-
-                    //TODO: Verify if this is right
-                    if(row.Cells.Count < 10) { 
-                        CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Some data is missing in your database row");
-                        continue;
-                    }
-
-                    var pnrCell = row.GetCell((int) RequestColumnsEnum.PNR);
-
-                    var getTime = (IRow row, int index) => row.GetCell(index).DateCellValue.Value.TimeOfDay;
-                    //Generated a DbRequest object to the added on the database 
-                    var item = new DbRequest()
-                    {
-                        Name = row.GetCell((int) RequestColumnsEnum.Name).StringCellValue,
-                        PNR = pnrCell.CellType == CellType.String? pnrCell.StringCellValue: pnrCell.NumericCellValue.ToString(),
-                        Sex = row.GetCell((int) RequestColumnsEnum.Sex).StringCellValue,
-                        Class = row.GetCell((int) RequestColumnsEnum.Class).StringCellValue,
-                        IsChildren = row.GetCell((int) RequestColumnsEnum.IsChildren).BooleanCellValue,
-                        Origin = airportOrigin,
-                        Destination = airportDestination,
-                        DepartureTimeWindowBegin = getTime(row, (int) RequestColumnsEnum.DepartureTimeWindowBegin),
-                        DepartureTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.DepartureTimeWindowEnd),
-                        ArrivalTimeWindowBegin = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowBegin),
-                        ArrivalTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowEnd),
-                        Instance = instance
-                    };
-
-                    Instance.Context.Requests.Add(item);
-                }
-
-                try{
-                    Instance.Context.SaveChanges();
-                }catch (DbEntityValidationException e){
-                    ShowErros(e);
-                }
+            if (sheet != null)
+            {
+                readRequestData(instance, importHour, sheet);
             }
             Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
+        }
+
+        private void readRequestData(DbInstance instance, DateTime importHour, ISheet sheet)
+        {
+            //Create a dictionary that links a aiport IATA code to the airport. Airports without a IATA code registered are not mapped
+            var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id && !string.IsNullOrEmpty(x.IATA)).ToDictionary(x => x.IATA, x => x);
+            //The first line is reserved to the headers
+            for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+            {
+                //Get the data of the row i
+                IRow row = sheet.GetRow(i);
+                if (row == null) break;
+                //If all the fields of that row are empty, finish the procedure
+                //TODO: Create a error log to this case
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                var originIATA = row.GetCell((int)RequestColumnsEnum.Origin).StringCellValue;
+                var destinationIATA = row.GetCell((int)RequestColumnsEnum.Destination).StringCellValue;
+                //Verify if the IATA codes fields have non null or empty values. If it is false, it's generated a log error
+                if (string.IsNullOrEmpty(originIATA) || string.IsNullOrEmpty(destinationIATA))
+                {
+                    CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Null origin or destination airport name");
+                    continue;
+                }
+
+                //Get the airport given the IATA
+                var airportOrigin = instanceAirports.ContainsKey(originIATA) ? instanceAirports[originIATA] : null;
+                var airportDestination = instanceAirports.ContainsKey(destinationIATA) ? instanceAirports[destinationIATA] : null;
+
+                //If some of the airports are not found a error log is generated
+                if (airportOrigin == null || airportDestination == null)
+                {
+                    CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Inexistent airport");
+                    continue;
+                }
+
+                //TODO: Verify if this is right
+                if (row.Cells.Count < 10)
+                {
+                    CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Some data is missing in your database row");
+                    continue;
+                }
+
+                var pnrCell = row.GetCell((int)RequestColumnsEnum.PNR);
+
+                var getTime = (IRow row, int index) => row.GetCell(index).DateCellValue.Value.TimeOfDay;
+                //Generated a DbRequest object to the added on the database 
+                var item = new DbRequest()
+                {
+                    Name = row.GetCell((int)RequestColumnsEnum.Name).StringCellValue,
+                    PNR = pnrCell.CellType == CellType.String ? pnrCell.StringCellValue : pnrCell.NumericCellValue.ToString(),
+                    Sex = row.GetCell((int)RequestColumnsEnum.Sex).StringCellValue,
+                    Class = row.GetCell((int)RequestColumnsEnum.Class).StringCellValue,
+                    IsChildren = row.GetCell((int)RequestColumnsEnum.IsChildren).BooleanCellValue,
+                    Origin = airportOrigin,
+                    Destination = airportDestination,
+                    DepartureTimeWindowBegin = getTime(row, (int)RequestColumnsEnum.DepartureTimeWindowBegin),
+                    DepartureTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.DepartureTimeWindowEnd),
+                    ArrivalTimeWindowBegin = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowBegin),
+                    ArrivalTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowEnd),
+                    Instance = instance
+                };
+
+                Instance.Context.Requests.Add(item);
+            }
+
+            try
+            {
+                Instance.Context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                ShowErros(e);
+            }
         }
 
         /// <summary>
