@@ -7,6 +7,8 @@ using SolverClientComunication;
 using SolverClientComunication.Models;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
+using SolverClientComunication.Enums;
+using SolverClientComunication.Enums.Excel;
 
 namespace Prototipo1.Controller
 {
@@ -57,37 +59,38 @@ namespace Prototipo1.Controller
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
                     //Check if the first cell (airport name) is present. If it's not, it's impossible to identify the airport
-                    if (iatas.Contains(row.GetCell(1).StringCellValue))
+                    if (iatas.Contains(row.GetCell((int)AirportColumnsEnum.IataCode).StringCellValue))
                         continue;
                     
                     // Discards airports without IATA code. 
-                    if(row.GetCell(1).CellType == CellType.Blank)
+                    if(row.GetCell((int) AirportColumnsEnum.IataCode).CellType == CellType.Blank)
                         continue;
 
+                    var groundTimeCell = row.GetCell((int)AirportColumnsEnum.GroundTime);
                     //Create DbAirport object to add it on the database
                     var item = new DbAirport()
                     {
-                        AirportName = row.GetCell(0).StringCellValue,
-                        GroundTime = row.GetCell(9).CellType != CellType.String && row.GetCell(9).CellType != CellType.Blank ? 
-                                                               row.GetCell(9).DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
-                        IATA = row.GetCell(1).StringCellValue,
-                        Latitude = row.GetCell(2).StringCellValue,
-                        Longitude = row.GetCell(3).StringCellValue, 
-                        Region = row.GetCell(6).StringCellValue,
-                        MTOW_APE3 = Convert.ToInt32(row.GetCell(7).NumericCellValue),
-                        MTOW_PC12 = Convert.ToInt32( row.GetCell(8).NumericCellValue),
+                        AirportName = row.GetCell((int) AirportColumnsEnum.AiportName).StringCellValue,
+                        GroundTime = groundTimeCell.CellType != CellType.String && groundTimeCell.CellType != CellType.Blank ? 
+                                                               groundTimeCell.DateCellValue.Value.TimeOfDay: (new DateTime(0)).TimeOfDay,
+                        IATA = row.GetCell((int) AirportColumnsEnum.IataCode).StringCellValue,
+                        Latitude = row.GetCell((int) AirportColumnsEnum.Latitude).StringCellValue,
+                        Longitude = row.GetCell((int) AirportColumnsEnum.Longitude).StringCellValue, 
+                        Region = row.GetCell((int) AirportColumnsEnum.Region).StringCellValue,
+                        MTOW_APE3 = Convert.ToInt32( row.GetCell((int) AirportColumnsEnum.Mtow_Ape3).NumericCellValue),
+                        MTOW_PC12 = Convert.ToInt32( row.GetCell((int) AirportColumnsEnum.Mtow_pc12).NumericCellValue),
                         Instance = instance
                     };
 
                     //Solve some problems related with the data format and lack of information
-                    if (row.GetCell(4) == null)
+                    if (row.GetCell((int) AirportColumnsEnum.Elevation) == null)
                         item.Elevation = -1; 
-                    else if (row.GetCell(4).CellType == CellType.Numeric )
-                        item.Elevation = Convert.ToInt32(row.GetCell(4).NumericCellValue);
-                    if (row.GetCell(10).CellType == CellType.Numeric )
-                        item.LandingCost = Convert.ToInt32(row.GetCell(10).NumericCellValue);
-                    if (row.GetCell(5).CellType == CellType.Numeric )
-                        item.RunwayLength = Convert.ToInt32(row.GetCell(5).NumericCellValue);
+                    else if (row.GetCell((int) AirportColumnsEnum.Elevation).CellType == CellType.Numeric )
+                        item.Elevation = Convert.ToInt32(row.GetCell((int) AirportColumnsEnum.Elevation).NumericCellValue);
+                    if (row.GetCell((int) AirportColumnsEnum.LandingCost).CellType == CellType.Numeric )
+                        item.LandingCost = Convert.ToInt32(row.GetCell((int) AirportColumnsEnum.LandingCost).NumericCellValue);
+                    if (row.GetCell((int) AirportColumnsEnum.RunwayLength).CellType == CellType.Numeric )
+                        item.RunwayLength = Convert.ToInt32(row.GetCell((int)AirportColumnsEnum.RunwayLength).NumericCellValue);
 
                     try{
                      Instance.Context.Airports.Add(item);
