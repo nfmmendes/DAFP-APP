@@ -9,6 +9,7 @@ using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Enums.Excel;
+using NPOI.SS.Formula.Functions;
 
 namespace Prototipo1.Controller
 {
@@ -270,8 +271,8 @@ namespace Prototipo1.Controller
                     //TODO: Create a error log to this case
                     if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
 
-                    var originIATA = row.GetCell(5).StringCellValue;
-                    var destinationIATA = row.GetCell(6).StringCellValue;
+                    var originIATA = row.GetCell((int) RequestColumnsEnum.Origin).StringCellValue;
+                    var destinationIATA = row.GetCell((int) RequestColumnsEnum.Destination).StringCellValue;
                     //Verify if the IATA codes fields have non null or empty values. If it is false, it's generated a log error
                     if (string.IsNullOrEmpty(originIATA) || string.IsNullOrEmpty(destinationIATA)){
                         CreateImportErrorLog(instance, "Requests", "Request", importHour, i, "Null origin or destination airport name");
@@ -294,20 +295,23 @@ namespace Prototipo1.Controller
                         continue;
                     }
 
+                    var pnrCell = row.GetCell((int) RequestColumnsEnum.PNR);
+
+                    var getTime = (IRow row, int index) => row.GetCell(index).DateCellValue.Value.TimeOfDay;
                     //Generated a DbRequest object to the added on the database 
                     var item = new DbRequest()
                     {
-                        Name = row.GetCell(0).StringCellValue,
-                        PNR = row.GetCell(1).CellType == CellType.String? row.GetCell(1).StringCellValue: row.GetCell(1).NumericCellValue.ToString(),
-                        Sex = row.GetCell(2).StringCellValue,
-                        Class = row.GetCell(3).StringCellValue,
-                        IsChildren = row.GetCell(4).BooleanCellValue,
+                        Name = row.GetCell((int) RequestColumnsEnum.Name).StringCellValue,
+                        PNR = pnrCell.CellType == CellType.String? pnrCell.StringCellValue: pnrCell.NumericCellValue.ToString(),
+                        Sex = row.GetCell((int) RequestColumnsEnum.Sex).StringCellValue,
+                        Class = row.GetCell((int) RequestColumnsEnum.Class).StringCellValue,
+                        IsChildren = row.GetCell((int) RequestColumnsEnum.IsChildren).BooleanCellValue,
                         Origin = airportOrigin,
                         Destination = airportDestination,
-                        DepartureTimeWindowBegin = row.GetCell(7).DateCellValue.Value.TimeOfDay,
-                        DepartureTimeWindowEnd = row.GetCell(8).DateCellValue.Value.TimeOfDay,
-                        ArrivalTimeWindowBegin = row.GetCell(9).DateCellValue.Value.TimeOfDay,
-                        ArrivalTimeWindowEnd = row.GetCell(10).DateCellValue.Value.TimeOfDay,
+                        DepartureTimeWindowBegin = getTime(row, (int) RequestColumnsEnum.DepartureTimeWindowBegin),
+                        DepartureTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.DepartureTimeWindowEnd),
+                        ArrivalTimeWindowBegin = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowBegin),
+                        ArrivalTimeWindowEnd = getTime(row, (int)RequestColumnsEnum.ArrivalTimeWindowEnd),
                         Instance = instance
                     };
 
