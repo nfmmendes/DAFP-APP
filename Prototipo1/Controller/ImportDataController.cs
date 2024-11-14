@@ -455,6 +455,7 @@ namespace Prototipo1.Controller
 
         private void ReadAirplanesData(DbInstance instance, DateTime importHour, ISheet sheet)
         {
+            var getValue = (IRow row, int index) => Convert.ToInt32(row.GetCell(index).NumericCellValue); 
             //The first row is reserved to readers 
             for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
             {
@@ -487,15 +488,15 @@ namespace Prototipo1.Controller
                 {
                     Model = row.GetCell((int)AirplaneColumnsEnum.Model).StringCellValue,
                     Prefix = row.GetCell((int)AirplaneColumnsEnum.Prefix).StringCellValue,
-                    Range = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Range).NumericCellValue),
-                    Weight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Weight).NumericCellValue),
-                    MaxWeight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxWeight).NumericCellValue),
-                    CruiseSpeed = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.CruiseSpeed).NumericCellValue),
-                    Capacity = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Capacity).NumericCellValue),
+                    Range = getValue(row, (int) AirplaneColumnsEnum.Range),
+                    Weight = getValue(row, (int)AirplaneColumnsEnum.Weight),
+                    MaxWeight = getValue(row, (int)AirplaneColumnsEnum.MaxWeight),
+                    CruiseSpeed = getValue(row, (int)AirplaneColumnsEnum.CruiseSpeed),
+                    Capacity = getValue(row, (int)AirplaneColumnsEnum.Capacity),
                     BaseAirport = baseAirport,
-                    FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.FuelConsumptionFirstHour).NumericCellValue),
-                    FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.FuelConsumptionSecondHour).NumericCellValue),
-                    MaxFuel = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxFuel).NumericCellValue),
+                    FuelConsumptionFirstHour = getValue(row, (int)AirplaneColumnsEnum.FuelConsumptionFirstHour),
+                    FuelConsumptionSecondHour = getValue(row, (int)AirplaneColumnsEnum.FuelConsumptionSecondHour),
+                    MaxFuel = getValue(row, (int)AirplaneColumnsEnum.MaxFuel),
                     Instance = instance
                 };
 
