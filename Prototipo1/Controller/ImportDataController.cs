@@ -10,6 +10,7 @@ using NPOI.SS.UserModel;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Enums.Excel;
 using NPOI.SS.Formula.Functions;
+using Microsoft.Identity.Client;
 
 namespace Prototipo1.Controller
 {
@@ -463,7 +464,7 @@ namespace Prototipo1.Controller
 
                 //Get the data about the airport base and checks if this airport is registered on the database, otherwise will be generated
                 //a error log 
-                var airportName = row.GetCell(7).StringCellValue;
+                var airportName = row.GetCell((int) AirplaneColumnsEnum.BaseAirport).StringCellValue;
                 var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
 
                 if (baseAirport != null)
@@ -471,17 +472,17 @@ namespace Prototipo1.Controller
                     //Generate the DbAirplane object to be added on the database
                     var item = new DbAirplane()
                     {
-                        Model = row.GetCell(0).StringCellValue,
-                        Prefix = row.GetCell(1).StringCellValue,
-                        Range = Convert.ToInt32(row.GetCell(2).NumericCellValue),
-                        Weight = Convert.ToInt32(row.GetCell(3).NumericCellValue),
-                        MaxWeight = Convert.ToInt32(row.GetCell(4).NumericCellValue),
-                        CruiseSpeed = Convert.ToInt32(row.GetCell(5).NumericCellValue),
-                        Capacity = Convert.ToInt32(row.GetCell(6).NumericCellValue),
+                        Model = row.GetCell((int)AirplaneColumnsEnum.Model).StringCellValue,
+                        Prefix = row.GetCell((int)AirplaneColumnsEnum.Prefix).StringCellValue,
+                        Range = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Range).NumericCellValue),
+                        Weight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Weight).NumericCellValue),
+                        MaxWeight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxWeight).NumericCellValue),
+                        CruiseSpeed = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.CruiseSpeed).NumericCellValue),
+                        Capacity = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.Capacity).NumericCellValue),
                         BaseAirport = baseAirport,
-                        FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell(8).NumericCellValue),
-                        FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell(9).NumericCellValue),
-                        MaxFuel = Convert.ToInt32(row.GetCell(10).NumericCellValue),
+                        FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.FuelConsumptionFirstHour).NumericCellValue),
+                        FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.FuelConsumptionSecondHour).NumericCellValue),
+                        MaxFuel = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.MaxFuel).NumericCellValue),
                         Instance = instance
                     };
 
