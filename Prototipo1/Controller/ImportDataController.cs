@@ -467,28 +467,7 @@ namespace Prototipo1.Controller
                 var airportName = row.GetCell((int) AirplaneColumnsEnum.BaseAirport).StringCellValue;
                 var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
 
-                if (baseAirport != null)
-                {
-                    //Generate the DbAirplane object to be added on the database
-                    var item = new DbAirplane()
-                    {
-                        Model = row.GetCell((int)AirplaneColumnsEnum.Model).StringCellValue,
-                        Prefix = row.GetCell((int)AirplaneColumnsEnum.Prefix).StringCellValue,
-                        Range = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Range).NumericCellValue),
-                        Weight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Weight).NumericCellValue),
-                        MaxWeight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxWeight).NumericCellValue),
-                        CruiseSpeed = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.CruiseSpeed).NumericCellValue),
-                        Capacity = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.Capacity).NumericCellValue),
-                        BaseAirport = baseAirport,
-                        FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.FuelConsumptionFirstHour).NumericCellValue),
-                        FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.FuelConsumptionSecondHour).NumericCellValue),
-                        MaxFuel = Convert.ToInt32(row.GetCell((int) AirplaneColumnsEnum.MaxFuel).NumericCellValue),
-                        Instance = instance
-                    };
-
-                    Instance.Context.Airplanes.Add(item);
-                }
-                else
+                if (baseAirport == null)
                 {
                     Instance.Context.ImportErrors.Add(new DbImportError()
                     {
@@ -499,7 +478,28 @@ namespace Prototipo1.Controller
                         RowLine = i,
                         Message = "Airport does not exist"
                     });
+
+                    continue;
                 }
+                
+                //Generate the DbAirplane object to be added on the database
+                var item = new DbAirplane()
+                {
+                    Model = row.GetCell((int)AirplaneColumnsEnum.Model).StringCellValue,
+                    Prefix = row.GetCell((int)AirplaneColumnsEnum.Prefix).StringCellValue,
+                    Range = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Range).NumericCellValue),
+                    Weight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Weight).NumericCellValue),
+                    MaxWeight = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxWeight).NumericCellValue),
+                    CruiseSpeed = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.CruiseSpeed).NumericCellValue),
+                    Capacity = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.Capacity).NumericCellValue),
+                    BaseAirport = baseAirport,
+                    FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.FuelConsumptionFirstHour).NumericCellValue),
+                    FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.FuelConsumptionSecondHour).NumericCellValue),
+                    MaxFuel = Convert.ToInt32(row.GetCell((int)AirplaneColumnsEnum.MaxFuel).NumericCellValue),
+                    Instance = instance
+                };
+
+                Instance.Context.Airplanes.Add(item);
             }
             Instance.Context.SaveChanges();
         }
