@@ -381,105 +381,126 @@ namespace Prototipo1.Controller
 
             //Get the sheet called "Airplanes" if it exist
             var sheet = XSSFwb.GetSheet("Airplanes");
-            if (sheet != null && loadAirplanes){
-                //The first row is reserved to readers 
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
-                {
-                    IRow row = sheet.GetRow(i);         //Get the row i
-                    if (row == null) break;
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+            if (sheet != null && loadAirplanes)
+            {
+                ReadAirplanesData(instance, importHour, sheet);
 
-                    //Get the data about the airport base and checks if this airport is registered on the database, otherwise will be generated
-                    //a error log 
-                    var airportName = row.GetCell(7).StringCellValue;
-                    var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
-
-                    if (baseAirport != null){
-                        //Generate the DbAirplane object to be added on the database
-                        var item = new DbAirplane()
-                        {
-                            Model = row.GetCell(0).StringCellValue,
-                            Prefix = row.GetCell(1).StringCellValue,
-                            Range = Convert.ToInt32(row.GetCell(2).NumericCellValue),
-                            Weight = Convert.ToInt32(row.GetCell(3).NumericCellValue),
-                            MaxWeight = Convert.ToInt32(row.GetCell(4).NumericCellValue),
-                            CruiseSpeed = Convert.ToInt32(row.GetCell(5).NumericCellValue),
-                            Capacity = Convert.ToInt32(row.GetCell(6).NumericCellValue),
-                            BaseAirport = baseAirport,
-                            FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell(8).NumericCellValue),
-                            FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell(9).NumericCellValue),
-                            MaxFuel = Convert.ToInt32(row.GetCell(10).NumericCellValue),
-                            Instance = instance
-                        };
-
-                        Instance.Context.Airplanes.Add(item);
-                    }
-                    else
-                    {
-                        Instance.Context.ImportErrors.Add(new DbImportError(){
-                            ImportationHour = importHour,
-                            File = "Airplanes",
-                            Instance = instance,
-                            Sheet = "Airplanes",
-                            RowLine = i,
-                            Message = "Airport does not exist"
-                        });
-                    }
-                }
-                Instance.Context.SaveChanges();
-                
             }
 
             //Get the sheet called "Seat List"
             sheet = XSSFwb.GetSheet("Seat List");
-            if (sheet != null && loadSeats){
-                //The first row is reserved to the headers 
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
-                {
-                    IRow row = sheet.GetRow(i); //Get the data of the row i
-                    if (row == null) break;
-                    //If all the fields of the row are empty, the import procedure stops
-                    //TODO: Generate a error log
-                    if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
-
-                    //Data validation
-                    if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)){
-                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplanes information not available");
-                        continue;
-                    }
-
-                    if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)){
-                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Class information not available");
-                        continue;
-                    }
-
-                    if (row.GetCell(2).CellType == CellType.String && string.IsNullOrEmpty(row.GetCell(2).StringCellValue)){
-                        CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Number of seats not available");
-                        continue;
-                    }
-                    
-                    var prefix = row.GetCell(0).StringCellValue;
-                    var airplane = Instance.Context.Airplanes.FirstOrDefault(x=>x.Instance.Id == instance.Id 
-                                                                             && x.Prefix.Equals(prefix));
-
-                    //Generate the airplane object that will be added to the database
-                    if (airplane != null){
-
-                        var item = new DbSeat(){
-                            Airplanes = airplane,
-                            seatClass = row.GetCell(1).StringCellValue,
-                            luggageWeightLimit = row.GetCell(2).NumericCellValue
-                        };
-
-                        Instance.Context.Seats.Add(item);
-                        
-                    }else{
-                        CreateImportErrorLog(instance,"Airplanes", "Seat List",importHour, i, "Airplanes not found");
-                    }
-                }
-                Instance.Context.SaveChanges();
+            if (sheet != null && loadSeats)
+            {
+                ReadSeatListData(instance, importHour, sheet);
             }
             Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
+        }
+
+        private void ReadSeatListData(DbInstance instance, DateTime importHour, ISheet sheet)
+        {
+            //The first row is reserved to the headers 
+            for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+            {
+                IRow row = sheet.GetRow(i); //Get the data of the row i
+                if (row == null) break;
+                //If all the fields of the row are empty, the import procedure stops
+                //TODO: Generate a error log
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                //Data validation
+                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue))
+                {
+                    CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplanes information not available");
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue))
+                {
+                    CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Class information not available");
+                    continue;
+                }
+
+                if (row.GetCell(2).CellType == CellType.String && string.IsNullOrEmpty(row.GetCell(2).StringCellValue))
+                {
+                    CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Number of seats not available");
+                    continue;
+                }
+
+                var prefix = row.GetCell(0).StringCellValue;
+                var airplane = Instance.Context.Airplanes.FirstOrDefault(x => x.Instance.Id == instance.Id
+                                                                         && x.Prefix.Equals(prefix));
+
+                //Generate the airplane object that will be added to the database
+                if (airplane != null)
+                {
+
+                    var item = new DbSeat()
+                    {
+                        Airplanes = airplane,
+                        seatClass = row.GetCell(1).StringCellValue,
+                        luggageWeightLimit = row.GetCell(2).NumericCellValue
+                    };
+
+                    Instance.Context.Seats.Add(item);
+
+                }
+                else
+                {
+                    CreateImportErrorLog(instance, "Airplanes", "Seat List", importHour, i, "Airplanes not found");
+                }
+            }
+            Instance.Context.SaveChanges();
+        }
+
+        private void ReadAirplanesData(DbInstance instance, DateTime importHour, ISheet sheet)
+        {
+            //The first row is reserved to readers 
+            for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+            {
+                IRow row = sheet.GetRow(i);         //Get the row i
+                if (row == null) break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+
+                //Get the data about the airport base and checks if this airport is registered on the database, otherwise will be generated
+                //a error log 
+                var airportName = row.GetCell(7).StringCellValue;
+                var baseAirport = Context.Airports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
+
+                if (baseAirport != null)
+                {
+                    //Generate the DbAirplane object to be added on the database
+                    var item = new DbAirplane()
+                    {
+                        Model = row.GetCell(0).StringCellValue,
+                        Prefix = row.GetCell(1).StringCellValue,
+                        Range = Convert.ToInt32(row.GetCell(2).NumericCellValue),
+                        Weight = Convert.ToInt32(row.GetCell(3).NumericCellValue),
+                        MaxWeight = Convert.ToInt32(row.GetCell(4).NumericCellValue),
+                        CruiseSpeed = Convert.ToInt32(row.GetCell(5).NumericCellValue),
+                        Capacity = Convert.ToInt32(row.GetCell(6).NumericCellValue),
+                        BaseAirport = baseAirport,
+                        FuelConsumptionFirstHour = Convert.ToInt32(row.GetCell(8).NumericCellValue),
+                        FuelConsumptionSecondHour = Convert.ToInt32(row.GetCell(9).NumericCellValue),
+                        MaxFuel = Convert.ToInt32(row.GetCell(10).NumericCellValue),
+                        Instance = instance
+                    };
+
+                    Instance.Context.Airplanes.Add(item);
+                }
+                else
+                {
+                    Instance.Context.ImportErrors.Add(new DbImportError()
+                    {
+                        ImportationHour = importHour,
+                        File = "Airplanes",
+                        Instance = instance,
+                        Sheet = "Airplanes",
+                        RowLine = i,
+                        Message = "Airport does not exist"
+                    });
+                }
+            }
+            Instance.Context.SaveChanges();
         }
     }
 }
