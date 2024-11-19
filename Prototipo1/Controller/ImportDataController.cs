@@ -111,12 +111,16 @@ namespace Prototipo1.Controller
             for (int i = (sheet2.FirstRowNum + 1); i <= sheet2.LastRowNum; i++)
             {
                 IRow row = sheet2.GetRow(i);
-                if (row == null) break;
-                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+                if (row == null) 
+                    break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) 
+                    break;
 
                 //If the field "Origin" or the field "Destination" is empty, there is nothing to add
-                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
-                if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)) continue; //TODO: Error
+                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) 
+                    continue; //TODO: Error
+                if (string.IsNullOrEmpty(row.GetCell(1).StringCellValue)) 
+                    continue; //TODO: Error
 
 
                 var airportOriginName = row.GetCell(0).StringCellValue;
@@ -169,11 +173,13 @@ namespace Prototipo1.Controller
             {
                 //Get the i-esim row
                 IRow row = sheet.GetRow(i);
-                if (row == null) break;
+                if (row == null) 
+                    break;
 
                 //If all lines are blank the reading procedure stops
                 //TODO: Create a error log
-                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) 
+                    break;
 
                 //Check if the first cell (airport name) is present. If it's not, it's impossible to identify the airport
                 if (iatas.Contains(row.GetCell((int)AirportColumnsEnum.IataCode).StringCellValue))
