@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Enums.Excel
 {
+    /// <summary>
+    /// Enum to hold the column indexes of the Airplane sheet. 
+    /// </summary>
     public enum AirplaneColumnsEnum
     {
         Model,

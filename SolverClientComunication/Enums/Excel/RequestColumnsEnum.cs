@@ -1,5 +1,8 @@
 ﻿namespace SolverClientComunication.Enums.Excel
 {
+    /// <summary>
+    /// Enum to hold the column indexes of the Request sheet. 
+    /// </summary>
     public enum RequestColumnsEnum
     {
         Name,

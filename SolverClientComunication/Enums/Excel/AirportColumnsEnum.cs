@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SolverClientComunication.Enums.Excel
 {
+    /// <summary>
+    /// Enum to hold the column indexes of the Airport sheet. 
+    /// </summary>
     public enum AirportColumnsEnum
     {
         AiportName,
