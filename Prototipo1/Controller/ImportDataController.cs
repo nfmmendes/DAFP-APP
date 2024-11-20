@@ -8,6 +8,7 @@ using SolverClientComunication.Models;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
 using SolverClientComunication.Enums.Excel;
+using Prototipo1.Components;
 
 namespace Prototipo1.Controller
 {
@@ -84,10 +85,10 @@ namespace Prototipo1.Controller
                 //If the airport field is empty the row will be not added to the database
                 if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) 
                     continue; //TODO: Error
-                if (row.GetCell(2).CellType != CellType.Numeric)
+                if (row.GetCell((int)FuelPriceColumnsEnum.Price).CellType != CellType.Numeric)
                     continue; 
 
-                var airportName = row.GetCell(0).StringCellValue;
+                var airportName = row.GetCell((int) FuelPriceColumnsEnum.Airport).StringCellValue;
 
                 //Get the airport by its name
                 var airport = instanceAirports.FirstOrDefault(x => x.Instance.Id == instance.Id && x.AirportName.Equals(airportName));
@@ -99,8 +100,8 @@ namespace Prototipo1.Controller
                     {
                         Instance = instance,
                         Airport = airport,
-                        Currency = row.GetCell(1).StringCellValue,
-                        Value = row.GetCell(2).NumericCellValue.ToString()
+                        Currency = row.GetCell((int) FuelPriceColumnsEnum.Currency ).StringCellValue,
+                        Value = row.GetCell( (int) FuelPriceColumnsEnum.Price).NumericCellValue.ToString()
                     };
                     Instance.Context.FuelPrices.Add(item);
                 }
