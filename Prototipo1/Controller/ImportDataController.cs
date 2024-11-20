@@ -7,10 +7,7 @@ using SolverClientComunication;
 using SolverClientComunication.Models;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
-using SolverClientComunication.Enums;
 using SolverClientComunication.Enums.Excel;
-using NPOI.SS.Formula.Functions;
-using Microsoft.Identity.Client;
 
 namespace Prototipo1.Controller
 {
