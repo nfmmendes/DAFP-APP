@@ -61,21 +61,32 @@ namespace Prototipo1.Controller
             Instance.Context.ChangeTracker.AutoDetectChangesEnabled = true;
         }
 
-        private static void readFuelPricesWorkSheetData(DbInstance instance, ISheet sheet3)
+        /// <summary>
+        /// Read airport fuel price from excel worksheet and save it on instance object. 
+        /// </summary>
+        /// <param name="instance"> The instance to hold the data. </param>
+        /// <param name="sheet"> The sheet from where the data will be read. </param>
+        private static void readFuelPricesWorkSheetData(DbInstance instance, ISheet sheet)
         {
             //Get the name of all aiports
             var instanceAirports = Instance.Context.Airports.Where(x => x.Instance.Id == instance.Id);
 
             //The first row is reserved to the headers
-            for (int i = (sheet3.FirstRowNum + 1); i <= sheet3.LastRowNum; i++)
+            for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++)
             {
                 //Get the information of the row i
-                IRow row = sheet3.GetRow(i);
-                if (row == null) break;
-                if (row.Cells.All(d => d.CellType == CellType.Blank)) break;
+                IRow row = sheet.GetRow(i);
+                if (row == null) 
+                    break;
+                if (row.Cells.All(d => d.CellType == CellType.Blank)) 
+                    break;
 
                 //If the airport field is empty the row will be not added to the database
-                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) continue; //TODO: Error
+                if (string.IsNullOrEmpty(row.GetCell(0).StringCellValue)) 
+                    continue; //TODO: Error
+                if (row.GetCell(2).CellType != CellType.Numeric)
+                    continue; 
+
                 var airportName = row.GetCell(0).StringCellValue;
 
                 //Get the airport by its name
