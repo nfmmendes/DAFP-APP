@@ -215,9 +215,7 @@ namespace Solver.Heuristics
         /// <returns></returns>
         public static double GetRequestWeight(SolverInput input, DbAirplane airplanes, List<DbRequest> requests){
 
-            var weightPerPassenger =  requests.Count(x => x.Sex.Equals("M") && !x.IsChildren) * input.OptimizationParameter.AverageManWeight
-                                    + requests.Count(x => x.Sex.Equals("F") && !x.IsChildren) * input.OptimizationParameter.AverageWomanWeight
-                                    + requests.Count(x => x.IsChildren) * input.OptimizationParameter.AverageChildWeight;
+            var weightPerPassenger = requests.Sum(x => x.PassengerWeight(input));
 
             var requestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList());
 
@@ -358,6 +356,19 @@ namespace Solver.Heuristics
 
         public static TimeSpan GetTravelTime(this DbAirplane airplane, double distance) { 
             return TimeSpan.FromHours(airplane.CruiseSpeed > 0 ? distance/(airplane.CruiseSpeed * KnotsToKmH) : 1e5);
+        }
+
+        public static double PassengerWeight(this DbRequest request, SolverInput input)
+        {
+            var weight = request switch
+            {
+                DbRequest r when r.Sex.Equals("M") && !r.IsChildren => input.OptimizationParameter.AverageManWeight,
+                DbRequest r when r.Sex.Equals("F") && !r.IsChildren => input.OptimizationParameter.AverageWomanWeight,
+                DbRequest r when r.IsChildren => input.OptimizationParameter.AverageChildWeight,
+                _ => -1
+            };
+
+            return weight;
         }
 
     }
