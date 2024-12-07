@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MathNet.Numerics;
 using SolutionData;
 using SolverClientComunication.Enums;
 using SolverClientComunication.Models;
 
 namespace Solver.Heuristics
 {
-    class SolverUtils
+    static class SolverUtils
     {
         public static readonly double KnotsToKmH = 1.852;
         public static readonly double PoundsToKg = 0.453592;
@@ -42,7 +43,7 @@ namespace Solver.Heuristics
         /// <param name="input"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public List<DbAirplane> GetPartiallyCompatibleAirplanes(SolverInput input, List<DbRequest> requests)
+        public static List<DbAirplane> GetPartiallyCompatibleAirplanes(SolverInput input, List<DbRequest> requests)
         {
             var returnedList = new List<DbAirplane>();
 
@@ -65,7 +66,7 @@ namespace Solver.Heuristics
         /// <param name="flights"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public List<DbAirplane> AvailableAirplanes(SolverInput input, List<Flight> flights, List<DbRequest> requests)
+        public static List<DbAirplane> AvailableAirplanes(SolverInput input, List<Flight> flights, List<DbRequest> requests)
         {
             var returnedList = new List<DbAirplane>();
 
@@ -94,7 +95,7 @@ namespace Solver.Heuristics
         /// <param name="flights"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        private bool IsFreeAndClose(SolverInput input, DbAirplane airplanes, List<Flight> flights, DbRequest request)
+        private static bool IsFreeAndClose(SolverInput input, DbAirplane airplanes, List<Flight> flights, DbRequest request)
         {
             
             var earlyFlights = flights.Where(x =>x.ArrivalTime <= request.DepartureTimeWindowEnd - x.Destination.GroundTime - request.Origin.GroundTime);
@@ -361,5 +362,10 @@ namespace Solver.Heuristics
             else
                 return 0;
         }
+
+        public static TimeSpan GetTravelTime(this DbAirplane airplane, double distance) { 
+            return TimeSpan.FromHours(airplane.CruiseSpeed > 0 ? distance/(airplane.CruiseSpeed * KnotsToKmH) : 1e5);
+        }
+
     }
 }
