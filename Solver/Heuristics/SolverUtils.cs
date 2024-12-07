@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common;
 using MathNet.Numerics;
 using SolutionData;
 using SolverClientComunication.Enums;
@@ -187,25 +188,21 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static List<DbAirport> findStopToFuelAirport(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination){
-            const double absurdValue = 100000;
-            double distanceOrigDest = absurdValue;
-            if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
-                distanceOrigDest = input.Stretches[origin][destination];
-            var refuelAirports = input.FuelPrice.Select(x => x.Airport);
+        public static List<DbAirport> FindStopToFuelAirport(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination){
+            // Filter refuel airports that are in the network.
+            var refuelAirports = input.FuelPrice.Where(x => input.Stretches[origin].ContainsKey(x.Airport) && 
+                                                            input.Stretches.ContainsKey(x.Airport)
+                                                            && input.Stretches[x.Airport].ContainsKey(destination)
+                                                       ).Select(x => x.Airport);
 
-            //TODO: Evaluate a future improvement on this filter
-            if (refuelAirports.Any() && distanceOrigDest != absurdValue){
-                var closerAirports  = refuelAirports.Where(x=>   input.Stretches[origin].ContainsKey(x) && input.Stretches.ContainsKey(x)
-                                                              && input.Stretches[origin][x] < airplane.Range).ToList();
-
-                var finalResult = closerAirports.Where(x=>     input.Stretches[x].ContainsKey(destination)
-                                                            && input.Stretches[x][destination] < airplane.Range).ToList();
-
-                return finalResult; 
-
-            }else
+            if(refuelAirports.None())
                 return new List<DbAirport>();
+
+            if (!(input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination)))
+                return new List<DbAirport>();
+            
+            return refuelAirports.Where(x=> input.Stretches[origin][x] < airplane.Range &&
+                                            input.Stretches[x][destination] < airplane.Range).ToList();
         }
 
         /// <summary>

@@ -334,7 +334,7 @@ namespace Solver.Heuristics
         /// <returns></returns>
         private bool GoRefuelAndGo(DbAirport origin, DbAirport destination, double fuelOnTakeOff, DbAirplane airplane,
             TimeSpan departureTime, GeneralSolution solution, List<DbRequest> requests){
-            var alternativeRoute = SolverUtils.findStopToFuelAirport(Input,airplane, origin, destination);
+            var alternativeRoute = SolverUtils.FindStopToFuelAirport(Input,airplane, origin, destination);
             foreach (var airport in alternativeRoute)
             {
                 //Fuel after arriving on the intermediary airport
