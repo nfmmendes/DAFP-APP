@@ -215,21 +215,15 @@ namespace Solver.Heuristics
         /// <returns></returns>
         public static double GetRequestWeight(SolverInput input, DbAirplane airplanes, List<DbRequest> requests){
 
-            var weightPerPassenger = requests.Sum(x => x.PassengerWeight(input));
+            var passengersWeight = requests.Sum(x => x.PassengerWeight(input));
 
             var requestsByClass = requests.GroupBy(x => x.Class).ToDictionary(x => x.Key, x => x.ToList());
+            var airplaneSeatList = input.SeatList.Where(x => x.Airplanes.Id == airplanes.Id).ToList();
 
-            double weightPerClass = 0;
-            foreach (var classItem in requestsByClass){
-                var seatClass = input.SeatList.FirstOrDefault(x => x.Airplanes.Id == airplanes.Id && x.seatClass.Equals(classItem.Key));
-                if(seatClass != null)
-                    weightPerClass += input.SeatList.First(x => x.Airplanes.Id == airplanes.Id && x.seatClass.Equals(classItem.Key)).luggageWeightLimit
-                                      * classItem.Value.Count;
-                else
-                    weightPerClass += 100000; //TODO : The code should not arrive here 
-            }
+            var classesWeight = requestsByClass.Sum(x => airplaneSeatList.FirstOrDefault(y => y.seatClass.Equals(x.Key))?.
+                                                         luggageWeightLimit ?? 10000);
 
-            return weightPerClass + weightPerPassenger;
+            return classesWeight + passengersWeight;
         }
         
         /// <summary>
