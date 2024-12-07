@@ -170,12 +170,12 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplane airplanes, TimeSpan departureTime, DbAirport origin, DbAirport destination){
+        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplane airplane, TimeSpan departureTime, DbAirport origin, DbAirport destination){
             
             var returnedValue = TimeSpan.FromHours(1000000);
             //TODO: Maybe replace this calculus (time to go) with a input
             if (input.Stretches.ContainsKey(origin) && input.Stretches[origin].ContainsKey(destination))
-                returnedValue = TimeSpan.FromHours(input.Stretches[origin][destination] / (airplanes.CruiseSpeed * KnotsToKmH));
+                returnedValue = airplane.GetTravelTime(input.Stretches[origin][destination]);
 
             return departureTime + returnedValue;
         }
