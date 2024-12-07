@@ -151,17 +151,13 @@ namespace Solver.Heuristics
         public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirport origin, DbAirport destination, DbAirplane airplanes){
 
             double timeToGo = 0;
-            if(input.Stretches.ContainsKey(origin))
+            if (input.Stretches.ContainsKey(origin))
                 if (input.Stretches[origin].ContainsKey(destination))
-                    timeToGo = input.Stretches[origin][destination] / (airplanes.CruiseSpeed*KnotsToKmH);
+                    timeToGo = airplanes.GetTravelTime(input.Stretches[origin][destination]).TotalHours;
 
             double fuelSpent = 0;
-            if (timeToGo > 1)
-                fuelSpent = (timeToGo - 1) * airplanes.FuelConsumptionSecondHour + airplanes.FuelConsumptionFirstHour;
-            else
-                fuelSpent = airplanes.FuelConsumptionFirstHour * timeToGo;
-
-
+            fuelSpent = Math.Max(0, timeToGo - 1) * airplanes.FuelConsumptionSecondHour + + Math.Min(1, timeToGo)*airplanes.FuelConsumptionFirstHour;
+            
             return Math.Abs(timeToGo) > 0.00001? fuelOnTakeOff - fuelSpent : -1;
         }
 
