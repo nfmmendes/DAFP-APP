@@ -423,7 +423,7 @@ namespace Solver.Heuristics
                     continue;
 
                 //Fuel after arriving on the second airport
-                var fuelBuyed = SolverUtils.MaxRefuelQuantity(Input, airplane, firstStep, origin, requests);
+                var fuelBuyed = airplane.MaxRefuelQuantity(Input, firstStep, origin, requests);
                 var secondStep = SolverUtils.GetFuelOnLanding(Input, firstStep + fuelBuyed, airport, destination, airplane);
                 var secondStepArrival = SolverUtils.GetArrivalTime(Input, airplane, firstStepArrival + airport.GroundTime, airport, destination);
 
@@ -489,7 +489,7 @@ namespace Solver.Heuristics
             if (arrivalTime > TimeSpan.FromHours(18.25))
                 return false;
 
-            var maxRefuelQuantity = SolverUtils.MaxRefuelQuantity(Input, airplanes, fuelOnTank, origin, requests);
+            var maxRefuelQuantity = airplanes.MaxRefuelQuantity(Input, fuelOnTank, origin, requests);
             var finalFuel = SolverUtils.GetFuelOnLanding(Input, fuelOnTank + maxRefuelQuantity, origin, destination, airplanes);
 
             if (finalFuel > 0)

@@ -235,7 +235,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="requests"></param>
         /// <returns></returns>
-        public static double MaxRefuelQuantity(SolverInput input, DbAirplane airplanes, double fuelOnTank, DbAirport origin, List<DbRequest> requests)
+        public static double MaxRefuelQuantity(this DbAirplane airplanes, SolverInput input, double fuelOnTank, DbAirport origin, List<DbRequest> requests)
         {
             //IF there was not enough fuel on the airplanes to do the trip without a stop, 
             //it is searched an airport to refueling on the track (or refueled on origin airport)

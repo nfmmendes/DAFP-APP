@@ -161,7 +161,7 @@ namespace Solver.Heuristics
                         if (airplane.BaseAirport.Id != airport.Id)
                             CreatedRouteFromDepot(solution, passengersList, airplane, airport,destination);
                         else{
-                            var fuel = SolverUtils.MaxRefuelQuantity(Input, airplane, 0, airport, passengersList);
+                            var fuel = airplane.MaxRefuelQuantity(Input, 0, airport, passengersList);
                             CreateRegularRoute(solution, airport, destination, passengersList.Max(x => x.ArrivalTimeWindowBegin), airplane, fuel,passengersList);
                         }
                                 
