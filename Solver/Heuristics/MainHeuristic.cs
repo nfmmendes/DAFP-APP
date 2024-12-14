@@ -275,7 +275,7 @@ namespace Solver.Heuristics
 
                 //PROCEED THE SECOND FLIGHT, AFTER THE AIRPLANE ARRIVES IN THE ORIGIN OF THE REQUEST 
                 var arrivalTime = GetArrivalTime(lastDeparture, lastOrigin, earliest.Origin, airplane);
-                var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, lastFuel, lastOrigin, earliest.Origin, airplane);
+                var fuelOnLanding = airplane.GetFuelOnLanding(Input, lastFuel, lastOrigin, earliest.Origin);
 
                 var minTakeOffTime = arrivalTime + earliest.Origin.GroundTime;
                 var minDeparture = minTakeOffTime > earliest.DepartureTimeWindowBegin ? minTakeOffTime : earliest.DepartureTimeWindowBegin;
@@ -293,7 +293,7 @@ namespace Solver.Heuristics
 
                 //PROCEED THE LAST FLIGHT, GOING BACK TO DEPOT 
                 arrivalTime = GetArrivalTime(minDeparture, earliest.Origin, earliest.Destination, airplane);
-                fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuelOnLanding, earliest.Origin, earliest.Destination, airplane);
+                fuelOnLanding = airplane.GetFuelOnLanding(Input, fuelOnLanding, earliest.Origin, earliest.Destination);
 
                 minTakeOffTime = arrivalTime + earliest.Destination.GroundTime;
                 CreateRegularRoute(earliest.Destination, airplane.BaseAirport, fuelOnLanding, airplane, minTakeOffTime, currentSolution, new List<DbRequest>());
@@ -351,7 +351,7 @@ namespace Solver.Heuristics
                                         GeneralSolution solution, List<DbRequest> passengers)
         {
 
-            var fuelOnLanding = SolverUtils.GetFuelOnLanding(Input, fuel, origin, destination, airplane);
+            var fuelOnLanding = airplane.GetFuelOnLanding(Input, fuel, origin, destination);
 
             //TODO: Include more checks  
             if (fuelOnLanding > 0){
@@ -413,7 +413,7 @@ namespace Solver.Heuristics
             foreach (var airport in alternativeRoute)
             {
                 //Fuel after arriving on the intermediary airport
-                var firstStep = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, origin, airport, airplane);
+                var firstStep = airplane.GetFuelOnLanding(Input, fuelOnTakeOff, origin, airport);
                 var firstStepArrival = airplane.GetArrivalTime(Input, departureTime, origin, airport);
 
                 if (firstStepArrival > TimeSpan.FromHours(18.25))
@@ -424,7 +424,7 @@ namespace Solver.Heuristics
 
                 //Fuel after arriving on the second airport
                 var fuelBuyed = airplane.MaxRefuelQuantity(Input, firstStep, origin, requests);
-                var secondStep = SolverUtils.GetFuelOnLanding(Input, firstStep + fuelBuyed, airport, destination, airplane);
+                var secondStep = airplane.GetFuelOnLanding(Input, firstStep + fuelBuyed, airport, destination);
                 var secondStepArrival = airplane.GetArrivalTime(Input, firstStepArrival + airport.GroundTime, airport, destination);
 
                 if (secondStepArrival > TimeSpan.FromHours(18.25))
@@ -490,7 +490,7 @@ namespace Solver.Heuristics
                 return false;
 
             var maxRefuelQuantity = airplanes.MaxRefuelQuantity(Input, fuelOnTank, origin, requests);
-            var finalFuel = SolverUtils.GetFuelOnLanding(Input, fuelOnTank + maxRefuelQuantity, origin, destination, airplanes);
+            var finalFuel = airplanes.GetFuelOnLanding(Input, fuelOnTank + maxRefuelQuantity, origin, destination);
 
             if (finalFuel > 0)
             {

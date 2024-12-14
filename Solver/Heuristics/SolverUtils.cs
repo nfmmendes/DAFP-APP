@@ -149,7 +149,7 @@ namespace Solver.Heuristics
         /// <param name="destination"></param>
         /// <param name="airplanes"></param>
         /// <returns></returns>
-        public static double GetFuelOnLanding(SolverInput input, double fuelOnTakeOff, DbAirport origin, DbAirport destination, DbAirplane airplanes){
+        public static double GetFuelOnLanding(this DbAirplane airplanes, SolverInput input, double fuelOnTakeOff, DbAirport origin, DbAirport destination){
 
             double timeToGo = 0;
             if (input.Stretches.ContainsKey(origin))
