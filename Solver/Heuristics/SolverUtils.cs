@@ -289,7 +289,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static bool CanDoInOneDay(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination)
+        public static bool CanMakeItInOneDay(SolverInput input, DbAirplane airplane, DbAirport origin, DbAirport destination)
         {
             double distStretch1 = 100000000;
             double distStretch2 = 100000000;
@@ -317,7 +317,7 @@ namespace Solver.Heuristics
         /// <param name="requestDestination"></param>
         /// <param name="airplane"></param>
         /// <returns></returns>
-        public static bool CanDoInOne(SolverInput input , TimeSpan lastDeparture, DbAirport lastOrigin,DbAirport requestOrigin,
+        public static bool CanMakeItInOne(SolverInput input , TimeSpan lastDeparture, DbAirport lastOrigin,DbAirport requestOrigin,
                                      DbAirport requestDestination, DbAirplane airplane){
             
             var arrival1 = GetArrivalTime(input, airplane,lastDeparture,lastOrigin,requestOrigin);

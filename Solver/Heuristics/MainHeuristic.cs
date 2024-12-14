@@ -259,7 +259,7 @@ namespace Solver.Heuristics
                 var orderedRequests = possibleNewRequests.OrderBy(x => x.DepartureTimeWindowBegin);
                 var earliest = orderedRequests.First();
 
-                if (!SolverUtils.CanDoInOne(Input, lastDeparture, lastOrigin, earliest.Origin, earliest.Destination, airplane))
+                if (!SolverUtils.CanMakeItInOne(Input, lastDeparture, lastOrigin, earliest.Origin, earliest.Destination, airplane))
                 {
                     continue;
                 }

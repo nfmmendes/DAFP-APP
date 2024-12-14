@@ -122,7 +122,7 @@ namespace Solver.Heuristics
                     var firstDeparture = requestsToDestination.First(x=>!requestsBoardedInOrigin.Contains(x)).DepartureTimeWindowEnd;
 
                     var airplane = airplanesByClosests.FirstOrDefault( x => SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
-                                                        !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x,airport,destination));
+                                                        !ExitedFromDepot.Contains(x) && SolverUtils.CanMakeItInOneDay(Input, x,airport,destination));
 
                     while (airplane != null){
                         List<DbRequest> passengersList = new List<DbRequest>();
@@ -166,7 +166,7 @@ namespace Solver.Heuristics
                         }
                                 
                         airplane = airplanesByClosests.FirstOrDefault(x =>SolverUtils.ArrivallFromDepot(Input, x, airport) < firstDeparture &&
-                                                                     !ExitedFromDepot.Contains(x) && SolverUtils.CanDoInOneDay(Input, x, airport, destination));
+                                                                     !ExitedFromDepot.Contains(x) && SolverUtils.CanMakeItInOneDay(Input, x, airport, destination));
                     }
    
                 }
