@@ -171,7 +171,7 @@ namespace Solver.Heuristics
         /// <param name="origin"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static TimeSpan GetArrivalTime(SolverInput input, DbAirplane airplane, TimeSpan departureTime, DbAirport origin, DbAirport destination){
+        public static TimeSpan GetArrivalTime(this DbAirplane airplane, SolverInput input, TimeSpan departureTime, DbAirport origin, DbAirport destination){
             
             var returnedValue = TimeSpan.FromHours(1000000);
             //TODO: Maybe replace this calculus (time to go) with a input
@@ -320,9 +320,9 @@ namespace Solver.Heuristics
         public static bool CanMakeItInOne(SolverInput input , TimeSpan lastDeparture, DbAirport lastOrigin,DbAirport requestOrigin,
                                      DbAirport requestDestination, DbAirplane airplane){
             
-            var arrival1 = GetArrivalTime(input, airplane,lastDeparture,lastOrigin,requestOrigin);
-            var arrival2 = GetArrivalTime(input, airplane, arrival1+requestOrigin.GroundTime, requestOrigin, requestDestination);
-            var arrival3 = GetArrivalTime(input, airplane, arrival2+requestDestination.GroundTime,requestDestination, airplane.BaseAirport);
+            var arrival1 = airplane.GetArrivalTime(input,lastDeparture,lastOrigin,requestOrigin);
+            var arrival2 = airplane.GetArrivalTime(input, arrival1+requestOrigin.GroundTime, requestOrigin, requestDestination);
+            var arrival3 = airplane.GetArrivalTime(input, arrival2+requestDestination.GroundTime,requestDestination, airplane.BaseAirport);
 
             var timeInString = input.Parameters.FirstOrDefault(x => x.Code.Equals(ParametersEnum.SUNSET_TIME.DbCode)).Value;
             var hour = Convert.ToInt32(timeInString.Split(':')[0]);

@@ -356,7 +356,7 @@ namespace Solver.Heuristics
             //TODO: Include more checks  
             if (fuelOnLanding > 0){
 
-                var arrivalTime = SolverUtils.GetArrivalTime(Input, airplane, departure, origin, destination);
+                var arrivalTime = airplane.GetArrivalTime(Input, departure, origin, destination);
                 if (arrivalTime < TimeSpan.FromHours(18.25))
                 {
 
@@ -414,7 +414,7 @@ namespace Solver.Heuristics
             {
                 //Fuel after arriving on the intermediary airport
                 var firstStep = SolverUtils.GetFuelOnLanding(Input, fuelOnTakeOff, origin, airport, airplane);
-                var firstStepArrival = SolverUtils.GetArrivalTime(Input, airplane, departureTime, origin, airport);
+                var firstStepArrival = airplane.GetArrivalTime(Input, departureTime, origin, airport);
 
                 if (firstStepArrival > TimeSpan.FromHours(18.25))
                     return false;
@@ -425,7 +425,7 @@ namespace Solver.Heuristics
                 //Fuel after arriving on the second airport
                 var fuelBuyed = airplane.MaxRefuelQuantity(Input, firstStep, origin, requests);
                 var secondStep = SolverUtils.GetFuelOnLanding(Input, firstStep + fuelBuyed, airport, destination, airplane);
-                var secondStepArrival = SolverUtils.GetArrivalTime(Input, airplane, firstStepArrival + airport.GroundTime, airport, destination);
+                var secondStepArrival = airplane.GetArrivalTime(Input, firstStepArrival + airport.GroundTime, airport, destination);
 
                 if (secondStepArrival > TimeSpan.FromHours(18.25))
                     return false;
@@ -484,7 +484,7 @@ namespace Solver.Heuristics
                               GeneralSolution solution, TimeSpan departureTime, List<DbRequest> requests)
         {
 
-            var arrivalTime = SolverUtils.GetArrivalTime(Input, airplanes, departureTime, origin, destination);
+            var arrivalTime = airplanes.GetArrivalTime(Input, departureTime, origin, destination);
 
             if (arrivalTime > TimeSpan.FromHours(18.25))
                 return false;
